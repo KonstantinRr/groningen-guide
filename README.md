@@ -1,16 +1,26 @@
-# groningen_guide
+# Groningen Guide | UNIVERSITY OF GRONINGEN
 
-The Groningen tourist and study guide
+The Groningen tourist and study guide.
 
 ## Getting Started
+This project implements a tourist guide for the city of Groningen located in the north of the Netherlands. 
 
-This project is a starting point for a Flutter application.
+## Building
 
-A few resources to get you started if this is your first Flutter project:
+### Installing Flutter
+The project is build using the [Flutter](https://flutter.dev/) framework. See the [documentation](https://flutter.dev/docs) for more information about installing the framework or building applications using it. Flutter allows to build native user interfaces for various different platforms with the same codebase. This includes Android, iOS as well as web development using HTML with the combination of a JavaScript canvas.
 
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
+### Building the study guide
+The study guide is mainly intended as an web interface but can be compiled to Android or iOS as well using the same codebase. See the build instructions below for more information. The resulting files are located in the build/ directory. Use any suitable web server to run the web version of the project.
 
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+```
+flutter build web --release
+flutter build android --release
+flutter buiild ios --release
+```
+
+## Reference
+This project is build for the course Knowledge Technology Practical at the University of Groningen (WBAI014-05).
+Konstantin Rolf (S3750558)
+Nicholas Koundouros (S3726444)
+Livia Regus (SXXXXXXX)
