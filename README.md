@@ -23,4 +23,4 @@ flutter buiild ios --release
 This project is build for the course Knowledge Technology Practical at the University of Groningen (WBAI014-05).
 Konstantin Rolf (S3750558)
 Nicholas Koundouros (S3726444)
-Livia Regus (SXXXXXXX)
+Livia Regus (S3354970)
