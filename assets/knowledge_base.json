@@ -1,0 +1,46 @@
+{
+    "variables": [
+        {
+            "name": "option1",
+            "value": 0
+        },
+        {
+            "name": "option2",
+            "value": 0
+        }
+    ],
+    "rules": [
+        {
+            "name": "Rule 1",
+            "description": "Example inference ",
+            "conditions": [
+                "option1 AND option2"
+            ],
+            "events": [
+                ["final", 1]
+            ]
+        }
+    ],
+    "questions": [
+        {
+            "name": "Question 1",
+            "description": "This is a simple example question",
+            "image": null,
+            "maxAnswers": 1,
+            "options": [
+                {
+                    "descriptions": "Answer option 1",
+                    "events": [
+                        ["option1", 1]
+                    ]
+                },
+                {
+                    "descriptions": "Answer option 2",
+                    "events": [
+                        ["option2", 1]
+                    ]
+                }
+            ]
+        }
+    ]
+}

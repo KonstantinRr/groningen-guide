@@ -12,7 +12,7 @@ class KlVariable extends MapObject {
   /// The variable's unique identifier
   String name;
   /// The variable's numerical value
-  double value;
+  int value;
 
   /// Creates a new variable by supplying the member variables
   KlVariable({this.name, this.value});
@@ -23,7 +23,7 @@ class KlVariable extends MapObject {
   void read(dynamic map) {
     assertType<Map<String, dynamic>>(map);
     name = assertTypeGet<String>(map, 'name');
-    value = assertTypeGet<double>(map, 'value');
+    value = assertTypeGet<int>(map, 'value');
   }
 
   /// Serializes this object as a JSON object
