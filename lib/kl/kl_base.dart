@@ -29,7 +29,8 @@ class KlBase extends MapObject {
     assertType<Map<String, dynamic>>(map);
     values = assertTypeGet<List>(map, 'values').map((e) => KlVariable.fromJson(e)).toList();
     rules = assertTypeGet<List>(map, 'rules').map((e) => KlRule.fromJson(e)).toList();
-    questions = assertTypeGet<List>(map, 'rules').map((e) => KlQuestion.fromJson(e)).toList();
+    questions = assertTypeGet<List>(map, 'questions')
+      .map((e) => KlQuestion.fromJson(e)).toList();
   }
 
   /// Serializes this knowledge base to a map object

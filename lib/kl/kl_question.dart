@@ -33,8 +33,10 @@ class KlQuestion extends MapObject {
     description = assertTypeGet<String>(map, 'description');
     image = assertTypeGet<String>(map, 'image', allowNull: true);
     maxAnswers = assertTypeGet<int>(map, 'maxAnswers', allowNull: true);
-    options = assertTypeGet<List>(map, 'options').map(
-      (e) => KlQuestionOption.fromJson(e)).toList();
+    conditions = assertTypeGet<List>(map, 'conditions')
+      .map<String>((e) => e as String).toList();
+    options = assertTypeGet<List>(map, 'options')
+      .map((e) => KlQuestionOption.fromJson(e)).toList();
   }
 
   /// Serializes this object as a JSON object

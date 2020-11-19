@@ -12,7 +12,7 @@ class KlQuestionOption extends MapObject {
   /// Gives a brief description of this option
   String description;
   /// List of events that happen if this option is selected
-  List<String> events;
+  List events;
 
   /// Creates a new question option by supplying the member variables
   KlQuestionOption({this.description, this.events});
@@ -23,7 +23,7 @@ class KlQuestionOption extends MapObject {
   void read(dynamic map) {
     assertType<Map<String, dynamic>>(map);
     description = assertTypeGet<String>(map, 'description');
-    events = assertTypeGet<List<String>>(map, 'events');
+    events = assertTypeGet<List>(map, 'events');
   }
 
   /// Serializes this object as a JSON object
