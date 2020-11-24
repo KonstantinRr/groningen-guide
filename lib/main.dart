@@ -10,6 +10,8 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:groningen_guide/kl/kl_base.dart';
 import 'package:flutter/services.dart' show rootBundle;
+import 'package:groningen_guide/kl/kl_question.dart';
+import 'package:groningen_guide/kl_parser.dart';
 
 void main() {
   runApp(StudyGuide());
@@ -41,48 +43,158 @@ class KnowledgeBaseLoader extends StatelessWidget {
   }
 }
 
+class CustomKnowledgeLoader extends StatefulWidget {
+  const CustomKnowledgeLoader({Key key}) : super(key: key);
+
+  @override
+  CustomKnowledgeLoaderState createState() => CustomKnowledgeLoaderState();
+}
+
+class CustomKnowledgeLoaderState extends State<CustomKnowledgeLoader> {
+  final TextEditingController controller = TextEditingController();
+
+  @override
+  void dispose() {
+    controller.dispose();
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    var theme = Theme.of(context);
+    return Container(
+      width: 200.0,
+      height: 350.0,
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        children: <Widget> [
+          Expanded(child: TextField(
+            controller: controller,
+            decoration: InputDecoration.collapsed(
+              hintText: 'Expression'
+            ),
+            expands: true,
+          )),
+          RaisedButton(
+            child: Text('Load', style: theme.textTheme.button,),
+            onPressed: () {},
+          )
+        ]
+      )
+    );
+  }
+}
+
+
+class QuestionWidget extends StatelessWidget {
+  final KlQuestion question;
+  const QuestionWidget({@required this.question, Key key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    var theme = Theme.of(context);
+    return Container(
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(5),
+        color: Colors.grey[200]
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          Text(question.name, style: theme.textTheme.headline5),
+          Text(question.description, style: theme.textTheme.bodyText2,),
+          SizedBox(height: 15),
+
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: question.options.map((e) =>
+              Container(
+                margin: EdgeInsets.all(5),
+                decoration: BoxDecoration(
+                  color: Colors.grey[300]
+                ),
+                height: 50.0,
+                alignment: Alignment.center,
+                child: Text(e.description)
+              )
+            ).toList()
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class ExpressionParser extends StatefulWidget {
+  const ExpressionParser({Key key}) : super(key: key);
+
+  @override
+  ExpressionParserState createState() => ExpressionParserState();
+}
+
+class ExpressionParserState extends State<ExpressionParser> {
+  final TextEditingController controller = TextEditingController();
+
+  @override
+  void dispose() {
+    controller.dispose();
+    super.dispose();
+  }
+
+  void _loadExpression() {
+    //try {
+      var tree = buildExpression(controller.text);
+      print(tree.istr());
+    //} catch (e, stacktrace) {
+    //  print(stacktrace);
+    //  print(e.toString());
+    //  throw e;
+    //} 
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      width: 200.0, height: 150.0,
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        children: [
+          Expanded(child: TextField(
+            maxLines: null, minLines: null,
+            controller: controller,
+            decoration: InputDecoration.collapsed(
+              hintText: 'Expression'
+            ),
+            expands: true,
+          ),),
+          RaisedButton(
+            child: Text('Load Expression'),
+            onPressed: _loadExpression
+          )
+        ],
+      )
+    );
+  }
+}
+
+
 class Home extends StatelessWidget {
   const Home({Key key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    var theme = Theme.of(context);
     return Scaffold(
       body: KnowledgeBaseLoader(
         onLoad: (context, base) {
           return ListView(
             padding: EdgeInsets.all(15),
-            children: base.questions.map((q) =>
-              Container(
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(5),
-                  color: Colors.grey[200]
-                ),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    Text(q.name, style: theme.textTheme.headline5),
-                    Text(q.description, style: theme.textTheme.bodyText2,),
-                    SizedBox(height: 15),
-
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.stretch,
-                      children: q.options.map((e) =>
-                        Container(
-                          margin: EdgeInsets.all(5),
-                          decoration: BoxDecoration(
-                            color: Colors.grey[300]
-                          ),
-                          height: 50.0,
-                          alignment: Alignment.center,
-                          child: Text(e.description)
-                        )
-                      ).toList()
-                    ),
-                  ],
-                ),
-              )
-            ).toList()
+            children: [
+              ...
+              base.questions.map((q) =>
+                QuestionWidget(question: q)
+              ),
+              ExpressionParser()
+            ]
           );
         },
         onErr: (context) {
