@@ -349,11 +349,9 @@ TreeElement buildExpression(String exp) {
   // creates the list of tokens
   var tokens = tokenize(exp);
   tokens = tokens.where((element) => !element.isBlank()).toList();
-  print(tokens);
 
   // parses the expression
   var ret = parseExpression(tokens, 0);
-  print(ret.x);
   // checks if all elements have been used
   if (ret.i != tokens.length)
     throw Exception('Unexpected element at end of stream');

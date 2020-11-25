@@ -11,6 +11,7 @@ import 'package:flutter/material.dart';
 import 'package:groningen_guide/kl/kl_base.dart';
 import 'package:flutter/services.dart' show rootBundle;
 import 'package:groningen_guide/kl/kl_question.dart';
+import 'package:groningen_guide/kl_engine.dart';
 import 'package:groningen_guide/kl_parser.dart';
 
 void main() {
@@ -19,20 +20,21 @@ void main() {
 
 class KnowledgeBaseLoader extends StatelessWidget {
   final Widget Function(BuildContext) onErr;
-  final Widget Function(BuildContext, KlBase) onLoad;
+  final Widget Function(BuildContext, KlEngine) onLoad;
   final String path;
   const KnowledgeBaseLoader({this.onErr, this.onLoad,
     this.path = 'assets/knowledge_base.json', Key key}) : super(key: key);
 
-  Future<KlBase> loadKlBase(String path) async {
+  Future<KlEngine> loadKlBase(String path) async {
     var string = await rootBundle.loadString(path);
-    var map = json.decode(string);
-    return KlBase.fromJson(map);
+    var engine = KlEngine.fromString(string);
+    engine.expressionStorage.info();
+    return engine;
   }
 
   @override
   Widget build(BuildContext context) {
-    return FutureBuilder(
+    return FutureBuilder<KlEngine>(
       future: loadKlBase(path),
       builder: (context, snap) {
         if (snap.hasData)
@@ -142,14 +144,14 @@ class ExpressionParserState extends State<ExpressionParser> {
   }
 
   void _loadExpression() {
-    //try {
+    try {
       var tree = buildExpression(controller.text);
       print(tree.istr());
-    //} catch (e, stacktrace) {
-    //  print(stacktrace);
-    //  print(e.toString());
-    //  throw e;
-    //} 
+    } catch (e, stacktrace) {
+      print(stacktrace);
+      print(e.toString());
+      throw e;
+    } 
   }
 
   @override
@@ -185,12 +187,12 @@ class Home extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       body: KnowledgeBaseLoader(
-        onLoad: (context, base) {
+        onLoad: (context, engine) {
           return ListView(
             padding: EdgeInsets.all(15),
             children: [
               ...
-              base.questions.map((q) =>
+              engine.klBase.questions.map((q) =>
                 QuestionWidget(question: q)
               ),
               ExpressionParser()
