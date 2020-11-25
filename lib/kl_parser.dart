@@ -183,9 +183,12 @@ List<Token> tokenize(String s) {
 /// The context model stores variable/value paris.
 class ContextModel {
   /// Stores the variable/value pairs
-  Map<String, int> model;
+  final model = <String, int> {};
   /// Whether to assume fails if a variable is non existent
   bool assumeFalse;
+
+  /// Creates a new [ContextModel] that assumes missing variables as false
+  ContextModel({this.assumeFalse=true});
 
   /// Sets a [value] for the given [variable]
   void setVar(String variable, int value) {
@@ -223,8 +226,8 @@ class TreeElement {
     => !elem.values[0].evaluateBool(cm) || elem.values[1].evaluateBool(cm) ? 1 : 0;
   static int _funcNOT(TreeElement elem, ContextModel cm)
     => !elem.values[0].evaluateBool(cm) ? 1 : 0; 
-  static int _funcIDENT(TreeElement elem, ContextModel cm) => elem.values[0]; 
-  static int _funcVALUE(TreeElement elem, ContextModel cm) => cm.getVar(elem.values[0]); 
+  static int _funcIDENT(TreeElement elem, ContextModel cm) => cm.getVar(elem.values[0]); 
+  static int _funcVALUE(TreeElement elem, ContextModel cm) => elem.values[0]; 
 
   static const Map<TokenType, int Function(TreeElement, ContextModel)> _evalMap = {
     TokenType.AND : _funcAND, TokenType.OR : _funcOR, TokenType.XOR : _funcXOR,

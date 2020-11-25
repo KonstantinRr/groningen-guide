@@ -80,7 +80,7 @@ class CustomKnowledgeLoaderState extends State<CustomKnowledgeLoader> {
           RaisedButton(
             child: Text('Load', style: theme.textTheme.button,),
             onPressed: () {},
-          )
+          ),
         ]
       )
     );
@@ -195,7 +195,17 @@ class Home extends StatelessWidget {
               engine.klBase.questions.map((q) =>
                 QuestionWidget(question: q)
               ),
-              ExpressionParser()
+              ExpressionParser(),
+              SizedBox(
+                height: 40.0,
+                width: 150.0,
+                child: RaisedButton(
+                  child: Text('Evaluate Model'),
+                  onPressed: () {
+                    engine.inference();
+                  },
+                ),
+              )
             ]
           );
         },

@@ -8,6 +8,7 @@ import 'dart:convert';
 /// Livia Regus (S3354970): l.regus@student.rug.nl
 
 import 'package:groningen_guide/kl/kl_base.dart';
+import 'package:groningen_guide/kl/kl_rule.dart';
 import 'package:groningen_guide/kl_parser.dart';
 
 class ExpressionStorage {
@@ -22,6 +23,15 @@ class ExpressionStorage {
       throw e;
     }
   }
+
+  int evaluateExpression(String exp, ContextModel model) {
+    if (!storage.containsKey(exp))
+      insertExp(exp);
+
+    return storage[exp].evaluate(model);
+  }
+  bool evaluateExpressionAsBool(String exp, ContextModel model)
+    => evaluateExpression(exp, model) != 0;
 
   ExpressionStorage(KlBase base) {
     // generates the expressions for all questions
@@ -42,14 +52,30 @@ class ExpressionStorage {
 class KlEngine {
   KlBase klBase;
   ExpressionStorage expressionStorage;
+  ContextModel contextModel;
 
-  KlEngine.fromString(String string) {
+  factory KlEngine.fromString(String string) {
     var map = json.decode(string);
-    klBase = KlBase.fromJson(map);
-    expressionStorage = ExpressionStorage(klBase);
+    return KlEngine(KlBase.fromJson(map));
   }
 
   KlEngine(this.klBase) {
     expressionStorage = ExpressionStorage(klBase);
+    contextModel = ContextModel(assumeFalse: true);
+  }
+
+  bool evaluateConditionList(List<String> conditions) {
+    for (var cond in conditions) {
+      if (!expressionStorage.evaluateExpressionAsBool(cond, contextModel))
+        return false;
+    }
+    return true;
+  }
+
+  void inference() {
+    for (var rule in klBase.rules) {
+      var result = evaluateConditionList(rule.conditions);
+      print('Evaluating Rule \'${rule.name}\' => $result');
+    }
   }
 }
