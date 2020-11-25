@@ -14,8 +14,17 @@
 /// 2. Tree building, see [TreeElement], [parseExpression], parseXYZ
 /// Both tasks may be performed by a single call to [buildExpression] which
 /// returns an abstract syntax tree.
-/// 
 /// Written by Konstantin Rolf 2020
+
+// Parsing is done using the following grammar
+// atom  := <ident> | <value> |'(' <or> ')' .
+// not   := ['NOT'] <atom>
+// and   := <not> { 'NOT' <not> }
+// then  := <and> { 'THEN' <and> }
+// xor   := <then> { 'XOR' <then> }
+// or    := <or> { 'OR' <or> }
+
+//// TOKENIZER SEGMENT ////
 
 /// This class gives all possible tokens that may be encountered in the input
 /// message. Note that this list may be split into two different kinds of tokens.
@@ -25,28 +34,44 @@ enum TokenType {
   // S tokens, they are allowed everywhere
   PARANTHESIS_OPEN,
   PARANTHESIS_CLOSE,
-  WHITESPACE,
+  WHITESPACE, TAB, NEWLINE,
+
   // L tokens, they require at least one S token in between
   AND, OR, XOR, THEN, NOT,
   IDENT, VALUE,
 }
 
-
+/// A token is a tuple consisting of a [TokenType] and a [String] value
 class Token {
+  /// The type of this token
   final TokenType type;
+  /// The string value
   final String value;
+
   /// Checks whether this token is a (s)mall token
-  bool isSToken() => type == TokenType.PARANTHESIS_OPEN ||
-    type == TokenType.PARANTHESIS_CLOSE || type == TokenType.WHITESPACE;
+  bool isSToken() =>
+    type == TokenType.PARANTHESIS_OPEN ||
+    type == TokenType.PARANTHESIS_CLOSE ||
+    type == TokenType.WHITESPACE ||
+    type == TokenType.NEWLINE ||
+    type == TokenType.TAB;
+  
+  bool isBlank() =>
+    type == TokenType.WHITESPACE ||
+    type == TokenType.NEWLINE || 
+    type == TokenType.TAB;
+
   /// Checks whether this token is a (l)arge token
   bool isLToken() => !isSToken();
 
   /// Creates a new token using the supplied parameters
   Token({this.type, this.value});
+
   /// Creates a new token using the definition of a matcher
   Token.fromMatcher(List list)
     : type = list[1], value = list[0];
 
+  /// Override the toString function for easy inspection
   @override
   String toString() => '($type $value)';
 }
@@ -62,15 +87,20 @@ Token _findMatches(List matchers, String s, int i) {
   return null;
 }
 
-/// Ret
+/// Finds the end of the next character set. Character sets are
+/// discontinued by S tokens. See [TokenType] for more information.
+/// The algorithm starts searching the [String] [s] at position [i]
 String _nextSubstring(String s, int i) {
-  var spaceIndex = s.indexOf(' ', i);
+  // searches the first S token
+  var spaceIndex = s.indexOf(RegExp('[ ()]'), i);
   if (spaceIndex == -1) spaceIndex = s.length;
   var sub = s.substring(i, spaceIndex);
   return sub.length == 0 ? null : sub;
 }
 
-Token parseValue(String s, int i) {
+/// Tries parsing a value token. Returns null if the parse fails.
+/// The algorithm starts searching the [String] [s] at position [i].
+Token _parseValue(String s, int i) {
   var sub = _nextSubstring(s, i);
   if (sub == null) return null;
 
@@ -79,26 +109,38 @@ Token parseValue(String s, int i) {
   return Token(type: TokenType.VALUE, value: sub);
 }
 
-Token parseIdent(String s, int i) {
+/// Tries parsing a identifier token. Returns null if the parse fails.
+/// The algorithm starts searching the [String] [s] at position [i].
+Token _parseIdent(String s, int i) {
   var sub = _nextSubstring(s, i);
   if (sub == null) return null;
   
   return Token(type: TokenType.IDENT, value: sub);
 }
 
+/// Adds an L token to the list of tokens. Throws an exception
+/// if this L token would follow on another L token.
 int _addLToken(Token lToken, List<Token> tokens) {
   if (lToken != null) {
     if (tokens.isNotEmpty && tokens.last.isLToken())
-      throw Exception('Could not parse expression: two l tokens in a row');
+      throw Exception('Could not parse expression: two L tokens in a row');
     tokens.add(lToken);
     return lToken.value.length;
   }
   return 0;
 }
 
+/// Tokenizes the input [String] [s] by creating a List of tokens.
+/// The function applies a list of matchers in the following order
+/// 1. Is it a S token?
+/// 2. Is it a L token?
+/// 3. Is it a value?
+/// 4. Is it an identifier?
 List<Token> tokenize(String s) {
   const sMatchers = [
     [' ', TokenType.WHITESPACE],
+    ['\n', TokenType.NEWLINE],
+    ['\t', TokenType.TAB],
     ['(', TokenType.PARANTHESIS_OPEN],
     [')', TokenType.PARANTHESIS_CLOSE],
   ];
@@ -123,11 +165,11 @@ List<Token> tokenize(String s) {
     var advance = _addLToken(lToken, tokens);
     if (advance != 0) { i += advance; continue; }
 
-    var valueToken = parseValue(s, i);
+    var valueToken = _parseValue(s, i);
     var valueAdvance = _addLToken(valueToken, tokens);
     if (valueAdvance != 0) { i += valueAdvance; continue; }
 
-    var identToken = parseIdent(s, i);
+    var identToken = _parseIdent(s, i);
     var identAdvance = _addLToken(identToken, tokens);
     if (identAdvance != 0) { i += identAdvance; continue; }
 
@@ -136,19 +178,28 @@ List<Token> tokenize(String s) {
   return tokens;
 }
 
+//// EVALUATING SEGMENT ////
 
+/// The context model stores variable/value paris.
 class ContextModel {
+  /// Stores the variable/value pairs
   Map<String, int> model;
+  /// Whether to assume fails if a variable is non existent
   bool assumeFalse;
 
+  /// Sets a [value] for the given [variable]
   void setVar(String variable, int value) {
     model[variable] = value;
   }
 
+  /// Deletes a variable from this [ContextModel]
   void deleteVar(String variable) {
     model.remove(variable);
   }
 
+  /// Returns the value associated with the variable [name].
+  /// Returns false if the variable is non existent and
+  /// [assumeFalse] is true. Throws an exception otherwise.
   int getVar(String name) {
     if (!model.containsKey(name)) {
       if (assumeFalse) return 0;
@@ -158,63 +209,72 @@ class ContextModel {
   }
 }
 
-class TreeElement {
-  static int funcAND(TreeElement elem, ContextModel cm)
-    => elem.values[0].evaluateBool(cm) && elem.values[1].evaluateBool(cm) ? 1 : 0;
-  static int funcOR(TreeElement elem, ContextModel cm)
-    => elem.values[0].evaluateBool(cm) || elem.values[1].evaluateBool(cm) ? 1 : 0;
-  static int funcXOR(TreeElement elem, ContextModel cm)
-    => elem.values[0].evaluateBool(cm) != elem.values[1].evaluateBool(cm) ? 1 : 0;
-  static int funcTHEN(TreeElement elem, ContextModel cm)
-    => !elem.values[0].evaluateBool(cm) || elem.values[1].evaluateBool(cm) ? 1 : 0;
-  static int funcNOT(TreeElement elem, ContextModel cm)
-    => !elem.values[0].evaluateBool(cm) ? 1 : 0; 
-  static int funcIDENT(TreeElement elem, ContextModel cm) => elem.values[0]; 
-  static int funcVALUE(TreeElement elem, ContextModel cm) => cm.getVar(elem.values[0]); 
+//// PARSING SEGMENT ////
 
-  static const Map<TokenType, int Function(TreeElement, ContextModel)> evalMap = {
-    TokenType.AND : funcAND, TokenType.OR : funcOR, TokenType.XOR : funcXOR,
-    TokenType.THEN : funcTHEN, TokenType.NOT : funcNOT, TokenType.IDENT: funcIDENT,
-    TokenType.VALUE: funcVALUE,
+/// Represents an element in the abstract syntaxt tree
+class TreeElement {
+  static int _funcAND(TreeElement elem, ContextModel cm)
+    => elem.values[0].evaluateBool(cm) && elem.values[1].evaluateBool(cm) ? 1 : 0;
+  static int _funcOR(TreeElement elem, ContextModel cm)
+    => elem.values[0].evaluateBool(cm) || elem.values[1].evaluateBool(cm) ? 1 : 0;
+  static int _funcXOR(TreeElement elem, ContextModel cm)
+    => elem.values[0].evaluateBool(cm) != elem.values[1].evaluateBool(cm) ? 1 : 0;
+  static int _funcTHEN(TreeElement elem, ContextModel cm)
+    => !elem.values[0].evaluateBool(cm) || elem.values[1].evaluateBool(cm) ? 1 : 0;
+  static int _funcNOT(TreeElement elem, ContextModel cm)
+    => !elem.values[0].evaluateBool(cm) ? 1 : 0; 
+  static int _funcIDENT(TreeElement elem, ContextModel cm) => elem.values[0]; 
+  static int _funcVALUE(TreeElement elem, ContextModel cm) => cm.getVar(elem.values[0]); 
+
+  static const Map<TokenType, int Function(TreeElement, ContextModel)> _evalMap = {
+    TokenType.AND : _funcAND, TokenType.OR : _funcOR, TokenType.XOR : _funcXOR,
+    TokenType.THEN : _funcTHEN, TokenType.NOT : _funcNOT, TokenType.IDENT: _funcIDENT,
+    TokenType.VALUE: _funcVALUE,
   };
   
-  static String stringINLINE(TreeElement elem, String ct) => '(${elem.values[0].istr()} $ct ${elem.values[1].istr()})';
-  static String stringAND(TreeElement elem) => stringINLINE(elem, 'AND');
-  static String stringOR(TreeElement elem) => stringINLINE(elem, 'OR');
-  static String stringXOR(TreeElement elem) => stringINLINE(elem, 'XOR');
-  static String stringTHEN(TreeElement elem) => stringINLINE(elem, 'THEN');
-  static String stringNOT(TreeElement elem)=> '(NOT ${elem.values[0].istr()})'; 
-  static String stringIDENT(TreeElement elem) => elem.values[0].toString();
-  static String stringVALUE(TreeElement elem) => elem.values[0].toString();
+  static String _stringINLINE(TreeElement elem, String ct) => '(${elem.values[0].istr()} $ct ${elem.values[1].istr()})';
+  static String _stringAND(TreeElement elem) => _stringINLINE(elem, 'AND');
+  static String _stringOR(TreeElement elem) => _stringINLINE(elem, 'OR');
+  static String _stringXOR(TreeElement elem) => _stringINLINE(elem, 'XOR');
+  static String _stringTHEN(TreeElement elem) => _stringINLINE(elem, 'THEN');
+  static String _stringNOT(TreeElement elem)=> '(NOT ${elem.values[0].istr()})'; 
+  static String _stringIDENT(TreeElement elem) => elem.values[0].toString();
+  static String _stringVALUE(TreeElement elem) => elem.values[0].toString();
 
-  static const Map<TokenType, String Function(TreeElement)> stringMap = {
-    TokenType.AND : stringAND, TokenType.OR : stringOR, TokenType.XOR : stringXOR,
-    TokenType.THEN : stringTHEN, TokenType.NOT : stringNOT, TokenType.IDENT: stringIDENT,
-    TokenType.VALUE: stringVALUE,
+  static const Map<TokenType, String Function(TreeElement)> _stringMap = {
+    TokenType.AND : _stringAND, TokenType.OR : _stringOR, TokenType.XOR : _stringXOR,
+    TokenType.THEN : _stringTHEN, TokenType.NOT : _stringNOT, TokenType.IDENT: _stringIDENT,
+    TokenType.VALUE: _stringVALUE,
   };
 
   TokenType expression;
   List<dynamic> values;
 
+  /// Creates an expression using a [TokenType] and a list of arguments
   TreeElement(this.expression, this.values);
+  /// Creates a unary expression using a [TokenType] and a single value
   TreeElement.unary(this.expression, dynamic val)
     : values = [val];
 
+  /// Evaluates the tree using the given [ContextModel]
   int evaluate(ContextModel model) {
-    if (!evalMap.containsKey(expression))
+    if (!_evalMap.containsKey(expression))
       throw Exception('Unknwon expression $expression');
-    return evalMap[expression](this, model);
+    return _evalMap[expression](this, model);
   }
+  /// Evaluates the tree as a boolean using the given [ContextModel]
   bool evaluateBool(ContextModel model) => evaluate(model) != 0;
 
+  /// Creates an infix notation [String] from this expression
   String istr() {
-    if (!stringMap.containsKey(expression))
+    if (!_stringMap.containsKey(expression))
       throw Exception('Unknwon expression $expression');
-    return stringMap[expression](this);
+    return _stringMap[expression](this);
   } 
 
+  /// Creates an infix notation [String] from this expression. See [istr].
   @override
-  String toString() => '$expression:[$values]';
+  String toString() => istr();
 }
 
 class PReturn {
@@ -226,7 +286,7 @@ class PReturn {
   String toString() => '($i $x)';
 }
 
-Token nextToken(List<Token> a, int i, {bool canBeNull=false}) {
+Token _nextToken(List<Token> a, int i, {bool canBeNull=false}) {
   if (i >= a.length) {
     if (canBeNull) return null;
     throw Exception('Expected Token');
@@ -234,21 +294,29 @@ Token nextToken(List<Token> a, int i, {bool canBeNull=false}) {
   return a[i];
 }
 
-//PReturn parseXOR(List<Token> a, int i) {
-//
-//}
-//PReturn parseTHEN(List<Token> a, int i) {
-//
-//}
-PReturn parseAtom(List<Token> a, int i) {
-  var t = nextToken(a, i);
+/// Parses a general infix element in the form A <operator> B.
+PReturn _parseInfixElement(List<Token> a, int i, TokenType type, PReturn Function(List<Token>, int) subparser) {
+  var r = subparser(a, i);
+  var next = _nextToken(a, r.i, canBeNull: true);
+  while (next?.type == type) {
+    var r2 = subparser(a, r.i + 1);
+    r = PReturn(r2.i, TreeElement(type, [r.x, r2.x]));
+    next = _nextToken(a, r.i, canBeNull: true);
+  }
+  return r;
+}
+
+/// Parses an Atom, see the grammar for more information.
+PReturn _parseAtom(List<Token> a, int i) {
+  var t = _nextToken(a, i);
   if (t.type == TokenType.IDENT) {
     return PReturn(i + 1, TreeElement.unary(TokenType.IDENT, t.value));
   } else if (t.type == TokenType.VALUE) {
-    return PReturn(i + 1, TreeElement.unary(TokenType.VALUE, t.value));
+    var v = int.parse(t.value);
+    return PReturn(i + 1, TreeElement.unary(TokenType.VALUE, v));
   } else if (t.type == TokenType.PARANTHESIS_OPEN) {
     var r = parseExpression(a, i + 1);
-    if (nextToken(a, r.i).type != TokenType.PARANTHESIS_CLOSE)
+    if (_nextToken(a, r.i).type != TokenType.PARANTHESIS_CLOSE)
       throw Exception('Mismatching bracket');
 
     return PReturn(r.i + 1, r.x);
@@ -256,41 +324,31 @@ PReturn parseAtom(List<Token> a, int i) {
     throw Exception('Unknown symbol');
   }
 }
-PReturn parseNOT(List<Token> a, int i) {
+
+/// Parses a NOT statement, see the grammar for more information.
+PReturn _parseNOT(List<Token> a, int i) {
   if (a[i].type == TokenType.NOT) {
-    var r = parseNOT(a, i + 1);
+    var r = _parseNOT(a, i + 1);
     return PReturn(r.i, TreeElement.unary(TokenType.NOT, r.x));
   }
-  return parseAtom(a, i);
+  return _parseAtom(a, i);
 }
-PReturn parseAND(List<Token> a, int i) {
-  var r = parseNOT(a, i);
-  var next = nextToken(a, r.i, canBeNull: true);
-  while (next?.type == TokenType.AND) {
-    var r2 = parseNOT(a, r.i + 1);
-    r = PReturn(r2.i, TreeElement(TokenType.AND, [r.x, r2.x]));
-    next = nextToken(a, r.i, canBeNull: true);
-  }
-  return r;
-}
-PReturn parseOR(List<Token> a, int i) {
-  var r = parseAND(a, i);
-  var next = nextToken(a, r.i, canBeNull: true);
-  while (next?.type == TokenType.OR) {
-    var r2 = parseAND(a, r.i + 1);
-    r = PReturn(r2.i, TreeElement(TokenType.OR, [r.x, r2.x]));
-    next = nextToken(a, r.i, canBeNull: true);
-  }
-  return r;
-}
-PReturn parseExpression(List<Token> a, int i) {
-  return parseOR(a, i);
-}
+
+/// Parses an AND statement, see the grammar for more information.
+PReturn _parseAND(List<Token> a, int i) => _parseInfixElement(a, i, TokenType.AND, _parseNOT);
+/// Parses a THEN statement, see the grammar for more information.
+PReturn _parseTHEN(List<Token> a, int i) => _parseInfixElement(a, i, TokenType.THEN, _parseAND);
+/// Parses a XOR statement, see the grammar for more information.
+PReturn _parseXOR(List<Token> a, int i) => _parseInfixElement(a, i, TokenType.XOR, _parseTHEN);
+/// Parses an OR statement, see the grammar for more information.
+PReturn _parseOR(List<Token> a, int i) => _parseInfixElement(a, i, TokenType.OR, _parseXOR);
+/// Parses an Expression, see the grammar for more information.
+PReturn parseExpression(List<Token> a, int i) => _parseOR(a, i);
 
 TreeElement buildExpression(String exp) {
   // creates the list of tokens
   var tokens = tokenize(exp);
-  tokens = tokens.where((element) => element.type != TokenType.WHITESPACE).toList();
+  tokens = tokens.where((element) => !element.isBlank()).toList();
   print(tokens);
 
   // parses the expression
