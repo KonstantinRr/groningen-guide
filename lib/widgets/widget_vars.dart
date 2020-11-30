@@ -93,6 +93,7 @@ class WidgetVars extends StatelessWidget {
               ...
               enumerate(engine.klBase.questions).map((q) =>
                 Container(
+                  padding: const EdgeInsets.all(7),
                   color: q[0].isOdd ? Colors.grey[200] : Colors.grey[100],
                   child: WidgetQuestion(engine: engine, question: q[1])
                 ),

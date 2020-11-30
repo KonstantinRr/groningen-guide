@@ -18,7 +18,7 @@
                 "option1 XOR option2"
             ],
             "events": [
-                ["final", 1]
+                "final = 1"
             ]
         },
         {
@@ -29,7 +29,7 @@
                 
             ],
             "events": [
-                ["final", 1]
+                "final = 1"
             ]
         }
     ],
@@ -44,13 +44,13 @@
                 {
                     "description": "Answer option 1",
                     "events": [
-                        ["option1", 1]
+                        "option1 = 1"
                     ]
                 },
                 {
                     "description": "Answer option 2",
                     "events": [
-                        ["option2", 1]
+                        "option2 = 1"
                     ]
                 }
             ]

@@ -10,6 +10,7 @@ import 'dart:convert';
 import 'package:flutter/foundation.dart';
 import 'package:groningen_guide/kl/kl_base.dart';
 import 'package:groningen_guide/kl/kl_question.dart';
+import 'package:groningen_guide/kl/kl_question_option.dart';
 import 'package:groningen_guide/kl/kl_rule.dart';
 import 'package:groningen_guide/kl_parser.dart';
 
@@ -27,6 +28,9 @@ class ExpressionStorage {
   }
 
   TreeElement operator[](String elem) => storage[elem];
+
+  List<TreeElement> findExpressions(List<String> elements) =>
+    elements.map<TreeElement>((e) => storage[e]).toList();
 
   Set<String> findVariables() {
     var variables = <String> {};
@@ -51,10 +55,14 @@ class ExpressionStorage {
     // generates the expressions for all questions
     for (var q in base.questions) {
       q.conditions.forEach((e) => insertExp(e));
+      q.options.forEach((option) {
+        option.events.forEach((event) => insertExp(event));
+      });
     }
     // generates the expressions for all rules
     for (var rule in base.rules) {
       rule.conditions.forEach((e) => insertExp(e));
+      rule.events.forEach((event) => insertExp(event));
     }
   }
 
@@ -80,7 +88,7 @@ class KlEngine extends ChangeNotifier {
   }
 
   void loadFromString(String string) {
-    try {
+    //try {
       // code that might throw
       var map = json.decode(string);
       var nklBase = KlBase.fromJson(map);
@@ -93,9 +101,9 @@ class KlEngine extends ChangeNotifier {
       contextModel = ncontextModel;
       // notifies listeners on the state change
       notifyListeners();
-    } catch(e) {
-      throw e;
-    }
+    //} catch(e) {
+    //  throw e;
+    //}
   }
 
   void updateContextModel(void Function(ContextModel) updater) {

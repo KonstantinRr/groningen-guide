@@ -35,6 +35,7 @@ enum TokenType {
   PARANTHESIS_OPEN,
   PARANTHESIS_CLOSE,
   WHITESPACE, TAB, NEWLINE,
+  EQUAL,
 
   // L tokens, they require at least one S token in between
   AND, OR, XOR, THEN, NOT,
@@ -54,7 +55,8 @@ class Token {
     type == TokenType.PARANTHESIS_CLOSE ||
     type == TokenType.WHITESPACE ||
     type == TokenType.NEWLINE ||
-    type == TokenType.TAB;
+    type == TokenType.TAB ||
+    type == TokenType.EQUAL;
   
   bool isBlank() =>
     type == TokenType.WHITESPACE ||
@@ -143,6 +145,7 @@ List<Token> tokenize(String s) {
     ['\t', TokenType.TAB],
     ['(', TokenType.PARANTHESIS_OPEN],
     [')', TokenType.PARANTHESIS_CLOSE],
+    ['=', TokenType.EQUAL]
   ];
   const lMatchers = [
     ['AND', TokenType.AND],
@@ -234,11 +237,15 @@ class TreeElement {
     => !elem.values[0].evaluateBool(cm) ? 1 : 0; 
   static int _funcIDENT(TreeElement elem, ContextModel cm) => cm.getVar(elem.values[0]); 
   static int _funcVALUE(TreeElement elem, ContextModel cm) => elem.values[0]; 
-
+  static int _funcEQUAL(TreeElement elem, ContextModel cm) {
+    var result = elem.values[1].evaluate(cm);
+    cm.setVar(elem.values[0].values[0], result);
+    return result;
+  }
   static const Map<TokenType, int Function(TreeElement, ContextModel)> _evalMap = {
     TokenType.AND : _funcAND, TokenType.OR : _funcOR, TokenType.XOR : _funcXOR,
     TokenType.THEN : _funcTHEN, TokenType.NOT : _funcNOT, TokenType.IDENT: _funcIDENT,
-    TokenType.VALUE: _funcVALUE,
+    TokenType.VALUE: _funcVALUE, TokenType.EQUAL : _funcEQUAL
   };
   
   static String _stringINLINE(TreeElement elem, String ct) => '(${elem.values[0].istr()} $ct ${elem.values[1].istr()})';
@@ -249,11 +256,11 @@ class TreeElement {
   static String _stringNOT(TreeElement elem)=> '(NOT ${elem.values[0].istr()})'; 
   static String _stringIDENT(TreeElement elem) => elem.values[0].toString();
   static String _stringVALUE(TreeElement elem) => elem.values[0].toString();
-
+  static String _stringEQUAL(TreeElement elem) => _stringINLINE(elem, '=');
   static const Map<TokenType, String Function(TreeElement)> _stringMap = {
     TokenType.AND : _stringAND, TokenType.OR : _stringOR, TokenType.XOR : _stringXOR,
     TokenType.THEN : _stringTHEN, TokenType.NOT : _stringNOT, TokenType.IDENT: _stringIDENT,
-    TokenType.VALUE: _stringVALUE,
+    TokenType.VALUE: _stringVALUE, TokenType.EQUAL : _stringEQUAL
   };
 
   TokenType expression;
@@ -266,7 +273,7 @@ class TreeElement {
     : values = [val];
 
   /// Evaluates the tree using the given [ContextModel]
-  int evaluate(ContextModel model) {
+  int evaluate(ContextModel model, {bool allowAssignment=true}) {
     if (!_evalMap.containsKey(expression))
       throw Exception('Unknwon expression $expression');
     return _evalMap[expression](this, model);
@@ -373,15 +380,31 @@ PReturn _parseOR(List<Token> a, int i) => _parseInfixElement(a, i, TokenType.OR,
 /// Parses an Expression, see the grammar for more information.
 PReturn parseExpression(List<Token> a, int i) => _parseOR(a, i);
 
+PReturn parseAssignment(List<Token> a, int i) => _parseInfixElement(a, i, TokenType.EQUAL, parseExpression);
+
+void _checkAssignment(TreeElement elem) {
+  if (elem.expression == TokenType.EQUAL) {
+    if (!(elem.values[0] is TreeElement) || (elem.values[0].expression != TokenType.IDENT))
+      throw Exception('Left side of assignment must be variable');
+    _checkAssignment(elem.values[1]);
+  }
+
+  for (var child in elem.values) {
+    if (child is TreeElement)
+      _checkAssignment(child);
+  }
+}
+
 TreeElement buildExpression(String exp) {
   // creates the list of tokens
   var tokens = tokenize(exp);
   tokens = tokens.where((element) => !element.isBlank()).toList();
 
   // parses the expression
-  var ret = parseExpression(tokens, 0);
+  var ret = parseAssignment(tokens, 0);
   // checks if all elements have been used
   if (ret.i != tokens.length)
     throw Exception('Unexpected element at end of stream');
+  _checkAssignment(ret.x);
   return  ret.x;
 }

@@ -23,7 +23,7 @@ class KlRule extends MapObject {
   /// The conditions that must be met for this rule
   List<String> conditions;
   /// The events that are executed if this rule is infered
-  List<List> events;
+  List<String> events;
 
   /// Creates a new rule by supplying the member variables
   KlRule({this.name, this.description, this.conditions, this.events});
@@ -38,7 +38,7 @@ class KlRule extends MapObject {
     conditions = assertTypeGet<List>(map, 'conditions')
       .map<String>((e) => e as String).toList();
     events = assertTypeGet<List>(map, 'events')
-      .map<List>((e) => e as List).toList();
+      .map<String>((e) => e as String).toList();
   }
 
   /// Serializes this object as a JSON object

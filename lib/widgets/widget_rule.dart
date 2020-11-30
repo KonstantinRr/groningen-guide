@@ -62,7 +62,6 @@ class WidgetRule extends StatelessWidget {
             children: <Widget> [
               Text('Evaluated as: ', style: theme.textTheme.bodyText1,),
               WidgetEvaluator(val: engine.evaluateRule(rule))
-
             ]
           ),
         ]
