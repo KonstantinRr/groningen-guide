@@ -8,6 +8,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:groningen_guide/widgets/widget_logo.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class RouteSplash extends StatefulWidget {
   final Duration delay;
@@ -58,6 +59,7 @@ class RouteSplashState extends State<RouteSplash> {
               ),
             ]
           )),
+          // icon attribution
           Positioned(
             bottom: 0.0, height: 50.0,
             left: 0, right: 0,
@@ -68,16 +70,15 @@ class RouteSplashState extends State<RouteSplash> {
                 Text('Icons made by ', style: style,),
                 InkWell(
                   child: Text('Freepik', style: style.copyWith(color: Colors.lightBlue),),
-                  onTap: () {},
+                  onTap: () => launch('https://www.flaticon.com/authors/freepik'),
                 ),
                 Text(' from ', style: style,),
                 InkWell(
                   child: Text('Flaticon', style: style.copyWith(color: Colors.lightBlue),),
-                  onTap: () {},
+                  onTap: () => launch('https://www.flaticon.com/'),
                 ),
               ]
             )
-                //<a href="https://www.flaticon.com/authors/freepik" title="Freepik">Freepik</a> from <a href="https://www.flaticon.com/" title="Flaticon"> www.flaticon.com</a>')
           )
         ]
       )
