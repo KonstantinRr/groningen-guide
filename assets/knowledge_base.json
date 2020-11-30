@@ -19,6 +19,17 @@
             "events": [
                 ["final", 1]
             ]
+        },
+        {
+            "name": "Rule 2",
+            "description": "Example inference ",
+            "conditions": [
+                "option1 AND option2"
+                
+            ],
+            "events": [
+                ["final", 1]
+            ]
         }
     ],
     "questions": [

@@ -1,5 +1,3 @@
-import 'dart:convert';
-
 /// This project is build during the course Knowledge Technology Practical at the
 /// UNIVERSITY OF GRONINGEN (WBAI014-05).
 /// The project was build by:
@@ -7,8 +5,10 @@ import 'dart:convert';
 /// Nicholas Koundouros (S3726444) n.koundouros@student.rug.nl
 /// Livia Regus (S3354970): l.regus@student.rug.nl
 
+import 'dart:convert';
+
+import 'package:flutter/foundation.dart';
 import 'package:groningen_guide/kl/kl_base.dart';
-import 'package:groningen_guide/kl/kl_rule.dart';
 import 'package:groningen_guide/kl_parser.dart';
 
 class ExpressionStorage {
@@ -49,7 +49,7 @@ class ExpressionStorage {
   }
 }
 
-class KlEngine {
+class KlEngine extends ChangeNotifier {
   KlBase klBase;
   ExpressionStorage expressionStorage;
   ContextModel contextModel;
@@ -77,5 +77,6 @@ class KlEngine {
       var result = evaluateConditionList(rule.conditions);
       print('Evaluating Rule \'${rule.name}\' => $result');
     }
+    notifyListeners();
   }
 }
