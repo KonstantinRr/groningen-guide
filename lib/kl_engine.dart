@@ -9,10 +9,12 @@ import 'dart:convert';
 
 import 'package:flutter/foundation.dart';
 import 'package:groningen_guide/kl/kl_base.dart';
+import 'package:groningen_guide/kl/kl_question.dart';
+import 'package:groningen_guide/kl/kl_rule.dart';
 import 'package:groningen_guide/kl_parser.dart';
 
 class ExpressionStorage {
-  final storage = <String, TreeElement> {};
+  final storage = <String, TreeElement> { };
 
   void insertExp(String exp) {
     try {
@@ -22,6 +24,18 @@ class ExpressionStorage {
       print('Could not parse expression $exp : ${e.toString()}');
       throw e;
     }
+  }
+
+  TreeElement operator[](String elem) => storage[elem];
+
+  Set<String> findVariables() {
+    var variables = <String> {};
+    for (var tree in storage.values) {
+      variables.addAll(
+        tree.findOfType(TokenType.IDENT).map((e) => e.values[0])
+      );
+    }
+    return variables;
   }
 
   int evaluateExpression(String exp, ContextModel model) {
@@ -45,6 +59,7 @@ class ExpressionStorage {
   }
 
   void info() {
+    print('Variables: ${findVariables()}');
     storage.forEach((key, value) => print('Expression: \'$key\' => $value'));
   }
 }
@@ -54,14 +69,42 @@ class KlEngine extends ChangeNotifier {
   ExpressionStorage expressionStorage;
   ContextModel contextModel;
 
-  factory KlEngine.fromString(String string) {
-    var map = json.decode(string);
-    return KlEngine(KlBase.fromJson(map));
-  }
+  factory KlEngine.fromString(String string) 
+    => KlEngine.empty()..loadFromString(string);
 
-  KlEngine(this.klBase) {
+  KlEngine.empty();
+  KlEngine() {
+    klBase = KlBase(values: [], questions: [], rules: []);
     expressionStorage = ExpressionStorage(klBase);
     contextModel = ContextModel(assumeFalse: true);
+  }
+
+  void loadFromString(String string) {
+    try {
+      // code that might throw
+      var map = json.decode(string);
+      var nklBase = KlBase.fromJson(map);
+      var nexpressionStorage = ExpressionStorage(nklBase);
+      var ncontextModel = ContextModel(assumeFalse: true);
+      ncontextModel.loadDefaultVars(nexpressionStorage.findVariables());
+      // assign new variables (cannot throw)
+      klBase = nklBase;
+      expressionStorage = nexpressionStorage;
+      contextModel = ncontextModel;
+      // notifies listeners on the state change
+      notifyListeners();
+    } catch(e) {
+      throw e;
+    }
+  }
+
+  void updateContextModel(void Function(ContextModel) updater) {
+    updater(contextModel);
+    notifyListeners();
+  }
+  void updateKnowledgeBase(void Function(KlBase) updater) {
+    updater(klBase);
+    notifyListeners();
   }
 
   bool evaluateConditionList(List<String> conditions) {
@@ -71,6 +114,16 @@ class KlEngine extends ChangeNotifier {
     }
     return true;
   }
+
+  bool evaluateCondition(String cond) =>
+    expressionStorage.evaluateExpressionAsBool(cond, contextModel);
+  bool evaluateRule(KlRule rule) => evaluateConditionList(rule.conditions);
+  bool evaluateQuestion(KlQuestion q) => evaluateConditionList(q.conditions);
+
+  List<TreeElement> ruleConditions(KlRule rule)
+    => rule.conditions.map((e) => expressionStorage[e]).toList();
+  List<TreeElement> questionConditions(KlQuestion question)
+    => question.conditions.map((e) => expressionStorage[e]).toList();
 
   void inference() {
     for (var rule in klBase.rules) {

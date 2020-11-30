@@ -8,6 +8,7 @@
 import 'package:flutter/material.dart';
 import 'package:groningen_guide/kl_engine.dart';
 import 'package:flutter/services.dart' show rootBundle;
+import 'package:provider/provider.dart';
 
 /// Loads a knowledge base from an application asset file
 class KnowledgeBaseLoader extends StatelessWidget {
@@ -34,7 +35,10 @@ class KnowledgeBaseLoader extends StatelessWidget {
       future: _loadKlBase(path),
       builder: (context, snap) {
         if (snap.hasData)
-          return onLoad(context, snap.data);
+          return ChangeNotifierProvider<KlEngine>(
+            create: (context) => snap.data,
+            child: onLoad(context, snap.data)
+          );
         return onErr(context);
       },
     );

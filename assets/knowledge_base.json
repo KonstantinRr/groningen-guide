@@ -14,7 +14,8 @@
             "name": "Rule 1",
             "description": "Example inference ",
             "conditions": [
-                "option1 OR NOT option2"
+                "option1 OR NOT option2",
+                "option1 XOR option2"
             ],
             "events": [
                 ["final", 1]

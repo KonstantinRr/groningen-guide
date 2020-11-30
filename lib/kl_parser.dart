@@ -200,6 +200,12 @@ class ContextModel {
     model.remove(variable);
   }
 
+  /// loads the given list of [vars] to the knowledge base
+  void loadDefaultVars(Set<String> vars) {
+    model.addEntries(
+      vars.map((e) => MapEntry<String, int>(e, 0)));
+  }
+
   /// Returns the value associated with the variable [name].
   /// Returns false if the variable is non existent and
   /// [assumeFalse] is true. Throws an exception otherwise.
@@ -267,6 +273,25 @@ class TreeElement {
   }
   /// Evaluates the tree as a boolean using the given [ContextModel]
   bool evaluateBool(ContextModel model) => evaluate(model) != 0;
+
+  Iterable<TreeElement> findOfType(TokenType type) sync* {
+    if (expression == type)
+      yield this;
+    
+    for (var child in values) {
+      if (child is TreeElement)
+        yield* child.findOfType(type);
+    }
+  }
+
+  void replaceVarByValue(String ident, int value) {
+    findOfType(TokenType.IDENT)
+      .where((element) => element.values[0] == ident)
+      .forEach((element) {
+        element.expression = TokenType.VALUE;
+        element.values[0] = value;
+      });
+  }
 
   /// Creates an infix notation [String] from this expression
   String istr() {

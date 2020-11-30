@@ -6,6 +6,8 @@
 /// Livia Regus (S3354970): l.regus@student.rug.nl
 
 import 'package:flutter/material.dart';
+import 'package:groningen_guide/kl_engine.dart';
+import 'package:provider/provider.dart';
 
 
 class CustomKnowledgeLoader extends StatefulWidget {
@@ -22,6 +24,11 @@ class CustomKnowledgeLoaderState extends State<CustomKnowledgeLoader> {
   void dispose() {
     controller.dispose();
     super.dispose();
+  }
+
+  void _load() {
+    var prov = Provider.of<KlEngine>(context, listen: false);
+    prov.loadFromString(controller.text);
   }
 
   @override
