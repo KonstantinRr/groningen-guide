@@ -13,6 +13,8 @@ import 'package:groningen_guide/kl/kl_question.dart';
 import 'package:groningen_guide/kl/kl_question_option.dart';
 import 'package:groningen_guide/kl/kl_rule.dart';
 import 'package:groningen_guide/kl_parser.dart';
+import 'package:groningen_guide/widgets/widget_vars.dart';
+import 'package:tuple/tuple.dart';
 
 class ExpressionStorage {
   final storage = <String, TreeElement> { };
@@ -72,10 +74,58 @@ class ExpressionStorage {
   }
 }
 
+class QuestionData extends ChangeNotifier {
+  final List<Tuple2<KlQuestion, List<bool>>> previous = [];
+  Tuple2<KlQuestion, List<bool>> _current;
+  
+  void unloadQuestion() {
+    if (_current != null)
+      previous.add(_current);
+    _current = null;
+    notifyListeners();
+  }
+
+  void loadQuestion(KlQuestion question) {
+    if (_current != null)
+      previous.add(_current);
+    _current = Tuple2(question, List.generate(
+      question.options.length, (_) => false));
+    notifyListeners();
+  }
+
+  bool containsQuestion(KlQuestion question) {
+    return previous.firstWhere((element) => element.item1 == question,
+      orElse: () => null) != null;
+  }
+
+  List<KlQuestionOption> selectedOptions() {
+    return enumerate(_current.item1.options)
+      .where((e) => _current.item2[e[0]])
+      .map<KlQuestionOption>((e) => e[1])
+      .toList();
+  }
+
+  void setOption(int index, bool value) {
+    _current.item2[index] = value;
+    notifyListeners();
+  }
+
+  void changeOption(int index) {
+    _current.item2[index] = !_current.item2[index];
+    notifyListeners();
+  }
+
+  bool get hasQuestion => _current != null;
+  Tuple2<KlQuestion, List<bool>> get current => _current;
+  KlQuestion get currentQuestion => _current.item1;
+  List<bool> get currentAnswers => _current.item2;
+}
+
 class KlEngine extends ChangeNotifier {
   KlBase klBase;
   ExpressionStorage expressionStorage;
   ContextModel contextModel;
+  bool debug = true;
 
   factory KlEngine.fromString(String string) 
     => KlEngine.empty()..loadFromString(string);
@@ -106,6 +156,11 @@ class KlEngine extends ChangeNotifier {
     //}
   }
 
+  void updateEngine(void Function(KlEngine) updater) {
+    updater(this);
+    notifyListeners();
+  }
+
   void updateContextModel(void Function(ContextModel) updater) {
     updater(contextModel);
     notifyListeners();
@@ -123,6 +178,15 @@ class KlEngine extends ChangeNotifier {
     return true;
   }
 
+  void evaluateEvents(List<String> events) {
+    print('Evaluating Events');
+    for (var event in events) {
+      print('    $event');
+      expressionStorage.evaluateExpression(event, contextModel);
+    }
+    notifyListeners();
+  }
+
   bool evaluateCondition(String cond) =>
     expressionStorage.evaluateExpressionAsBool(cond, contextModel);
   bool evaluateRule(KlRule rule) => evaluateConditionList(rule.conditions);
@@ -134,9 +198,26 @@ class KlEngine extends ChangeNotifier {
     => question.conditions.map((e) => expressionStorage[e]).toList();
 
   void inference() {
-    for (var rule in klBase.rules) {
+    print('Evaluating Rules');
+    for (var i = 0; i < klBase.rules.length; i++) {
+      var rule = klBase.rules[i];
       var result = evaluateConditionList(rule.conditions);
-      print('Evaluating Rule \'${rule.name}\' => $result');
+      print('    $i: \'${rule.name}\' => $result');
+      if (result) {
+        evaluateEvents(rule.events);
+      }
+    }
+  }
+
+  void loadNextQuestion(QuestionData questionData) {
+    print('Unloading current question');
+    questionData.unloadQuestion();
+    for (var i = 0; i < klBase.questions.length; i++) {
+      if (!questionData.containsQuestion(klBase.questions[i])) {
+        print('Loading Question ${klBase.questions[i]}');
+        questionData.loadQuestion(klBase.questions[i]);
+        break;
+      }
     }
     notifyListeners();
   }

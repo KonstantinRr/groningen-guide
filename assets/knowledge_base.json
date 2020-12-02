@@ -44,7 +44,8 @@
                 {
                     "description": "Answer option 1",
                     "events": [
-                        "option1 = 1"
+                        "option1 = 1",
+                        "three = 3"
                     ]
                 },
                 {
