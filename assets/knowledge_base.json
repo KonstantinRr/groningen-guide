@@ -130,6 +130,12 @@
                     ]
                 },
                 {
+                    "description": "Private",
+                    "events": [
+                        "option1"
+                    ]
+                },
+                {
                     "description": "Just a nice place",
                     "events": [
                         "option1"
@@ -249,6 +255,108 @@
             ]
         },
         {
+            "name": "You have chosen European cuisine",
+            "description": "please, specify",
+            "image": null,
+            "maxAnswers": 1,
+            "conditions": [ ],
+            "options": [
+                {
+                    "description": "French",
+                    "events": [
+                        "option1"
+                    ]
+                },
+                {
+                    "description": "Italian",
+                    "events": [
+                        "option1"
+                    ]
+                },
+                {
+                    "description": "Greek",
+                    "events": [
+                        "option1"
+                    ]
+                },
+                {
+                    "description": "Irish",
+                    "events": [
+                        "option1"
+                    ]
+                },
+                {
+                    "description": "Scandinavian",
+                    "events": [
+                        "option1"
+                    ]
+                },
+                {
+                    "description": "Spanish",
+                    "events": [
+                        "option1"
+                    ]
+                },
+                {
+                    "description": "British",
+                    "events": [
+                        "option1"
+                    ]
+                }
+            ]
+        },
+        {
+            "name": "You have chosen Asian cuisine",
+            "description": "please, specify",
+            "image": null,
+            "maxAnswers": 1,
+            "conditions": [ ],
+            "options": [
+                {
+                    "description": "Indian",
+                    "events": [
+                        "option1"
+                    ]
+                },
+                {
+                    "description": "Thai",
+                    "events": [
+                        "option1"
+                    ]
+                },
+                {
+                    "description": "Korean",
+                    "events": [
+                        "option1"
+                    ]
+                },
+                {
+                    "description": "Japanese",
+                    "events": [
+                        "option1"
+                    ]
+                },
+                {
+                    "description": "Chinese",
+                    "events": [
+                        "option1"
+                    ]
+                },
+                {
+                    "description": "Vietnamese",
+                    "events": [
+                        "option1"
+                    ]
+                },
+                {
+                    "description": "Indonesian",
+                    "events": [
+                        "option1"
+                    ]
+                }
+            ]
+        },
+        {
             "name": "Do you have any dietary restrictions?",
             "description": "",
             "image": null,
@@ -275,6 +383,60 @@
                 },
                 {
                     "description": "None",
+                    "events": [
+                        "option1"
+                    ]
+                }
+            ]
+        },
+        {
+            "name": "You have chosen American",
+            "description": "please specify",
+            "image": null,
+            "maxAnswers": 1,
+            "conditions": [ ],
+            "options": [
+                {
+                    "description": "US",
+                    "events": [
+                        "option1"
+                    ]
+                },
+                {
+                    "description": "Chilean",
+                    "events": [
+                        "option1"
+                    ]
+                },
+                {
+                    "description": "Caribbean",
+                    "events": [
+                        "option1"
+                    ]
+                }
+            ]
+        },
+        {
+            "name": "You have chosen Middle Eastern",
+            "description": "please specify",
+            "image": null,
+            "maxAnswers": 1,
+            "conditions": [ ],
+            "options": [
+                {
+                    "description": "Turkish",
+                    "events": [
+                        "option1"
+                    ]
+                },
+                {
+                    "description": "Persian",
+                    "events": [
+                        "option1"
+                    ]
+                },
+                {
+                    "description": "Lebanese",
                     "events": [
                         "option1"
                     ]
