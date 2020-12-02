@@ -7,6 +7,10 @@
         {
             "name": "option2",
             "value": 0
+        },
+        {
+            "name": "option3",
+            "value": 0
         }
     ],
     "rules": [
@@ -35,22 +39,349 @@
     ],
     "questions": [
         {
-            "name": "Question 1",
-            "description": "This is a simple example question",
+            "name": "What are you looking for?",
+            "description": "",
             "image": null,
             "maxAnswers": 1,
             "conditions": [ ],
             "options": [
                 {
-                    "description": "Answer option 1",
+                    "description": "Cafes / Bars and Pubs",
                     "events": [
-                        "option1 = 1"
+                        "option1"
                     ]
                 },
                 {
-                    "description": "Answer option 2",
+                    "description": "Restaurants",
                     "events": [
-                        "option2 = 1"
+                        "option2"
+                    ]
+                },
+                {
+                    "description": "Hotels",
+                    "events": [
+                        "option3"
+                    ]
+                }
+            ]
+        },
+        {
+            "name": "What is your main goal?",
+            "description": "",
+            "image": null,
+            "maxAnswers": 1,
+            "conditions": [ ],
+            "options": [
+                {
+                    "description": "Business",
+                    "events": [
+                        "option1"
+                    ]
+                },
+                {
+                    "description": "Leisure",
+                    "events": [
+                        "option1"
+                    ]
+                },
+                {
+                    "description": "Tourism",
+                    "events": [
+                        "option1"
+                    ]
+                }
+            ]
+        },
+        {
+            "name": "What do you have in mind?",
+            "description": "",
+            "image": null,
+            "maxAnswers": 1,
+            "conditions": [ ],
+            "options": [
+                {
+                    "description": "Family and children",
+                    "events": [
+                        "option1"
+                    ]
+                },
+                {
+                    "description": "The whole gang",
+                    "events": [
+                        "option1"
+                    ]
+                },
+                {
+                    "description": "Romantic evening",
+                    "events": [
+                        "option1"
+                    ]
+                },
+                {
+                    "description": "Cultural experience",
+                    "events": [
+                        "option1"
+                    ]
+                },
+                {
+                    "description": "Bar scene",
+                    "events": [
+                        "option1"
+                    ]
+                },
+                {
+                    "description": "Just a nice place",
+                    "events": [
+                        "option1"
+                    ]
+                }
+            ]
+        },
+        {
+            "name": "How much are you willing to spend?",
+            "description": "",
+            "image": null,
+            "maxAnswers": 1,
+            "conditions": [ ],
+            "options": [
+                {
+                    "description": "Fine - dining",
+                    "events": [
+                        "option1"
+                    ]
+                },
+                {
+                    "description": "Mid-range",
+                    "events": [
+                        "option2"
+                    ]
+                },
+                {
+                    "description": "Cheap-eats",
+                    "events": [
+                        "option3"
+                    ]
+                }
+            ]
+        },
+        {
+            "name": "What kind of meal would you like?",
+            "description": "",
+            "image": null,
+            "maxAnswers": 1,
+            "conditions": [ ],
+            "options": [
+                {
+                    "description": "Breakfast",
+                    "events": [
+                        "option1"
+                    ]
+                },
+                {
+                    "description": "Brunch",
+                    "events": [
+                        "option1"
+                    ]
+                },
+                {
+                    "description": "Lunch",
+                    "events": [
+                        "option1"
+                    ]
+                },
+                {
+                    "description": "Dinner",
+                    "events": [
+                        "option1"
+                    ]
+                }
+            ]
+        },
+        {
+            "name": "What type of cuisine are you looking for?",
+            "description": "",
+            "image": null,
+            "maxAnswers": 1,
+            "conditions": [ ],
+            "options": [
+                {
+                    "description": "Dutch",
+                    "events": [
+                        "option1"
+                    ]
+                },
+                {
+                    "description": "European",
+                    "events": [
+                        "option1"
+                    ]
+                },
+                {
+                    "description": "Asian",
+                    "events": [
+                        "option1"
+                    ]
+                },
+                {
+                    "description": "African",
+                    "events": [
+                        "option1"
+                    ]
+                },
+                {
+                    "description": "Middle Eastern",
+                    "events": [
+                        "option1"
+                    ]
+                },
+                {
+                    "description": "Australian",
+                    "events": [
+                        "option1"
+                    ]
+                },
+                {
+                    "description": "American",
+                    "events": [
+                        "option1"
+                    ]
+                }
+            ]
+        },
+        {
+            "name": "Do you have any dietary restrictions?",
+            "description": "",
+            "image": null,
+            "maxAnswers": 1,
+            "conditions": [ ],
+            "options": [
+                {
+                    "description": "Vegetarian",
+                    "events": [
+                        "option1"
+                    ]
+                },
+                {
+                    "description": "Vegan",
+                    "events": [
+                        "option1"
+                    ]
+                },
+                {
+                    "description": "Halal",
+                    "events": [
+                        "option1"
+                    ]
+                },
+                {
+                    "description": "None",
+                    "events": [
+                        "option1"
+                    ]
+                }
+            ]
+        },
+        {
+            "name": "Would you like other activities alongside?",
+            "description": "",
+            "image": null,
+            "maxAnswers": 1,
+            "conditions": [ ],
+            "options": [
+                {
+                    "description": "Yes",
+                    "events": [
+                        "option1"
+                    ]
+                },
+                {
+                    "description": "No",
+                    "events": [
+                        "option1"
+                    ]
+                }
+            ]
+        },
+        {
+            "name": "What service preference do you have?",
+            "description": "",
+            "image": null,
+            "maxAnswers": 1,
+            "conditions": [ ],
+            "options": [
+                {
+                    "description": "Free cancellation",
+                    "events": [
+                        "option1"
+                    ]
+                },
+                {
+                    "description": "Long stay (up to a couple of months)",
+                    "events": [
+                        "option1"
+                    ]
+                },
+                {
+                    "description": "Breakfast included",
+                    "events": [
+                        "option1"
+                    ]
+                },
+                {
+                    "description": "Parking ",
+                    "events": [
+                        "option1"
+                    ]
+                },
+                {
+                    "description": "No preference",
+                    "events": [
+                        "option1"
+                    ]
+                }
+            ]
+        },
+        {
+            "name": "What area would you prefer?",
+            "description": "",
+            "image": null,
+            "maxAnswers": 1,
+            "conditions": [ ],
+            "options": [
+                {
+                    "description": "City centre",
+                    "events": [
+                        "option1"
+                    ]
+                },
+                {
+                    "description": "Schilderswijk/Zeeheldenbuurt",
+                    "events": [
+                        "option1"
+                    ]
+                },
+                {
+                    "description": "Korrewegwijk/ Indische buurt",
+                    "events": [
+                        "option1"
+                    ]
+                },
+                {
+                    "description": "Rivierenbuurt",
+                    "events": [
+                        "option1"
+                    ]
+                },
+                {
+                    "description": "Oosterparkwijk",
+                    "events": [
+                        "option1"
+                    ]
+                },
+                {
+                    "description": "Paddepoel / Selwerd / Tuinbouw Buurt / Oranjewijk",
+                    "events": [
+                        "option1"
                     ]
                 }
             ]
