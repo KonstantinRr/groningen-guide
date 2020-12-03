@@ -1,6 +1,7 @@
 # Groningen Guide | UNIVERSITY OF GRONINGEN
 
 The Groningen tourist and study guide.
+View the live website [here](https://studyguide.esync.dev).
 
 ## Getting Started
 This project implements a tourist guide for the city of Groningen located in the north of the Netherlands. 
