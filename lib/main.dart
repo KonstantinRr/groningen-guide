@@ -9,8 +9,14 @@ import 'package:flutter/material.dart';
 import 'package:groningen_guide/rotues/route_home.dart';
 import 'package:groningen_guide/rotues/route_splash.dart';
 import 'package:groningen_guide/rotues/route_unknown.dart';
+import 'package:logging/logging.dart';
 
 void main() {
+  Logger.root.level = Level.ALL; // defaults to Level.INFO
+  Logger.root.onRecord.listen((record) {
+    print('${record.level.name}: ${record.time}: ${record.message}');
+  });
+
   // starts the main application
   runApp(const StudyGuide());
 }
