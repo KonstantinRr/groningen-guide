@@ -20,6 +20,8 @@ class KlQuestionOption extends MapObject {
   /// List of events that happen if this option is selected
   List<String> events;
 
+  bool exclusive;
+
   /// Creates a new question option by supplying the member variables
   KlQuestionOption({this.description, this.events});
   /// Creates a new question option using a JSON deserialized object
@@ -29,6 +31,7 @@ class KlQuestionOption extends MapObject {
   void read(dynamic map) {
     assertType<Map<String, dynamic>>(map);
     description = assertTypeGet<String>(map, 'description');
+    exclusive = map['exclusive'] ?? false;
     events = assertTypeGet<List>(map, 'events')
       .map<String>((e) => e as String).toList();
   }
@@ -36,6 +39,7 @@ class KlQuestionOption extends MapObject {
   /// Serializes this object as a JSON object
   Map<String, dynamic> toJson() => {
     'description': description,
-    'events': events
+    'events': events,
+    'exclusive': exclusive
   };
 }

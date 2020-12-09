@@ -1,74 +1,42 @@
 {
-    "values": [
-        {
-            "name": "option1",
-            "value": 0
-        },
-        {
-            "name": "option2",
-            "value": 0
-        },
-        {
-            "name": "option3",
-            "value": 0
-        }
-    ],
+    "values": [ ],
     "rules": [
         {
             "name": "Mofongos",
             "enpoint": true,
             "description": " ",
             "conditions": [
-                "business OR leisure OR lunch OR brunch OR dinner"
+                "business AND (leisure OR lunch) OR brunch OR dinner"
             ],
-            "events": [
-                "mofongos = 1"
-            ]
-        },
-        {
-            "name": "Rule 2",
-            "description": "Example inference ",
-            "conditions": [
-                "option1 AND option2"
-                
-            ],
-            "events": [
-                "final = 1"
-            ]
+            "events": [ "mofongos = 1" ]
         }
     ],
     "questions": [
         {
             "name": "What are you looking for?",
             "description": "",
-            "image": null,
-            "maxAnswers": 1,
+            "image": "assets/images/logo.png",
+            "maxAnswers": 3,
             "conditions": [ ],
             "options": [
                 {
                     "description": "Cafes / Bars and Pubs",
-                    "events": [
-                        "cafe = 1"
-                    ]
+                    "events": [ "cafe = 1" ]
                 },
                 {
                     "description": "Restaurants",
-                    "events": [
-                        "restaurant = 1"
-                    ]
+                    "events": [ "restaurant = 1" ]
                 },
                 {
                     "description": "Hotels",
-                    "events": [
-                        "hotel = 1"
-                    ]
+                    "events": [ "hotel = 1" ]
                 }
             ]
         },
         {
             "name": "What is your main goal?",
             "description": "",
-            "image": "assets/images/image1.png",
+            "image": "assets/images/logo.png",
             "maxAnswers": 1,
             "conditions": [
                 "hotel OR cafe OR restaurant"
@@ -76,21 +44,15 @@
             "options": [
                 {
                     "description": "Business",
-                    "events": [
-                        "option1"
-                    ]
+                    "events": [ "business = 1" ]
                 },
                 {
                     "description": "Leisure",
-                    "events": [
-                        "option1"
-                    ]
+                    "events": [ "leisure = 1" ]
                 },
                 {
                     "description": "Tourism",
-                    "events": [
-                        "option1"
-                    ]
+                    "events": [ "tourism = 1" ]
                 }
             ]
         },
@@ -103,45 +65,31 @@
             "options": [
                 {
                     "description": "Family and children",
-                    "events": [
-                        "option1"
-                    ]
+                    "events": [ "family = 1", "children = 1" ]
                 },
                 {
                     "description": "The whole gang",
-                    "events": [
-                        "option1"
-                    ]
+                    "events": [ "gang = 1" ]
                 },
                 {
                     "description": "Romantic evening",
-                    "events": [
-                        "option1"
-                    ]
+                    "events": [ "romantic = 1" ]
                 },
                 {
                     "description": "Cultural experience",
-                    "events": [
-                        "option1"
-                    ]
+                    "events": [ "cultural = 1" ]
                 },
                 {
                     "description": "Bar scene",
-                    "events": [
-                        "option1"
-                    ]
+                    "events": [ "bar = 1" ]
                 },
                 {
                     "description": "Private",
-                    "events": [
-                        "option1"
-                    ]
+                    "events": [ "private = 1" ]
                 },
                 {
                     "description": "Just a nice place",
-                    "events": [
-                        "option1"
-                    ]
+                    "events": [ "nice = 1" ]
                 }
             ]
         },
@@ -154,21 +102,15 @@
             "options": [
                 {
                     "description": "Fine - dining",
-                    "events": [
-                        "option1"
-                    ]
+                    "events": [ "fine = 1" ]
                 },
                 {
                     "description": "Mid-range",
-                    "events": [
-                        "option2"
-                    ]
+                    "events": [ "average = 1" ]
                 },
                 {
                     "description": "Cheap-eats",
-                    "events": [
-                        "option3"
-                    ]
+                    "events": [ "cheap = 1" ]
                 }
             ]
         },
@@ -181,27 +123,19 @@
             "options": [
                 {
                     "description": "Breakfast",
-                    "events": [
-                        "breakfast = 1"
-                    ]
+                    "events": [ "breakfast = 1" ]
                 },
                 {
                     "description": "Brunch",
-                    "events": [
-                        "brunch = 1"
-                    ]
+                    "events": [ "brunch = 1" ]
                 },
                 {
                     "description": "Lunch",
-                    "events": [
-                        "lunch = 1"
-                    ]
+                    "events": [ "lunch = 1" ]
                 },
                 {
                     "description": "Dinner",
-                    "events": [
-                        "dinner = 1"
-                    ]
+                    "events": [ "dinner = 1" ]
                 }
             ]
         },
@@ -209,50 +143,36 @@
             "name": "What type of cuisine are you looking for?",
             "description": "",
             "image": null,
-            "maxAnswers": 1,
+            "maxAnswers": 7,
             "conditions": [ ],
             "options": [
                 {
                     "description": "Dutch",
-                    "events": [
-                        "option1"
-                    ]
+                    "events": [ "region_dutch = 1", "cultural = 1"]
                 },
                 {
                     "description": "European",
-                    "events": [
-                        "option1"
-                    ]
+                    "events": [ "region_european = 1" ]
                 },
                 {
                     "description": "Asian",
-                    "events": [
-                        "option1"
-                    ]
+                    "events": [ "region_asian = 1" ]
                 },
                 {
                     "description": "African",
-                    "events": [
-                        "option1"
-                    ]
+                    "events": [ "region_african = 1" ]
                 },
                 {
                     "description": "Middle Eastern",
-                    "events": [
-                        "option1"
-                    ]
+                    "events": [ "region_mideast = 1"]
                 },
                 {
                     "description": "Australian",
-                    "events": [
-                        "option1"
-                    ]
+                    "events": [ "region_australian = 1" ]
                 },
                 {
                     "description": "American",
-                    "events": [
-                        "option1"
-                    ]
+                    "events": [ "region_american = 1" ]
                 }
             ]
         },
@@ -260,50 +180,36 @@
             "name": "You have chosen European cuisine",
             "description": "please, specify",
             "image": null,
-            "maxAnswers": 1,
-            "conditions": [ ],
+            "maxAnswers": 7,
+            "conditions": [ "region_european" ],
             "options": [
                 {
                     "description": "French",
-                    "events": [
-                        "option1"
-                    ]
+                    "events": [ "lang_french = 1" ]
                 },
                 {
                     "description": "Italian",
-                    "events": [
-                        "option1"
-                    ]
+                    "events": [ "lang_italian" ]
                 },
                 {
                     "description": "Greek",
-                    "events": [
-                        "option1"
-                    ]
+                    "events": [ "lang_greek = 1" ]
                 },
                 {
                     "description": "Irish",
-                    "events": [
-                        "option1"
-                    ]
+                    "events": [ "lang_irish = 1" ]
                 },
                 {
                     "description": "Scandinavian",
-                    "events": [
-                        "option1"
-                    ]
+                    "events": [ "lang_scandinavian = 1" ]
                 },
                 {
                     "description": "Spanish",
-                    "events": [
-                        "option1"
-                    ]
+                    "events": [ "lang_spanish = 1" ]
                 },
                 {
                     "description": "British",
-                    "events": [
-                        "option1"
-                    ]
+                    "events": [ "lang_british = 1" ]
                 }
             ]
         },
@@ -311,50 +217,36 @@
             "name": "You have chosen Asian cuisine",
             "description": "please, specify",
             "image": null,
-            "maxAnswers": 1,
-            "conditions": [ ],
+            "maxAnswers": 6,
+            "conditions": [ "region_asian" ],
             "options": [
                 {
                     "description": "Indian",
-                    "events": [
-                        "option1"
-                    ]
+                    "events": [ "lang_indian = 1" ]
                 },
                 {
                     "description": "Thai",
-                    "events": [
-                        "option1"
-                    ]
+                    "events": [ "lang_thai = 1" ]
                 },
                 {
                     "description": "Korean",
-                    "events": [
-                        "option1"
-                    ]
+                    "events": [ "lang_korean = 1" ]
                 },
                 {
                     "description": "Japanese",
-                    "events": [
-                        "option1"
-                    ]
+                    "events": [ "lang_japanese = 1" ]
                 },
                 {
                     "description": "Chinese",
-                    "events": [
-                        "option1"
-                    ]
+                    "events": [ "lang_chinese = 1" ]
                 },
                 {
                     "description": "Vietnamese",
-                    "events": [
-                        "option1"
-                    ]
+                    "events": [ "lang_vietnames = 1" ]
                 },
                 {
                     "description": "Indonesian",
-                    "events": [
-                        "option1"
-                    ]
+                    "events": [ "lang_indonesian = 1" ]
                 }
             ]
         },
@@ -367,27 +259,20 @@
             "options": [
                 {
                     "description": "Vegetarian",
-                    "events": [
-                        "option1"
-                    ]
+                    "events": [ "vegetarian = 1" ]
                 },
                 {
                     "description": "Vegan",
-                    "events": [
-                        "option1"
-                    ]
+                    "events": [ "vegan = 1" ]
                 },
                 {
                     "description": "Halal",
-                    "events": [
-                        "option1"
-                    ]
+                    "events": [ "halal = 1" ]
                 },
                 {
+                    "exclusive": true,
                     "description": "None",
-                    "events": [
-                        "option1"
-                    ]
+                    "events": [ ]
                 }
             ]
         },
@@ -395,26 +280,20 @@
             "name": "You have chosen American",
             "description": "please specify",
             "image": null,
-            "maxAnswers": 1,
-            "conditions": [ ],
+            "maxAnswers": 3,
+            "conditions": [ "region_american" ],
             "options": [
                 {
                     "description": "US",
-                    "events": [
-                        "option1"
-                    ]
+                    "events": [ "lang_us = 1" ]
                 },
                 {
                     "description": "Chilean",
-                    "events": [
-                        "option1"
-                    ]
+                    "events": [ "lang_chilean = 1" ]
                 },
                 {
                     "description": "Caribbean",
-                    "events": [
-                        "option1"
-                    ]
+                    "events": [ "lang_caribbean = 1" ]
                 }
             ]
         },
@@ -422,26 +301,20 @@
             "name": "You have chosen Middle Eastern",
             "description": "please specify",
             "image": null,
-            "maxAnswers": 1,
-            "conditions": [ ],
+            "maxAnswers": 3,
+            "conditions": [ "region_mideast" ],
             "options": [
                 {
                     "description": "Turkish",
-                    "events": [
-                        "option1"
-                    ]
+                    "events": [ "lang_turkish = 1" ]
                 },
                 {
                     "description": "Persian",
-                    "events": [
-                        "option1"
-                    ]
+                    "events": [ "lang_persian = 1" ]
                 },
                 {
                     "description": "Lebanese",
-                    "events": [
-                        "option1"
-                    ]
+                    "events": [ "lang_lebanese = 1" ]
                 }
             ]
         },
@@ -454,15 +327,12 @@
             "options": [
                 {
                     "description": "Yes",
-                    "events": [
-                        "option1"
+                    "events": [ "activity = 1"
                     ]
                 },
                 {
                     "description": "No",
-                    "events": [
-                        "option1"
-                    ]
+                    "events": [ "activity = 0" ]
                 }
             ]
         },
@@ -470,38 +340,29 @@
             "name": "What service preference do you have?",
             "description": "",
             "image": null,
-            "maxAnswers": 1,
+            "maxAnswers": 4,
             "conditions": [ ],
             "options": [
                 {
                     "description": "Free cancellation",
-                    "events": [
-                        "option1"
-                    ]
+                    "events": [ "service_cancellation = 1" ]
                 },
                 {
                     "description": "Long stay (up to a couple of months)",
-                    "events": [
-                        "option1"
-                    ]
+                    "events": [ "service_long_stay = 1" ]
                 },
                 {
                     "description": "Breakfast included",
-                    "events": [
-                        "option1"
-                    ]
+                    "events": [ "service_breakfast = 1" ]
                 },
                 {
                     "description": "Parking ",
-                    "events": [
-                        "option1"
-                    ]
+                    "events": [ "service_parking = 1" ]
                 },
                 {
+                    "exclusive": true,
                     "description": "No preference",
-                    "events": [
-                        "option1"
-                    ]
+                    "events": [ ]
                 }
             ]
         },
@@ -514,38 +375,31 @@
             "options": [
                 {
                     "description": "City centre",
-                    "events": [
-                        "option1"
-                    ]
+                    "events": [ "area_citycenter = 1" ]
                 },
                 {
                     "description": "Schilderswijk/Zeeheldenbuurt",
-                    "events": [
-                        "option1"
-                    ]
+                    "events": [ "area_schilderswijk = 1", "area_zeeheldenbuurt = 1" ]
                 },
                 {
                     "description": "Korrewegwijk/ Indische buurt",
-                    "events": [
-                        "option1"
-                    ]
+                    "events": [ "area_korrewegwijk = 1", "area_indischebuurt = 1" ]
                 },
                 {
                     "description": "Rivierenbuurt",
-                    "events": [
-                        "option1"
-                    ]
+                    "events": [ "area_rivierenbuurt = 1" ]
                 },
                 {
                     "description": "Oosterparkwijk",
-                    "events": [
-                        "option1"
-                    ]
+                    "events": [ "area_oosterparkwijk = 1" ]
                 },
                 {
                     "description": "Paddepoel / Selwerd / Tuinbouw Buurt / Oranjewijk",
                     "events": [
-                        "option1"
+                        "area_paddepoel = 1",
+                        "area_Selwerd = 1",
+                        "area_tuinbouwbuurt = 1",
+                        "area_oranjewijk = 1"
                     ]
                 }
             ]

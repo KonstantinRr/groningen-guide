@@ -189,24 +189,37 @@ class ContextModel {
   final model = <String, int> {};
   /// Whether to assume fails if a variable is non existent
   bool assumeFalse;
+  bool changed = true;
 
   /// Creates a new [ContextModel] that assumes missing variables as false
   ContextModel({this.assumeFalse=true});
 
+  Iterable<MapEntry<String, int>> get entries => model.entries;
+
+  void clear() {
+    model.clear();
+    changed = true;
+  }
+
   /// Sets a [value] for the given [variable]
   void setVar(String variable, int value) {
-    model[variable] = value;
+    if (value != model[variable]) {
+      model[variable] = value;
+      changed = true;
+    }
   }
 
   /// Deletes a variable from this [ContextModel]
   void deleteVar(String variable) {
     model.remove(variable);
+    changed = true;
   }
 
   /// loads the given list of [vars] to the knowledge base
   void loadDefaultVars(Set<String> vars) {
     model.addEntries(
       vars.map((e) => MapEntry<String, int>(e, 0)));
+    changed = true;
   }
 
   /// Returns the value associated with the variable [name].
@@ -226,15 +239,15 @@ class ContextModel {
 /// Represents an element in the abstract syntaxt tree
 class TreeElement {
   static int _funcAND(TreeElement elem, ContextModel cm)
-    => elem.values[0].evaluateBool(cm) && elem.values[1].evaluateBool(cm) ? 1 : 0;
+    => (elem.values[0].evaluateBool(cm) & elem.values[1].evaluateBool(cm)) ? 1 : 0;
   static int _funcOR(TreeElement elem, ContextModel cm)
-    => elem.values[0].evaluateBool(cm) || elem.values[1].evaluateBool(cm) ? 1 : 0;
+    => (elem.values[0].evaluateBool(cm) | elem.values[1].evaluateBool(cm)) ? 1 : 0;
   static int _funcXOR(TreeElement elem, ContextModel cm)
-    => elem.values[0].evaluateBool(cm) != elem.values[1].evaluateBool(cm) ? 1 : 0;
+    => (elem.values[0].evaluateBool(cm) != elem.values[1].evaluateBool(cm)) ? 1 : 0;
   static int _funcTHEN(TreeElement elem, ContextModel cm)
-    => !elem.values[0].evaluateBool(cm) || elem.values[1].evaluateBool(cm) ? 1 : 0;
+    => (!elem.values[0].evaluateBool(cm) | elem.values[1].evaluateBool(cm)) ? 1 : 0;
   static int _funcNOT(TreeElement elem, ContextModel cm)
-    => !elem.values[0].evaluateBool(cm) ? 1 : 0; 
+    => (!elem.values[0].evaluateBool(cm)) ? 1 : 0; 
   static int _funcIDENT(TreeElement elem, ContextModel cm) => cm.getVar(elem.values[0]); 
   static int _funcVALUE(TreeElement elem, ContextModel cm) => elem.values[0]; 
   static int _funcEQUAL(TreeElement elem, ContextModel cm) {

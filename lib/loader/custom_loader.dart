@@ -35,7 +35,7 @@ class CustomKnowledgeLoaderState extends State<CustomKnowledgeLoader> {
     super.didChangeDependencies();
     JsonEncoder encoder = new JsonEncoder.withIndent('  ');
     var provider = Provider.of<KlEngine>(context);
-    var prettyprint = encoder.convert(provider.klBase.toJson());
+    var prettyprint = encoder.convert(provider.klBaseProvider.base.toJson());
     controller.text = prettyprint;
   }
 

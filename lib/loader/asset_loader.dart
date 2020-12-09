@@ -29,7 +29,7 @@ class KnowledgeBaseLoader extends StatelessWidget {
     var engine = Provider.of<KlEngine>(context, listen: false);
     var string = await rootBundle.loadString(path);
     engine.loadFromString(string);
-    engine.expressionStorage.info();
+    engine.expressionProvider.storage.info();
     return true;
   }
 

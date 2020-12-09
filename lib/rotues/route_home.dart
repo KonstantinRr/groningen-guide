@@ -15,7 +15,7 @@ import 'package:groningen_guide/widgets/widget_debugger.dart';
 
 /// The main screen of the [RouteHome]
 class MainScreen extends StatelessWidget {
-  const MainScreen({Key key}) : super(key: key);
+  MainScreen({Key key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -32,10 +32,10 @@ class MainScreen extends StatelessWidget {
                   change: (index) => questionData.changeOption(index),
                 ),
                 Container(
-                  margin: EdgeInsets.only(top: 15, bottom: 15.0),
+                  margin: const EdgeInsets.only(top: 15, bottom: 15.0),
                   height: 40.0, width: 150.0,
                   child: RaisedButton(
-                    child: Text('Next'),
+                    child: const Text('Next'),
                     onPressed: () {
                       var engine = Provider.of<KlEngine>(context, listen: false);
                       var selectedOptions = questionData.selectedOptions();
@@ -132,17 +132,17 @@ class RouteHome extends StatelessWidget {
                 if (constraints.maxWidth <= 850.0) {
                   return Scaffold(
                     appBar: _buildAppBar(context),
-                    body: const SingleChildScrollView(child: MainScreen()),
+                    body: SingleChildScrollView(child: MainScreen()),
                   );
                 } else {
                   return Scaffold(
-                    appBar:  _buildAppBar(context),
+                    appBar: _buildAppBar(context),
                     body: Row(
                       crossAxisAlignment: CrossAxisAlignment.stretch,
                       children: <Widget> [
-                        const Expanded(flex: 2, child: SingleChildScrollView(child: MainScreen())),
+                        Expanded(flex: 2, child: SingleChildScrollView(child: MainScreen())),
                         if (engine.debug)
-                          const Expanded(flex: 1, child: ClipRect(child: WidgetDebugger())),
+                          const WidgetDebugger(),
                       ]
                     )
                   );

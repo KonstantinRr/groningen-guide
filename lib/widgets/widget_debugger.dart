@@ -28,55 +28,73 @@ class WidgetEvaluator extends StatelessWidget {
   Widget build(BuildContext context) {
     var theme = Theme.of(context);
     return Text('$val', style: theme.textTheme.bodyText2.copyWith(
-      color: val ? Colors.green : Colors.red));
+        color: val ? Colors.green : Colors.red));
   }
 }
 
-class WidgetDebugger extends StatelessWidget {
-  const WidgetDebugger({Key key}) : super(key: key);
+class WidgetDebugger extends StatefulWidget {
+  final bool includeScrollBar;
+  const WidgetDebugger({this.includeScrollBar=true, Key key}) : super(key: key);
+
+  @override
+  WidgetDebuggerState createState() => WidgetDebuggerState();
+}
+
+class WidgetDebuggerState extends State<WidgetDebugger> {
+  final controller = ScrollController();
+
+  @override
+  void dispose() {
+    controller.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
     var theme = Theme.of(context);
     return Container(
+      width: 500.0,
       color: Colors.white,
-      child: Consumer<KlEngine>(
-        builder: (context, engine, _) {
-          return ListView(
-            children: <Widget> [
+      child: Consumer<KlBaseProvider>(
+        builder: (context, klBaseProvider, _) {
+          var view = SingleChildScrollView(
+            controller: controller,
+            child: Column(children: <Widget> [
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 15.0, vertical: 10.0),
                 child: RaisedButton(
-                  child: Text('Edit Knowledge Base'),
+                  child: const Text('Edit Knowledge Base'),
                   onPressed: () => Navigator.of(context).pushNamed('/editor')
                 ),
               ),
-
               Container(
                 margin: const EdgeInsets.only(top: 10, bottom: 5),
                 alignment: Alignment.center,
                 child: Text('Variables', style: theme.textTheme.headline5,),
               ),
-              ...
-              enumerate(engine.contextModel.model.entries).map((e) =>
-                Container(
-                  padding: const EdgeInsets.all(7),
-                  color: e[0].isOdd ? Colors.grey[200] : Colors.grey[100],
-                  child: Row(
-                    children: <Widget>[
-                      Checkbox(
-                        value: e[1].value != 0,
-                        onChanged: (val) => engine.updateContextModel(
-                          (model) => model.setVar(e[1].key, val ? 1 : 0)),
+              Consumer<KlContextProvider>(
+                builder: (context, contextProvider, _) => Column(
+                  children: enumerate(contextProvider.model.entries).map((e) =>
+                    Container(
+                      padding: const EdgeInsets.all(7),
+                      color: e[0].isOdd ? Colors.grey[200] : Colors.grey[100],
+                      child: Row(
+                        children: <Widget>[
+                          Checkbox(
+                            value: e[1].value != 0,
+                            onChanged: (val) => contextProvider.updateContextModel(
+                              (model) => model.setVar(e[1].key, val ? 1 : 0)),
+                          ),
+                          Container(
+                            width: 150.0,
+                            height: 40.0,
+                            alignment: Alignment.center,
+                            child: Text(e[1].key),
+                          )
+                        ],
                       ),
-                      Container(
-                        width: 150.0,
-                        height: 40.0,
-                        alignment: Alignment.center,
-                        child: Text(e[1].key),
-                      )
-                    ],
-                  ),
+                    )
+                  ).toList(),
                 ),
               ),
               Container(
@@ -85,11 +103,11 @@ class WidgetDebugger extends StatelessWidget {
                 child: Text('Rules', style: theme.textTheme.headline5,),
               ),
               ...
-              enumerate(engine.klBase.rules).map<Widget>((r) =>
+              enumerate(klBaseProvider.base.rules).map<Widget>((r) =>
                 Container(
                   padding: const EdgeInsets.all(7),
                   color: r[0].isOdd ? Colors.grey[200] : Colors.grey[100],
-                  child: WidgetRule(engine: engine, rule: r[1])
+                  child: WidgetRule(rule: r[1])
                 ),
               ),
 
@@ -99,15 +117,23 @@ class WidgetDebugger extends StatelessWidget {
                 child: Text('Questions', style: theme.textTheme.headline5,),
               ),
               ...
-              enumerate(engine.klBase.questions).map((q) =>
+              enumerate(klBaseProvider.base.questions).map((q) =>
                 Container(
                   padding: const EdgeInsets.all(7),
                   color: q[0].isOdd ? Colors.grey[200] : Colors.grey[100],
-                  child: WidgetQuestion(engine: engine, question: q[1])
+                  child: WidgetQuestion(question: q[1])
                 ),
               )
             ]
-          );
+          ));
+
+          return widget.includeScrollBar ?
+            Scrollbar(
+              child: view,
+              controller: controller,
+              isAlwaysShown: true,
+              thickness: 8.0,
+            ) : view;
         },
       ),
     );

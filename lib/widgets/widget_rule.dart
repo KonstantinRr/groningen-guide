@@ -11,13 +11,12 @@ import 'package:groningen_guide/kl_engine.dart';
 import 'package:groningen_guide/widgets/widget_condition.dart';
 import 'package:groningen_guide/widgets/widget_event.dart';
 import 'package:groningen_guide/widgets/widget_debugger.dart';
+import 'package:provider/provider.dart';
 
 class WidgetRule extends StatelessWidget {
-  final KlEngine engine;
   final KlRule rule;
 
-  const WidgetRule({@required this.engine,
-    @required this.rule, Key key}) : super(key: key);
+  const WidgetRule({@required this.rule, Key key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -33,7 +32,7 @@ class WidgetRule extends StatelessWidget {
                 width: 50.0,
                 child: Text('Name:', style: theme.textTheme.bodyText1,),
               ),
-              Text('${rule.name}'),
+              Expanded(child: Text('${rule.name}')),
             ]
           ),
           Row(
@@ -42,27 +41,35 @@ class WidgetRule extends StatelessWidget {
                 width: 50.0,
                 child: Text('Descr:', style: theme.textTheme.bodyText1,),
               ),
-              Text('${rule.description}'),
+              Expanded(child: Text('${rule.description}')),
             ],
           ),
 
           Text('Conditions:', style: theme.textTheme.bodyText1,),
-          ...
-          enumerate(engine.ruleConditions(rule)).map((e) => 
-            Padding(
-              padding: EdgeInsets.only(left: 10.0),
-              child: Row(
-                children: <Widget> [
-                  Text('${e[0]+1}: ', style: theme.textTheme.bodyText1),
-                  WidgetCondition(element: e[1], engine: engine)
-                ]
-              ),
-            ),
+          Consumer<KlExpressionProvider>(
+            builder: (context, expressionProvider, _) => Column(
+              children: enumerate(expressionProvider.storage.ruleConditions(rule)).map((e) => 
+                Padding(
+                  padding: EdgeInsets.only(left: 10.0),
+                  child: Row(
+                    children: <Widget> [
+                      Text('${e[0]+1}: ', style: theme.textTheme.bodyText1),
+                      Expanded(child: WidgetCondition(element: e[1]))
+                    ]
+                  ),
+                ),
+              ).toList()
+            )
           ),
           Row(
             children: <Widget> [
               Text('Evaluated as: ', style: theme.textTheme.bodyText1,),
-              WidgetEvaluator(val: engine.evaluateRule(rule))
+              Expanded(child: Align(
+                alignment: Alignment.centerRight,
+                child: Consumer<KlEngine>(
+                  builder: (context, engine, _) => WidgetEvaluator(val: engine.evaluateRule(rule))
+                ),
+              ))
             ]
           ),
           Column(
@@ -75,10 +82,12 @@ class WidgetRule extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: <Widget> [
                       Text('Event ${e[0]+1}: ', style: theme.textTheme.bodyText1),
-                      WidgetEvent(
-                        element: engine.expressionStorage[e[1]],
-                        engine: engine
-                      )
+                      Expanded(child: Consumer<KlExpressionProvider>(
+                        builder: (context, expressionProvider, _) =>
+                          WidgetEvent(
+                            element: expressionProvider.storage[e[1]],
+                          ),
+                      ))
                     ]
                   ),
                 ),

@@ -11,13 +11,13 @@ import 'package:groningen_guide/kl_engine.dart';
 import 'package:groningen_guide/widgets/widget_condition.dart';
 import 'package:groningen_guide/widgets/widget_event.dart';
 import 'package:groningen_guide/widgets/widget_debugger.dart';
+import 'package:provider/provider.dart';
 
 class WidgetQuestion extends StatelessWidget {
   final KlQuestion question;
-  final KlEngine engine;
 
   const WidgetQuestion({
-    @required this.question, @required this.engine,
+    @required this.question,
     Key key}) : super(key: key);
   
   @override
@@ -34,7 +34,7 @@ class WidgetQuestion extends StatelessWidget {
                 width: 50.0,
                 child: Text('Name:', style: theme.textTheme.bodyText1,),
               ),
-              Text('${question.name}'),
+              Expanded(child: Text('${question.name}')),
             ]
           ),
           Row(
@@ -43,27 +43,35 @@ class WidgetQuestion extends StatelessWidget {
                 width: 50.0,
                 child: Text('Descr:', style: theme.textTheme.bodyText1,),
               ),
-              Text('${question.description}'),
+              Expanded(child: Text('${question.description}')),
             ],
           ),
 
           Text('Conditions:', style: theme.textTheme.bodyText1,),
-          ...
-          enumerate(engine.questionConditions(question)).map((e) => 
-            Padding(
-              padding: EdgeInsets.only(left: 10.0),
-              child: Row(
-                children: <Widget> [
-                  Text('${e[0]+1}: ', style: theme.textTheme.bodyText1),
-                  WidgetCondition(element: e[1], engine: engine)
-                ]
-              ),
-            ),
+          Consumer<KlExpressionProvider>(
+            builder: (context, expressionProvider, _) => Column(
+              children: enumerate(expressionProvider.storage.questionConditions(question)).map((e) => 
+                Padding(
+                  padding: EdgeInsets.only(left: 10.0),
+                  child: Row(
+                    children: <Widget> [
+                      Text('${e[0]+1}: ', style: theme.textTheme.bodyText1),
+                      Expanded(child: WidgetCondition(element: e[1]))
+                    ]
+                  ),
+                ),
+              ).toList(),
+            )
           ),
           Row(
             children: <Widget> [
               Text('Condition evaluated as: ', style: theme.textTheme.bodyText1,),
-              WidgetEvaluator(val: engine.evaluateQuestion(question))
+              Expanded(child: Align(
+                alignment: Alignment.centerRight,
+                child: Consumer<KlEngine>(
+                  builder: (context, engine, _) =>
+                    WidgetEvaluator(val: engine.evaluateQuestion(question)))
+              ))
             ]
           ),
 
@@ -78,7 +86,7 @@ class WidgetQuestion extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: <Widget> [
                       Text('Option ${option[0]+1}: ', style: theme.textTheme.bodyText1),
-                      Text('${option[1].description}'),
+                      Expanded(child: Text('${option[1].description}')),
                     ]
                   ),
                 ),
@@ -95,10 +103,12 @@ class WidgetQuestion extends StatelessWidget {
                             crossAxisAlignment: CrossAxisAlignment.center,
                             children: <Widget> [
                               Text('Event ${e[0]+1}: ', style: theme.textTheme.bodyText1),
-                              WidgetEvent(
-                                element: engine.expressionStorage[e[1]],
-                                engine: engine
-                              )
+                              Expanded(child: Consumer<KlExpressionProvider>(
+                                builder: (context, expressionStorage, _) =>
+                                  WidgetEvent(
+                                    element: expressionStorage.storage[e[1]],
+                                  )
+                              ))
                             ]
                           ),
                         ),
