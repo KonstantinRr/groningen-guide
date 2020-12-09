@@ -8,19 +8,22 @@
 import 'dart:convert';
 
 import 'package:flutter/foundation.dart';
+import 'package:flutter/material.dart';
 import 'package:groningen_guide/kl/kl_base.dart';
 import 'package:groningen_guide/kl/kl_question.dart';
 import 'package:groningen_guide/kl/kl_question_option.dart';
 import 'package:groningen_guide/kl/kl_rule.dart';
 import 'package:groningen_guide/kl_parser.dart';
-import 'package:groningen_guide/widgets/widget_vars.dart';
+import 'package:groningen_guide/widgets/widget_debugger.dart';
 import 'package:logging/logging.dart';
+import 'package:provider/provider.dart';
 import 'package:tuple/tuple.dart';
 
 /// Stores a map that matches [String] elements to [TreeElement] objects.
 /// It is used to retrieve the corresponding [TreeElement] objects and
 /// acts similar to a cache.
 class ExpressionStorage {
+  final logger = Logger('ExpressionStorage');
   final storage = <String, TreeElement> { };
 
   /// Inserts a new expression into the map. It replaces the current
@@ -30,7 +33,7 @@ class ExpressionStorage {
       var parsed = buildExpression(exp);
       storage[exp] = parsed;
     } catch(e) {
-      print('Could not parse expression $exp : ${e.toString()}');
+      logger.info('Could not parse expression $exp : ${e.toString()}');
       throw e;
     }
   }
@@ -87,8 +90,8 @@ class ExpressionStorage {
 
   /// Prints an info stream of all stored expressions
   void info() {
-    print('Variables: ${findVariables()}');
-    storage.forEach((key, value) => print('Expression: \'$key\' => $value'));
+    logger.info('Variables: ${findVariables()}');
+    storage.forEach((key, value) => logger.info('Expression: \'$key\' => $value'));
   }
 }
 
@@ -153,6 +156,19 @@ class QuestionData extends ChangeNotifier {
   KlQuestion get currentQuestion => _current?.item1;
   /// Returns the currently loaded answers
   List<bool> get currentAnswers => _current?.item2;
+}
+
+class EngineSession extends StatelessWidget {
+  final Widget child;
+  const EngineSession({@required this.child, Key key}) : super(key: key);
+  
+  @override
+  Widget build(BuildContext context) {
+    return ChangeNotifierProvider<KlEngine>(
+      create: (context) => KlEngine(),
+      child: child,
+    );
+  }
 }
 
 /// The main inference engine that stores a knowledge base [KlBase],
@@ -229,9 +245,9 @@ class KlEngine extends ChangeNotifier {
 
   /// Evaluates a list of [events]. Events are evaluated in order
   void evaluateEvents(List<String> events) {
-    print('Evaluating Events');
+    logger.info('Evaluating Events');
     for (var event in events) {
-      print('    $event');
+      logger.info('    $event');
       expressionStorage.evaluateExpression(event, contextModel);
     }
     notifyListeners();

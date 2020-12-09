@@ -15,14 +15,14 @@
     ],
     "rules": [
         {
-            "name": "Rule 1",
-            "description": "Example inference ",
+            "name": "Mofongos",
+            "enpoint": true,
+            "description": " ",
             "conditions": [
-                "option1 OR NOT option2",
-                "option1 XOR option2"
+                "business OR leisure OR lunch OR brunch OR dinner"
             ],
             "events": [
-                "final = 1"
+                "mofongos = 1"
             ]
         },
         {
@@ -48,19 +48,19 @@
                 {
                     "description": "Cafes / Bars and Pubs",
                     "events": [
-                        "option1"
+                        "cafe = 1"
                     ]
                 },
                 {
                     "description": "Restaurants",
                     "events": [
-                        "option2"
+                        "restaurant = 1"
                     ]
                 },
                 {
                     "description": "Hotels",
                     "events": [
-                        "option3"
+                        "hotel = 1"
                     ]
                 }
             ]
@@ -68,9 +68,11 @@
         {
             "name": "What is your main goal?",
             "description": "",
-            "image": null,
+            "image": "assets/images/image1.png",
             "maxAnswers": 1,
-            "conditions": [ ],
+            "conditions": [
+                "hotel OR cafe OR restaurant"
+            ],
             "options": [
                 {
                     "description": "Business",
@@ -180,25 +182,25 @@
                 {
                     "description": "Breakfast",
                     "events": [
-                        "option1"
+                        "breakfast = 1"
                     ]
                 },
                 {
                     "description": "Brunch",
                     "events": [
-                        "option1"
+                        "brunch = 1"
                     ]
                 },
                 {
                     "description": "Lunch",
                     "events": [
-                        "option1"
+                        "lunch = 1"
                     ]
                 },
                 {
                     "description": "Dinner",
                     "events": [
-                        "option1"
+                        "dinner = 1"
                     ]
                 }
             ]

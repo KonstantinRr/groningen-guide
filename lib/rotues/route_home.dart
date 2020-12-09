@@ -11,7 +11,7 @@ import 'package:provider/provider.dart';
 import 'package:groningen_guide/kl_engine.dart';
 import 'package:groningen_guide/loader/asset_loader.dart';
 import 'package:groningen_guide/widgets/widget_question.dart';
-import 'package:groningen_guide/widgets/widget_vars.dart';
+import 'package:groningen_guide/widgets/widget_debugger.dart';
 
 /// The main screen of the [RouteHome]
 class MainScreen extends StatelessWidget {
@@ -122,7 +122,8 @@ class RouteHome extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return KnowledgeBaseLoader(
-      onLoad: (context, _) {
+      onLoad: (context) => CircularProgressIndicator(),
+      onDone: (context) {
         return QuestionSession(
           child: Consumer<KlEngine>(
           builder: (context, engine, _) =>
@@ -141,7 +142,7 @@ class RouteHome extends StatelessWidget {
                       children: <Widget> [
                         const Expanded(flex: 2, child: SingleChildScrollView(child: MainScreen())),
                         if (engine.debug)
-                          const Expanded(flex: 1, child: ClipRect(child: WidgetVars())),
+                          const Expanded(flex: 1, child: ClipRect(child: WidgetDebugger())),
                       ]
                     )
                   );
@@ -150,9 +151,8 @@ class RouteHome extends StatelessWidget {
             )
         ));
       },
-      onErr: (context) {
-        return Center(child: Text('Error loading knowledge base'));
-      },
+      onErr: (context, err) =>
+        Center(child: Text('Error loading knowledge base $err'))
     );
   }
 }

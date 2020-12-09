@@ -32,8 +32,8 @@ class WidgetEvaluator extends StatelessWidget {
   }
 }
 
-class WidgetVars extends StatelessWidget {
-  const WidgetVars({Key key}) : super(key: key);
+class WidgetDebugger extends StatelessWidget {
+  const WidgetDebugger({Key key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -44,6 +44,14 @@ class WidgetVars extends StatelessWidget {
         builder: (context, engine, _) {
           return ListView(
             children: <Widget> [
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 15.0, vertical: 10.0),
+                child: RaisedButton(
+                  child: Text('Edit Knowledge Base'),
+                  onPressed: () => Navigator.of(context).pushNamed('/editor')
+                ),
+              ),
+
               Container(
                 margin: const EdgeInsets.only(top: 10, bottom: 5),
                 alignment: Alignment.center,

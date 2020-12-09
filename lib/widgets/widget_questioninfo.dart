@@ -10,7 +10,7 @@ import 'package:groningen_guide/kl/kl_question.dart';
 import 'package:groningen_guide/kl_engine.dart';
 import 'package:groningen_guide/widgets/widget_condition.dart';
 import 'package:groningen_guide/widgets/widget_event.dart';
-import 'package:groningen_guide/widgets/widget_vars.dart';
+import 'package:groningen_guide/widgets/widget_debugger.dart';
 
 class WidgetQuestion extends StatelessWidget {
   final KlQuestion question;

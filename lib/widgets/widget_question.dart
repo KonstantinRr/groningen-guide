@@ -7,7 +7,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:groningen_guide/kl/kl_question.dart';
-import 'package:groningen_guide/widgets/widget_vars.dart';
+import 'package:groningen_guide/widgets/widget_debugger.dart';
 import 'package:tuple/tuple.dart';
 
 class QuestionWidget extends StatelessWidget {

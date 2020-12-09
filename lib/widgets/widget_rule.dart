@@ -9,7 +9,8 @@ import 'package:flutter/material.dart';
 import 'package:groningen_guide/kl/kl_rule.dart';
 import 'package:groningen_guide/kl_engine.dart';
 import 'package:groningen_guide/widgets/widget_condition.dart';
-import 'package:groningen_guide/widgets/widget_vars.dart';
+import 'package:groningen_guide/widgets/widget_event.dart';
+import 'package:groningen_guide/widgets/widget_debugger.dart';
 
 class WidgetRule extends StatelessWidget {
   final KlEngine engine;
@@ -64,6 +65,26 @@ class WidgetRule extends StatelessWidget {
               WidgetEvaluator(val: engine.evaluateRule(rule))
             ]
           ),
+          Column(
+            children: [
+              ...
+              enumerate(rule.events).map((e) =>
+                Padding(
+                  padding: EdgeInsets.only(left: 0.0),
+                  child: Row(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: <Widget> [
+                      Text('Event ${e[0]+1}: ', style: theme.textTheme.bodyText1),
+                      WidgetEvent(
+                        element: engine.expressionStorage[e[1]],
+                        engine: engine
+                      )
+                    ]
+                  ),
+                ),
+              )
+            ]
+          )
         ]
       ),
     );

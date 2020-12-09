@@ -8,7 +8,7 @@
 import 'package:flutter/material.dart';
 import 'package:groningen_guide/kl_engine.dart';
 import 'package:groningen_guide/kl_parser.dart';
-import 'package:groningen_guide/widgets/widget_vars.dart';
+import 'package:groningen_guide/widgets/widget_debugger.dart';
 
 
 class WidgetCondition extends StatelessWidget {
