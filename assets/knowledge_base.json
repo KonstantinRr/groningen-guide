@@ -2,13 +2,13 @@
     "values": [ ],
     "rules": [
         {
-            "name": "Mofongos",
+            "name": "the_student_hotel",
             "enpoint": true,
-            "description": " ",
+            "description": " The Student Hotel seems to suit you best",
             "conditions": [
-                "business AND (leisure OR lunch) OR brunch OR dinner"
+                "business AND service_breakfast AND service_long_stay"
             ],
-            "events": [ "mofongos = 1" ]
+            "events": [ "the_student_hotel = 1" ]
         }
     ],
     
@@ -17,7 +17,7 @@
             "name": "What are you looking for?",
             "description": "",
             "image": "assets/images/logo.png",
-            "maxAnswers": 3,
+            "maxAnswers": 1,
             "conditions": [ ],
             "options": [
                 {
@@ -148,13 +148,6 @@
             "conditions": [ ],
             "options": [
                 {
-<<<<<<< HEAD
-=======
-                    "description": "Dutch",
-                    "events": [ "region_dutch = 1", "cultural = 1"]
-                },
-                {
->>>>>>> master
                     "description": "European",
                     "events": [ "region_european = 1" ]
                 },
@@ -350,13 +343,9 @@
             "name": "What service preference do you have?",
             "description": "",
             "image": null,
-            "maxAnswers": 4,
-            "conditions": [ ],
-            "options": [
-                {
-                    "description": "Free cancellation",
-                    "events": [ "service_cancellation = 1" ]
-                },
+            "maxAnswers": 2,
+            "conditions": [ "hotel"],
+            "options": [              
                 {
                     "description": "Long stay (up to a couple of months)",
                     "events": [ "service_long_stay = 1" ]
@@ -364,11 +353,7 @@
                 {
                     "description": "Breakfast included",
                     "events": [ "service_breakfast = 1" ]
-                },
-                {
-                    "description": "Parking ",
-                    "events": [ "service_parking = 1" ]
-                },
+                },    
                 {
                     "exclusive": true,
                     "description": "No preference",
