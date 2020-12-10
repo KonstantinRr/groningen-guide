@@ -6,6 +6,7 @@
 /// Livia Regus (S3354970): l.regus@student.rug.nl
 
 import 'package:flutter/material.dart';
+import 'package:groningen_guide/rotues/route_endpoint.dart';
 import 'package:provider/provider.dart';
 
 import 'package:groningen_guide/kl_engine.dart';
@@ -21,57 +22,59 @@ class MainScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     var theme = Theme.of(context);
     return Consumer<QuestionData>(
-      builder: (context, questionData, _) =>
-        Padding(
+      builder: (context, questionData, _) => Padding(
           padding: const EdgeInsets.all(15),
-          child: questionData.hasQuestion ?
-            Column(
-              children: [
-                QuestionWidget(
-                  question: questionData.current,
-                  change: (index) => questionData.changeOption(index),
-                ),
-                Container(
-                  margin: const EdgeInsets.only(top: 15, bottom: 15.0),
-                  height: 40.0, width: 150.0,
-                  child: RaisedButton(
-                    child: const Text('Next'),
-                    onPressed: () {
-                      var engine = Provider.of<KlEngine>(context, listen: false);
-                      var selectedOptions = questionData.selectedOptions();
-                      for (var i in selectedOptions)
-                        engine.evaluateEvents(i.events);
-                      engine.inference();
-                      engine.loadNextQuestion(questionData);
-                      //engine.inference();
-                    },
+          child: questionData.hasQuestion
+              ? Column(children: [
+                  QuestionWidget(
+                    question: questionData.current,
+                    change: (index) => questionData.changeOption(index),
                   ),
-                )
-              ] 
-            ) :
-            Container(
-              height: 150.0,
-              alignment: Alignment.center,
-              child: Column(
-                children: <Widget> [
-                  Text('There is currently no question loaded!', style: theme.textTheme.headline6),
-                  FlatButton(
-                    child: Container(
-                      width: 100.0,
-                      height: 40.0,
-                      child: Text('Start Process'),
+                  Container(
+                    margin: const EdgeInsets.only(top: 15, bottom: 15.0),
+                    height: 40.0,
+                    width: 150.0,
+                    child: RaisedButton(
+                      child: const Text('Next'),
+                      onPressed: () {
+                        var engine =
+                            Provider.of<KlEngine>(context, listen: false);
+                        var selectedOptions = questionData.selectedOptions();
+                        for (var i in selectedOptions)
+                          engine.evaluateEvents(i.events);
+                        engine.inference();
+                        var endpoint = engine.checkEndpoints();
+                        if (endpoint != null) {
+                          showEndpointDialog(context, endpoint);
+                        } else {
+                          engine.loadNextQuestion(questionData);
+                        }
+                        //engine.inference();
+                      },
                     ),
-                    onPressed: () {
-                      // loads the next question
-                      var engine = Provider.of<KlEngine>(context, listen: false);
-                      engine.inference();
-                      engine.loadNextQuestion(questionData);
-                    },
                   )
-                ]
-              )
-            )
-        ),
+                ])
+              : Container(
+                  height: 150.0,
+                  alignment: Alignment.center,
+                  child: Column(children: <Widget>[
+                    Text('There is currently no question loaded!',
+                        style: theme.textTheme.headline6),
+                    FlatButton(
+                      child: Container(
+                        width: 100.0,
+                        height: 40.0,
+                        child: Text('Start Process'),
+                      ),
+                      onPressed: () {
+                        // loads the next question
+                        var engine =
+                            Provider.of<KlEngine>(context, listen: false);
+                        engine.inference();
+                        engine.loadNextQuestion(questionData);
+                      },
+                    )
+                  ]))),
     );
   }
 }
@@ -98,23 +101,24 @@ class RouteHome extends StatelessWidget {
       backgroundColor: Colors.grey[100],
       actions: [
         Consumer<KlEngine>(
-          builder: (context, engine, _) =>
-            Padding(
-              padding: EdgeInsets.symmetric(horizontal: 5.0),
-              child: Row(
-                mainAxisSize: MainAxisSize.min,
-                children: <Widget> [
-                  Text('Inspector', style: theme.textTheme.headline6,),
-                  SizedBox(width: 5,),
-                  Checkbox(
-                    value: engine.debug,
-                    onChanged: (val) => engine.updateEngine(
-                      (engine) { engine.debug = !engine.debug;}),
-                  )
-                ]
-              ),
-            )
-        )
+            builder: (context, engine, _) => Padding(
+                  padding: EdgeInsets.symmetric(horizontal: 5.0),
+                  child: Row(mainAxisSize: MainAxisSize.min, children: <Widget>[
+                    Text(
+                      'Inspector',
+                      style: theme.textTheme.headline6,
+                    ),
+                    SizedBox(
+                      width: 5,
+                    ),
+                    Checkbox(
+                      value: engine.debug,
+                      onChanged: (val) => engine.updateEngine((engine) {
+                        engine.debug = !engine.debug;
+                      }),
+                    )
+                  ]),
+                ))
       ],
     );
   }
@@ -122,37 +126,34 @@ class RouteHome extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return KnowledgeBaseLoader(
-      onLoad: (context) => CircularProgressIndicator(),
-      onDone: (context) {
-        return QuestionSession(
-          child: Consumer<KlEngine>(
-          builder: (context, engine, _) =>
-            LayoutBuilder(
-              builder: (context, constraints) {
-                if (constraints.maxWidth <= 850.0) {
-                  return Scaffold(
-                    appBar: _buildAppBar(context),
-                    body: SingleChildScrollView(child: MainScreen()),
-                  );
-                } else {
-                  return Scaffold(
-                    appBar: _buildAppBar(context),
-                    body: Row(
-                      crossAxisAlignment: CrossAxisAlignment.stretch,
-                      children: <Widget> [
-                        Expanded(flex: 2, child: SingleChildScrollView(child: MainScreen())),
-                        if (engine.debug)
-                          const WidgetDebugger(),
-                      ]
-                    )
-                  );
-                }
-              }
-            )
-        ));
-      },
-      onErr: (context, err) =>
-        Center(child: Text('Error loading knowledge base $err'))
-    );
+        onLoad: (context) => CircularProgressIndicator(),
+        onDone: (context) {
+          return QuestionSession(
+              child: Consumer<KlEngine>(
+                  builder: (context, engine, _) =>
+                      LayoutBuilder(builder: (context, constraints) {
+                        if (constraints.maxWidth <= 850.0) {
+                          return Scaffold(
+                            appBar: _buildAppBar(context),
+                            body: SingleChildScrollView(child: MainScreen()),
+                          );
+                        } else {
+                          return Scaffold(
+                              appBar: _buildAppBar(context),
+                              body: Row(
+                                  crossAxisAlignment:
+                                      CrossAxisAlignment.stretch,
+                                  children: <Widget>[
+                                    Expanded(
+                                        flex: 2,
+                                        child: SingleChildScrollView(
+                                            child: MainScreen())),
+                                    if (engine.debug) const WidgetDebugger(),
+                                  ]));
+                        }
+                      })));
+        },
+        onErr: (context, err) =>
+            Center(child: Text('Error loading knowledge base $err')));
   }
 }

@@ -1,16 +1,24 @@
 {
     "values": [ ],
-    "rules": [
+    "endpoints": [
         {
-            "name": "Mofongos",
-            "enpoint": true,
+            "name": "Prinsenhof Hotel",
+            "description": " ",
+            "image": "assets/images/logo.png",
+            "conditions": [
+                "hotel AND (business OR leisure) AND (cultural_experience OR private)"
+            ]
+        },
+        {
+            "name": "The Student Hotel",
             "description": " ",
             "conditions": [
-                "business AND (leisure OR lunch) OR brunch OR dinner"
-            ],
-            "events": [ "mofongos = 1" ]
+                "hotel AND (business OR leisure) AND (service_long_stay OR service_breakfast_included) "
+            ]
+
         }
     ],
+    "rules": [ ],
     "questions": [
         {
             "name": "What are you looking for?",
