@@ -7,6 +7,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:groningen_guide/rotues/route_endpoint.dart';
+import 'package:groningen_guide/widgets/action_info.dart';
 import 'package:provider/provider.dart';
 
 import 'package:groningen_guide/kl_engine.dart';
@@ -101,7 +102,7 @@ class RouteHome extends StatelessWidget {
   AppBar _buildAppBar(BuildContext context) {
     var theme = Theme.of(context);
     return AppBar(
-      backgroundColor: Colors.grey[100],
+      backgroundColor: theme.appBarTheme.color,
       actions: [
         Consumer<KlEngine>(
           builder: (context, engine, _) => Padding(
@@ -122,7 +123,8 @@ class RouteHome extends StatelessWidget {
               )
             ]),
           )
-        )
+        ),
+        const ActionInfo(),
       ],
     );
   }

@@ -52,8 +52,8 @@ class WidgetRule extends StatelessWidget {
                   padding: EdgeInsets.only(left: 10.0),
                   child: Row(
                     children: <Widget> [
-                      Text('${e[0]+1}: ', style: theme.textTheme.bodyText1),
-                      Expanded(child: WidgetCondition(element: e[1]))
+                      Text('${e.item1+1}: ', style: theme.textTheme.bodyText1),
+                      Expanded(child: WidgetCondition(element: e.item2))
                     ]
                   ),
                 ),
@@ -80,11 +80,11 @@ class WidgetRule extends StatelessWidget {
                   child: Row(
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: <Widget> [
-                      Text('Event ${e[0]+1}: ', style: theme.textTheme.bodyText1),
+                      Text('Event ${e.item1+1}: ', style: theme.textTheme.bodyText1),
                       Expanded(child: Consumer<KlExpressionProvider>(
                         builder: (context, expressionProvider, _) =>
                           WidgetEvent(
-                            element: expressionProvider.storage[e[1]],
+                            element: expressionProvider.storage[e.item2],
                           ),
                       ))
                     ]

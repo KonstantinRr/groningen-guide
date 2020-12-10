@@ -158,8 +158,8 @@ class QuestionData extends ChangeNotifier {
   /// Gets the currently selected options
   List<KlQuestionOption> selectedOptions() {
     return enumerate(_current.item1.options)
-        .where((e) => _current.item2[e[0]])
-        .map<KlQuestionOption>((e) => e[1])
+        .where((e) => _current.item2[e.item1])
+        .map<KlQuestionOption>((e) => e.item2)
         .toList();
   }
 

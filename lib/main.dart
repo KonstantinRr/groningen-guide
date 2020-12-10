@@ -63,7 +63,11 @@ class StudyGuide extends StatelessWidget {
         onGenerateRoute: onGenerateRoute,
         onUnknownRoute: onGenerateUnknownRoute,
         debugShowCheckedModeBanner: false,
-        theme: ThemeData(),
+        theme: ThemeData(
+          appBarTheme: AppBarTheme(
+            color: Colors.grey[100]
+          )
+        ),
       )
     );
   }

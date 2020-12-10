@@ -12,8 +12,17 @@ class RouteUnknwon extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    var theme = Theme.of(context);
     var name = ModalRoute.of(context).settings.name;
+
     return Scaffold(
+      appBar: AppBar(
+        backgroundColor: theme.appBarTheme.color,
+        leading: IconButton(
+          icon: Icon(Icons.arrow_back),
+          onPressed: () => Navigator.of(context).pop(),
+        ),
+      ),
       body: Center(
         child: Text('Error 404: Could not find route $name'),
       ),

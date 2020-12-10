@@ -84,9 +84,10 @@ class RouteEndpoint extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    var theme = Theme.of(context);
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.grey[100],
+        backgroundColor: theme.appBarTheme.color,
         leading: IconButton(
           icon: const Icon(Icons.arrow_back, color: Colors.black,),
           onPressed: () => Navigator.of(context).pop()
