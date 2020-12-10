@@ -8,18 +8,17 @@
 import 'package:flutter/material.dart';
 import 'package:groningen_guide/kl_engine.dart';
 import 'package:groningen_guide/kl_parser.dart';
-import 'package:groningen_guide/widgets/widget_vars.dart';
+import 'package:groningen_guide/widgets/widget_debugger.dart';
+import 'package:provider/provider.dart';
 
 
 class WidgetCondition extends StatelessWidget {
   final TreeElement element;
-  final KlEngine engine;
-  const WidgetCondition({Key key,
-    @required this.engine,@required this.element}) : super(key: key);
+  const WidgetCondition({Key key, @required this.element}) : super(key: key);
 
-  Widget _evaluate(BuildContext context, ThemeData theme) {
+  Widget _evaluate(BuildContext context, ThemeData theme, KlContextProvider contextProvider) {
     try {
-      var b = element.evaluate(engine.contextModel) != 0;
+      var b = element.evaluate(contextProvider.model) != 0;
       return WidgetEvaluator(val: b);
     } catch(e) {
       return IconButton(
@@ -48,9 +47,10 @@ class WidgetCondition extends StatelessWidget {
     var theme = Theme.of(context);
     return Row(
       children: <Widget> [
-        Text(element.toString(), style: theme.textTheme.bodyText2),
+        Expanded(child: Text(element.toString(), style: theme.textTheme.bodyText2)),
         Text(' = '),
-        _evaluate(context, theme)
+        Consumer<KlContextProvider>(
+          builder: (context, contextProvider, _) => _evaluate(context, theme, contextProvider))
       ]
     );
   }

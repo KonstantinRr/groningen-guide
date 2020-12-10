@@ -1,3 +1,4 @@
+import 'dart:collection';
 /// This project is build during the course Knowledge Technology Practical at the
 /// UNIVERSITY OF GRONINGEN (WBAI014-05).
 /// The project was build by:
@@ -8,49 +9,66 @@
 import 'dart:convert';
 
 import 'package:flutter/foundation.dart';
+import 'package:flutter/material.dart';
 import 'package:groningen_guide/kl/kl_base.dart';
 import 'package:groningen_guide/kl/kl_question.dart';
 import 'package:groningen_guide/kl/kl_question_option.dart';
 import 'package:groningen_guide/kl/kl_rule.dart';
 import 'package:groningen_guide/kl_parser.dart';
+import 'package:groningen_guide/widgets/widget_debugger.dart';
+import 'package:logging/logging.dart';
+import 'package:provider/provider.dart';
+import 'package:tuple/tuple.dart';
 
+/// Stores a map that matches [String] elements to [TreeElement] objects.
+/// It is used to retrieve the corresponding [TreeElement] objects and
+/// acts similar to a cache.
 class ExpressionStorage {
+  final logger = Logger('ExpressionStorage');
   final storage = <String, TreeElement> { };
 
+  /// Inserts a new expression into the map. It replaces the current
+  /// expression if there is already one stored using this key.
   void insertExp(String exp) {
     try {
       var parsed = buildExpression(exp);
       storage[exp] = parsed;
     } catch(e) {
-      print('Could not parse expression $exp : ${e.toString()}');
+      logger.info('Could not parse expression $exp : ${e.toString()}');
       throw e;
     }
   }
 
+  /// Finds the expression stored below this key
   TreeElement operator[](String elem) => storage[elem];
 
+  /// Finds all expressions
   List<TreeElement> findExpressions(List<String> elements) =>
     elements.map<TreeElement>((e) => storage[e]).toList();
 
+  /// Finds all variables stored in this knowledge base
   Set<String> findVariables() {
     var variables = <String> {};
-    for (var tree in storage.values) {
+    for (var tree in storage.values)
       variables.addAll(
-        tree.findOfType(TokenType.IDENT).map((e) => e.values[0])
-      );
-    }
+        tree.findOfType(TokenType.IDENT).map((e) => e.values[0]));
     return variables;
   }
 
+  /// Evaluates the expression stored at this key using the
+  /// given [ContextModel]. Creates a new expression if the
+  /// map does not already contain one.
   int evaluateExpression(String exp, ContextModel model) {
     if (!storage.containsKey(exp))
       insertExp(exp);
-
     return storage[exp].evaluate(model);
   }
+
+  /// Evaluates a given expression as a [bool] value
   bool evaluateExpressionAsBool(String exp, ContextModel model)
     => evaluateExpression(exp, model) != 0;
 
+  /// Loads all expressons sotred at the knowledge ase.
   ExpressionStorage(KlBase base) {
     // generates the expressions for all questions
     for (var q in base.questions) {
@@ -66,78 +84,311 @@ class ExpressionStorage {
     }
   }
 
+  /// Clears the list of stored entries
+  void clear() {
+    storage.clear();
+  }
+
+  /// Prints an info stream of all stored expressions
   void info() {
-    print('Variables: ${findVariables()}');
-    storage.forEach((key, value) => print('Expression: \'$key\' => $value'));
+    logger.info('Variables: ${findVariables()}');
+    storage.forEach((key, value) => logger.info('Expression: \'$key\' => $value'));
+  }
+
+    /// Returns the mapped list of [TreeElement] objects of rule conditions
+  List<TreeElement> ruleConditions(KlRule rule)
+    => rule.conditions.map((e) => storage[e]).toList();
+  /// Returns the mapped list of [TreeElement] objects of question conditions
+  List<TreeElement> questionConditions(KlQuestion question)
+    => question.conditions.map((e) => storage[e]).toList();
+
+  /// Returns the mapped list of [TreeElement] objects of rule events
+  List<TreeElement> ruleEvents(KlRule rule)
+    => rule.events.map((e) => storage[e]).toList();
+  /// Returns the mapped list of [TreeElement] objects of question option events
+  List<TreeElement> questionOptionEvents(KlQuestionOption option)
+    => option.events.map((e) => storage[e]).toList();
+}
+
+/// Stores the the currently asked question as well as all
+/// previous questions.
+class QuestionData extends ChangeNotifier {
+  final List<Tuple2<KlQuestion, List<bool>>> previous = [];
+  Queue<int> _selectionOrder;
+  Tuple2<KlQuestion, List<bool>> _current;
+  
+  /// Unloads the current question and puts it on the stack of
+  /// previous asked questions.
+  void unloadQuestion() {
+    if (_current != null)
+      previous.add(_current);
+    _current = null;
+    notifyListeners();
+  }
+
+  /// Loads the current [question] and puts it on the 
+  void loadQuestion(KlQuestion question) {
+    if (_current != null)
+      previous.add(_current);
+    _current = Tuple2(question, List.generate(
+      question.options.length, (_) => false));
+    _selectionOrder = Queue();
+    notifyListeners();
+  }
+
+  /// Checks if the question was already asked or is currently loaded
+  bool containsQuestion(KlQuestion question) {
+    var prev = previous.firstWhere((element) => element.item1 == question,
+      orElse: () => null) != null;
+    return prev || _current?.item1 == question;
+  }
+
+  // ---- Options ---- //
+
+  /// Gets the currently selected options 
+  List<KlQuestionOption> selectedOptions() {
+    return enumerate(_current.item1.options)
+      .where((e) => _current.item2[e[0]])
+      .map<KlQuestionOption>((e) => e[1])
+      .toList();
+  }
+
+  /// Sets the answer option at the given [index] to [value]
+  void setOption(int index, bool value) {
+    if (current.item2[index] != value) {
+      changeOption(index);
+    }
+  }
+
+  /// Changes the answer option at the given [index]
+  void changeOption(int index) {
+    _current.item2[index] = !_current.item2[index];
+    if (_current.item2[index]) {
+      if (currentQuestion.options[index].exclusive) {
+        _selectionOrder.clear();
+        for (var i = 0 ; i < currentAnswers.length; i++)
+          currentAnswers[i] = false;
+        currentAnswers[index] = true;
+      }
+
+      // the item was newly selected
+      _selectionOrder.add(index);
+      if (_selectionOrder.length > _current.item1.maxAnswers) {
+        _current.item2[_selectionOrder.first] = false;
+        _selectionOrder.removeFirst();
+      }
+    } else {
+      // the selection was removed
+      _selectionOrder.remove(index);
+    }
+    notifyListeners();
+  }
+
+  /// Returns whether there is currently a question loaded
+  bool get hasQuestion => _current != null;
+  /// Returns the current question as well as the answers
+  Tuple2<KlQuestion, List<bool>> get current => _current;
+  /// Returns the currently loaded question
+  KlQuestion get currentQuestion => _current?.item1;
+  /// Returns the currently loaded answers
+  List<bool> get currentAnswers => _current?.item2;
+}
+
+class EngineSession extends StatefulWidget {
+  final Widget child;
+  const EngineSession({@required this.child, Key key}) : super(key: key);
+
+  @override
+  EngineSessionState createState() => EngineSessionState();
+}
+
+class EngineSessionState extends State<EngineSession> {
+  final engine = KlEngine();
+
+  @override
+  Widget build(BuildContext context) {
+    return MultiProvider(
+      providers: [
+        ChangeNotifierProvider<KlEngine>(create: (context) => engine),
+        ChangeNotifierProvider<KlBaseProvider>(create: (context) => engine.klBaseProvider),
+        ChangeNotifierProvider<KlContextProvider>(create: (context) => engine.contextProvider,),
+        ChangeNotifierProvider<KlExpressionProvider>(create: (context) => engine.expressionProvider,)
+      ],
+      child: widget.child, 
+    );
   }
 }
 
-class KlEngine extends ChangeNotifier {
-  KlBase klBase;
-  ExpressionStorage expressionStorage;
-  ContextModel contextModel;
+class KlBaseProvider extends ChangeNotifier {
+  KlBase base;
+  KlEngine parent;
 
+  KlBaseProvider(this.base, this.parent);
+
+    /// Upadtes the knowledge base by caling the update function
+  void updateKnowledgeBase(void Function(KlBase) updater, {bool notifyParent=true}) {
+    updater(base);
+    notifyListeners();
+    if (notifyParent) parent.notifyListeners();
+  }
+}
+
+class KlContextProvider extends ChangeNotifier {
+  ContextModel model;
+  KlEngine parent;
+  KlContextProvider(this.model, this.parent); 
+
+  /// Updates the context model by calling the update function
+  void updateContextModel(void Function(ContextModel) updater, {bool notifyParent=true}) {
+    updater(model);
+    notifyListeners();
+    if (notifyParent) parent.notifyListeners();
+  }
+}
+
+class KlExpressionProvider extends ChangeNotifier {
+  ExpressionStorage storage;
+  KlEngine parent;
+  KlExpressionProvider(this.storage, this.parent);
+
+    /// Updates the context model by calling the update function
+  void updateContextModel(void Function(ExpressionStorage) updater, {bool notifyParent=true}) {
+    updater(storage);
+    notifyListeners();
+    if (notifyParent) parent.notifyListeners();
+  }
+}
+
+
+/// The main inference engine that stores a knowledge base [KlBase],
+/// an [ExpressionStorage] and a [Contextmodel].
+class KlEngine extends ChangeNotifier {
+  KlBaseProvider klBaseProvider;
+  KlExpressionProvider expressionProvider;
+  KlContextProvider contextProvider;
+  bool debug = true;
+  final Logger logger = Logger('KlEngine');
+
+  /// Creates a knowledge engine
   factory KlEngine.fromString(String string) 
     => KlEngine.empty()..loadFromString(string);
 
+  /// Creates an empty knowledge engine where all members are null
   KlEngine.empty();
+  /// Creates an empty knowledge base with default initialized members
   KlEngine() {
-    klBase = KlBase(values: [], questions: [], rules: []);
-    expressionStorage = ExpressionStorage(klBase);
-    contextModel = ContextModel(assumeFalse: true);
+    klBaseProvider = KlBaseProvider(KlBase(values: [], questions: [], rules: []), this);
+    expressionProvider = KlExpressionProvider(ExpressionStorage(klBaseProvider.base), this);
+    contextProvider = KlContextProvider(ContextModel(assumeFalse: true), this);
   }
 
+  /// Loads a new knowledge base from a JSON encoded [String]
   void loadFromString(String string) {
-    //try {
+    try {
       // code that might throw
       var map = json.decode(string);
-      var nklBase = KlBase.fromJson(map);
-      var nexpressionStorage = ExpressionStorage(nklBase);
-      var ncontextModel = ContextModel(assumeFalse: true);
-      ncontextModel.loadDefaultVars(nexpressionStorage.findVariables());
+      var nklBase = KlBaseProvider(KlBase.fromJson(map), this);
+      var nexpressionStorage = KlExpressionProvider(ExpressionStorage(nklBase.base), this);
+      var ncontextModel = KlContextProvider(ContextModel(assumeFalse: true), this);
+      ncontextModel.model.loadDefaultVars(nexpressionStorage.storage.findVariables());
       // assign new variables (cannot throw)
-      klBase = nklBase;
-      expressionStorage = nexpressionStorage;
-      contextModel = ncontextModel;
+      klBaseProvider = nklBase;
+      expressionProvider = nexpressionStorage;
+      contextProvider = ncontextModel;
       // notifies listeners on the state change
-      notifyListeners();
-    //} catch(e) {
-    //  throw e;
-    //}
+      notifyAll();
+    } catch(e) {
+      throw e;
+    }
   }
 
-  void updateContextModel(void Function(ContextModel) updater) {
-    updater(contextModel);
-    notifyListeners();
-  }
-  void updateKnowledgeBase(void Function(KlBase) updater) {
-    updater(klBase);
-    notifyListeners();
+  /// Updates the engine model by calling the update function
+  void updateEngine(void Function(KlEngine) updater) {
+    updater(this);
+    notifyAll();
   }
 
+  /// Evaluates a single condition
+  bool evaluateCondition(String cond) =>
+    expressionProvider.storage.evaluateExpressionAsBool(cond, contextProvider.model);
+
+  /// Evaluates a list of [conditions]. This function evaluates to [true]
+  /// if all conditions evaluate to [true].
   bool evaluateConditionList(List<String> conditions) {
     for (var cond in conditions) {
-      if (!expressionStorage.evaluateExpressionAsBool(cond, contextModel))
+      if (!expressionProvider.storage.evaluateExpressionAsBool(cond, contextProvider.model))
         return false;
     }
     return true;
   }
 
-  bool evaluateCondition(String cond) =>
-    expressionStorage.evaluateExpressionAsBool(cond, contextModel);
+  /// Evaluates a list of [events]. Events are evaluated in order
+  bool evaluateEvents(List<String> events, {bool notifyOnChange=true}) {
+    logger.info('Evaluating Events');
+    var changed = false;
+    for (var event in events) {
+      logger.info('    $event');
+      contextProvider.model.changed = false;
+      expressionProvider.storage.evaluateExpression(
+        event, contextProvider.model);
+      changed |= contextProvider.model.changed;
+    }
+    if (changed && notifyOnChange)
+      notifyAll();
+    return changed;
+  }
+
+  /// Evaluates the conditions of a rule
   bool evaluateRule(KlRule rule) => evaluateConditionList(rule.conditions);
+  /// Evaluates the conditions of a question
   bool evaluateQuestion(KlQuestion q) => evaluateConditionList(q.conditions);
 
-  List<TreeElement> ruleConditions(KlRule rule)
-    => rule.conditions.map((e) => expressionStorage[e]).toList();
-  List<TreeElement> questionConditions(KlQuestion question)
-    => question.conditions.map((e) => expressionStorage[e]).toList();
-
+  /// Runs the inference model by running through all rules and executing the
+  /// event list of the rule conditions evaluate to [true].
   void inference() {
-    for (var rule in klBase.rules) {
-      var result = evaluateConditionList(rule.conditions);
-      print('Evaluating Rule \'${rule.name}\' => $result');
+    var changed = true;
+    for (var k = 0; changed; k++) {
+      changed = false;
+      logger.info('Evaluating Rules: Iteration $k');
+      for (var i = 0; i < klBaseProvider.base.rules.length; i++) {
+        var rule = klBaseProvider.base.rules[i];
+        var result = evaluateConditionList(rule.conditions);
+        logger.info('    $i: \'${rule.name}\' => $result');
+        if (result) {
+          changed |= evaluateEvents(rule.events);
+        }
+      }
     }
+  }
+
+  void notifyAll() {
     notifyListeners();
+    klBaseProvider.notifyListeners();
+    expressionProvider.notifyListeners();
+    contextProvider.notifyListeners();
+  }
+
+  /// Loads the next question to to the [QuestionData] object
+  /// that is required to gain more information.
+  void loadNextQuestion(QuestionData questionData) {
+    logger.info('Unloading current question');
+    questionData.unloadQuestion();
+    for (var i = 0; i < klBaseProvider.base.questions.length; i++) {
+      var question = klBaseProvider.base.questions[i];
+      logger.info("Checking question ${question.name}");
+      // evaluates if the question was already asked
+      var contained = questionData.containsQuestion(question);
+      logger.info("    Checking if question was already set: $contained");
+      if (contained) continue;
+      // evaluates the question's conditions
+      var conditions = evaluateQuestion(klBaseProvider.base.questions[i]);
+      logger.info("    Checking conditions $conditions");
+      if (!conditions) continue;
+
+      logger.info('Loading Question ${question.name}');
+      questionData.loadQuestion(klBaseProvider.base.questions[i]);
+      break;
+    }
+    notifyAll();
   }
 }

@@ -12,34 +12,37 @@ import 'package:provider/provider.dart';
 
 /// Loads a knowledge base from an application asset file
 class KnowledgeBaseLoader extends StatelessWidget {
-  final Widget Function(BuildContext) onErr;
-  final Widget Function(BuildContext, KlEngine) onLoad;
+  final Widget Function(BuildContext) onLoad;
+  final Widget Function(BuildContext, dynamic) onErr;
+  final Widget Function(BuildContext) onDone;
   final String path;
 
   /// Creates a knowledge base builder with the given callbacks
   const KnowledgeBaseLoader({Key key,
-    @required this.onErr, @required this.onLoad,
+    @required this.onLoad,
+    @required this.onErr,
+    @required this.onDone,
     this.path = 'assets/knowledge_base.json'}) : super(key: key);
 
   /// Loads a knowledge base from the given path
-  Future<KlEngine> _loadKlBase(String path) async {
+  Future<bool> _loadKlBase(BuildContext context, String path) async {
+    var engine = Provider.of<KlEngine>(context, listen: false);
     var string = await rootBundle.loadString(path);
-    var engine = KlEngine.fromString(string);
-    engine.expressionStorage.info();
-    return engine;
+    engine.loadFromString(string);
+    engine.expressionProvider.storage.info();
+    return true;
   }
 
   @override
   Widget build(BuildContext context) {
-    return FutureBuilder<KlEngine>(
-      future: _loadKlBase(path),
+    return FutureBuilder<bool>(
+      future: _loadKlBase(context, path),
       builder: (context, snap) {
+        if (snap.hasError)
+          return onErr(context, snap.error);
         if (snap.hasData)
-          return ChangeNotifierProvider<KlEngine>(
-            create: (context) => snap.data,
-            child: onLoad(context, snap.data)
-          );
-        return onErr(context);
+          return onDone(context);
+        return onLoad(context);
       },
     );
   }

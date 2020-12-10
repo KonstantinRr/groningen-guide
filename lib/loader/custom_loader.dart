@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 /// This project is build during the course Knowledge Technology Practical at the
 /// UNIVERSITY OF GRONINGEN (WBAI014-05).
 /// The project was build by:
@@ -18,12 +20,23 @@ class CustomKnowledgeLoader extends StatefulWidget {
 }
 
 class CustomKnowledgeLoaderState extends State<CustomKnowledgeLoader> {
-  final TextEditingController controller = TextEditingController();
+  final controller = TextEditingController();
+  final scroll = ScrollController();
 
   @override
   void dispose() {
     controller.dispose();
+    scroll.dispose();
     super.dispose();
+  }
+
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    JsonEncoder encoder = new JsonEncoder.withIndent('  ');
+    var provider = Provider.of<KlEngine>(context);
+    var prettyprint = encoder.convert(provider.klBaseProvider.base.toJson());
+    controller.text = prettyprint;
   }
 
   void _load() {
@@ -31,26 +44,52 @@ class CustomKnowledgeLoaderState extends State<CustomKnowledgeLoader> {
     prov.loadFromString(controller.text);
   }
 
+  void _verify() {
+
+  }
+
   @override
   Widget build(BuildContext context) {
     var theme = Theme.of(context);
     return Container(
-      width: 200.0,
-      height: 350.0,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: <Widget> [
-          Expanded(child: TextField(
-            maxLines: null, minLines: null,
-            controller: controller,
-            decoration: InputDecoration.collapsed(
-              hintText: 'Knowledge Base'
+          Expanded(child: Scrollbar(
+            isAlwaysShown: true,
+            thickness: 8.0,
+            controller: scroll,
+            child: Container(
+              margin: const EdgeInsets.all(20.0),
+              padding: const EdgeInsets.all(20.0),
+              color: Colors.grey[100],
+              child: TextField(
+                scrollController: scroll,
+                maxLines: null, minLines: null,
+                controller: controller,
+                decoration: InputDecoration.collapsed(
+                  hintText: 'Knowledge Base'
+                ),
+                expands: true,
+              ),
             ),
-            expands: true,
           )),
-          RaisedButton(
-            child: Text('Load', style: theme.textTheme.button,),
-            onPressed: () {},
+          Container(
+            height: 50.0,
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: <Widget> [
+                RaisedButton(
+                  child: Text('Load', style: theme.textTheme.button),
+                  onPressed: _load,
+                ),
+                const SizedBox(width: 10.0,),
+                RaisedButton(
+                  child: Text('Verify', style: theme.textTheme.button),
+                  onPressed: _verify,
+                )
+              ]
+            ),
           ),
         ]
       )

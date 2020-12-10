@@ -6,11 +6,19 @@
 /// Livia Regus (S3354970): l.regus@student.rug.nl
 
 import 'package:flutter/material.dart';
+import 'package:groningen_guide/kl_engine.dart';
+import 'package:groningen_guide/rotues/route_editor.dart';
 import 'package:groningen_guide/rotues/route_home.dart';
 import 'package:groningen_guide/rotues/route_splash.dart';
 import 'package:groningen_guide/rotues/route_unknown.dart';
+import 'package:logging/logging.dart';
 
 void main() {
+  Logger.root.level = Level.ALL; // defaults to Level.INFO
+  Logger.root.onRecord.listen((record) {
+    print('${record.level.name}: ${record.time}: ${record.message}');
+  });
+
   // starts the main application
   runApp(const StudyGuide());
 }
@@ -35,19 +43,24 @@ class StudyGuide extends StatelessWidget {
       case '/': return MaterialPageRoute(
         builder: (context) => const RouteHome(),
         settings: const RouteSettings(name: '/'));
+      case '/editor': return MaterialPageRoute(
+        builder: (context) => const RouteEditor(),
+        settings: const RouteSettings(name: 'editor'));
     }
     return null;
   }
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Groningen Guide',
-      initialRoute: 'splash',
-      onGenerateRoute: onGenerateRoute,
-      onUnknownRoute: onGenerateUnknownRoute,
-      debugShowCheckedModeBanner: false,
-      theme: ThemeData(),
+    return EngineSession(
+      child: MaterialApp(
+        title: 'Groningen Guide',
+        initialRoute: 'splash',
+        onGenerateRoute: onGenerateRoute,
+        onUnknownRoute: onGenerateUnknownRoute,
+        debugShowCheckedModeBanner: false,
+        theme: ThemeData(),
+      )
     );
   }
 }
