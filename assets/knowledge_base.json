@@ -15,7 +15,13 @@
             "conditions": [
                 "hotel AND (business OR leisure) AND (service_long_stay OR service_breakfast_included) "
             ]
-
+        },
+        {
+            "name": "Mister Mofongo",
+            "description": " ",
+            "conditions": [
+                "restaurant AND (business OR leisure) AND (romantic OR bar) AND average"
+            ]
         }
     ],
     "rules": [ ],
@@ -94,10 +100,6 @@
                 {
                     "description": "Private",
                     "events": [ "private = 1" ]
-                },
-                {
-                    "description": "Just a nice place",
-                    "events": [ "nice = 1" ]
                 }
             ]
         },

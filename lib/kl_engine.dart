@@ -222,15 +222,14 @@ class EngineSessionState extends State<EngineSession> {
   Widget build(BuildContext context) {
     return MultiProvider(
       providers: [
-        ChangeNotifierProvider<KlEngine>(create: (context) => engine),
+        ChangeNotifierProvider<KlEngine>(
+          create: (context) => engine),
         ChangeNotifierProvider<KlBaseProvider>(
             create: (context) => engine.klBaseProvider),
         ChangeNotifierProvider<KlContextProvider>(
-          create: (context) => engine.contextProvider,
-        ),
+          create: (context) => engine.contextProvider),
         ChangeNotifierProvider<KlExpressionProvider>(
-          create: (context) => engine.expressionProvider,
-        )
+          create: (context) => engine.expressionProvider)
       ],
       child: widget.child,
     );
@@ -245,7 +244,7 @@ class KlBaseProvider extends ChangeNotifier {
 
   /// Upadtes the knowledge base by caling the update function
   void updateKnowledgeBase(void Function(KlBase) updater,
-      {bool notifyParent = true}) {
+    {bool notifyParent = true}) {
     updater(base);
     notifyListeners();
     if (notifyParent) parent.notifyListeners();
@@ -298,11 +297,12 @@ class KlEngine extends ChangeNotifier {
 
   /// Creates an empty knowledge base with default initialized members
   KlEngine() {
-    klBaseProvider =
-        KlBaseProvider(KlBase(values: [], questions: [], rules: []), this);
-    expressionProvider =
-        KlExpressionProvider(ExpressionStorage(klBaseProvider.base), this);
-    contextProvider = KlContextProvider(ContextModel(assumeFalse: true), this);
+    klBaseProvider = KlBaseProvider(
+      KlBase(values: [], questions: [], rules: []), this);
+    expressionProvider = KlExpressionProvider(
+      ExpressionStorage(klBaseProvider.base), this);
+    contextProvider = KlContextProvider(
+      ContextModel(assumeFalse: true), this);
   }
 
   /// Loads a new knowledge base from a JSON encoded [String]
@@ -311,12 +311,11 @@ class KlEngine extends ChangeNotifier {
       // code that might throw
       var map = json.decode(string);
       var nklBase = KlBaseProvider(KlBase.fromJson(map), this);
-      var nexpressionStorage =
-          KlExpressionProvider(ExpressionStorage(nklBase.base), this);
-      var ncontextModel =
-          KlContextProvider(ContextModel(assumeFalse: true), this);
-      ncontextModel.model
-          .loadDefaultVars(nexpressionStorage.storage.findVariables());
+      var nexpressionStorage = KlExpressionProvider(
+        ExpressionStorage(nklBase.base), this);
+      var ncontextModel = KlContextProvider(
+        ContextModel(assumeFalse: true), this);
+      ncontextModel.model.loadDefaultVars(nexpressionStorage.storage.findVariables());
       // assign new variables (cannot throw)
       klBaseProvider = nklBase;
       expressionProvider = nexpressionStorage;
@@ -326,6 +325,13 @@ class KlEngine extends ChangeNotifier {
     } catch (e) {
       throw e;
     }
+  }
+
+  void clear() {
+    contextProvider.model.clear();
+    contextProvider.model.loadDefaultVars(
+      expressionProvider.storage.findVariables());
+    notifyAll();
   }
 
   /// Updates the engine model by calling the update function

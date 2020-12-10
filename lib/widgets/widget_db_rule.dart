@@ -44,7 +44,6 @@ class WidgetRule extends StatelessWidget {
               Expanded(child: Text('${rule.description}')),
             ],
           ),
-
           Text('Conditions:', style: theme.textTheme.bodyText1,),
           Consumer<KlExpressionProvider>(
             builder: (context, expressionProvider, _) => Column(
