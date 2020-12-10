@@ -54,7 +54,7 @@ class ActionInfoDialogState extends State<ActionInfoDialog> {
             onPressed: () => setState(() => page = 1),
           ),
           FlatButton(
-            child: Text('Policy', style: TextStyle(color: page == 2 ? theme.accentColor : null),),
+            child: Text('Cookies', style: TextStyle(color: page == 2 ? theme.accentColor : null),),
             onPressed: () => setState(() => page = 2)
           )
         ]
