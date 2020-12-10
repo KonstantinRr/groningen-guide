@@ -211,12 +211,6 @@
             "conditions": [ ],
             "options": [
                 {
-                    "description": "Dutch",
-                    "events": [
-                        "option1"
-                    ]
-                },
-                {
                     "description": "European",
                     "events": [
                         "option1"
@@ -261,6 +255,12 @@
             "maxAnswers": 1,
             "conditions": [ ],
             "options": [
+                {
+                    "description": "Dutch",
+                    "events": [
+                        "option1"
+                    ]
+                },
                 {
                     "description": "French",
                     "events": [
