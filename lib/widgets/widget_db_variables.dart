@@ -23,6 +23,7 @@ class WidgetVariablesState extends State<WidgetVariables> {
   Widget build(BuildContext context) {
     var theme = Theme.of(context);
     return Column(
+      crossAxisAlignment: CrossAxisAlignment.stretch,
       children: <Widget> [
         Container(
           margin: const EdgeInsets.only(top: 10, bottom: 5),
@@ -63,12 +64,11 @@ class WidgetVariablesState extends State<WidgetVariables> {
                         .updateContextModel((model) => model
                           .setVar(e.item2.key, val ? 1 : 0)),
                     ),
-                    Container(
-                      width: 150.0,
+                    Expanded(child: Container(
                       height: 40.0,
                       alignment: Alignment.center,
                       child: Text(e.item2.key),
-                    )
+                    ))
                   ],
                 ),
               )).toList(),

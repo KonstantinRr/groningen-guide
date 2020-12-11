@@ -37,7 +37,10 @@ class WidgetEvaluator extends StatelessWidget {
 
 class WidgetDebugger extends StatefulWidget {
   final bool includeScrollBar;
-  const WidgetDebugger({this.includeScrollBar = true, Key key})
+  final bool showAlways;
+  const WidgetDebugger({Key key,
+    this.includeScrollBar = true,
+    this.showAlways = false})
       : super(key: key);
 
   @override
@@ -45,7 +48,13 @@ class WidgetDebugger extends StatefulWidget {
 }
 
 class WidgetDebuggerState extends State<WidgetDebugger> {
-  final controller = ScrollController();
+  ScrollController controller;
+
+  @override
+  void initState() {
+    super.initState();
+    controller = ScrollController();
+  }
 
   @override
   void dispose() {
@@ -127,7 +136,7 @@ class WidgetDebuggerState extends State<WidgetDebugger> {
             ? Scrollbar(
                 child: view,
                 controller: controller,
-                isAlwaysShown: true,
+                isAlwaysShown: widget.showAlways,
                 thickness: 8.0,
               )
             : view;

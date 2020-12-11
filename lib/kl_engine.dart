@@ -207,6 +207,16 @@ class QuestionData extends ChangeNotifier {
   List<bool> get currentAnswers => _current?.item2;
 }
 
+class DebuggerProvider extends ChangeNotifier {
+  bool showDebugger;
+  DebuggerProvider({this.showDebugger = true});
+
+  void changeState() {
+    showDebugger = !showDebugger;
+    notifyListeners();
+  }
+}
+
 class EngineSession extends StatefulWidget {
   final Widget child;
   const EngineSession({@required this.child, Key key}) : super(key: key);
@@ -229,7 +239,9 @@ class EngineSessionState extends State<EngineSession> {
         ChangeNotifierProvider<KlContextProvider>(
           create: (context) => engine.contextProvider),
         ChangeNotifierProvider<KlExpressionProvider>(
-          create: (context) => engine.expressionProvider)
+          create: (context) => engine.expressionProvider),
+        ChangeNotifierProvider<DebuggerProvider>(
+          create: (context) => DebuggerProvider())
       ],
       child: widget.child,
     );

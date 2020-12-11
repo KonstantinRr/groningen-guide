@@ -42,7 +42,7 @@ class StudyGuide extends StatelessWidget {
         builder: (context) => const RouteSplash(destination: '/', delay: Duration(milliseconds: 500)),
         settings: const RouteSettings(name: 'splash'));
       case '/': return MaterialPageRoute(
-        builder: (context) => const RouteHome(),
+        builder: (context) => RouteHome(),
         settings: const RouteSettings(name: '/'));
       case '/editor': return MaterialPageRoute(
         builder: (context) => const RouteEditor(),
