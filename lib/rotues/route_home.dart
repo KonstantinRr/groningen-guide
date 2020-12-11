@@ -22,6 +22,24 @@ import 'package:groningen_guide/widgets/widget_debugger.dart';
 class MainScreen extends StatelessWidget {
   const MainScreen({Key key}) : super(key: key);
 
+  void _next(BuildContext context, QuestionData questionData) {
+    var engine = Provider.of<KlEngine>(context, listen: false);
+    var selectedOptions = questionData.selectedOptions();
+    for (var i in selectedOptions)
+      engine.evaluateEvents(i.events);
+    engine.inference();
+    var endpoint = engine.checkEndpoints();
+    if (endpoint != null) {
+      showEndpointDialog(context, endpoint);
+    } else {
+      engine.loadNextQuestion(questionData);
+    }
+  }
+
+  void _previous(BuildContext context, QuestionData questionData) {
+
+  }
+
   @override
   Widget build(BuildContext context) {
     var theme = Theme.of(context);
@@ -34,53 +52,56 @@ class MainScreen extends StatelessWidget {
                 question: questionData.current,
                 change: (index) => questionData.changeOption(index),
               )),
-              Container(
-                margin: const EdgeInsets.only(top: 15, bottom: 15.0),
-                height: 40.0,
-                width: 150.0,
-                child: RaisedButton(
-                  child: const Text('Next'),
-                  onPressed: () {
-                    var engine =
-                        Provider.of<KlEngine>(context, listen: false);
-                    var selectedOptions = questionData.selectedOptions();
-                    for (var i in selectedOptions)
-                      engine.evaluateEvents(i.events);
-                    engine.inference();
-                    var endpoint = engine.checkEndpoints();
-                    if (endpoint != null) {
-                      showEndpointDialog(context, endpoint);
-                    } else {
-                      engine.loadNextQuestion(questionData);
-                    }
-                    //engine.inference();
-                  },
-                ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: <Widget> [
+                  Container(
+                    margin: const EdgeInsets.only(top: 15, bottom: 15.0),
+                    height: 40.0,
+                    width: 100.0,
+                    child: RaisedButton(
+                      child: const Text('Previous'),
+                      onPressed: () => _previous(context, questionData)
+                    ),
+                  ),
+                  const SizedBox(width: 10.0,),
+                  Container(
+                    margin: const EdgeInsets.only(top: 15.0, bottom: 15.0),
+                    height: 40.0,
+                    width: 100.0,
+                    child: RaisedButton(
+                      child: const Text('Next'),
+                      onPressed: () => _next(context, questionData)
+                    ),
+                  )
+                ]
               )
             ]
           )
         : Container(
-            height: 150.0,
+            height: 250.0,
             alignment: Alignment.center,
-            child: Column(children: <Widget>[
-              Text('There is currently no question loaded!',
-                  style: theme.textTheme.headline6),
-              FlatButton(
-                child: Container(
-                  width: 100.0,
-                  height: 40.0,
-                  child: Text('Start Process'),
-                ),
-                onPressed: () {
-                  // loads the next question
-                  var engine =
-                      Provider.of<KlEngine>(context, listen: false);
-                  engine.inference();
-                  engine.loadNextQuestion(questionData);
-                },
-              )
-            ]
-          )
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: <Widget>[
+                Text('There is currently no question loaded!',
+                    style: theme.textTheme.headline6),
+                FlatButton(
+                  child: Container(
+                    width: 100.0,
+                    height: 40.0,
+                    alignment: Alignment.center,
+                    child: Text('Start Process'),
+                  ),
+                  onPressed: () {
+                    // loads the next question
+                    var engine = Provider.of<KlEngine>(context, listen: false);
+                    engine.inference();
+                    engine.loadNextQuestion(questionData);
+                  },
+                )
+              ]
+            )
         )
     );
   }

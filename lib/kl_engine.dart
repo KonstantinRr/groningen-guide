@@ -117,16 +117,19 @@ class ExpressionStorage {
 /// Stores the the currently asked question as well as all
 /// previous questions.
 class QuestionData extends ChangeNotifier {
-  final List<Tuple2<KlQuestion, List<bool>>> previous = [];
+  final List<Tuple3<KlQuestion, List<bool>, ContextModel>> previous = [];
   Queue<int> _selectionOrder;
   Tuple2<KlQuestion, List<bool>> _current;
 
   /// Unloads the current question and puts it on the stack of
   /// previous asked questions.
-  void unloadQuestion() {
-    if (_current != null) previous.add(_current);
-    _current = null;
-    notifyListeners();
+  void unloadQuestion(ContextModel currentModel, {bool notify=true}) {
+    if (_current != null) {
+      previous.add(Tuple3<KlQuestion, List<bool>, ContextModel>(
+        _current.item1, _current.item2, currentModel.snapshot()));
+      _current = null;
+    }
+    if (notify) notifyListeners();
   }
 
   void clear() {
@@ -137,19 +140,19 @@ class QuestionData extends ChangeNotifier {
   }
 
   /// Loads the current [question] and puts it on the
-  void loadQuestion(KlQuestion question) {
-    if (_current != null) previous.add(_current);
-    _current =
-        Tuple2(question, List.generate(question.options.length, (_) => false));
+  void loadQuestion(KlQuestion question, ContextModel currentModel) {
+    unloadQuestion(currentModel, notify: false);
+    _current = Tuple2(question, List.generate(
+      question.options.length, (_) => false));
     _selectionOrder = Queue();
     notifyListeners();
   }
 
   /// Checks if the question was already asked or is currently loaded
   bool containsQuestion(KlQuestion question) {
-    var prev = previous.firstWhere((element) => element.item1 == question,
-            orElse: () => null) !=
-        null;
+    var prev = previous.firstWhere(
+      (element) => element.item1 == question,
+      orElse: () => null) != null;
     return prev || _current?.item1 == question;
   }
 
@@ -158,16 +161,15 @@ class QuestionData extends ChangeNotifier {
   /// Gets the currently selected options
   List<KlQuestionOption> selectedOptions() {
     return enumerate(_current.item1.options)
-        .where((e) => _current.item2[e.item1])
-        .map<KlQuestionOption>((e) => e.item2)
-        .toList();
+      .where((e) => _current.item2[e.item1])
+      .map<KlQuestionOption>((e) => e.item2)
+      .toList();
   }
 
   /// Sets the answer option at the given [index] to [value]
   void setOption(int index, bool value) {
-    if (current.item2[index] != value) {
+    if (current.item2[index] != value)
       changeOption(index);
-    }
   }
 
   /// Changes the answer option at the given [index]
@@ -426,7 +428,7 @@ class KlEngine extends ChangeNotifier {
   /// that is required to gain more information.
   void loadNextQuestion(QuestionData questionData) {
     logger.info('Unloading current question');
-    questionData.unloadQuestion();
+    questionData.unloadQuestion(contextProvider.model);
     for (var i = 0; i < klBaseProvider.base.questions.length; i++) {
       var question = klBaseProvider.base.questions[i];
       logger.info("Checking question ${question.name}");
@@ -440,7 +442,7 @@ class KlEngine extends ChangeNotifier {
       if (!conditions) continue;
 
       logger.info('Loading Question ${question.name}');
-      questionData.loadQuestion(klBaseProvider.base.questions[i]);
+      questionData.loadQuestion(klBaseProvider.base.questions[i], contextProvider.model);
       break;
     }
     notifyAll();
