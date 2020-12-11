@@ -8,6 +8,7 @@
 import 'package:flutter/material.dart';
 import 'package:groningen_guide/kl/kl_rule.dart';
 import 'package:groningen_guide/kl_engine.dart';
+import 'package:groningen_guide/main.dart';
 import 'package:groningen_guide/widgets/widget_condition.dart';
 import 'package:groningen_guide/widgets/widget_event.dart';
 import 'package:groningen_guide/widgets/widget_debugger.dart';

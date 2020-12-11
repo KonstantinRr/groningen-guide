@@ -17,7 +17,7 @@ import 'package:groningen_guide/kl/kl_question.dart';
 import 'package:groningen_guide/kl/kl_question_option.dart';
 import 'package:groningen_guide/kl/kl_rule.dart';
 import 'package:groningen_guide/kl_parser.dart';
-import 'package:groningen_guide/widgets/widget_debugger.dart';
+import 'package:groningen_guide/main.dart';
 import 'package:logging/logging.dart';
 import 'package:provider/provider.dart';
 import 'package:tuple/tuple.dart';

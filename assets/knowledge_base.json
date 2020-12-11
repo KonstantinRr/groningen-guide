@@ -4,7 +4,6 @@
         {
             "name": "Prinsenhof Hotel",
             "description": " ",
-            "image": "assets/images/logo.png",
             "conditions": [
                 "hotel AND (business OR leisure) AND (cultural_experience OR private)"
             ]
@@ -29,7 +28,6 @@
         {
             "name": "What are you looking for?",
             "description": "",
-            "image": "assets/images/logo.png",
             "maxAnswers": 3,
             "conditions": [ ],
             "options": [
@@ -50,7 +48,6 @@
         {
             "name": "What is your main goal?",
             "description": "",
-            "image": "assets/images/logo.png",
             "maxAnswers": 1,
             "conditions": [
                 "hotel OR cafe OR restaurant"

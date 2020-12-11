@@ -8,19 +8,12 @@
 import 'package:flutter/material.dart';
 
 import 'package:groningen_guide/kl_engine.dart';
+import 'package:groningen_guide/main.dart';
 import 'package:groningen_guide/widgets/widget_db_question.dart';
 import 'package:groningen_guide/widgets/widget_db_rule.dart';
 import 'package:groningen_guide/widgets/widget_db_variables.dart';
 import 'package:provider/provider.dart';
-import 'package:tuple/tuple.dart';
 
-Iterable<Tuple2<int, T>> enumerate<T>(Iterable<T> it) sync* {
-  int index = 0;
-  for (var val in it) {
-    yield Tuple2(index, val);
-    index++;
-  }
-}
 
 class WidgetEvaluator extends StatelessWidget {
   final bool val;
@@ -66,7 +59,7 @@ class WidgetDebuggerState extends State<WidgetDebugger> {
   Widget build(BuildContext context) {
     var theme = Theme.of(context);
     return Container(
-      width: 500.0,
+      width: 400.0,
       color: Colors.white,
       child: Consumer<KlBaseProvider>(
         builder: (context, klBaseProvider, _) {
@@ -75,17 +68,21 @@ class WidgetDebuggerState extends State<WidgetDebugger> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: <Widget>[
-                Padding(
-                  padding: const EdgeInsets.only(left: 15.0, right: 15.0, top: 10.0, bottom: 5.0),
+                Container(
+                  height: 45.0,
+                  margin: const EdgeInsets.only(left: 15.0, right: 15.0, top: 10.0, bottom: 5.0),
                   child: RaisedButton(
-                    child: const Text('Edit Knowledge Base'),
+                    color: theme.primaryColor,
+                    child: Text('Edit Knowledge Base', style: theme.textTheme.button,),
                     onPressed: () =>
                       Navigator.of(context).pushNamed('/editor')),
                 ),
-                Padding(
-                  padding: const EdgeInsets.only(left: 15.0, right: 15.0, top: 5.0, bottom: 10.0),
+                Container(
+                  height: 45.0,
+                  margin: const EdgeInsets.only(left: 15.0, right: 15.0, top: 5.0, bottom: 10.0),
                   child: RaisedButton(
-                    child: const Text('Reset'),
+                    color: theme.primaryColor,
+                    child: Text('Reset', style: theme.textTheme.button,),
                     onPressed: () {
                       Provider.of<QuestionData>(context, listen: false).clear();
                       Provider.of<KlEngine>(context, listen: false).clear();

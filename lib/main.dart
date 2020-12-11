@@ -13,6 +13,7 @@ import 'package:groningen_guide/rotues/route_home.dart';
 import 'package:groningen_guide/rotues/route_splash.dart';
 import 'package:groningen_guide/rotues/route_unknown.dart';
 import 'package:logging/logging.dart';
+import 'package:tuple/tuple.dart';
 
 void main() {
   Logger.root.level = Level.ALL; // defaults to Level.INFO
@@ -24,6 +25,13 @@ void main() {
   runApp(const StudyGuide());
 }
 
+Iterable<Tuple2<int, T>> enumerate<T>(Iterable<T> it) sync* {
+  int index = 0;
+  for (var val in it) {
+    yield Tuple2(index, val);
+    index++;
+  }
+}
 
 /// The main application widget that creates a [MaterialApp]
 class StudyGuide extends StatelessWidget {
@@ -64,9 +72,11 @@ class StudyGuide extends StatelessWidget {
         onUnknownRoute: onGenerateUnknownRoute,
         debugShowCheckedModeBanner: false,
         theme: ThemeData(
+          primaryColor: Colors.lightBlue[300],
+          accentColor: Colors.lightBlueAccent[300],
           appBarTheme: AppBarTheme(
             color: Colors.grey[100]
-          )
+          ),
         ),
       )
     );

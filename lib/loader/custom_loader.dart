@@ -78,14 +78,22 @@ class CustomKnowledgeLoaderState extends State<CustomKnowledgeLoader> {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget> [
-                RaisedButton(
-                  child: Text('Load', style: theme.textTheme.button),
-                  onPressed: _load,
+                SizedBox(
+                  width: 80.0,
+                  child: RaisedButton(
+                    color: theme.primaryColor,
+                    child: Text('Load', style: theme.textTheme.button),
+                    onPressed: _load,
+                  ),
                 ),
                 const SizedBox(width: 10.0,),
-                RaisedButton(
-                  child: Text('Verify', style: theme.textTheme.button),
-                  onPressed: _verify,
+                SizedBox(
+                  width: 80.0,
+                  child: RaisedButton(
+                    color: theme.primaryColor,
+                    child: Text('Verify', style: theme.textTheme.button),
+                    onPressed: _verify,
+                  ),
                 )
               ]
             ),

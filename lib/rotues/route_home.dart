@@ -9,6 +9,7 @@ import 'package:flutter/material.dart';
 import 'package:groningen_guide/rotues/route_endpoint.dart';
 import 'package:groningen_guide/widgets/action_info.dart';
 import 'package:groningen_guide/widgets/action_inspector.dart';
+import 'package:groningen_guide/widgets/widget_title.dart';
 import 'package:groningen_guide/widgets/width_size_requirement.dart';
 import 'package:provider/provider.dart';
 
@@ -25,14 +26,14 @@ class MainScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     var theme = Theme.of(context);
     return Consumer<QuestionData>(
-      builder: (context, questionData, _) => Padding(
-        padding: const EdgeInsets.all(15),
-        child: questionData.hasQuestion
-          ? Column(children: [
-              QuestionWidget(
+      builder: (context, questionData, _) => questionData.hasQuestion
+        ? Column(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: [
+              Expanded(child: QuestionWidget(
                 question: questionData.current,
                 change: (index) => questionData.changeOption(index),
-              ),
+              )),
               Container(
                 margin: const EdgeInsets.only(top: 15, bottom: 15.0),
                 height: 40.0,
@@ -56,31 +57,31 @@ class MainScreen extends StatelessWidget {
                   },
                 ),
               )
-            ])
-          : Container(
-              height: 150.0,
-              alignment: Alignment.center,
-              child: Column(children: <Widget>[
-                Text('There is currently no question loaded!',
-                    style: theme.textTheme.headline6),
-                FlatButton(
-                  child: Container(
-                    width: 100.0,
-                    height: 40.0,
-                    child: Text('Start Process'),
-                  ),
-                  onPressed: () {
-                    // loads the next question
-                    var engine =
-                        Provider.of<KlEngine>(context, listen: false);
-                    engine.inference();
-                    engine.loadNextQuestion(questionData);
-                  },
-                )
-              ]
-            )
+            ]
           )
-        ),
+        : Container(
+            height: 150.0,
+            alignment: Alignment.center,
+            child: Column(children: <Widget>[
+              Text('There is currently no question loaded!',
+                  style: theme.textTheme.headline6),
+              FlatButton(
+                child: Container(
+                  width: 100.0,
+                  height: 40.0,
+                  child: Text('Start Process'),
+                ),
+                onPressed: () {
+                  // loads the next question
+                  var engine =
+                      Provider.of<KlEngine>(context, listen: false);
+                  engine.inference();
+                  engine.loadNextQuestion(questionData);
+                },
+              )
+            ]
+          )
+        )
     );
   }
 }
@@ -106,6 +107,7 @@ class RouteHome extends StatelessWidget {
     var theme = Theme.of(context);
     return AppBar(
       backgroundColor: theme.appBarTheme.color,
+      title: const WidgetTitle(),
       actions: [
         const ActionInspector(),
         const ActionInfo(),
@@ -119,7 +121,7 @@ class RouteHome extends StatelessWidget {
       body: Stack(
         fit: StackFit.passthrough,
         children: <Widget> [
-          const SingleChildScrollView(child: const MainScreen()),
+          const MainScreen(),
           if (prov.showDebugger)
             InkWell(
               onTap: () => prov.changeState(),
@@ -148,7 +150,7 @@ class RouteHome extends StatelessWidget {
         children: <Widget>[
           const Expanded(
             flex: 2,
-            child: const SingleChildScrollView(child: const MainScreen())
+            child: const MainScreen()
           ),
           Visibility(
             visible: prov.showDebugger,

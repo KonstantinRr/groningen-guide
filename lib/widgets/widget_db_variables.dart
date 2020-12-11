@@ -7,7 +7,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:groningen_guide/kl_engine.dart';
-import 'package:groningen_guide/widgets/widget_debugger.dart';
+import 'package:groningen_guide/main.dart';
 import 'package:provider/provider.dart';
 
 class WidgetVariables extends StatefulWidget {
