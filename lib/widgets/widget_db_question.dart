@@ -55,8 +55,8 @@ class WidgetQuestion extends StatelessWidget {
                   padding: EdgeInsets.only(left: 10.0),
                   child: Row(
                     children: <Widget> [
-                      Text('${e[0]+1}: ', style: theme.textTheme.bodyText1),
-                      Expanded(child: WidgetCondition(element: e[1]))
+                      Text('${e.item1}+1}: ', style: theme.textTheme.bodyText1),
+                      Expanded(child: WidgetCondition(element: e.item2))
                     ]
                   ),
                 ),
@@ -85,8 +85,8 @@ class WidgetQuestion extends StatelessWidget {
                   child: Row(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: <Widget> [
-                      Text('Option ${option[0]+1}: ', style: theme.textTheme.bodyText1),
-                      Expanded(child: Text('${option[1].description}')),
+                      Text('Option ${option.item1}+1}: ', style: theme.textTheme.bodyText1),
+                      Expanded(child: Text('${option.item2.description}')),
                     ]
                   ),
                 ),
@@ -96,17 +96,17 @@ class WidgetQuestion extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       ...
-                      enumerate(option[1].events).map((e) =>
+                      enumerate(option.item2.events).map((e) =>
                         Padding(
                           padding: EdgeInsets.only(left: 0.0),
                           child: Row(
                             crossAxisAlignment: CrossAxisAlignment.center,
                             children: <Widget> [
-                              Text('Event ${e[0]+1}: ', style: theme.textTheme.bodyText1),
+                              Text('Event ${e.item1+1}: ', style: theme.textTheme.bodyText1),
                               Expanded(child: Consumer<KlExpressionProvider>(
                                 builder: (context, expressionStorage, _) =>
                                   WidgetEvent(
-                                    element: expressionStorage.storage[e[1]],
+                                    element: expressionStorage.storage[e.item2],
                                   )
                               ))
                             ]

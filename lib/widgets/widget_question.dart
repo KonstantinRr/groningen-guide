@@ -89,15 +89,15 @@ class QuestionWidgetState extends State<QuestionWidget> {
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: enumerate(widget.question.item1.options).map((e) =>
               FlatButton(
-                onPressed: () => widget.change(e[0]),
+                onPressed: () => widget.change(e.item1),
                 child: Container(
                   margin: const EdgeInsets.all(5),
                   decoration: BoxDecoration(
-                    color: widget.question.item2[e[0]] ? Colors.lightBlue : Colors.grey[300]
+                    color: widget.question.item2[e.item1] ? Colors.lightBlue : Colors.grey[300]
                   ),
                   height: 50.0,
                   alignment: Alignment.center,
-                  child: Text(e[1].description)
+                  child: Text(e.item2.description)
                 ),
               )
             ).toList()
