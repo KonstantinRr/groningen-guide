@@ -1,17 +1,31 @@
 {
     "values": [ ],
-    "rules": [
+    "endpoints": [
         {
-            "name": "the_student_hotel",
-            "enpoint": true,
-            "description": " The Student Hotel seems to suit you best",
+            "name": "Prinsenhof Hotel",
+            "description": " ",
+            "image": "assets/images/logo.png",
             "conditions": [
-                "business AND service_breakfast AND service_long_stay"
-            ],
-            "events": [ "the_student_hotel = 1" ]
+                "hotel AND (business OR leisure) AND (cultural_experience OR private)"
+            ]
+        },
+        {
+            "name": "The Student Hotel",
+            "description": " ",
+            "conditions": [
+                "hotel AND (business OR leisure) AND (service_long_stay OR service_breakfast_included) "
+            ]
+        },
+        {
+            "name": "Mister Mofongo",
+            "description": " ",
+            "conditions": [
+                "restaurant AND (business OR leisure) AND (romantic OR bar) AND average"
+            ]
         }
     ],
     
+    "rules": [ ],
     "questions": [
         {
             "name": "What are you looking for?",
@@ -79,10 +93,6 @@
                 {
                     "description": "Private",
                     "events": [ "private = 1" ]
-                },
-                {
-                    "description": "Just a nice place",
-                    "events": [ "nice = 1" ]
                 }
             ]
         },

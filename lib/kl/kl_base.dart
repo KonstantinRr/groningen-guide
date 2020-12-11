@@ -1,3 +1,4 @@
+import 'package:groningen_guide/kl/kl_endpoint.dart';
 /// This project is build during the course Knowledge Technology Practical at the
 /// UNIVERSITY OF GRONINGEN (WBAI014-05).
 /// The project was build by:
@@ -22,9 +23,11 @@ class KlBase extends MapObject {
   List<KlRule> rules;
   /// Stores the list of questions to gain information
   List<KlQuestion> questions;
+  /// Stores the list of potential endpoints
+  List<KlEndpoint> endpoints;
 
   /// Creates a new knowledge base by supplying the member variables
-  KlBase({this.values, this.rules, this.questions});
+  KlBase({this.values, this.rules, this.questions, this.endpoints});
   /// Creates a new question option using a JSON deserialized object
   factory KlBase.fromJson(dynamic map) => KlBase()..read(map);
 
@@ -33,14 +36,15 @@ class KlBase extends MapObject {
     assertType<Map<String, dynamic>>(map);
     values = assertTypeGet<List>(map, 'values').map((e) => KlVariable.fromJson(e)).toList();
     rules = assertTypeGet<List>(map, 'rules').map((e) => KlRule.fromJson(e)).toList();
-    questions = assertTypeGet<List>(map, 'questions')
-      .map((e) => KlQuestion.fromJson(e)).toList();
+    questions = assertTypeGet<List>(map, 'questions').map((e) => KlQuestion.fromJson(e)).toList();
+    endpoints = assertTypeGet<List>(map, 'endpoints').map((e) => KlEndpoint.fromJson(e)).toList();
   }
 
   /// Serializes this knowledge base to a map object
   Map<String, dynamic> toJson() => {
     'values': values.map((e) => e.toJson()).toList(),
     'rules': rules.map((e) => e.toJson()).toList(),
-    'questions': questions.map((e) => e.toJson()).toList()
+    'questions': questions.map((e) => e.toJson()).toList(),
+    'endpoints': endpoints.map((e) => e.toJson()).toList()
   };
 }

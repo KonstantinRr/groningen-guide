@@ -8,6 +8,7 @@
 import 'package:flutter/material.dart';
 import 'package:groningen_guide/kl_engine.dart';
 import 'package:groningen_guide/rotues/route_editor.dart';
+import 'package:groningen_guide/rotues/route_endpoint.dart';
 import 'package:groningen_guide/rotues/route_home.dart';
 import 'package:groningen_guide/rotues/route_splash.dart';
 import 'package:groningen_guide/rotues/route_unknown.dart';
@@ -46,6 +47,9 @@ class StudyGuide extends StatelessWidget {
       case '/editor': return MaterialPageRoute(
         builder: (context) => const RouteEditor(),
         settings: const RouteSettings(name: 'editor'));
+      case '/endpoint': return MaterialPageRoute(
+        builder: (context) => RouteEndpoint.fromSettings(settings.arguments),
+        settings: const RouteSettings(name: 'endpoint'));
     }
     return null;
   }
@@ -59,7 +63,11 @@ class StudyGuide extends StatelessWidget {
         onGenerateRoute: onGenerateRoute,
         onUnknownRoute: onGenerateUnknownRoute,
         debugShowCheckedModeBanner: false,
-        theme: ThemeData(),
+        theme: ThemeData(
+          appBarTheme: AppBarTheme(
+            color: Colors.grey[100]
+          )
+        ),
       )
     );
   }
