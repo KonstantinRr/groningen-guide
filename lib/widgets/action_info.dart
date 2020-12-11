@@ -15,9 +15,10 @@ class ActionInfoDialog extends StatefulWidget {
 }
 
 class ActionInfoDialogState extends State<ActionInfoDialog> {
+  final ScrollController controller = ScrollController();
   int page = 0;
   
-  final String info = 
+  static const String info = 
     "This project is build during the course Knowledge Technology Practical at the\n"
     "UNIVERSITY OF GRONINGEN (WBAI014-05).\n\n"
     "The project was build by:\n"
@@ -25,16 +26,45 @@ class ActionInfoDialogState extends State<ActionInfoDialog> {
     "Nicholas Koundouros (S3726444) n.koundouros@student.rug.nl\n"
     "Livia Regus (S3354970): l.regus@student.rug.nl\n";
 
+  static const String cookies =
+    "This site does not make use of any Cookies to store session and/or user data.\n"
+    "All session data is deleted whenever you leave or reload the site.\n";
+
+  static const String privacy =
+    "The site collects some general information data about site usage for service\n"
+    "improvements and data analytics. This means that the following connection data\n"
+    "is collected and stored at servers in Europe:\n"
+    " - The IP address\n"
+    " - The requested resources/links\n"
+    " - The browser (version) that used to view the site\n";
+
+  static const String privacyBold =
+    "We value your privacy and do not collect any additional data!\n"
+    "Contact k.rolf@student.rug.nl for more information about data collection and privacy";
+
   List<Widget Function(BuildContext)> builders;
-  
+
   @override
   void initState() {
     super.initState();
     builders = [
-      (context) => Text(info),
-      (context) => Container(),
-      (context) => Container()
+      (context) => const Text(info),
+      (context) => 
+        Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: const <Widget> [
+            const Text(privacy),
+            const Text(privacyBold, style: TextStyle(fontWeight: FontWeight.bold),)
+          ]
+        ),
+      (context) => const Text(cookies)
     ];
+  }
+
+  @override
+  void dispose() {
+    controller.dispose();
+    super.dispose();
   }
 
 
@@ -45,23 +75,36 @@ class ActionInfoDialogState extends State<ActionInfoDialog> {
       title: Row(
         children: <Widget> [
           Expanded(child: Text('Information')),
-          FlatButton(
-            child: Text('Info', style: TextStyle(color: page == 0 ? theme.accentColor : null),),
-            onPressed: () => setState(() => page = 0),
-          ),
-          FlatButton(
-            child: Text('Privacy', style: TextStyle(color: page == 1 ? theme.accentColor : null),),
-            onPressed: () => setState(() => page = 1),
-          ),
-          FlatButton(
-            child: Text('Cookies', style: TextStyle(color: page == 2 ? theme.accentColor : null),),
-            onPressed: () => setState(() => page = 2)
-          )
+          Expanded(child: Wrap(
+            runAlignment: WrapAlignment.end,
+            children: <Widget> [
+              FlatButton(
+                child: Text('Info', style: TextStyle(color: page == 0 ? theme.accentColor : null),),
+                onPressed: () => setState(() => page = 0),
+              ),
+              FlatButton(
+                child: Text('Privacy', style: TextStyle(color: page == 1 ? theme.accentColor : null),),
+                onPressed: () => setState(() => page = 1),
+              ),
+              FlatButton(
+                child: Text('Cookies', style: TextStyle(color: page == 2 ? theme.accentColor : null),),
+                onPressed: () => setState(() => page = 2)
+              )
+            ]
+          ))
         ]
       ),
       content: SizedBox(
-        width: 600.0, height: 150.0,
-        child: builders[page](context),
+        width: 600.0, height: 170.0,
+        child: Scrollbar(
+          isAlwaysShown: false,
+          thickness: 8.0,
+          controller: controller,
+          child: SingleChildScrollView(
+            controller: controller,
+            child: builders[page](context),
+          ),
+        ),
       ),
       actions: [
         FlatButton(
