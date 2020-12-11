@@ -48,12 +48,8 @@
                     "events": [ "business = 1" ]
                 },
                 {
-                    "description": "Leisure",
+                    "description": "Leisure/Tourism",
                     "events": [ "leisure = 1" ]
-                },
-                {
-                    "description": "Tourism",
-                    "events": [ "tourism = 1" ]
                 }
             ]
         },
@@ -62,15 +58,11 @@
             "description": "",
             "image": null,
             "maxAnswers": 1,
-            "conditions": [ ],
+            "conditions": ["leisure OR business" ],
             "options": [
                 {
                     "description": "Family and children",
                     "events": [ "family = 1", "children = 1" ]
-                },
-                {
-                    "description": "The whole gang",
-                    "events": [ "gang = 1" ]
                 },
                 {
                     "description": "Romantic evening",
@@ -102,7 +94,7 @@
             "conditions": [ ],
             "options": [
                 {
-                    "description": "Fine - dining",
+                    "description": "Let the money flow",
                     "events": [ "fine = 1" ]
                 },
                 {
@@ -110,8 +102,68 @@
                     "events": [ "average = 1" ]
                 },
                 {
-                    "description": "Cheap-eats",
+                    "description": "On a budget",
                     "events": [ "cheap = 1" ]
+                }
+            ]
+        },
+        {
+            "name": "What service preference do you have?",
+            "description": "",
+            "image": null,
+            "maxAnswers": 2,
+            "conditions": [ "hotel"],
+            "options": [              
+                {
+                    "description": "Long stay (up to a couple of months)",
+                    "events": [ "service_long_stay = 1" ]
+                },
+                {
+                    "description": "Breakfast included",
+                    "events": [ "service_breakfast = 1" ]
+                },    
+                {
+                    "exclusive": true,
+                    "description": "No preference",
+                    "events": [ ]
+                }
+            ]
+        },
+        {
+            "name": "What area would you prefer?",
+            "description": "",
+            "image": null,
+            "maxAnswers": 1,
+            "conditions": [ ],
+            "options": [
+                {
+                    "description": "City centre",
+                    "events": [ "area_citycenter = 1" ]
+                },
+                {
+                    "description": "Schilderswijk/Zeeheldenbuurt",
+                    "events": [ "area_schilderswijk = 1", "area_zeeheldenbuurt = 1" ]
+                },
+                {
+                    "description": "Korrewegwijk/ Indische buurt",
+                    "events": [ "area_korrewegwijk = 1", "area_indischebuurt = 1" ]
+                },
+                {
+                    "description": "Rivierenbuurt",
+                    "events": [ "area_rivierenbuurt = 1" ]
+                },
+                {
+                    "description": "Oosterparkwijk",
+                    "events": [ "area_oosterparkwijk = 1" ]
+                },
+                {
+                    "description": "Paddepoel / Selwerd / Tuinbouw Buurt / Oranjewijk",
+                    "events": [
+                        "area_paddepoel = 1",
+                        "area_Selwerd = 1",
+                        "area_tuinbouwbuurt = 1",
+                        "area_oranjewijk = 1"
+                    ]
                 }
             ]
         },
@@ -180,12 +232,6 @@
             "maxAnswers": 7,
             "conditions": [ "region_european" ],
             "options": [
-                {
-                    "description": "Dutch",
-                    "events": [
-                        "option1"
-                    ]
-                },
                 {
                     "description": "French",
                     "events": [ "lang_french = 1" ]
@@ -338,66 +384,6 @@
                     "events": [ "activity = 0" ]
                 }
             ]
-        },
-        {
-            "name": "What service preference do you have?",
-            "description": "",
-            "image": null,
-            "maxAnswers": 2,
-            "conditions": [ "hotel"],
-            "options": [              
-                {
-                    "description": "Long stay (up to a couple of months)",
-                    "events": [ "service_long_stay = 1" ]
-                },
-                {
-                    "description": "Breakfast included",
-                    "events": [ "service_breakfast = 1" ]
-                },    
-                {
-                    "exclusive": true,
-                    "description": "No preference",
-                    "events": [ ]
-                }
-            ]
-        },
-        {
-            "name": "What area would you prefer?",
-            "description": "",
-            "image": null,
-            "maxAnswers": 1,
-            "conditions": [ ],
-            "options": [
-                {
-                    "description": "City centre",
-                    "events": [ "area_citycenter = 1" ]
-                },
-                {
-                    "description": "Schilderswijk/Zeeheldenbuurt",
-                    "events": [ "area_schilderswijk = 1", "area_zeeheldenbuurt = 1" ]
-                },
-                {
-                    "description": "Korrewegwijk/ Indische buurt",
-                    "events": [ "area_korrewegwijk = 1", "area_indischebuurt = 1" ]
-                },
-                {
-                    "description": "Rivierenbuurt",
-                    "events": [ "area_rivierenbuurt = 1" ]
-                },
-                {
-                    "description": "Oosterparkwijk",
-                    "events": [ "area_oosterparkwijk = 1" ]
-                },
-                {
-                    "description": "Paddepoel / Selwerd / Tuinbouw Buurt / Oranjewijk",
-                    "events": [
-                        "area_paddepoel = 1",
-                        "area_Selwerd = 1",
-                        "area_tuinbouwbuurt = 1",
-                        "area_oranjewijk = 1"
-                    ]
-                }
-            ]
-        }
+        }        
     ]
 }
