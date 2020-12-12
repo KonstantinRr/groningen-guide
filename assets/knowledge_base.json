@@ -6,7 +6,7 @@
             "description": " ",
             "image": "assets/images/prinsenhofHotel.jpg",
             "conditions": [
-                "hotel AND (business OR leisure) AND (cultural_experience OR private OR romantic) "
+                "hotel AND (business OR leisure) AND (cultural_experience OR private OR romantic OR area_citycenter) "
             ]
         },
         {
@@ -14,14 +14,14 @@
             "description": " ",
             "image": "",
             "conditions": [
-                "hotel AND business AND (service_breakfast_included OR bar) "
+                "hotel AND (business OR leisure) AND (service_breakfast_included OR bar) AND area_citycenter "
             ]
         },
         {
             "name": "The Student Hotel",
             "description": " ",
             "conditions": [
-                "hotel AND (business OR leisure) AND service_long_stay OR service_breakfast_included OR bar"
+                "hotel AND (business OR leisure) AND (service_long_stay AND (area_citycenter OR service_breakfast_included OR bar))"
             ]
         },
         {
@@ -29,7 +29,7 @@
             "description": " ",
             "image": "assets/images/steeInStad.jpg",
             "conditions": [
-                "hotel AND  leisure  AND (area_korrewegwijk OR family ) AND average OR service_breakfast_included"
+                "hotel AND  leisure  AND (area_korrewegwijk OR (family AND average) )  OR service_breakfast_included"
             ]
         },
         {
@@ -37,7 +37,7 @@
             "description": " ",
             "image": "assets/images/mercure.png",
             "conditions": [
-                "hotel AND (business OR leisure) AND area_rivierenbuurt OR service_breakfast_included OR bar"
+                "hotel AND (business OR leisure) AND (area_rivierenbuurt OR service_breakfast_included)"
             ]
         },
         {
@@ -45,7 +45,7 @@
             "description": " ",
             "image": "assets/images/theManor.png",
             "conditions": [
-                "hotel AND leisure AND (area_oosterportbuurt OR family) AND cheap  OR service_breakfast_included"
+                "hotel AND leisure AND (area_oosterportbuurt OR (family AND cheap))  AND service_breakfast_included"
             ]
         }
     ],
@@ -130,7 +130,7 @@
             "options": [
                 {
                     "description": "Let the money flow",
-                    "events": [ "fine = 1", "money = 1" ]
+                    "events": [ "expensive = 1", "money = 1" ]
                 },
                 {
                     "description": "Mid-range",
