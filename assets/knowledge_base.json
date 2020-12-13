@@ -3,26 +3,70 @@
     "endpoints": [
         {
             "name": "Prinsenhof Hotel",
-            "description": " ",
+            "description": "Angel recommends you this is a 4-star boutique hotel in the heart of Groningen. Right in the shadows of the Martini Tower, it's beautiful garden will offer the best cultural experience, suitable for any purpose, especially for a romantic experience <3 ",
+            "image": "assets/images/prinsenhofHotel.jpg",
             "conditions": [
-                "hotel AND (business OR leisure) AND (cultural_experience OR private)"
+                "hotel AND (business OR leisure) AND (cultural_experience OR private OR romantic OR area_citycenter) "
+            ]
+        },
+        {
+            "name": "NH Hotel de Ville, Mercure, The Student Hotel",
+            "description": "According to your requirements, Angel has found several suitable places. Opt for The Student Hotel or for the NH Hotel de Ville, if you'd like to be close to the city center or for Mercure for a more isolated option ;) ",
+            "image": "",
+            "conditions": [
+                "hotel AND (business OR leisure) AND (service_breakfast_included AND bar)  "
+            ]
+        },
+        {
+            "name": "Hotel Miss Blanche",
+            "description": "The best option for you, my friend, would be this boutique hotel in the city of Groningen with luxurious and uniquely furnished rooms ",
+            "image": "assets/images/missBlanche",
+            "conditions": [
+                "hotel AND (business OR leisure) AND area_citycenter AND fine AND (romantic OR family) "
             ]
         },
         {
             "name": "The Student Hotel",
-            "description": " ",
+            "image": "assets/images/studentHotel",
+            "description": "Thsi si the best option for you, with everything you need + the chance of extending your stay for up to a couple of months at a good price. ",
             "conditions": [
-                "hotel AND (business OR leisure) AND (service_long_stay OR service_breakfast_included) "
+                "hotel AND (business OR leisure) AND (service_long_stay AND (area_citycenter OR service_breakfast_included OR bar))"
             ]
         },
         {
-            "name": "Mister Mofongo",
-            "description": " ",
+            "name": "Stee in stad",
+            "description": " This is a great place for staying in with your family, a perfect location since you're close to the city center and the are is quiet and nice, all at the best price",
+            "image": "assets/images/steeInStad.jpg",
             "conditions": [
-                "restaurant AND (business OR leisure) AND (romantic OR bar) AND average"
+                "hotel AND  leisure  AND family AND average AND service_breakfast_included OR area_korrewegwijk"
+            ]
+        },
+        {
+            "name": "City Hotel",
+            "description": "This is a great place for you and your family if you want to stay in the city center at the best price",
+            "image": "assets/images/cityHotel.jpg",
+            "conditions": [
+                "hotel AND  leisure  AND area_citycenter AND average AND service_breakfast_included AND family"
+            ]
+        },
+        {
+            "name": "Mercure",
+            "description": "This hotel has all the facilities you could probably wish for, all in an isolated environment, reasonably far away from the city center crowdedness  ",
+            "image": "assets/images/mercure.png",
+            "conditions": [
+                "hotel AND (business OR leisure) AND (area_rivierenbuurt OR service_breakfast_included)"
+            ]
+        },
+        {
+            "name": "Bed & Breakfast 'Het Kasteeltje'",
+            "description": "I know you're on a budget, but trust me, this place will make your family feel like you've had the best vacation ever! Cosy rooms, your own kitchen and a friendly neighbourhood, what else is there to wish for? ",
+            "image": "assets/images/theManor.png",
+            "conditions": [
+                "hotel AND leisure AND (area_oosterportbuurt OR (family AND cheap)) "
             ]
         }
     ],
+    
     "rules": [ ],
     "questions": [
         {
@@ -55,15 +99,11 @@
             "options": [
                 {
                     "description": "Business",
-                    "events": [ "business = 1" ]
+                    "events": [ "business = 1", "goal = 1" ]
                 },
                 {
-                    "description": "Leisure",
-                    "events": [ "leisure = 1" ]
-                },
-                {
-                    "description": "Tourism",
-                    "events": [ "tourism = 1" ]
+                    "description": "Leisure/Tourism",
+                    "events": [ "leisure = 1", "goal = 1" ]
                 }
             ]
         },
@@ -72,31 +112,27 @@
             "description": "",
             "image": null,
             "maxAnswers": 1,
-            "conditions": [ ],
+            "conditions": ["money" ],
             "options": [
                 {
                     "description": "Family and children",
-                    "events": [ "family = 1", "children = 1" ]
-                },
-                {
-                    "description": "The whole gang",
-                    "events": [ "gang = 1" ]
+                    "events": [ "family = 1", "mind = 1"  ]
                 },
                 {
                     "description": "Romantic evening",
-                    "events": [ "romantic = 1" ]
+                    "events": [ "romantic = 1", "mind = 1" ]
                 },
                 {
                     "description": "Cultural experience",
-                    "events": [ "cultural = 1" ]
+                    "events": [ "cultural = 1", "mind = 1" ]
                 },
                 {
                     "description": "Bar scene",
-                    "events": [ "bar = 1" ]
+                    "events": [ "bar = 1", "mind = 1" ]
                 },
                 {
                     "description": "Private",
-                    "events": [ "private = 1" ]
+                    "events": [ "private = 1", "mind = 1" ]
                 }
             ]
         },
@@ -105,241 +141,19 @@
             "description": "",
             "image": null,
             "maxAnswers": 1,
-            "conditions": [ ],
+            "conditions": [ "goal"],
             "options": [
                 {
-                    "description": "Fine - dining",
-                    "events": [ "fine = 1" ]
+                    "description": "Let the money flow",
+                    "events": [ "expensive = 1", "money = 1" ]
                 },
                 {
                     "description": "Mid-range",
-                    "events": [ "average = 1" ]
+                    "events": [ "average = 1", "money = 1" ]
                 },
                 {
-                    "description": "Cheap-eats",
-                    "events": [ "cheap = 1" ]
-                }
-            ]
-        },
-        {
-            "name": "What kind of meal would you like?",
-            "description": "",
-            "image": null,
-            "maxAnswers": 1,
-            "conditions": [ ],
-            "options": [
-                {
-                    "description": "Breakfast",
-                    "events": [ "breakfast = 1" ]
-                },
-                {
-                    "description": "Brunch",
-                    "events": [ "brunch = 1" ]
-                },
-                {
-                    "description": "Lunch",
-                    "events": [ "lunch = 1" ]
-                },
-                {
-                    "description": "Dinner",
-                    "events": [ "dinner = 1" ]
-                }
-            ]
-        },
-        {
-            "name": "What type of cuisine are you looking for?",
-            "description": "",
-            "image": null,
-            "maxAnswers": 7,
-            "conditions": [ ],
-            "options": [
-                {
-                    "description": "Dutch",
-                    "events": [ "region_dutch = 1", "cultural = 1"]
-                },
-                {
-                    "description": "European",
-                    "events": [ "region_european = 1" ]
-                },
-                {
-                    "description": "Asian",
-                    "events": [ "region_asian = 1" ]
-                },
-                {
-                    "description": "African",
-                    "events": [ "region_african = 1" ]
-                },
-                {
-                    "description": "Middle Eastern",
-                    "events": [ "region_mideast = 1"]
-                },
-                {
-                    "description": "Australian",
-                    "events": [ "region_australian = 1" ]
-                },
-                {
-                    "description": "American",
-                    "events": [ "region_american = 1" ]
-                }
-            ]
-        },
-        {
-            "name": "You have chosen European cuisine",
-            "description": "please, specify",
-            "image": null,
-            "maxAnswers": 7,
-            "conditions": [ "region_european" ],
-            "options": [
-                {
-                    "description": "French",
-                    "events": [ "lang_french = 1" ]
-                },
-                {
-                    "description": "Italian",
-                    "events": [ "lang_italian" ]
-                },
-                {
-                    "description": "Greek",
-                    "events": [ "lang_greek = 1" ]
-                },
-                {
-                    "description": "Irish",
-                    "events": [ "lang_irish = 1" ]
-                },
-                {
-                    "description": "Scandinavian",
-                    "events": [ "lang_scandinavian = 1" ]
-                },
-                {
-                    "description": "Spanish",
-                    "events": [ "lang_spanish = 1" ]
-                },
-                {
-                    "description": "British",
-                    "events": [ "lang_british = 1" ]
-                }
-            ]
-        },
-        {
-            "name": "You have chosen Asian cuisine",
-            "description": "please, specify",
-            "image": null,
-            "maxAnswers": 6,
-            "conditions": [ "region_asian" ],
-            "options": [
-                {
-                    "description": "Indian",
-                    "events": [ "lang_indian = 1" ]
-                },
-                {
-                    "description": "Thai",
-                    "events": [ "lang_thai = 1" ]
-                },
-                {
-                    "description": "Korean",
-                    "events": [ "lang_korean = 1" ]
-                },
-                {
-                    "description": "Japanese",
-                    "events": [ "lang_japanese = 1" ]
-                },
-                {
-                    "description": "Chinese",
-                    "events": [ "lang_chinese = 1" ]
-                },
-                {
-                    "description": "Vietnamese",
-                    "events": [ "lang_vietnames = 1" ]
-                },
-                {
-                    "description": "Indonesian",
-                    "events": [ "lang_indonesian = 1" ]
-                }
-            ]
-        },
-        {
-            "name": "Do you have any dietary restrictions?",
-            "description": "",
-            "image": null,
-            "maxAnswers": 1,
-            "conditions": [ ],
-            "options": [
-                {
-                    "description": "Vegetarian",
-                    "events": [ "vegetarian = 1" ]
-                },
-                {
-                    "description": "Vegan",
-                    "events": [ "vegan = 1" ]
-                },
-                {
-                    "description": "Halal",
-                    "events": [ "halal = 1" ]
-                },
-                {
-                    "exclusive": true,
-                    "description": "None",
-                    "events": [ ]
-                }
-            ]
-        },
-        {
-            "name": "You have chosen American",
-            "description": "please specify",
-            "image": null,
-            "maxAnswers": 3,
-            "conditions": [ "region_american" ],
-            "options": [
-                {
-                    "description": "US",
-                    "events": [ "lang_us = 1" ]
-                },
-                {
-                    "description": "Chilean",
-                    "events": [ "lang_chilean = 1" ]
-                },
-                {
-                    "description": "Caribbean",
-                    "events": [ "lang_caribbean = 1" ]
-                }
-            ]
-        },
-        {
-            "name": "You have chosen Middle Eastern",
-            "description": "please specify",
-            "image": null,
-            "maxAnswers": 3,
-            "conditions": [ "region_mideast" ],
-            "options": [
-                {
-                    "description": "Turkish",
-                    "events": [ "lang_turkish = 1" ]
-                },
-                {
-                    "description": "Persian",
-                    "events": [ "lang_persian = 1" ]
-                },
-                {
-                    "description": "Lebanese",
-                    "events": [ "lang_lebanese = 1" ]
-                }
-            ]
-        },
-        {
-            "name": "Would you like other activities alongside?",
-            "description": "",
-            "image": null,
-            "maxAnswers": 1,
-            "conditions": [ ],
-            "options": [
-                {
-                    "description": "Yes",
-                    "events": [ "activity = 1"
-                    ]
-                },
-                {
-                    "description": "No",
-                    "events": [ "activity = 0" ]
+                    "description": "On a budget",
+                    "events": [ "cheap = 1", "money = 1" ]
                 }
             ]
         },
@@ -347,29 +161,21 @@
             "name": "What service preference do you have?",
             "description": "",
             "image": null,
-            "maxAnswers": 4,
-            "conditions": [ ],
-            "options": [
-                {
-                    "description": "Free cancellation",
-                    "events": [ "service_cancellation = 1" ]
-                },
+            "maxAnswers": 2,
+            "conditions": [ "money"],
+            "options": [              
                 {
                     "description": "Long stay (up to a couple of months)",
-                    "events": [ "service_long_stay = 1" ]
+                    "events": [ "service_long_stay = 1", "service = 1" ]
                 },
                 {
                     "description": "Breakfast included",
-                    "events": [ "service_breakfast = 1" ]
-                },
-                {
-                    "description": "Parking ",
-                    "events": [ "service_parking = 1" ]
-                },
+                    "events": [ "service_breakfast = 1", "service = 1" ]
+                },    
                 {
                     "exclusive": true,
                     "description": "No preference",
-                    "events": [ ]
+                    "events": ["service = 1" ]
                 }
             ]
         },
@@ -378,7 +184,7 @@
             "description": "",
             "image": null,
             "maxAnswers": 1,
-            "conditions": [ ],
+            "conditions": [ "service"],
             "options": [
                 {
                     "description": "City centre",
@@ -397,19 +203,10 @@
                     "events": [ "area_rivierenbuurt = 1" ]
                 },
                 {
-                    "description": "Oosterparkwijk",
-                    "events": [ "area_oosterparkwijk = 1" ]
-                },
-                {
-                    "description": "Paddepoel / Selwerd / Tuinbouw Buurt / Oranjewijk",
-                    "events": [
-                        "area_paddepoel = 1",
-                        "area_Selwerd = 1",
-                        "area_tuinbouwbuurt = 1",
-                        "area_oranjewijk = 1"
-                    ]
-                }
+                    "description": "Oosterportbuurt",
+                    "events": [ "area_oosterportbuurt = 1" ]
+                }                
             ]
-        }
+        }        
     ]
 }
