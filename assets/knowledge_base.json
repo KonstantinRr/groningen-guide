@@ -40,6 +40,7 @@
                 "restaurant AND (business OR leisure) AND (romantic OR bar) AND average AND area_citycenter AND gang AND dinner AND lunch"
             ]
         },
+        {
             "name": "Stee in stad",
             "description": " This is a great place for staying in with your family, a perfect location since you're close to the city center and the are is quiet and nice, all at the best price",
             "image": "assets/images/steeInStad.jpg",
@@ -152,84 +153,84 @@
             "name": "Hanasato",
             "description": " ",
             "conditions": [
-                "restaurant AND romantic AND fine AND area_citycenter AND Asian And Japanese AND dinner"
+                "restaurant AND romantic AND fine AND area_citycenter AND Asian AND Japanese AND dinner"
             ]
         },
         {
             "name": "De Pijp Wine & Dine",
             "description": " ",
             "conditions": [
-                "restaurant AND romantic AND fine AND area_citycenter AND European And French AND dinner"
+                "restaurant AND romantic AND fine AND area_citycenter AND European AND French AND dinner"
             ]
         },
         {
             "name": "Vive la Vie",
             "description": " ",
             "conditions": [
-                "restaurant AND romantic AND fine AND area_citycenter AND Dutch And French AND dinner"
+                "restaurant AND romantic AND fine AND area_citycenter AND Dutch AND French AND dinner"
             ]
         },
         {
             "name": "Voila",
             "description": " ",
             "conditions": [
-                "restaurant AND romantic AND fine AND area_citycenter AND Dutch And French AND dinner"
+                "restaurant AND romantic AND fine AND area_citycenter AND Dutch AND French AND dinner"
             ]
         },
         {
             "name": "Restaurant Nassau",
             "description": " ",
             "conditions": [
-                "restaurant AND romantic AND fine AND area_citycenter AND Dutch And French AND dinner"
+                "restaurant AND romantic AND fine AND area_citycenter AND Dutch AND French AND dinner"
             ]
         },
         {
             "name": "Fatoush",
             "description": " ",
             "conditions": [
-                "restaurant AND romantic AND fine AND area_citycenter AND Dutch And French AND dinner AND lunch"
+                "restaurant AND romantic AND fine AND area_citycenter AND Dutch AND French AND dinner AND lunch"
             ]
         },
         {
             "name": "Konbu Streetfood",
             "description": " ",
             "conditions": [
-                "restaurant AND romantic AND cheap AND area_citycenter AND Asian And Vietnamese AND dinner AND lunch"
+                "restaurant AND romantic AND cheap AND area_citycenter AND Asian AND Vietnamese AND dinner AND lunch"
             ]
         },
         {
             "name": "Tiantianle",
             "description": " ",
             "conditions": [
-                "restaurant AND gang AND cheap AND area_citycenter AND Asian And Chinese AND American AND Chilean AND dinner AND lunch"
+                "restaurant AND gang AND cheap AND area_citycenter AND Asian AND Chinese AND American AND Chilean AND dinner AND lunch"
             ]
         },
         {
             "name": "Chaplin's Pub",
             "description": " ",
             "conditions": [
-                "restaurant AND gang AND cheap AND area_citycenter AND bar AND American and US AND dinner AND lunch"
+                "restaurant AND gang AND cheap AND area_citycenter AND bar AND American AND US AND dinner AND lunch"
             ]
         },
         {
             "name": "Magoya",
             "description": " ",
             "conditions": [
-                "restaurant AND gang AND cheap AND area_citycenter AND Asian And Japanese AND dinner AND lunch"
+                "restaurant AND gang AND cheap AND area_citycenter AND Asian AND Japanese AND dinner AND lunch"
             ]
         },
         {
             "name": "De Pasta Fabriek",
             "description": " ",
             "conditions": [
-                "restaurant  AND (business or leisure)AND gang AND cheap AND area_citycenter AND Italian AND dinner AND lunch"
+                "restaurant  AND (business OR leisure)AND gang AND cheap AND area_citycenter AND Italian AND dinner AND lunch"
             ]
         },
         {
             "name": "Vapiano",
             "description": " ",
             "conditions": [
-                "restaurant  AND (business or leisure)AND gang AND cheap AND area_citycenter AND Italian AND dinner AND lunch"
+                "restaurant  AND (business OR leisure)AND gang AND cheap AND area_citycenter AND Italian AND dinner AND lunch"
             ]
         },
         {
@@ -243,7 +244,7 @@
             "name": "Starbucks",
             "description": " ",
             "conditions": [
-                "cafe AND AND studying leisure AND gang AND cheap AND area_citycenter AND coffee AND breakfast AND lunch"
+                "cafe AND studying AND leisure AND gang AND cheap AND area_citycenter AND coffee AND breakfast AND lunch"
             ]
         },
         {
@@ -271,7 +272,7 @@
             "name": "Black & Bloom",
             "description": " ",
             "conditions": [
-                "cafe AND (leisure or tourism) AND gang AND cheap AND area_citycenter AND coffee AND breakfast AND lunch"
+                "cafe AND (leisure OR tourism) AND gang AND cheap AND area_citycenter AND coffee AND breakfast AND lunch"
             ]
         },
         {
@@ -508,7 +509,7 @@
                 {
                     "description": "Vietnamese",
                     "events": [ "lang_vietnames = 1" ]
-                },
+                }
             ]
         },
         {
@@ -526,7 +527,7 @@
                     "description": "Vegan",
                     "events": [ "vegan = 1" ]
                 }
-            ],
+            ]
         },
         {
             "name": "What service preference do you have?",
@@ -612,6 +613,6 @@
                     ]
                 }
             ]
-        },
+        }
     ]
 }
