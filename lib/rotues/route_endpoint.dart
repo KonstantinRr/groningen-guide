@@ -1,6 +1,14 @@
+/// This project is build during the course Knowledge Technology Practical at the
+/// UNIVERSITY OF GRONINGEN (WBAI014-05).
+/// The project was build by:
+/// Konstantin Rolf (S3750558) k.rolf@student.rug.nl
+/// Nicholas Koundouros (S3726444) n.koundouros@student.rug.nl
+/// Livia Regus (S3354970): l.regus@student.rug.nl
+
 import 'package:flutter/material.dart';
 import 'package:groningen_guide/kl/kl_endpoint.dart';
 import 'package:groningen_guide/kl_engine.dart';
+import 'package:groningen_guide/widgets/widget_title.dart';
 import 'package:provider/provider.dart';
 
 class EndpointWidget extends StatelessWidget {
@@ -88,6 +96,7 @@ class RouteEndpoint extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: theme.appBarTheme.color,
+        title: const WidgetTitle(),
         leading: IconButton(
           icon: const Icon(Icons.arrow_back, color: Colors.black,),
           onPressed: () => Navigator.of(context).pop()

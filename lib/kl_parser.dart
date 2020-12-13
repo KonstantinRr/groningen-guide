@@ -186,19 +186,28 @@ List<Token> tokenize(String s) {
 /// The context model stores variable/value paris.
 class ContextModel {
   /// Stores the variable/value pairs
-  final model = <String, int> {};
+  Map<String, int> model;
   /// Whether to assume fails if a variable is non existent
   bool assumeFalse;
-  bool changed = true;
+  bool changed;
 
   /// Creates a new [ContextModel] that assumes missing variables as false
-  ContextModel({this.assumeFalse=true});
+  ContextModel({this.assumeFalse=true, Map<String, int> model, this.changed=true})
+    : model = model ?? { };
 
   Iterable<MapEntry<String, int>> get entries => model.entries;
 
   void clear() {
     model.clear();
     changed = true;
+  }
+
+  ContextModel snapshot() {
+    return ContextModel(
+      assumeFalse: assumeFalse,
+      changed: changed,
+      model: model.map((key, value) => MapEntry(key, value))
+    );
   }
 
   /// Sets a [value] for the given [variable]
@@ -232,6 +241,15 @@ class ContextModel {
     }
     return model[name];
   }
+
+  void info() {
+    print('ContextModel with ${model.length} entries');
+    for (var entry in model.entries)
+      print('   Entry ${entry.key}:${entry.value}');
+  }
+
+  @override
+  String toString() => 'ContextModel@${model.length}';
 }
 
 //// PARSING SEGMENT ////

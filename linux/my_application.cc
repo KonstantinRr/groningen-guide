@@ -7,6 +7,9 @@
 
 #include "flutter/generated_plugin_registrant.h"
 
+//#include <gdkmm/pixbuf.h>
+#include "turtle.xpm"
+
 struct _MyApplication {
   GtkApplication parent_instance;
   char** dart_entrypoint_arguments;
@@ -40,13 +43,20 @@ static void my_application_activate(GApplication* application) {
   if (use_header_bar) {
     GtkHeaderBar *header_bar = GTK_HEADER_BAR(gtk_header_bar_new());
     gtk_widget_show(GTK_WIDGET(header_bar));
-    gtk_header_bar_set_title(header_bar, "groningen_guide");
+    gtk_header_bar_set_title(header_bar, "Groningen Guide");
     gtk_header_bar_set_show_close_button(header_bar, TRUE);
     gtk_window_set_titlebar(window, GTK_WIDGET(header_bar));
   }
   else {
-    gtk_window_set_title(window, "groningen_guide");
+    gtk_window_set_title(window, "Groningen Guide");
   }
+
+  bool includeIcon = false; 
+  if (includeIcon) {
+    GdkPixbuf* logo = gdk_pixbuf_new_from_xpm_data(logoXPM);
+    gtk_window_set_icon(window, logo);
+  }
+
 
   gtk_window_set_default_size(window, 1280, 720);
   gtk_widget_show(GTK_WIDGET(window));

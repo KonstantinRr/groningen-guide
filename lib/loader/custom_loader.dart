@@ -1,5 +1,3 @@
-import 'dart:convert';
-
 /// This project is build during the course Knowledge Technology Practical at the
 /// UNIVERSITY OF GRONINGEN (WBAI014-05).
 /// The project was build by:
@@ -7,10 +5,11 @@ import 'dart:convert';
 /// Nicholas Koundouros (S3726444) n.koundouros@student.rug.nl
 /// Livia Regus (S3354970): l.regus@student.rug.nl
 
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:groningen_guide/kl_engine.dart';
 import 'package:provider/provider.dart';
-
 
 class CustomKnowledgeLoader extends StatefulWidget {
   const CustomKnowledgeLoader({Key key}) : super(key: key);
@@ -79,14 +78,22 @@ class CustomKnowledgeLoaderState extends State<CustomKnowledgeLoader> {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget> [
-                RaisedButton(
-                  child: Text('Load', style: theme.textTheme.button),
-                  onPressed: _load,
+                SizedBox(
+                  width: 80.0,
+                  child: RaisedButton(
+                    color: theme.primaryColor,
+                    child: Text('Load', style: theme.textTheme.button),
+                    onPressed: _load,
+                  ),
                 ),
                 const SizedBox(width: 10.0,),
-                RaisedButton(
-                  child: Text('Verify', style: theme.textTheme.button),
-                  onPressed: _verify,
+                SizedBox(
+                  width: 80.0,
+                  child: RaisedButton(
+                    color: theme.primaryColor,
+                    child: Text('Verify', style: theme.textTheme.button),
+                    onPressed: _verify,
+                  ),
                 )
               ]
             ),
