@@ -85,7 +85,7 @@ class MainScreen extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
                 Text('There is currently no question loaded!',
-                    style: theme.textTheme.headline6),
+                  style: theme.textTheme.headline6),
                 FlatButton(
                   child: Container(
                     width: 100.0,

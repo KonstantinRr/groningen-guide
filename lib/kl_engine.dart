@@ -207,6 +207,20 @@ class QuestionData extends ChangeNotifier {
 
   /// Returns the currently loaded answers
   List<bool> get currentAnswers => _current?.item2;
+
+  void info() {
+    for (var i = 0; i < previous.length; i++) {
+      print('    Previous at $i');
+      print('        Question ${previous[i].item1.name}');
+      print('        Answers ${previous[i].item2}');
+      print('        CM ${previous[i].item3}');
+    }
+  }
+
+  @override
+  String toString() {
+
+  }
 }
 
 class DebuggerProvider extends ChangeNotifier {

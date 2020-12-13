@@ -88,22 +88,25 @@ class QuestionWidgetState extends State<QuestionWidget> {
 
   Widget _buildOptions(BuildContext context) {
     var theme = Theme.of(context);
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.stretch,
-      children: enumerate(widget.question.item1.options).map((e) =>
-        FlatButton(
-          onPressed: () => widget.change(e.item1),
-          child: Container(
-            margin: const EdgeInsets.all(5),
-            decoration: BoxDecoration(
-              color: widget.question.item2[e.item1] ? theme.primaryColor : Colors.grey[300]
+    return Center(child: ConstrainedBox(
+      constraints: BoxConstraints(maxWidth: 700.0),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        children: enumerate(widget.question.item1.options).map((e) =>
+          FlatButton(
+            onPressed: () => widget.change(e.item1),
+            child: Container(
+              margin: const EdgeInsets.all(5),
+              decoration: BoxDecoration(
+                color: widget.question.item2[e.item1] ? theme.primaryColor : Colors.grey[300]
+              ),
+              height: 50.0,
+              alignment: Alignment.center,
+              child: Text(e.item2.description)
             ),
-            height: 50.0,
-            alignment: Alignment.center,
-            child: Text(e.item2.description)
-          ),
-        )
-      ).toList()
+          )
+        ).toList()
+      )),
     );
   }
 
@@ -124,6 +127,7 @@ class QuestionWidgetState extends State<QuestionWidget> {
                     width: constraints.maxWidth * 2 / 3, right: 0.0,
                     top: 0.0,
                     child: Card(
+                      elevation: 5.0,
                       child: Padding(
                         padding: const EdgeInsets.all(5.0),
                         child: _buildQuestion(context)
