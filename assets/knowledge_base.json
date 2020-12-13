@@ -3,10 +3,10 @@
     "endpoints": [
         {
             "name": "Prinsenhof Hotel",
-            "description": "Angel recommends you this is a 4-star boutique hotel in the heart of Groningen. Right in the shadows of the Martini Tower, it's beautiful garden will offer the best cultural experience, suitable for any purpose, especially for a romantic experience <3 ",
+            "description": "Angel recommends you this 4-star boutique hotel in the heart of Groningen. Right in the shadows of the Martini Tower, it's beautiful garden will offer the best cultural experience, suitable for any purpose, especially for a romantic experience <3 ",
             "image": "assets/images/prinsenhofHotel.jpg",
             "conditions": [
-                "hotel AND (business OR leisure) AND (cultural_experience OR private OR romantic OR area_citycenter) "
+                "hotel AND (business OR leisure) AND (cultural_experience OR private OR romantic OR area_citycenter) AND NOT cheap "
             ]
         },
         {
@@ -15,6 +15,14 @@
             "image": "",
             "conditions": [
                 "hotel AND (business OR leisure) AND (service_breakfast_included AND bar)  "
+            ]
+        },
+        {
+            "name": "Martini Hotel Groningen",
+            "description": "Wonderful memories are granted if you stay here, the sweet spot of Groningen ;) ",
+            "image": "",
+            "conditions": [
+                "hotel AND (business OR leisure) AND (cultural_experience OR private OR romantic OR area_citycenter) AND cheap "
             ]
         },
         {
@@ -184,7 +192,7 @@
         {
             "name": "What area would you prefer?",
             "description": "",
-            "image": null,
+            "image": "assets/images/groMap.jpg",
             "maxAnswers": 1,
             "conditions": [ "service"],
             "options": [
