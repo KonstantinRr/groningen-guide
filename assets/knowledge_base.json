@@ -80,8 +80,7 @@
         {
             "name": "What are you looking for?",
             "description": "",
-            "image": null,
-            "maxAnswers": 1,
+            "maxAnswers": 3,
             "conditions": [ ],
             "options": [
                 {
@@ -101,7 +100,6 @@
         {
             "name": "What is your main goal?",
             "description": "",
-            "image":null,
             "maxAnswers": 1,
             "conditions": [
                 "hotel OR cafe OR restaurant"

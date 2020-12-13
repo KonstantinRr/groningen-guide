@@ -6,6 +6,8 @@
 /// Livia Regus (S3354970): l.regus@student.rug.nl
 
 import 'package:flutter/material.dart';
+import 'package:groningen_guide/widgets/widget_title.dart';
+import 'package:groningen_guide/widgets/width_size_requirement.dart';
 
 class RouteUnknwon extends StatelessWidget {
   const RouteUnknwon({Key key}) : super(key: key);
@@ -15,16 +17,21 @@ class RouteUnknwon extends StatelessWidget {
     var theme = Theme.of(context);
     var name = ModalRoute.of(context).settings.name;
 
-    return Scaffold(
-      appBar: AppBar(
-        backgroundColor: theme.appBarTheme.color,
-        leading: IconButton(
-          icon: Icon(Icons.arrow_back),
-          onPressed: () => Navigator.of(context).pop(),
+    return WidgetSizeRequirement(
+      minHeight: 210.0,
+      minWidth: 270.0,
+      builder: (context, _) => Scaffold(
+        appBar: AppBar(
+          backgroundColor: theme.appBarTheme.color,
+          title: const WidgetTitle(),
+          leading: IconButton(
+            icon: Icon(Icons.arrow_back, color: theme.accentColor,),
+            onPressed: () => Navigator.of(context).pop(),
+          ),
         ),
-      ),
-      body: Center(
-        child: Text('Error 404: Could not find route $name'),
+        body: Center(
+          child: Text('Error 404: Could not find route $name'),
+        ),
       ),
     );
   }
