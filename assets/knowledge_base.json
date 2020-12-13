@@ -3,7 +3,7 @@
     "endpoints": [
         {
             "name": "Prinsenhof Hotel",
-            "description": "Angel recommends you this 4-star boutique hotel in the heart of Groningen. Right in the shadows of the Martini Tower, it's beautiful garden will offer the best cultural experience, suitable for any purpose, especially for a romantic experience <3 ",
+            "description": "Angel recommends you this 4-star boutique hotel in the heart of Groningen. Right in the shadows of the Martini Tower, its beautiful garden will offer the best cultural experience, suitable for any purpose, especially for a romantic experience <3 ",
             "image": "assets/images/prinsenhofHotel.jpg",
             "conditions": [
                 "hotel AND (business OR leisure) AND (cultural_experience OR private OR romantic OR area_citycenter) AND NOT cheap "
@@ -19,7 +19,7 @@
         },
         {
             "name": "Martini Hotel Groningen",
-            "description": "Wonderful memories are granted if you stay here, the sweet spot of Groningen ;) ",
+            "description": "Wonderful memories are granted if you stay here, the sweet spot of Groningen ",
             "image": "",
             "conditions": [
                 "hotel AND (business OR leisure) AND (cultural_experience OR private OR romantic OR area_citycenter) AND cheap "
@@ -36,14 +36,14 @@
         {
             "name": "The Student Hotel",
             "image": "assets/images/studentHotel",
-            "description": "Thsi si the best option for you, with everything you need + the chance of extending your stay for up to a couple of months at a good price. ",
+            "description": "This si the best option for you, with everything you need + the chance of extending your stay for up to a couple of months at a good price. ",
             "conditions": [
                 "hotel AND (business OR leisure) AND (service_long_stay AND (area_citycenter OR service_breakfast_included OR bar))"
             ]
         },
         {
             "name": "Stee in stad",
-            "description": " This is a great place for staying in with your family, a perfect location since you're close to the city center and the are is quiet and nice, all at the best price",
+            "description": " This is a great place for staying in with your family, a perfect location since you're close to the city center and the area is quiet and nice, all at the best price",
             "image": "assets/images/steeInStad.jpg",
             "conditions": [
                 "hotel AND  leisure  AND family AND average AND service_breakfast_included OR area_korrewegwijk"
