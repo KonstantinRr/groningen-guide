@@ -70,18 +70,24 @@ class ExpressionStorage {
       evaluateExpression(exp, model) != 0;
 
   /// Loads all expressons sotred at the knowledge ase.
-  ExpressionStorage(KlBase base) {
-    // generates the expressions for all questions
-    for (var q in base.questions) {
-      q.conditions.forEach((e) => insertExp(e));
-      q.options.forEach((option) {
-        option.events.forEach((event) => insertExp(event));
-      });
-    }
-    // generates the expressions for all rules
-    for (var rule in base.rules) {
-      rule.conditions.forEach((e) => insertExp(e));
-      rule.events.forEach((event) => insertExp(event));
+  ExpressionStorage(KlBase base, {bool aot=true}) {
+    if (aot) {
+      // generates the expressions for all questions
+      for (var q in base.questions) {
+        q.conditions.forEach((e) => insertExp(e));
+        q.options.forEach((option) {
+          option.events.forEach((event) => insertExp(event));
+        });
+      }
+      // generates the expressions for all rules
+      for (var rule in base.rules) {
+        rule.conditions.forEach((e) => insertExp(e));
+        rule.events.forEach((event) => insertExp(event));
+      }
+
+      for (var endpoint in base.endpoints) {
+        endpoint.conditions.forEach((e) => insertExp(e));
+      }
     }
   }
 
@@ -338,12 +344,14 @@ class KlEngine extends ChangeNotifier {
     try {
       // code that might throw
       var map = json.decode(string);
-      var nklBase = KlBaseProvider(KlBase.fromJson(map), this);
+      var nklBase = KlBaseProvider(
+        KlBase.fromJson(map), this);
       var nexpressionStorage = KlExpressionProvider(
         ExpressionStorage(nklBase.base), this);
       var ncontextModel = KlContextProvider(
         ContextModel(assumeFalse: true), this);
-      ncontextModel.model.loadDefaultVars(nexpressionStorage.storage.findVariables());
+      ncontextModel.model.loadDefaultVars(
+        nexpressionStorage.storage.findVariables());
       // assign new variables (cannot throw)
       klBaseProvider = nklBase;
       expressionProvider = nexpressionStorage;
