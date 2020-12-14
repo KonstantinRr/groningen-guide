@@ -400,19 +400,19 @@
             "options": [
                 {
                     "description": "Breakfast",
-                    "events": [ "breakfast = 1" ]
+                    "events": [ "breakfast = 1", "meal = 1" ]
                 },
                 {
                     "description": "Brunch",
-                    "events": [ "brunch = 1" ]
+                    "events": [ "brunch = 1", "meal = 1" ]
                 },
                 {
                     "description": "Lunch",
-                    "events": [ "lunch = 1" ]
+                    "events": [ "lunch = 1", "meal = 1" ]
                 },
                 {
                     "description": "Dinner",
-                    "events": [ "dinner = 1" ]
+                    "events": [ "dinner = 1", "meal = 1" ]
                 }
             ]
         },
@@ -421,12 +421,8 @@
             "description": "",
             "image": null,
             "maxAnswers": 7,
-            "conditions": [ ],
-            "options": [
-                {
-                    "description": "Dutch",
-                    "events": [ "region_dutch = 1", "cultural = 1"]
-                },
+            "conditions": [ "restaurant AND meal" ],
+            "options": [                
                 {
                     "description": "European",
                     "events": [ "region_european = 1" ]
@@ -434,10 +430,6 @@
                 {
                     "description": "Asian",
                     "events": [ "region_asian = 1" ]
-                },
-                {
-                    "description": "African",
-                    "events": [ "region_african = 1" ]
                 },
                 {
                     "description": "Middle Eastern",
@@ -459,7 +451,11 @@
             "image": null,
             "maxAnswers": 7,
             "conditions": [ "region_european" ],
-            "options": [
+            "options": [                
+                {
+                    "description": "Dutch",
+                    "events": [ "lang_dutch = 1", "cultural = 1" ]
+                },
                 {
                     "description": "French",
                     "events": [ "lang_french = 1" ]
@@ -473,20 +469,8 @@
                     "events": [ "lang_greek = 1" ]
                 },
                 {
-                    "description": "Irish",
-                    "events": [ "lang_irish = 1" ]
-                },
-                {
-                    "description": "Scandinavian",
-                    "events": [ "lang_scandinavian = 1" ]
-                },
-                {
                     "description": "Spanish",
                     "events": [ "lang_spanish = 1" ]
-                },
-                {
-                    "description": "British",
-                    "events": [ "lang_british = 1" ]
                 }
             ]
         },
@@ -587,7 +571,7 @@
         {
             "name": "What area would you prefer?",
             "description": "",
-            "image": null,
+            "image": "assets/images/groMap.jpg",
             "maxAnswers": 1,
             "conditions": [ "service"],
             "options": [
