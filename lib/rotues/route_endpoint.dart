@@ -75,18 +75,10 @@ class EndpointDialog extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var theme = Theme.of(context);
     return AlertDialog(
-      title: Container(
+      content: Container(
         width: 500, height: 300,
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: <Widget> [
-            Expanded(child: EndpointWidget(
-              endpoint: endpoint,
-            )),
-          ]
-        )
+        child: EndpointWidget(endpoint: endpoint),
       ),
       actions: [
         //FlatButton(
