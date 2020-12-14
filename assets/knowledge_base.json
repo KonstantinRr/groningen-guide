@@ -12,7 +12,7 @@
         {
             "name": "NH Hotel de Ville, Mercure, The Student Hotel",
             "description": "According to your requirements, Angel has found several suitable places. Opt for The Student Hotel or for the NH Hotel de Ville, if you'd like to be close to the city center or for Mercure for a more isolated option ",
-            "image": "",
+            "image": "assets/images/nhDeVille.jpg",
             "conditions": [
                 "hotel AND (business OR leisure) AND (service_breakfast_included AND bar)  "
             ]
@@ -20,7 +20,7 @@
         {
             "name": "Martini Hotel Groningen",
             "description": "Wonderful memories are granted if you stay here, the sweet spot of Groningen ;)",
-            "image": "",
+            "image": "assets/images/steeInStad.jpg",
             "conditions": [
                 "hotel AND (business OR leisure) AND (cultural_experience OR private OR romantic OR area_citycenter) AND cheap "
             ]
@@ -304,7 +304,6 @@
         {
             "name": "What are you looking for?",
             "description": "",
-            "image": "assets/images/logo.png",
             "maxAnswers": 3,
             "conditions": [ ],
             "options": [
@@ -325,7 +324,6 @@
         {
             "name": "What is your main goal?",
             "description": "",
-            "image": "assets/images/logo.png",
             "maxAnswers": 1,
             "conditions": [
                 "hotel OR cafe OR restaurant"
@@ -344,7 +342,6 @@
         {
             "name": "What do you have in mind?",
             "description": "",
-            "image": null,
             "maxAnswers": 1,
             "conditions": ["money" ],
             "options": [
@@ -373,7 +370,6 @@
         {
             "name": "How much are you willing to spend?",
             "description": "",
-            "image": null,
             "maxAnswers": 1,
             "conditions": [ "goal"],
             "options": [
@@ -394,7 +390,6 @@
         {
             "name": "What kind of meal would you like?",
             "description": "",
-            "image": null,
             "maxAnswers": 1,
             "conditions": [ ],
             "options": [
@@ -419,7 +414,6 @@
         {
             "name": "What type of cuisine are you looking for?",
             "description": "",
-            "image": null,
             "maxAnswers": 7,
             "conditions": [ "restaurant AND meal" ],
             "options": [                
@@ -448,7 +442,6 @@
         {
             "name": "You have chosen European cuisine",
             "description": "please, specify",
-            "image": null,
             "maxAnswers": 7,
             "conditions": [ "region_european" ],
             "options": [                
@@ -477,7 +470,6 @@
         {
             "name": "You have chosen Asian cuisine",
             "description": "please, specify",
-            "image": null,
             "maxAnswers": 6,
             "conditions": [ "region_asian" ],
             "options": [
@@ -507,7 +499,6 @@
         {
             "name": "Do you have any dietary restrictions?",
             "description": "",
-            "image": null,
             "maxAnswers": 1,
             "conditions": [ ],
             "options": [
@@ -524,7 +515,6 @@
         {
             "name": "What service preference do you have?",
             "description": "",
-            "image": null,
             "maxAnswers": 2,
             "conditions": [ "money"],
             "options": [              
@@ -546,7 +536,6 @@
         {
             "name": "You chose Cafes",
             "description": "please specify",
-            "image": null,
             "maxAnswers": 3,
             "conditions": [ "cafe" ],
             "options": [

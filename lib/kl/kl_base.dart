@@ -32,6 +32,7 @@ class KlBase extends MapObject {
   factory KlBase.fromJson(dynamic map) => KlBase()..read(map);
 
   /// Reads the knowledge base object using a JSON deserialized object
+  @override
   void read(dynamic map) {
     assertType<Map<String, dynamic>>(map);
     values = assertTypeGet<List>(map, 'values').map((e) => KlVariable.fromJson(e)).toList();
@@ -41,10 +42,16 @@ class KlBase extends MapObject {
   }
 
   /// Serializes this knowledge base to a map object
+  @override
   Map<String, dynamic> toJson() => {
     'values': values.map((e) => e.toJson()).toList(),
     'rules': rules.map((e) => e.toJson()).toList(),
     'questions': questions.map((e) => e.toJson()).toList(),
     'endpoints': endpoints.map((e) => e.toJson()).toList()
   };
+
+  @override
+  String toString() => 'KlBase['
+    'values:${values.length},rules:${rules.length},'
+    'questions:${questions.length},endpoint:${endpoints.length}]';
 }
