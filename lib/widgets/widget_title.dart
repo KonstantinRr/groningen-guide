@@ -7,6 +7,6 @@ class WidgetTitle extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Text('Guide');
+    return Text('Angel\'s Groningen Guide');
   }
 }

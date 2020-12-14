@@ -67,7 +67,7 @@ class StudyGuide extends StatelessWidget {
     return EngineSession(
       child: QuestionSession(
         child: MaterialApp(
-          title: 'Groningen Guide',
+          title: 'Angel\'s Groningen Guide',
           initialRoute: 'splash',
           onGenerateRoute: onGenerateRoute,
           onUnknownRoute: onGenerateUnknownRoute,
