@@ -3,18 +3,26 @@
     "endpoints": [
         {
             "name": "Prinsenhof Hotel",
-            "description": "Angel recommends you this is a 4-star boutique hotel in the heart of Groningen. Right in the shadows of the Martini Tower, it's beautiful garden will offer the best cultural experience, suitable for any purpose, especially for a romantic experience <3 ",
+            "description": "Angel recommends you this 4-star boutique hotel in the heart of Groningen. Right in the shadows of the Martini Tower, its beautiful garden will offer the best cultural experience, suitable for any purpose, especially for a romantic experience <3 ",
             "image": "assets/images/prinsenhofHotel.jpg",
             "conditions": [
-                "hotel AND (business OR leisure) AND (cultural_experience OR private OR romantic OR area_citycenter) "
+                "hotel AND (business OR leisure) AND (cultural_experience OR private OR romantic OR area_citycenter) AND NOT cheap "
             ]
         },
         {
             "name": "NH Hotel de Ville, Mercure, The Student Hotel",
-            "description": "According to your requirements, Angel has found several suitable places. Opt for The Student Hotel or for the NH Hotel de Ville, if you'd like to be close to the city center or for Mercure for a more isolated option ;) ",
+            "description": "According to your requirements, Angel has found several suitable places. Opt for The Student Hotel or for the NH Hotel de Ville, if you'd like to be close to the city center or for Mercure for a more isolated option ",
             "image": "",
             "conditions": [
                 "hotel AND (business OR leisure) AND (service_breakfast_included AND bar)  "
+            ]
+        },
+        {
+            "name": "Martini Hotel Groningen",
+            "description": "Wonderful memories are granted if you stay here, the sweet spot of Groningen ;)",
+            "image": "",
+            "conditions": [
+                "hotel AND (business OR leisure) AND (cultural_experience OR private OR romantic OR area_citycenter) AND cheap "
             ]
         },
         {
@@ -28,21 +36,14 @@
         {
             "name": "The Student Hotel",
             "image": "assets/images/studentHotel",
-            "description": "Thsi si the best option for you, with everything you need + the chance of extending your stay for up to a couple of months at a good price. ",
+            "description": "This si the best option for you, with everything you need + the chance of extending your stay for up to a couple of months at a good price. ",
             "conditions": [
                 "hotel AND (business OR leisure) AND (service_long_stay AND (area_citycenter OR service_breakfast_included OR bar))"
             ]
         },
         {
-            "name": "Mr Mofongo",
-            "description": " ",
-            "conditions": [
-                "restaurant AND (business OR leisure) AND (romantic OR bar) AND average AND area_citycenter AND gang AND dinner AND lunch"
-            ]
-        },
-        {
             "name": "Stee in stad",
-            "description": " This is a great place for staying in with your family, a perfect location since you're close to the city center and the are is quiet and nice, all at the best price",
+            "description": " This is a great place for staying in with your family, a perfect location since you're close to the city center and the area is quiet and nice, all at the best price",
             "image": "assets/images/steeInStad.jpg",
             "conditions": [
                 "hotel AND  leisure  AND family AND average AND service_breakfast_included OR area_korrewegwijk"
@@ -69,7 +70,14 @@
             "description": "I know you're on a budget, but trust me, this place will make your family feel like you've had the best vacation ever! Cosy rooms, your own kitchen and a friendly neighbourhood, what else is there to wish for? ",
             "image": "assets/images/theManor.png",
             "conditions": [
-                "hotel AND leisure AND (area_oosterportbuurt OR (family AND cheap))"
+                "hotel AND leisure AND (area_oosterportbuurt OR (family AND cheap)) "
+            ]
+        },
+        {
+            "name": "Mr Mofongo",
+            "description": " ",
+            "conditions": [
+                "restaurant AND (business OR leisure) AND (romantic OR bar) AND average AND area_citycenter AND gang AND dinner AND lunch"
             ]
         },
         {
