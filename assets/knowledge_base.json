@@ -6,7 +6,7 @@
             "description": "Angel recommends you this 4-star boutique hotel in the heart of Groningen. Right in the shadows of the Martini Tower, its beautiful garden will offer the best cultural experience, suitable for any purpose, especially for a romantic experience <3 ",
             "image": "assets/images/prinsenhofHotel.jpg",
             "conditions": [
-                "hotel AND (business OR leisure) AND (cultural_experience OR private OR romantic OR area_citycenter) AND NOT cheap "
+                "hotel AND (business OR leisure) AND (cultural OR private OR romantic OR area_citycenter) AND NOT cheap "
             ]
         },
         {
@@ -22,7 +22,7 @@
             "description": "Wonderful memories are granted if you stay here, the sweet spot of Groningen ;)",
             "image": "assets/images/steeInStad.jpg",
             "conditions": [
-                "hotel AND (business OR leisure) AND (cultural_experience OR private OR romantic OR area_citycenter) AND cheap "
+                "hotel AND (business OR leisure) AND (cultural OR private OR romantic OR area_citycenter) AND cheap "
             ]
         },
         {
@@ -46,7 +46,7 @@
             "description": " This is a great place for staying in with your family, a perfect location since you're close to the city center and the area is quiet and nice, all at the best price",
             "image": "assets/images/steeInStad.jpg",
             "conditions": [
-                "hotel AND  leisure  AND family AND average AND service_breakfast_included OR area_korrewegwijk"
+                "hotel AND leisure AND family AND average AND service_breakfast_included OR area_korrewegwijk"
             ]
         },
         {
@@ -54,7 +54,7 @@
             "description": "This is a great place for you and your family if you want to stay in the city center at the best price",
             "image": "assets/images/cityHotel.jpg",
             "conditions": [
-                "hotel AND  leisure  AND area_citycenter AND average AND service_breakfast_included AND family"
+                "hotel AND leisure AND area_citycenter AND average AND service_breakfast_included AND family"
             ]
         },
         {
