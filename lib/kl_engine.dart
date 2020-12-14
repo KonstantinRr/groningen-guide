@@ -84,7 +84,7 @@ class ExpressionStorage {
         rule.conditions.forEach((e) => insertExp(e));
         rule.events.forEach((event) => insertExp(event));
       }
-
+      // generates the expressions for all endpoints
       for (var endpoint in base.endpoints) {
         endpoint.conditions.forEach((e) => insertExp(e));
       }
@@ -332,7 +332,7 @@ class KlEngine extends ChangeNotifier {
   /// Creates an empty knowledge base with default initialized members
   KlEngine() {
     klBaseProvider = KlBaseProvider(
-      KlBase(values: [], questions: [], rules: []), this);
+      KlBase(values: [], questions: [], rules: [], endpoints: []), this);
     expressionProvider = KlExpressionProvider(
       ExpressionStorage(klBaseProvider.base), this);
     contextProvider = KlContextProvider(
