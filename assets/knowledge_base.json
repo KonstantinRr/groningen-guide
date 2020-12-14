@@ -130,13 +130,6 @@
             ]
         },
         {
-            "name": "Da Vinci",
-            "description": " ",
-            "conditions": [
-                "restaurant AND (business OR leisure) AND romantic AND average AND area_citycenter AND Italian AND dinner AND lunch"
-            ]
-        },
-        {
             "name": "Ouzerie De Olijfboom",
             "description": " ",
             "conditions": [
@@ -304,7 +297,7 @@
         {
             "name": "What are you looking for?",
             "description": "",
-            "maxAnswers": 3,
+            "maxAnswers": 1,
             "conditions": [ ],
             "options": [
                 {
