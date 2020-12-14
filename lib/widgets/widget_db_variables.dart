@@ -17,7 +17,7 @@ class WidgetVariables extends StatefulWidget {
 }
 
 class WidgetVariablesState extends State<WidgetVariables> {
-  bool showFalse = true;
+  bool showFalse = false;
 
   @override
   Widget build(BuildContext context) {

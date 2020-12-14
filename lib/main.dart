@@ -65,17 +65,19 @@ class StudyGuide extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return EngineSession(
-      child: MaterialApp(
-        title: 'Groningen Guide',
-        initialRoute: 'splash',
-        onGenerateRoute: onGenerateRoute,
-        onUnknownRoute: onGenerateUnknownRoute,
-        debugShowCheckedModeBanner: false,
-        theme: ThemeData(
-          primaryColor: Colors.lightBlue[300],
-          accentColor: Colors.lightBlueAccent[300],
-          appBarTheme: AppBarTheme(
-            color: Colors.grey[100]
+      child: QuestionSession(
+        child: MaterialApp(
+          title: 'Angel\'s Groningen Guide',
+          initialRoute: 'splash',
+          onGenerateRoute: onGenerateRoute,
+          onUnknownRoute: onGenerateUnknownRoute,
+          debugShowCheckedModeBanner: false,
+          theme: ThemeData(
+            primaryColor: Colors.lightBlue[300],
+            accentColor: Colors.lightBlueAccent[300],
+            appBarTheme: AppBarTheme(
+              color: Colors.grey[100]
+            ),
           ),
         ),
       )

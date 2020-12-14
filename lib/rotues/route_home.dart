@@ -186,16 +186,14 @@ class RouteHome extends StatelessWidget {
   Widget build(BuildContext context) {
     return KnowledgeBaseLoader(
       onLoad: (context) => const CircularProgressIndicator(),
-      onDone: (context) => QuestionSession(
-        child: Consumer<DebuggerProvider>(
-          builder: (context, prov, _) => WidgetSizeRequirement(
-            minHeight: 200, minWidth: 300,
-            builder: (context, constraints) {
-              return constraints.maxWidth <= 800.0
-                ? buildConstrained(context, prov)
-                : buildFull(context, prov);
-            }
-          )
+      onDone: (context) => Consumer<DebuggerProvider>(
+        builder: (context, prov, _) => WidgetSizeRequirement(
+          minHeight: 200, minWidth: 300,
+          builder: (context, constraints) {
+            return constraints.maxWidth <= 800.0
+              ? buildConstrained(context, prov)
+              : buildFull(context, prov);
+          }
         )
       ),
       onErr: (context, err) =>

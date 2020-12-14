@@ -6,13 +6,13 @@
             "description": "Angel recommends you this 4-star boutique hotel in the heart of Groningen. Right in the shadows of the Martini Tower, its beautiful garden will offer the best cultural experience, suitable for any purpose, especially for a romantic experience <3 ",
             "image": "assets/images/prinsenhofHotel.jpg",
             "conditions": [
-                "hotel AND (business OR leisure) AND (cultural_experience OR private OR romantic OR area_citycenter) AND NOT cheap "
+                "hotel AND (business OR leisure) AND (cultural OR private OR romantic OR area_citycenter) AND NOT cheap "
             ]
         },
         {
             "name": "NH Hotel de Ville, Mercure, The Student Hotel",
-            "description": "According to your requirements, Angel has found several suitable places. Opt for The Student Hotel or for the NH Hotel de Ville, if you'd like to be close to the city center or for Mercure for a more isolated option ;) ",
-            "image": "",
+            "description": "According to your requirements, Angel has found several suitable places. Opt for The Student Hotel or for the NH Hotel de Ville, if you'd like to be close to the city center or for Mercure for a more isolated option ",
+            "image": "assets/images/nhDeVille.jpg",
             "conditions": [
                 "hotel AND (business OR leisure) AND (service_breakfast_included AND bar)  "
             ]
@@ -46,7 +46,7 @@
             "description": " This is a great place for staying in with your family, a perfect location since you're close to the city center and the area is quiet and nice, all at the best price",
             "image": "assets/images/steeInStad.jpg",
             "conditions": [
-                "hotel AND  leisure  AND family AND average AND service_breakfast_included OR area_korrewegwijk"
+                "hotel AND leisure AND family AND average AND service_breakfast_included OR area_korrewegwijk"
             ]
         },
         {
@@ -54,7 +54,7 @@
             "description": "This is a great place for you and your family if you want to stay in the city center at the best price",
             "image": "assets/images/cityHotel.jpg",
             "conditions": [
-                "hotel AND  leisure  AND area_citycenter AND average AND service_breakfast_included AND family"
+                "hotel AND leisure AND area_citycenter AND average AND service_breakfast_included AND family"
             ]
         },
         {
@@ -72,6 +72,230 @@
             "conditions": [
                 "hotel AND leisure AND (area_oosterportbuurt OR (family AND cheap)) "
             ]
+        },
+        {
+            "name": "Mr Mofongo",
+            "description": " ",
+            "conditions": [
+                "restaurant AND (business OR leisure) AND (romantic OR bar) AND average AND area_citycenter AND gang AND dinner AND lunch"
+            ]
+        },
+        {
+            "name": "Mr Smith's",
+            "description": " ",
+            "conditions": [
+                "restaurant AND (business OR leisure) AND (romantic OR bar) AND average AND gang AND dinner AND lunch"
+            ]
+        },
+        {
+            "name": "Bronco",
+            "description": " ",
+            "conditions": [
+                "restaurant AND leisure AND  bar AND average AND area_citycenter AND gang AND America AND US AND dinner AND lunch"
+            ]
+        },
+        {
+            "name": "De Betere Tijden",
+            "description": " ",
+            "conditions": [
+                "restaurant AND (business OR leisure) AND romantic AND average AND area_citycenter AND Dutch AND dinner AND lunch"
+            ]
+        },
+        {
+            "name": "De Kleine Heerlijkheid",
+            "description": " ",
+            "conditions": [
+                "restaurant AND (business OR leisure) AND romantic AND average AND area_citycenter AND Dutch AND dinner AND lunch"
+            ]
+        },
+        {
+            "name": "Cho Fah",
+            "description": " ",
+            "conditions": [
+                "restaurant AND (business OR leisure) AND average AND area_citycenter AND Asian AND Thai AND gang AND dinner AND lunch"
+            ]
+        },
+        {
+            "name": "Gustatio",
+            "description": " ",
+            "conditions": [
+                "restaurant AND (business OR leisure) AND romantic AND average AND area_citycenter AND Italian AND dinner AND lunch"
+            ]
+        },
+        {
+            "name": "Da Vinci",
+            "description": " ",
+            "conditions": [
+                "restaurant AND (business OR leisure) AND romantic AND average AND area_citycenter AND Italian AND dinner AND lunch"
+            ]
+        },
+        {
+            "name": "Da Vinci",
+            "description": " ",
+            "conditions": [
+                "restaurant AND (business OR leisure) AND romantic AND average AND area_citycenter AND Italian AND dinner AND lunch"
+            ]
+        },
+        {
+            "name": "Ouzerie De Olijfboom",
+            "description": " ",
+            "conditions": [
+                "restaurant AND (business OR leisure) AND gang AND average AND area_citycenter AND Greek AND dinner AND lunch"
+            ]
+        },
+        {
+            "name": "Thai Jasmine",
+            "description": " ",
+            "conditions": [
+                "restaurant AND (business OR leisure) AND gang AND average AND area_citycenter AND Asian AND Thai AND dinner AND lunch"
+            ]
+        },
+        {
+            "name": "Imono",
+            "description": " ",
+            "conditions": [
+                "restaurant AND (business OR leisure) AND gang AND romantic AND average AND area_citycenter AND Asian AND Japanese AND dinner"
+            ]
+        },
+        {
+            "name": "Hanasato",
+            "description": " ",
+            "conditions": [
+                "restaurant AND romantic AND fine AND area_citycenter AND Asian AND Japanese AND dinner"
+            ]
+        },
+        {
+            "name": "De Pijp Wine & Dine",
+            "description": " ",
+            "conditions": [
+                "restaurant AND romantic AND fine AND area_citycenter AND European AND French AND dinner"
+            ]
+        },
+        {
+            "name": "Vive la Vie",
+            "description": " ",
+            "conditions": [
+                "restaurant AND romantic AND fine AND area_citycenter AND Dutch AND French AND dinner"
+            ]
+        },
+        {
+            "name": "Voila",
+            "description": " ",
+            "conditions": [
+                "restaurant AND romantic AND fine AND area_citycenter AND Dutch AND French AND dinner"
+            ]
+        },
+        {
+            "name": "Restaurant Nassau",
+            "description": " ",
+            "conditions": [
+                "restaurant AND romantic AND fine AND area_citycenter AND Dutch AND French AND dinner"
+            ]
+        },
+        {
+            "name": "Fatoush",
+            "description": " ",
+            "conditions": [
+                "restaurant AND romantic AND fine AND area_citycenter AND Dutch AND French AND dinner AND lunch"
+            ]
+        },
+        {
+            "name": "Konbu Streetfood",
+            "description": " ",
+            "conditions": [
+                "restaurant AND romantic AND cheap AND area_citycenter AND Asian AND Vietnamese AND dinner AND lunch"
+            ]
+        },
+        {
+            "name": "Tiantianle",
+            "description": " ",
+            "conditions": [
+                "restaurant AND gang AND cheap AND area_citycenter AND Asian AND Chinese AND American AND Chilean AND dinner AND lunch"
+            ]
+        },
+        {
+            "name": "Chaplin's Pub",
+            "description": " ",
+            "conditions": [
+                "restaurant AND gang AND cheap AND area_citycenter AND bar AND American AND US AND dinner AND lunch"
+            ]
+        },
+        {
+            "name": "Magoya",
+            "description": " ",
+            "conditions": [
+                "restaurant AND gang AND cheap AND area_citycenter AND Asian AND Japanese AND dinner AND lunch"
+            ]
+        },
+        {
+            "name": "De Pasta Fabriek",
+            "description": " ",
+            "conditions": [
+                "restaurant  AND (business OR leisure)AND gang AND cheap AND area_citycenter AND Italian AND dinner AND lunch"
+            ]
+        },
+        {
+            "name": "Vapiano",
+            "description": " ",
+            "conditions": [
+                "restaurant  AND (business OR leisure)AND gang AND cheap AND area_citycenter AND Italian AND dinner AND lunch"
+            ]
+        },
+        {
+            "name": "Vapiano",
+            "description": " ",
+            "conditions": [
+                "restaurant AND gang AND cheap AND area_citycenter AND Vegan AND dinner AND lunch"
+            ]
+        },
+        {
+            "name": "Starbucks",
+            "description": " ",
+            "conditions": [
+                "cafe AND studying AND leisure AND gang AND cheap AND area_citycenter AND coffee AND breakfast AND lunch"
+            ]
+        },
+        {
+            "name": "Doppio Espresso",
+            "description": " ",
+            "conditions": [
+                "cafe AND leisure AND gang AND cheap AND area_citycenter AND coffee AND breakfast AND lunch"
+            ]
+        },
+        {
+            "name": "Coffee Company",
+            "description": " ",
+            "conditions": [
+                "cafe AND leisure AND gang AND cheap AND area_citycenter AND coffee AND breakfast AND lunch"
+            ]
+        },
+        {
+            "name": "Black & Bloom",
+            "description": " ",
+            "conditions": [
+                "cafe AND leisure AND gang AND cheap AND area_citycenter AND coffee AND breakfast AND lunch"
+            ]
+        },
+        {
+            "name": "Black & Bloom",
+            "description": " ",
+            "conditions": [
+                "cafe AND (leisure OR tourism) AND gang AND cheap AND area_citycenter AND coffee AND breakfast AND lunch"
+            ]
+        },
+        {
+            "name": "Chocolate Company",
+            "description": " ",
+            "conditions": [
+                "cafe AND leisure AND gang AND cheap AND area_citycenter AND hot_chocolate AND breakfast AND lunch"
+            ]
+        },
+        {
+            "name": "Smooth Brothers",
+            "description": " ",
+            "conditions": [
+                "cafe AND leisure AND gang AND cheap AND area_citycenter AND smoothies AND breakfast AND lunch"
+            ]
         }
     ],
     
@@ -84,11 +308,11 @@
             "conditions": [ ],
             "options": [
                 {
-                    "description": "Cafes / Bars and Pubs",
+                    "description": "Cafes",
                     "events": [ "cafe = 1" ]
                 },
                 {
-                    "description": "Restaurants",
+                    "description": "Restaurants/ Bars and Pubs",
                     "events": [ "restaurant = 1" ]
                 },
                 {
@@ -118,7 +342,6 @@
         {
             "name": "What do you have in mind?",
             "description": "",
-            "image": null,
             "maxAnswers": 1,
             "conditions": ["money" ],
             "options": [
@@ -147,7 +370,6 @@
         {
             "name": "How much are you willing to spend?",
             "description": "",
-            "image": null,
             "maxAnswers": 1,
             "conditions": [ "goal"],
             "options": [
@@ -166,9 +388,133 @@
             ]
         },
         {
+            "name": "What kind of meal would you like?",
+            "description": "",
+            "maxAnswers": 1,
+            "conditions": [ ],
+            "options": [
+                {
+                    "description": "Breakfast",
+                    "events": [ "breakfast = 1", "meal = 1" ]
+                },
+                {
+                    "description": "Brunch",
+                    "events": [ "brunch = 1", "meal = 1" ]
+                },
+                {
+                    "description": "Lunch",
+                    "events": [ "lunch = 1", "meal = 1" ]
+                },
+                {
+                    "description": "Dinner",
+                    "events": [ "dinner = 1", "meal = 1" ]
+                }
+            ]
+        },
+        {
+            "name": "What type of cuisine are you looking for?",
+            "description": "",
+            "maxAnswers": 7,
+            "conditions": [ "restaurant AND meal" ],
+            "options": [                
+                {
+                    "description": "European",
+                    "events": [ "region_european = 1" ]
+                },
+                {
+                    "description": "Asian",
+                    "events": [ "region_asian = 1" ]
+                },
+                {
+                    "description": "Middle Eastern",
+                    "events": [ "region_mideast = 1"]
+                },
+                {
+                    "description": "Australian",
+                    "events": [ "region_australian = 1" ]
+                },
+                {
+                    "description": "American",
+                    "events": [ "region_american = 1" ]
+                }
+            ]
+        },
+        {
+            "name": "You have chosen European cuisine",
+            "description": "please, specify",
+            "maxAnswers": 7,
+            "conditions": [ "region_european" ],
+            "options": [                
+                {
+                    "description": "Dutch",
+                    "events": [ "lang_dutch = 1", "cultural = 1" ]
+                },
+                {
+                    "description": "French",
+                    "events": [ "lang_french = 1" ]
+                },
+                {
+                    "description": "Italian",
+                    "events": [ "lang_italian" ]
+                },
+                {
+                    "description": "Greek",
+                    "events": [ "lang_greek = 1" ]
+                },
+                {
+                    "description": "Spanish",
+                    "events": [ "lang_spanish = 1" ]
+                }
+            ]
+        },
+        {
+            "name": "You have chosen Asian cuisine",
+            "description": "please, specify",
+            "maxAnswers": 6,
+            "conditions": [ "region_asian" ],
+            "options": [
+                {
+                    "description": "Indian",
+                    "events": [ "lang_indian = 1" ]
+                },
+                {
+                    "description": "Thai",
+                    "events": [ "lang_thai = 1" ]
+                },
+
+                {
+                    "description": "Japanese",
+                    "events": [ "lang_japanese = 1" ]
+                },
+                {
+                    "description": "Chinese",
+                    "events": [ "lang_chinese = 1" ]
+                },
+                {
+                    "description": "Vietnamese",
+                    "events": [ "lang_vietnames = 1" ]
+                }
+            ]
+        },
+        {
+            "name": "Do you have any dietary restrictions?",
+            "description": "",
+            "maxAnswers": 1,
+            "conditions": [ ],
+            "options": [
+                {
+                    "description": "Vegetarian",
+                    "events": [ "vegetarian = 1" ]
+                },
+                {
+                    "description": "Vegan",
+                    "events": [ "vegan = 1" ]
+                }
+            ]
+        },
+        {
             "name": "What service preference do you have?",
             "description": "",
-            "image": null,
             "maxAnswers": 2,
             "conditions": [ "money"],
             "options": [              
@@ -184,6 +530,30 @@
                     "exclusive": true,
                     "description": "No preference",
                     "events": ["service = 1" ]
+                }
+            ]
+        },
+        {
+            "name": "You chose Cafes",
+            "description": "please specify",
+            "maxAnswers": 3,
+            "conditions": [ "cafe" ],
+            "options": [
+                {
+                    "description": "Hot Chocolate",
+                    "events": [ "hot_chocolate = 1" ]
+                },
+                {
+                    "description": "Smoothies",
+                    "events": [ "smoothies = 1" ]
+                },
+                {
+                    "description": "Coffee",
+                    "events": [ "coffee = 1" ]
+                },
+                {
+                    "description": "Studying",
+                    "events": [ "studying = 1" ]
                 }
             ]
         },
@@ -211,10 +581,19 @@
                     "events": [ "area_rivierenbuurt = 1" ]
                 },
                 {
-                    "description": "Oosterportbuurt",
-                    "events": [ "area_oosterportbuurt = 1" ]
-                }                
+                    "description": "Oosterparkwijk",
+                    "events": [ "area_oosterparkwijk = 1" ]
+                },
+                {
+                    "description": "Paddepoel / Selwerd / Tuinbouw Buurt / Oranjewijk",
+                    "events": [
+                        "area_paddepoel = 1",
+                        "area_Selwerd = 1",
+                        "area_tuinbouwbuurt = 1",
+                        "area_oranjewijk = 1"
+                    ]
+                }
             ]
-        }        
+        }
     ]
 }
