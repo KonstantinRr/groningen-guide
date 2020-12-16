@@ -1,5 +1,17 @@
 {
     "values": [ ],
+    "rules": [
+        {
+            "name": "businessTrip",
+            "description": " ",
+            "conditions": [
+                "hotel AND business"
+            ],
+            "events" : [
+                "isBusinessTrip = 1"
+            ]
+        }
+    ],
     "endpoints": [
         {
             "name": "Prinsenhof Hotel",
@@ -291,13 +303,11 @@
             ]
         }
     ],
-    
-    "rules": [ ],
     "questions": [
         {
             "name": "What are you looking for?",
             "description": "",
-            "maxAnswers": 1,
+            "maxAnswers": 2,
             "conditions": [ ],
             "options": [
                 {
