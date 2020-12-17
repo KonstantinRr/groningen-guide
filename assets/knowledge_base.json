@@ -30,11 +30,19 @@
             ]
         },
         {
+            "name": "Klipper Zwadde Boat Hotel",
+            "description": " Staying in a boat hotel! I bet you've never thought about that, huh? Angel highly suggests this for a unique experience ;) ",
+            "image": "assets/images/KlipperZwaddeboatHotel.jpg",
+            "conditions": [
+                "hotel AND  leisure AND cultural AND average   "
+            ]
+        },
+        {
             "name": "Martini Hotel Groningen",
             "description": "Wonderful memories are granted if you stay here, the sweet spot of Groningen ",
             "image": "",
             "conditions": [
-                "hotel AND (business OR leisure) AND (cultural_experience OR private OR romantic OR area_citycenter) AND cheap "
+                "hotel AND (business OR leisure) AND (cultural OR private OR romantic OR area_citycenter) AND cheap "
             ]
         },
         {
@@ -48,7 +56,7 @@
         {
             "name": "The Student Hotel",
             "image": "assets/images/studentHotel",
-            "description": "This si the best option for you, with everything you need + the chance of extending your stay for up to a couple of months at a good price. ",
+            "description": "This is the best option for you, with everything you need + the chance of extending your stay for up to a couple of months at a good price. ",
             "conditions": [
                 "hotel AND (business OR leisure) AND (service_long_stay AND (area_citycenter OR service_breakfast_included OR bar))"
             ]
