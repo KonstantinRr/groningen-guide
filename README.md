@@ -4,7 +4,7 @@ The Groningen tourist and study guide.
 View the live website [here](https://studyguide.esync.dev).
 
 ## Getting Started
-This project implements a tourist guide for the city of Groningen located in the north of the Netherlands. 
+This project implements a tourist guide for the city of Groningen located in the north of the Netherlands. There is a detailed description on how the knowledge base and engine work [here](knowledgebase.md).
 
 ## Building
 
