@@ -103,6 +103,9 @@ class ExpressionStorage {
         .forEach((key, value) => logger.info('Expression: \'$key\' => $value'));
   }
 
+  List<TreeElement> endpointConditions(KlEndpoint endpoint) =>
+    endpoint.conditions.map((e) => storage[e]).toList();
+
   /// Returns the mapped list of [TreeElement] objects of rule conditions
   List<TreeElement> ruleConditions(KlRule rule) =>
       rule.conditions.map((e) => storage[e]).toList();
@@ -407,10 +410,11 @@ class KlEngine extends ChangeNotifier {
 
   /// Evaluates the conditions of a rule
   bool evaluateRule(KlRule rule) => evaluateConditionList(rule.conditions);
-
   /// Evaluates the conditions of a question
   bool evaluateQuestion(KlQuestion q) => evaluateConditionList(q.conditions);
-
+  /// Evaluates the conditions of an endpoint
+  bool evaluateEndpoint(KlEndpoint endpoint) => evaluateConditionList(endpoint.conditions);
+  
   /// Runs the inference model by running through all rules and executing the
   /// event list of the rule conditions evaluate to [true].
   void inference() {

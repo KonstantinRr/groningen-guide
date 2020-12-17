@@ -6,9 +6,10 @@
 /// Livia Regus (S3354970): l.regus@student.rug.nl
 
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+
 import 'package:groningen_guide/kl_engine.dart';
 import 'package:groningen_guide/main.dart';
-import 'package:provider/provider.dart';
 
 class WidgetVariables extends StatefulWidget {
   const WidgetVariables({Key key}) : super(key: key);

@@ -6,13 +6,15 @@
 /// Livia Regus (S3354970): l.regus@student.rug.nl
 
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+
+import 'package:groningen_guide/main.dart';
 import 'package:groningen_guide/kl/kl_rule.dart';
 import 'package:groningen_guide/kl_engine.dart';
-import 'package:groningen_guide/main.dart';
-import 'package:groningen_guide/widgets/widget_condition.dart';
+import 'package:groningen_guide/widgets/widget_db_conditionlist.dart';
+import 'package:groningen_guide/widgets/widget_db_description.dart';
+import 'package:groningen_guide/widgets/widget_db_name.dart';
 import 'package:groningen_guide/widgets/widget_event.dart';
-import 'package:groningen_guide/widgets/widget_debugger.dart';
-import 'package:provider/provider.dart';
 
 class WidgetRule extends StatelessWidget {
   final KlRule rule;
@@ -27,50 +29,11 @@ class WidgetRule extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
-          Row(
-            children: <Widget> [
-              SizedBox(
-                width: 50.0,
-                child: Text('Name:', style: theme.textTheme.bodyText1,),
-              ),
-              Expanded(child: Text('${rule.name}')),
-            ]
-          ),
-          Row(
-            children: [
-              SizedBox(
-                width: 50.0,
-                child: Text('Descr:', style: theme.textTheme.bodyText1,),
-              ),
-              Expanded(child: Text('${rule.description}')),
-            ],
-          ),
-          Text('Conditions:', style: theme.textTheme.bodyText1,),
-          Consumer<KlExpressionProvider>(
-            builder: (context, expressionProvider, _) => Column(
-              children: enumerate(expressionProvider.storage.ruleConditions(rule)).map((e) => 
-                Padding(
-                  padding: EdgeInsets.only(left: 10.0),
-                  child: Row(
-                    children: <Widget> [
-                      Text('${e.item1+1}: ', style: theme.textTheme.bodyText1),
-                      Expanded(child: WidgetCondition(element: e.item2))
-                    ]
-                  ),
-                ),
-              ).toList()
-            )
-          ),
-          Row(
-            children: <Widget> [
-              Text('Evaluated as: ', style: theme.textTheme.bodyText1,),
-              Expanded(child: Align(
-                alignment: Alignment.centerRight,
-                child: Consumer<KlEngine>(
-                  builder: (context, engine, _) => WidgetEvaluator(val: engine.evaluateRule(rule))
-                ),
-              ))
-            ]
+          WidgetObjectName(name: rule.name),
+          WidgetObjectDescription(description: rule.description),
+          WidgetConditionList(
+            eventCallback: (prov) => prov.storage.ruleConditions(rule),
+            evaluatorCallback: (engine) => engine.evaluateRule(rule),
           ),
           Column(
             children: [

@@ -6,25 +6,73 @@
 /// Livia Regus (S3354970): l.regus@student.rug.nl
 
 import 'package:flutter/material.dart';
+import 'package:groningen_guide/kl/kl_endpoint.dart';
+import 'package:groningen_guide/kl/kl_rule.dart';
 
 import 'package:groningen_guide/kl_engine.dart';
 import 'package:groningen_guide/main.dart';
+import 'package:groningen_guide/widgets/widget_db_endpoint.dart';
 import 'package:groningen_guide/widgets/widget_db_question.dart';
 import 'package:groningen_guide/widgets/widget_db_rule.dart';
 import 'package:groningen_guide/widgets/widget_db_variables.dart';
 import 'package:provider/provider.dart';
 
-
-class WidgetEvaluator extends StatelessWidget {
-  final bool val;
-  const WidgetEvaluator({@required this.val, Key key}) : super(key: key);
+class WidgetDebuggerList<T> extends StatelessWidget {
+  final List<T> list;
+  final Widget Function(T) builder;
+  final String name;
+  const WidgetDebuggerList({Key key,
+    @required this.name,
+    @required this.list,
+    @required this.builder}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     var theme = Theme.of(context);
-    return Text('$val',
-        style: theme.textTheme.bodyText2
-            .copyWith(color: val ? Colors.green : Colors.red));
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.stretch,
+      children: <Widget> [
+        Container(
+          margin: const EdgeInsets.only(top: 10, bottom: 5),
+          alignment: Alignment.center,
+          child: Text(name, style: theme.textTheme.headline5,),
+        ),
+        ...
+        enumerate(list).map<Widget>(
+          (r) => Container(
+            padding: const EdgeInsets.all(7),
+            color: r.item1.isOdd ? Colors.grey[200] : Colors.grey[100],
+            child: builder(r.item2),
+          ),
+        )
+      ]
+    );
+  }
+}
+
+class WidgetRuleList extends StatelessWidget {
+  final List<KlRule> rules;
+  const WidgetRuleList({Key key, @required this.rules}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.stretch,
+      children: [
+        Container(
+          margin: const EdgeInsets.only(top: 10, bottom: 5),
+          alignment: Alignment.center,
+          child: Text('Rules', style: Theme.of(context).textTheme.headline5, ),
+        ),
+        ...
+        enumerate(rules).map<Widget>(
+          (r) => Container(
+            padding: const EdgeInsets.all(7),
+            color: r.item1.isOdd ? Colors.grey[200] : Colors.grey[100],
+            child: WidgetRule(rule: r.item2)),
+        ),
+      ],
+    );
   }
 }
 
@@ -89,42 +137,22 @@ class WidgetDebuggerState extends State<WidgetDebugger> {
                     }
                   ),
                 ),
-                //Container(
-                //  margin: const EdgeInsets.only(top: 10, bottom: 5),
-                //  alignment: Alignment.center,
-                //  child: Text('EndPoints', style: theme.textTheme.headline5,),
-                //),
-                //Column(
-                //  children: klBaseProvider.base.endpoints.map((e) => null)
-                //)
                 const WidgetVariables(),
-                Container(
-                  margin: const EdgeInsets.only(top: 10, bottom: 5),
-                  alignment: Alignment.center,
-                  child: Text('Rules', style: theme.textTheme.headline5, ),
+                WidgetDebuggerList(
+                  list: klBaseProvider.base.endpoints,
+                  name: 'Endpoints',
+                  builder: (endpoint) => WidgetEndpoint(endpoint: endpoint),
                 ),
-                ...
-                enumerate(klBaseProvider.base.rules).map<Widget>(
-                  (r) => Container(
-                    padding: const EdgeInsets.all(7),
-                    color: r.item1.isOdd ? Colors.grey[200] : Colors.grey[100],
-                    child: WidgetRule(rule: r.item2)),
+                WidgetDebuggerList(
+                  list: klBaseProvider.base.rules,
+                  name: 'Rules',
+                  builder: (rule) => WidgetRule(rule: rule),
                 ),
-                Container(
-                  margin: const EdgeInsets.only(top: 10, bottom: 5),
-                  alignment: Alignment.center,
-                  child: Text(
-                    'Questions',
-                    style: theme.textTheme.headline5,
-                  ),
+                WidgetDebuggerList(
+                  list: klBaseProvider.base.questions,
+                  name: 'Question',
+                  builder: (question) => WidgetQuestion(question: question),
                 ),
-                ...
-                enumerate(klBaseProvider.base.questions).map(
-                  (q) => Container(
-                    padding: const EdgeInsets.all(7),
-                    color: q.item1.isOdd ? Colors.grey[200] : Colors.grey[100],
-                    child: WidgetQuestion(question: q.item2)),
-                )
               ]
             )
           );
