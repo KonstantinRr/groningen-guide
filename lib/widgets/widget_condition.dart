@@ -6,11 +6,11 @@
 /// Livia Regus (S3354970): l.regus@student.rug.nl
 
 import 'package:flutter/material.dart';
-import 'package:groningen_guide/kl_engine.dart';
-import 'package:groningen_guide/kl_parser.dart';
-import 'package:groningen_guide/widgets/widget_debugger.dart';
 import 'package:provider/provider.dart';
 
+import 'package:groningen_guide/kl_engine.dart';
+import 'package:groningen_guide/kl_parser.dart';
+import 'package:groningen_guide/widgets/widget_db_evaluator.dart';
 
 class WidgetCondition extends StatelessWidget {
   final TreeElement element;
