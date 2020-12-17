@@ -111,126 +111,126 @@
             "name": "Bronco",
             "description": " ",
             "conditions": [
-                "restaurant AND leisure AND  bar AND average AND area_citycenter AND gang AND America AND US AND (dinner OR lunch)"
+                "restaurant AND leisure AND  bar AND average AND area_citycenter AND gang AND region_american AND lang_US AND (dinner OR lunch)"
             ]
         },
         {
             "name": "De Betere Tijden",
             "description": " ",
             "conditions": [
-                "restaurant AND (business OR leisure) AND romantic AND average AND area_citycenter AND Dutch AND (dinner OR lunch)"
+                "restaurant AND (business OR leisure) AND romantic AND average AND area_citycenter AND region_european AND lang_dutch AND (dinner OR lunch)"
             ]
         },
         {
             "name": "De Kleine Heerlijkheid",
             "description": " ",
             "conditions": [
-                "restaurant AND (business OR leisure) AND romantic AND average AND area_citycenter AND Dutch AND (dinner OR lunch)"
+                "restaurant AND (business OR leisure) AND romantic AND average AND area_citycenter AND region_european AND lang_dutch AND (dinner OR lunch)"
             ]
         },
         {
             "name": "Cho Fah",
             "description": " ",
             "conditions": [
-                "restaurant AND (business OR leisure) AND average AND area_citycenter AND Asian AND Thai AND gang AND (dinner OR lunch)"
+                "restaurant AND (business OR leisure) AND average AND area_citycenter AND region_asian AND lang_thai AND gang AND (dinner OR lunch)"
             ]
         },
         {
             "name": "Gustatio",
             "description": " ",
             "conditions": [
-                "restaurant AND (business OR leisure) AND romantic AND average AND area_citycenter AND Italian AND (dinner OR lunch)"
+                "restaurant AND (business OR leisure) AND romantic AND average AND area_citycenter AND region_european AND lang_italian AND (dinner OR lunch)"
             ]
         },
         {
             "name": "Da Vinci",
             "description": " ",
             "conditions": [
-                "restaurant AND (business OR leisure) AND romantic AND average AND area_citycenter AND Italian AND (dinner OR lunch)"
+                "restaurant AND (business OR leisure) AND romantic AND average AND area_citycenter AND region_european AND lang_italian AND (dinner OR lunch)"
             ]
         },
         {
             "name": "Ouzerie De Olijfboom",
             "description": " ",
             "conditions": [
-                "restaurant AND (business OR leisure) AND gang AND average AND area_citycenter AND Greek AND (dinner OR lunch)"
+                "restaurant AND (business OR leisure) AND gang AND average AND area_citycenter AND region_european AND lang_greek AND (dinner OR lunch)"
             ]
         },
         {
             "name": "Thai Jasmine",
             "description": " ",
             "conditions": [
-                "restaurant AND (business OR leisure) AND gang AND average AND area_citycenter AND Asian AND Thai AND (dinner OR lunch)"
+                "restaurant AND (business OR leisure) AND gang AND average AND area_citycenter AND region_asian AND lang_thai AND (dinner OR lunch)"
             ]
         },
         {
             "name": "Imono",
             "description": " ",
             "conditions": [
-                "restaurant AND (business OR leisure) AND gang AND romantic AND average AND area_citycenter AND Asian AND Japanese AND dinner"
+                "restaurant AND (business OR leisure) AND gang AND romantic AND average AND area_citycenter AND region_asian AND lang_japanese AND dinner"
             ]
         },
         {
             "name": "Hanasato",
             "description": " ",
             "conditions": [
-                "restaurant AND romantic AND fine AND area_citycenter AND Asian AND Japanese AND dinner"
+                "restaurant AND romantic AND fine AND area_citycenter AND region_asian AND lang_japanese AND dinner"
             ]
         },
         {
             "name": "De Pijp Wine & Dine",
             "description": " ",
             "conditions": [
-                "restaurant AND romantic AND fine AND area_citycenter AND European AND French AND dinner"
+                "restaurant AND romantic AND fine AND area_citycenter AND region_european AND lang_french AND dinner"
             ]
         },
         {
             "name": "Vive la Vie",
             "description": " ",
             "conditions": [
-                "restaurant AND romantic AND fine AND area_citycenter AND (Dutch OR French) AND dinner"
+                "restaurant AND romantic AND fine AND area_citycenter AND region_european AND(lang_dutch OR lang_french) AND dinner"
             ]
         },
         {
             "name": "Voila",
             "description": " ",
             "conditions": [
-                "restaurant AND romantic AND fine AND area_citycenter AND (Dutch OR French) AND dinner"
+                "restaurant AND romantic AND fine AND area_citycenter AND region_european AND (lang_dutch OR lang_french) AND dinner"
             ]
         },
         {
             "name": "Restaurant Nassau",
             "description": " ",
             "conditions": [
-                "restaurant AND romantic AND fine AND area_citycenter AND (Dutch OR French) AND dinner"
+                "restaurant AND romantic AND fine AND area_citycenter AND region_european AND (lang_dutch OR lang_french) AND dinner"
             ]
         },
         {
             "name": "Fatoush",
             "description": " ",
             "conditions": [
-                "restaurant AND romantic AND fine AND area_citycenter AND (Dutch OR French) AND (dinner OR lunch)"
+                "restaurant AND romantic AND fine AND area_citycenter AND region_european AND (lang_dutch OR lang_frenchh) AND (dinner OR lunch)"
             ]
         },
         {
             "name": "Konbu Streetfood",
             "description": " ",
             "conditions": [
-                "restaurant AND romantic AND cheap AND area_citycenter AND Asian AND Vietnamese AND (dinner OR lunch)"
+                "restaurant AND romantic AND cheap AND area_citycenter AND region_asian AND lang_vietnamese AND (dinner OR lunch)"
             ]
         },
         {
             "name": "Tiantianle",
             "description": " ",
             "conditions": [
-                "restaurant AND gang AND cheap AND area_citycenter AND (Asian AND Chinese OR American AND Chilean ) AND (dinner OR lunch)"
+                "restaurant AND gang AND cheap AND area_citycenter AND (region_asian AND lang_chinese OR region_american AND lang_chilean ) AND (dinner OR lunch)"
             ]
         },
         {
             "name": "Chaplin's Pub",
             "description": " ",
             "conditions": [
-                "restaurant AND gang AND cheap AND area_citycenter AND bar AND American AND US AND (dinner OR lunch)"
+                "restaurant AND gang AND cheap AND area_citycenter AND bar AND region_american AND lang_us AND (dinner OR lunch)"
             ]
         },
         {
@@ -315,7 +315,7 @@
         {
             "name": "What are you looking for?",
             "description": "",
-            "maxAnswers": 2,
+            "maxAnswers": 3,
             "conditions": [ ],
             "options": [
                 {
@@ -351,6 +351,26 @@
             ]
         },
         {
+            "name": "How much are you willing to spend?",
+            "description": "",
+            "maxAnswers": 1,
+            "conditions": [ "goal"],
+            "options": [
+                {
+                    "description": "Let the money flow",
+                    "events": [ "expensive = 1", "money = 1" ]
+                },
+                {
+                    "description": "Mid-range",
+                    "events": [ "average = 1", "money = 1" ]
+                },
+                {
+                    "description": "On a budget",
+                    "events": [ "cheap = 1", "money = 1" ]
+                }
+            ]
+        },
+        {
             "name": "What do you have in mind?",
             "description": "",
             "maxAnswers": 1,
@@ -381,32 +401,12 @@
                     "events": [ "gang = 1", "mind = 1" ]
                 }
             ]
-        },
-        {
-            "name": "How much are you willing to spend?",
-            "description": "",
-            "maxAnswers": 1,
-            "conditions": [ "goal"],
-            "options": [
-                {
-                    "description": "Let the money flow",
-                    "events": [ "expensive = 1", "money = 1" ]
-                },
-                {
-                    "description": "Mid-range",
-                    "events": [ "average = 1", "money = 1" ]
-                },
-                {
-                    "description": "On a budget",
-                    "events": [ "cheap = 1", "money = 1" ]
-                }
-            ]
-        },
+        },        
         {
             "name": "What kind of meal would you like?",
             "description": "",
             "maxAnswers": 1,
-            "conditions": [ ],
+            "conditions": ["cafe OR restaurant"],
             "options": [
                 {
                     "description": "Breakfast",
@@ -426,7 +426,7 @@
             "name": "What type of cuisine are you looking for?",
             "description": "",
             "maxAnswers": 7,
-            "conditions": [ "restaurant AND meal" ],
+            "conditions": [ "meal" ],
             "options": [                
                 {
                     "description": "European",
@@ -441,12 +441,24 @@
                     "events": [ "region_mideast = 1"]
                 },
                 {
-                    "description": "Australian",
-                    "events": [ "region_australian = 1" ]
-                },
-                {
                     "description": "American",
                     "events": [ "region_american = 1" ]
+                }
+            ]
+        },
+        {
+            "name": "You have chosen American cuisine",
+            "description": "please, specify",
+            "maxAnswers": 7,
+            "conditions": [ "region_american" ],
+            "options": [                
+                {
+                    "description": "US",
+                    "events": [ "lang_us = 1" ]
+                },
+                {
+                    "description": "Chilean",
+                    "events": [ "lang_chilean = 1" ]
                 }
             ]
         },
@@ -492,7 +504,6 @@
                     "description": "Thai",
                     "events": [ "lang_thai = 1" ]
                 },
-
                 {
                     "description": "Japanese",
                     "events": [ "lang_japanese = 1" ]
@@ -503,7 +514,7 @@
                 },
                 {
                     "description": "Vietnamese",
-                    "events": [ "lang_vietnames = 1" ]
+                    "events": [ "lang_vietnamese = 1" ]
                 }
             ]
         },
@@ -511,7 +522,7 @@
             "name": "Do you have any dietary restrictions?",
             "description": "",
             "maxAnswers": 1,
-            "conditions": [ ],
+            "conditions": [ "meal"],
             "options": [
                 {
                     "description": "Vegetarian",
@@ -532,7 +543,7 @@
             "name": "What service preference do you have?",
             "description": "",
             "maxAnswers": 2,
-            "conditions": [ "money"],
+            "conditions": [ "money AND NOT isBusinessTrip AND NOT (cafe OR restaurant)"],
             "options": [              
                 {
                     "description": "Long stay (up to a couple of months)",
