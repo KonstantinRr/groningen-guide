@@ -9,7 +9,9 @@ import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart' show rootBundle;
 import 'package:groningen_guide/kl/kl_question.dart';
+import 'package:groningen_guide/kl_engine.dart';
 import 'package:groningen_guide/main.dart';
+import 'package:provider/provider.dart';
 import 'package:tuple/tuple.dart';
 
 class QuestionWidget extends StatefulWidget {
@@ -90,22 +92,27 @@ class QuestionWidgetState extends State<QuestionWidget> {
     var theme = Theme.of(context);
     return Center(child: ConstrainedBox(
       constraints: BoxConstraints(maxWidth: 700.0),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.stretch,
-        children: enumerate(widget.question.item1.options).map((e) =>
-          FlatButton(
-            onPressed: () => widget.change(e.item1),
-            child: Container(
-              margin: const EdgeInsets.all(5),
-              decoration: BoxDecoration(
-                color: widget.question.item2[e.item1] ? theme.primaryColor : Colors.grey[300]
-              ),
-              height: 50.0,
-              alignment: Alignment.center,
-              child: Text(e.item2.description)
-            ),
+      child: Consumer<KlEngine>(
+        builder: (context, engine, child) =>
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: enumerate(widget.question.item1.options)
+              .where((e) => engine.evaluateConditionList(e.item2.conditions))
+              .map((e) =>
+                FlatButton(
+                  onPressed: () => widget.change(e.item1),
+                  child: Container(
+                    margin: const EdgeInsets.all(5),
+                    decoration: BoxDecoration(
+                      color: widget.question.item2[e.item1] ? theme.primaryColor : Colors.grey[300]
+                    ),
+                    height: 50.0,
+                    alignment: Alignment.center,
+                    child: Text(e.item2.description)
+                  ),
+                )
+              ).toList()
           )
-        ).toList()
       )),
     );
   }
