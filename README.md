@@ -17,7 +17,7 @@ The study guide is mainly intended as an web interface but can be compiled to An
 ```
 flutter build web --release
 flutter build android --release
-flutter buiild ios --release
+flutter build ios --release
 ```
 
 ## Reference
