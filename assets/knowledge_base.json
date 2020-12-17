@@ -413,10 +413,6 @@
                     "events": [ "breakfast = 1", "meal = 1" ]
                 },
                 {
-                    "description": "Brunch",
-                    "events": [ "brunch = 1", "meal = 1" ]
-                },
-                {
                     "description": "Lunch",
                     "events": [ "lunch = 1", "meal = 1" ]
                 },
