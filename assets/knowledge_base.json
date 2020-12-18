@@ -237,21 +237,21 @@
             "name": "Magoya",
             "description": " ",
             "conditions": [
-                "restaurant AND gang AND cheap AND area_citycenter AND Asian AND Japanese AND (dinner OR lunch)"
+                "restaurant AND gang AND cheap AND area_citycenter AND region_asian AND lang_japanese AND (dinner OR lunch)"
             ]
         },
         {
             "name": "De Pasta Fabriek",
             "description": " ",
             "conditions": [
-                "restaurant AND (business OR leisure) AND gang AND cheap AND area_citycenter AND Italian AND (dinner OR lunch)"
+                "restaurant AND (business OR leisure) AND gang AND cheap AND area_citycenter AND lang_italian AND (dinner OR lunch)"
             ]
         },
         {
             "name": "Vapiano",
             "description": " ",
             "conditions": [
-                "restaurant  AND (business OR leisure)AND gang AND cheap AND area_citycenter AND Italian AND (dinner OR lunch)"
+                "restaurant  AND (business OR leisure) AND gang AND cheap AND area_citycenter AND lang_italian AND (dinner OR lunch)"
             ]
         },
         {
@@ -293,7 +293,7 @@
             "name": "Black & Bloom",
             "description": " ",
             "conditions": [
-                "cafe AND (leisure OR tourism) AND gang AND cheap AND area_citycenter AND coffee AND (breakfast OR lunch)"
+                "cafe AND leisure  AND gang AND cheap AND area_citycenter AND coffee AND (breakfast OR lunch)"
             ]
         },
         {
@@ -305,9 +305,10 @@
         },
         {
             "name": "Smooth Brothers",
-            "description": " ",
+            "image":"assets/images/smoothBrothers.jpg",
+            "description": "The perfect place if you feel in a jazzy mood and want to delight yourself with a smoothy among other ",
             "conditions": [
-                "cafe AND leisure AND gang AND cheap AND area_citycenter AND smoothies AND (breakfast OR lunch)"
+                "cafe AND leisure AND (gang AND cheap OR cheap) AND area_citycenter AND smoothies AND (breakfast OR lunch)"
             ]
         }
     ],
