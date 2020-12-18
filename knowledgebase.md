@@ -33,15 +33,6 @@ The knwoledge base consists of rules, questions and goals that are used to guide
 }
 ```
 
-There are some common recurring fields that are part of the definition of a goal, rule and question.
-
-| Field         | Type     |                                             |
-| ------------- | -------- | ------------------------------------------- |
-| name          | optional | The unique name/identifier                  |
-| description   | optional | The description                             |
-| conditions    | optional | List of conditions that activate the object |
-| events        | optional | List of events that are executed            |
-
 ## Goal
 Goals are the most simple objects containing a list of conditions that specify whether the goal condition is fulfilled. A goal is definied by the following parameters: It has a name and description that give information about the goal itself. The 'name' and 'description' fields are optional and may be null. The goal will get auto generated if it is not specified. However, the 'conditions' variable must be specified. It must to be a list of strings that are parsable as expressions. If all conditions in this list evaluate to true (this also means an empty list) the goal will be activated.
 
@@ -87,3 +78,15 @@ A basic example question:
     ]
 }
 ```
+
+## General
+
+There are some common recurring fields that are part of the definition of a goal, rule and question.
+
+| Field         | Type     |                                             |
+| ------------- | -------- | ------------------------------------------- |
+| name          | optional | The unique name/identifier                  |
+| description   | optional | The description                             |
+| conditions    | required | List of conditions that activate the object |
+| events        | required | List of events that are executed            |
+
