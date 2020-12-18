@@ -49,6 +49,6 @@ The project uses a list of additional dependencies freely available from [pub](h
 ## Reference
 This project is build for the course Knowledge Technology Practical at the University of Groningen (WBAI014-05).
 
-Konstantin Rolf (S3750558)
+Konstantin Rolf (S3750558)<br/>
 Nicholas Koundouros (S3726444)<br/>
 Livia Regus (S3354970)
