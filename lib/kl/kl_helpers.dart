@@ -18,11 +18,11 @@ abstract class JsonElement {
       throw Exception('Object must be of type \'${Type.toString()}\'');
   }
 
-  Type assertTypeGet<Type>(dynamic map, dynamic key, {bool allowNull=false}) {
+  Type assertTypeGet<Type>(dynamic map, dynamic key, {bool allowNull=false, Type def}) {
     assertType<Map>(map);
     var result = map[key];
     assertType<Type>(result, allowNull: allowNull);
-    return result as Type;
+    return result == null ? def : result as Type;
   }
 }
 

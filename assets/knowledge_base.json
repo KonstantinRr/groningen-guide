@@ -42,7 +42,7 @@
             "description": "Wonderful memories are granted if you stay here, the sweet spot of Groningen ",
             "image": "",
             "conditions": [
-                "hotel AND (business OR leisure) AND (cultural OR private OR romantic OR area_citycenter) AND cheap "
+                "hotel AND (business OR leisure) AND (cultural_experience OR private OR romantic OR area_citycenter) AND cheap "
             ]
         },
         {
@@ -311,7 +311,7 @@
         {
             "name": "What are you looking for?",
             "description": "",
-            "maxAnswers": 3,
+            "maxAnswers": 2,
             "conditions": [ ],
             "options": [
                 {

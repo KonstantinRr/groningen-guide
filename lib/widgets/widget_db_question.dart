@@ -10,6 +10,11 @@ import 'package:groningen_guide/kl/kl_question.dart';
 import 'package:groningen_guide/kl_engine.dart';
 import 'package:groningen_guide/main.dart';
 import 'package:groningen_guide/widgets/widget_condition.dart';
+import 'package:groningen_guide/widgets/widget_db_conditionlist.dart';
+import 'package:groningen_guide/widgets/widget_db_description.dart';
+import 'package:groningen_guide/widgets/widget_db_eventlist.dart';
+import 'package:groningen_guide/widgets/widget_db_name.dart';
+import 'package:groningen_guide/widgets/widget_db_variables.dart';
 import 'package:groningen_guide/widgets/widget_event.dart';
 import 'package:groningen_guide/widgets/widget_debugger.dart';
 import 'package:provider/provider.dart';
@@ -29,51 +34,11 @@ class WidgetQuestion extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
-          Row(
-            children: <Widget> [
-              SizedBox(
-                width: 50.0,
-                child: Text('Name:', style: theme.textTheme.bodyText1,),
-              ),
-              Expanded(child: Text('${question.name}')),
-            ]
-          ),
-          Row(
-            children: [
-              SizedBox(
-                width: 50.0,
-                child: Text('Descr:', style: theme.textTheme.bodyText1,),
-              ),
-              Expanded(child: Text('${question.description}')),
-            ],
-          ),
-
-          Text('Conditions:', style: theme.textTheme.bodyText1,),
-          Consumer<KlExpressionProvider>(
-            builder: (context, expressionProvider, _) => Column(
-              children: enumerate(expressionProvider.storage.questionConditions(question)).map((e) => 
-                Padding(
-                  padding: EdgeInsets.only(left: 10.0),
-                  child: Row(
-                    children: <Widget> [
-                      Text('${e.item1}+1}: ', style: theme.textTheme.bodyText1),
-                      Expanded(child: WidgetCondition(element: e.item2))
-                    ]
-                  ),
-                ),
-              ).toList(),
-            )
-          ),
-          Row(
-            children: <Widget> [
-              Text('Condition evaluated as: ', style: theme.textTheme.bodyText1,),
-              Expanded(child: Align(
-                alignment: Alignment.centerRight,
-                child: Consumer<KlEngine>(
-                  builder: (context, engine, _) =>
-                    WidgetEvaluator(val: engine.evaluateQuestion(question)))
-              ))
-            ]
+          WidgetObjectName(name: question.name),
+          WidgetObjectDescription(description: question.description),
+          WidgetConditionList(
+            eventCallback: (prov) => prov.storage.questionConditions(question),
+            evaluatorCallback: (engine) => engine.evaluateQuestion(question)
           ),
 
           ...
@@ -82,40 +47,18 @@ class WidgetQuestion extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Padding(
-                  padding: EdgeInsets.only(left: 10.0),
+                  padding: const EdgeInsets.only(left: 10.0),
                   child: Row(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: <Widget> [
-                      Text('Option ${option.item1}+1}: ', style: theme.textTheme.bodyText1),
+                      Text('Option ${option.item1+1}: ', style: theme.textTheme.bodyText1),
                       Expanded(child: Text('${option.item2.description}')),
                     ]
                   ),
                 ),
                 Padding(
-                  padding: EdgeInsets.only(left: 20.0),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      ...
-                      enumerate(option.item2.events).map((e) =>
-                        Padding(
-                          padding: EdgeInsets.only(left: 0.0),
-                          child: Row(
-                            crossAxisAlignment: CrossAxisAlignment.center,
-                            children: <Widget> [
-                              Text('Event ${e.item1+1}: ', style: theme.textTheme.bodyText1),
-                              Expanded(child: Consumer<KlExpressionProvider>(
-                                builder: (context, expressionStorage, _) =>
-                                  WidgetEvent(
-                                    element: expressionStorage.storage[e.item2],
-                                  )
-                              ))
-                            ]
-                          ),
-                        ),
-                      )
-                    ],
-                  ),
+                  padding: const EdgeInsets.only(left: 20.0),
+                  child: WidgetEventList(events: option.item2.events)
                 )
               ]
             )

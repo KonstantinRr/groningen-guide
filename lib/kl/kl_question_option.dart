@@ -19,6 +19,8 @@ class KlQuestionOption extends MapObject {
   String description;
   /// List of events that happen if this option is selected
   List<String> events;
+  /// List of conditions that need to be fullfilled 
+  List<String> conditions;
 
   bool exclusive;
 
@@ -33,6 +35,8 @@ class KlQuestionOption extends MapObject {
     description = assertTypeGet<String>(map, 'description');
     exclusive = map['exclusive'] ?? false;
     events = assertTypeGet<List>(map, 'events')
+      .map<String>((e) => e as String).toList();
+    conditions = assertTypeGet<List>(map, 'conditions', allowNull: true, def: [])
       .map<String>((e) => e as String).toList();
   }
 
