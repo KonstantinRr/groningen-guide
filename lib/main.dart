@@ -39,7 +39,7 @@ class StudyGuide extends StatelessWidget {
 
   /// Generates a [Route] when no other matching route is found
   Route onGenerateUnknownRoute(RouteSettings settings) {
-    return MaterialPageRoute(builder: (context) => const RouteUnknwon(),
+    return MaterialPageRoute(builder: (context) => const RouteUnknown(),
       settings: RouteSettings(name: settings.name));
   }
 

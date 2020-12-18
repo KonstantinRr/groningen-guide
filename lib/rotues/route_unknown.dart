@@ -9,8 +9,8 @@ import 'package:flutter/material.dart';
 import 'package:groningen_guide/widgets/widget_title.dart';
 import 'package:groningen_guide/widgets/width_size_requirement.dart';
 
-class RouteUnknwon extends StatelessWidget {
-  const RouteUnknwon({Key key}) : super(key: key);
+class RouteUnknown extends StatelessWidget {
+  const RouteUnknown({Key key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -30,7 +30,7 @@ class RouteUnknwon extends StatelessWidget {
           ),
         ),
         body: Center(
-          child: Text('Error 404: Could not find route $name'),
+          child: Text('Error 404: Could not find route $name', style: theme.textTheme.bodyText1,),
         ),
       ),
     );
