@@ -54,10 +54,10 @@ class RouteEnd extends StatelessWidget {
             onPressed: () async {
               if (showExitDialog) {
                 var ex = await _showExitDialog(context);
-                if (ex == _ExitOptions.Continue)
-                  Navigator.of(context).pop();
-              } else
-                Navigator.of(context).pop();
+                if (ex == _ExitOptions.Stop) return;
+              }
+              resetModel(context);
+              Navigator.of(context).pop();
             }
           ),
         ),
