@@ -265,42 +265,37 @@
             "name": "Starbucks",
             "description": " ",
             "conditions": [
-                "cafe AND studying AND leisure AND gang AND cheap AND area_citycenter AND coffee AND (breakfast OR lunch)"
+                "cafe AND studying AND leisure AND gang AND (average) AND coffee AND (breakfast OR lunch)"
             ]
         },
         {
             "name": "Doppio Espresso",
             "description": " ",
             "conditions": [
-                "cafe AND leisure AND gang AND cheap AND area_citycenter AND coffee AND (breakfast OR lunch)"
+                "cafe AND leisure AND gang AND (cheap OR average) AND coffee AND (breakfast OR lunch)"
             ]
         },
         {
             "name": "Coffee Company",
             "description": " ",
             "conditions": [
-                "cafe AND leisure AND gang AND cheap AND area_citycenter AND coffee AND (breakfast OR lunch)"
+                "cafe AND leisure AND (gang OR family OR studying) AND (cheap OR average) AND coffee AND (breakfast OR lunch)"
             ]
         },
         {
             "name": "Black & Bloom",
-            "description": " ",
+            "image":"assets/images/blackBloom.jpg",
+            "description": "Experiment with white and black coffee at Black & Bloom, once here you'll want to come back again ",
             "conditions": [
-                "cafe AND leisure AND gang AND cheap AND area_citycenter AND coffee AND (breakfast OR lunch)"
-            ]
-        },
-        {
-            "name": "Black & Bloom",
-            "description": " ",
-            "conditions": [
-                "cafe AND leisure  AND gang AND cheap AND area_citycenter AND coffee AND (breakfast OR lunch)"
+                "cafe AND leisure  AND gang AND (cheap OR average)  AND coffee AND (breakfast OR lunch)"
             ]
         },
         {
             "name": "Chocolate Company",
-            "description": " ",
+            "image": "assets/images/chocoCompany.jpg",
+            "description": "Your sweet tooth thirves for some chocolate? This is where you want to be ;)",
             "conditions": [
-                "cafe AND leisure AND gang AND cheap AND area_citycenter AND hot_chocolate AND (breakfast OR lunch)"
+                "cafe AND leisure AND gang AND (cheap OR average)  AND hot_chocolate AND (breakfast OR lunch)"
             ]
         },
         {
@@ -308,7 +303,7 @@
             "image":"assets/images/smoothBrothers.jpg",
             "description": "The perfect place if you feel in a jazzy mood and want to delight yourself with a smoothy among other ",
             "conditions": [
-                "cafe AND leisure AND (gang AND cheap OR cheap) AND area_citycenter AND smoothies AND (breakfast OR lunch)"
+                "cafe AND leisure AND (gang AND cheap OR cheap OR average)  AND smoothies AND (breakfast OR lunch)"
             ]
         }
     ],
@@ -427,7 +422,7 @@
             "name": "What type of cuisine are you looking for?",
             "description": "",
             "maxAnswers": 7,
-            "conditions": [ "meal" ],
+            "conditions": [ "meal AND NOT cafe" ],
             "options": [                
                 {
                     "description": "European",
@@ -523,7 +518,7 @@
             "name": "Do you have any dietary restrictions?",
             "description": "",
             "maxAnswers": 1,
-            "conditions": [ "meal"],
+            "conditions": [ "meal AND NOT cafe"],
             "options": [
                 {
                     "description": "Vegetarian",
