@@ -10,6 +10,7 @@ import 'package:groningen_guide/kl_engine.dart';
 import 'package:groningen_guide/rotues/route_editor.dart';
 import 'package:groningen_guide/rotues/route_end.dart';
 import 'package:groningen_guide/rotues/route_endpoint.dart';
+import 'package:groningen_guide/rotues/route_history.dart';
 import 'package:groningen_guide/rotues/route_home.dart';
 import 'package:groningen_guide/rotues/route_splash.dart';
 import 'package:groningen_guide/rotues/route_unknown.dart';
@@ -60,8 +61,11 @@ class StudyGuide extends StatelessWidget {
         builder: (context) => RouteEndpoint.fromSettings(settings.arguments),
         settings: const RouteSettings(name: 'endpoint'));
       case '/end': return MaterialPageRoute(
-        builder: (context) => RouteEnd(),
+        builder: (context) => const RouteEnd(),
         settings: const RouteSettings(name: 'end'));
+      case '/history': return MaterialPageRoute(
+        builder: (context) => const RouteHistory(),
+        settings: const RouteSettings(name: 'history'));
     }
     return null;
   }
