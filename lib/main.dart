@@ -8,6 +8,7 @@
 import 'package:flutter/material.dart';
 import 'package:groningen_guide/kl_engine.dart';
 import 'package:groningen_guide/rotues/route_editor.dart';
+import 'package:groningen_guide/rotues/route_end.dart';
 import 'package:groningen_guide/rotues/route_endpoint.dart';
 import 'package:groningen_guide/rotues/route_home.dart';
 import 'package:groningen_guide/rotues/route_splash.dart';
@@ -58,6 +59,9 @@ class StudyGuide extends StatelessWidget {
       case '/endpoint': return MaterialPageRoute(
         builder: (context) => RouteEndpoint.fromSettings(settings.arguments),
         settings: const RouteSettings(name: 'endpoint'));
+      case '/end': return MaterialPageRoute(
+        builder: (context) => RouteEnd(),
+        settings: const RouteSettings(name: 'end'));
     }
     return null;
   }

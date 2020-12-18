@@ -6,7 +6,6 @@
 /// Livia Regus (S3354970): l.regus@student.rug.nl
 
 import 'package:flutter/material.dart';
-import 'package:groningen_guide/kl/kl_endpoint.dart';
 import 'package:groningen_guide/kl/kl_rule.dart';
 
 import 'package:groningen_guide/kl_engine.dart';
@@ -89,13 +88,7 @@ class WidgetDebugger extends StatefulWidget {
 }
 
 class WidgetDebuggerState extends State<WidgetDebugger> {
-  ScrollController controller;
-
-  @override
-  void initState() {
-    super.initState();
-    controller = ScrollController();
-  }
+  final controller = ScrollController();
 
   @override
   void dispose() {
@@ -106,67 +99,63 @@ class WidgetDebuggerState extends State<WidgetDebugger> {
   @override
   Widget build(BuildContext context) {
     var theme = Theme.of(context);
-    return Container(
+    var view = Container(
       width: 400.0,
       color: Colors.white,
-      child: Consumer<KlBaseProvider>(
-        builder: (context, klBaseProvider, _) {
-          var view = SingleChildScrollView(
-            controller: controller,
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.stretch,
-              children: <Widget>[
-                Container(
-                  height: 45.0,
-                  margin: const EdgeInsets.only(left: 15.0, right: 15.0, top: 10.0, bottom: 5.0),
-                  child: RaisedButton(
-                    color: theme.primaryColor,
-                    child: Text('Edit Knowledge Base', style: theme.textTheme.button,),
-                    onPressed: () =>
-                      Navigator.of(context).pushNamed('/editor')),
-                ),
-                Container(
-                  height: 45.0,
-                  margin: const EdgeInsets.only(left: 15.0, right: 15.0, top: 5.0, bottom: 10.0),
-                  child: RaisedButton(
-                    color: theme.primaryColor,
-                    child: Text('Reset', style: theme.textTheme.button,),
-                    onPressed: () {
-                      Provider.of<QuestionData>(context, listen: false).clear();
-                      Provider.of<KlEngine>(context, listen: false).clear();
-                    }
-                  ),
-                ),
-                const WidgetVariables(),
-                WidgetDebuggerList(
-                  list: klBaseProvider.base.endpoints,
-                  name: 'Endpoints',
-                  builder: (endpoint) => WidgetEndpoint(endpoint: endpoint),
-                ),
-                WidgetDebuggerList(
-                  list: klBaseProvider.base.rules,
-                  name: 'Rules',
-                  builder: (rule) => WidgetRule(rule: rule),
-                ),
-                WidgetDebuggerList(
-                  list: klBaseProvider.base.questions,
-                  name: 'Question',
-                  builder: (question) => WidgetQuestion(question: question),
-                ),
-              ]
-            )
-          );
-
-          return widget.includeScrollBar
-            ? Scrollbar(
-                child: view,
-                controller: controller,
-                isAlwaysShown: widget.showAlways,
-                thickness: 8.0,
-              )
-            : view;
-        },
-      ),
+      child: ListView(
+        controller: controller,
+          children: <Widget>[
+            Container(
+              height: 45.0,
+              margin: const EdgeInsets.only(left: 15.0, right: 15.0, top: 10.0, bottom: 5.0),
+              child: RaisedButton(
+                color: theme.primaryColor,
+                child: Text('Edit Knowledge Base', style: theme.textTheme.button,),
+                onPressed: () =>
+                  Navigator.of(context).pushNamed('/editor')),
+            ),
+            Container(
+              height: 45.0,
+              margin: const EdgeInsets.only(left: 15.0, right: 15.0, top: 5.0, bottom: 10.0),
+              child: RaisedButton(
+                color: theme.primaryColor,
+                child: Text('Reset', style: theme.textTheme.button,),
+                onPressed: () {
+                  Provider.of<QuestionData>(context, listen: false).clear();
+                  Provider.of<KlEngine>(context, listen: false).clear();
+                }
+              ),
+            ),
+            const WidgetVariables(),
+            Consumer<KlBaseProvider>(
+              builder: (context, klBaseProvider, _) => WidgetDebuggerList(
+                list: klBaseProvider.base.endpoints,
+                name: 'Endpoints',
+                builder: (endpoint) => WidgetEndpoint(endpoint: endpoint),
+            )),
+            Consumer<KlBaseProvider>(
+              builder: (context, klBaseProvider, _) => WidgetDebuggerList(
+                list: klBaseProvider.base.rules,
+                name: 'Rules',
+                builder: (rule) => WidgetRule(rule: rule),
+            )),
+            Consumer<KlBaseProvider>(
+              builder: (context, klBaseProvider, _) => WidgetDebuggerList(
+                list: klBaseProvider.base.questions,
+                name: 'Question',
+                builder: (question) => WidgetQuestion(question: question),
+            )),
+          ]
+      )
     );
+
+    return widget.includeScrollBar
+      ? Scrollbar(
+          child: view,
+          controller: controller,
+          isAlwaysShown: widget.showAlways,
+          thickness: 8.0,
+        )
+      : view;
   }
 }

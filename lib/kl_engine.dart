@@ -458,14 +458,11 @@ class KlEngine extends ChangeNotifier {
     }
   }
 
-  KlEndpoint checkEndpoints() {
+  Iterable<KlEndpoint> checkEndpoints() sync* {
     for (var endpoint in klBaseProvider.base.endpoints) {
       var result = evaluateConditionList(endpoint.conditions);
-      if (result) {
-        return endpoint;
-      }
+      if (result) yield endpoint;
     }
-    return null;
   }
 
   void notifyAll() {
@@ -482,13 +479,11 @@ class KlEngine extends ChangeNotifier {
     var questions = <KlQuestion>[];
     for (var i = 0; i < klBaseProvider.base.questions.length; i++) {
       var question = klBaseProvider.base.questions[i];
-      logger.info("Checking question ${question.name}");
       // evaluates the question's conditions
       var conditions = evaluateQuestion(klBaseProvider.base.questions[i]);
-      logger.info("    Checking conditions $conditions");
+      logger.info("Checking question ${question.name} conditions $conditions");
       if (!conditions) continue;
 
-      logger.info('Loading Question ${question.name}');
       questions.add(question);
     }
     return questions;

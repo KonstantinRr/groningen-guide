@@ -6,18 +6,13 @@
 /// Livia Regus (S3354970): l.regus@student.rug.nl
 
 import 'package:flutter/material.dart';
+
 import 'package:groningen_guide/kl/kl_question.dart';
-import 'package:groningen_guide/kl_engine.dart';
 import 'package:groningen_guide/main.dart';
-import 'package:groningen_guide/widgets/widget_condition.dart';
 import 'package:groningen_guide/widgets/widget_db_conditionlist.dart';
 import 'package:groningen_guide/widgets/widget_db_description.dart';
 import 'package:groningen_guide/widgets/widget_db_eventlist.dart';
 import 'package:groningen_guide/widgets/widget_db_name.dart';
-import 'package:groningen_guide/widgets/widget_db_variables.dart';
-import 'package:groningen_guide/widgets/widget_event.dart';
-import 'package:groningen_guide/widgets/widget_debugger.dart';
-import 'package:provider/provider.dart';
 
 class WidgetQuestion extends StatelessWidget {
   final KlQuestion question;

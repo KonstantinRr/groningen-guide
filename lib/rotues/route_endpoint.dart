@@ -7,9 +7,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:groningen_guide/kl/kl_endpoint.dart';
-import 'package:groningen_guide/kl_engine.dart';
 import 'package:groningen_guide/widgets/widget_title.dart';
-import 'package:provider/provider.dart';
 import 'package:flutter/services.dart' show rootBundle;
 
 Future<ImageProvider> loadImageFromAsset(String image) async {

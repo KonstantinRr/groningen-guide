@@ -27,17 +27,17 @@ Future<void> nextQuestion(BuildContext context) async {
   // inferes additional variables
   engine.inference();
   // checks if any goals have been reached
-  var endpoint = engine.checkEndpoints();
+  var endpoints = engine.checkEndpoints().toList();
 
-  if (endpoint != null) {
+  if (endpoints.isNotEmpty) {
     // we reached an endpoint and want to show the dialog
-    var result = await showEndpointDialog(context, endpoint);
+    var result = await showEndpointDialog(context, endpoints.first); // TODO multiple endpoints
     switch (result) {
       case GoalDialogAction.Previous:
         previousQuestion(context); // TODO side effects
         break;
       case GoalDialogAction.Reset:
-        resetModel(context, questionData);
+        resetModel(context);
         break;
     }
   } else {
@@ -86,7 +86,7 @@ void firstQuestion(BuildContext context) {
 }
 
 /// Resets the whole model
-void resetModel(BuildContext context, QuestionData questionData) {
-  questionData.clear();
+void resetModel(BuildContext context) {
+  Provider.of<QuestionData>(context, listen: false).clear();
   Provider.of<KlEngine>(context, listen: false).clear();
 }
