@@ -69,6 +69,10 @@ class EndpointWidget extends StatelessWidget {
   }
 }
 
+enum GoalDialogAction {
+  Reset, Previous
+}
+
 class EndpointDialog extends StatelessWidget {
   final KlEndpoint endpoint;
   const EndpointDialog({this.endpoint, Key key}) : super(key: key);
@@ -81,19 +85,18 @@ class EndpointDialog extends StatelessWidget {
         child: EndpointWidget(endpoint: endpoint),
       ),
       actions: [
-        //FlatButton(
-        //  child: Text('Exit', style: theme.textTheme.button,),
-        //  onPressed: () {
-        //    Navigator.of(context).pop(true);
-        //  },
-        //),
+        FlatButton(
+          child: Text('Previous'),
+          onPressed: () {
+            // goes back a question
+            Navigator.of(context).pop(GoalDialogAction.Previous);
+          },
+        ),
         FlatButton(
           child: Text('Reset'),
           onPressed: () {
             // resets the engine
-            Provider.of<QuestionData>(context, listen: false).clear();
-            Provider.of<KlEngine>(context, listen: false).clear();
-            Navigator.of(context).pop(true);
+            Navigator.of(context).pop(GoalDialogAction.Reset);
           }
         )
       ],
@@ -101,11 +104,11 @@ class EndpointDialog extends StatelessWidget {
   }
 }
 
-Future<void> showEndpointDialog(BuildContext context, KlEndpoint endpoint) {
-  return showDialog(
+Future<GoalDialogAction> showEndpointDialog(BuildContext context, KlEndpoint endpoint) {
+  return showDialog<GoalDialogAction>(
     context: context,
     builder: (context) => EndpointDialog(endpoint: endpoint,)
-  );
+  ) ?? GoalDialogAction.Reset;
 }
 
 class RouteEndpoint extends StatelessWidget {

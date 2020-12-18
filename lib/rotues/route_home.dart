@@ -6,6 +6,7 @@
 /// Livia Regus (S3354970): l.regus@student.rug.nl
 
 import 'package:flutter/material.dart';
+import 'package:groningen_guide/kl_parser.dart';
 import 'package:groningen_guide/rotues/route_endpoint.dart';
 import 'package:groningen_guide/widgets/action_info.dart';
 import 'package:groningen_guide/widgets/action_inspector.dart';
@@ -22,22 +23,80 @@ import 'package:groningen_guide/widgets/widget_debugger.dart';
 class MainScreen extends StatelessWidget {
   const MainScreen({Key key}) : super(key: key);
 
-  void _next(BuildContext context, QuestionData questionData) {
+  Future<void> _next(BuildContext context, QuestionData questionData) async {
+    // finds the engine provider in the widget tree
     var engine = Provider.of<KlEngine>(context, listen: false);
-    var selectedOptions = questionData.selectedOptions();
-    for (var i in selectedOptions)
+    // creates a snapshot from the current context model
+    var snapshot = engine.contextProvider.model.snapshot();
+
+    // evaluates all events that were selected
+    for (var i in questionData.selectedOptions())
       engine.evaluateEvents(i.events);
+
+    // unloads the question and stores the context model snapshot
+    questionData.unloadQuestion(snapshot);
+
+    // inferes additional variables
     engine.inference();
+    // checks if any goals have been reached
     var endpoint = engine.checkEndpoints();
+
     if (endpoint != null) {
-      showEndpointDialog(context, endpoint);
+      // we reached an endpoint and want to show the dialog
+      var result = await showEndpointDialog(context, endpoint);
+      switch (result) {
+        case GoalDialogAction.Previous:
+          _previous(context, questionData); // TODO side effects
+          break;
+        case GoalDialogAction.Reset:
+          _reset(context, questionData);
+          break;
+      }
     } else {
-      engine.loadNextQuestion(questionData);
+      // we have to ask a new question and check which are available
+      var questions = engine.availableQuestions();
+      // evaluates which questions were already asked
+      var available = questions.where((question) {
+        return !questionData.containsQuestion(question);
+      }).toList();
+
+      if (available.isEmpty) {
+        // we don't have any new question to ask, jump to the general conclusion
+        Navigator.of(context).pushNamed('/end');
+      } else {
+        // loads the first question that is available
+        questionData.loadQuestion(
+          available.first, engine.contextProvider.model);
+      }
     }
   }
 
+  /// Loads the previous question
   void _previous(BuildContext context, QuestionData questionData) {
+    var model = Provider.of<KlContextProvider>(context, listen: false);
+    // only goes back if we have a question we can go back to
+    if (questionData.previous.isNotEmpty) {
+      // returns the latest context snapshot and loads the previous question
+      var lastSnap = questionData.loadPreviousQuestion();
+      // loads the snapshot as actual context model to the engine
+      model.loadSnap(lastSnap);
+    }
+  }
 
+  /// Loads the first question
+  void _first(BuildContext context, QuestionData questionData) {
+    var engine = Provider.of<KlEngine>(context, listen: false);
+    engine.inference();
+    var questions = engine.availableQuestions();
+    if (questions.isEmpty)
+      Navigator.of(context).pushNamed('/end');
+    else
+      questionData.loadQuestion(questions.first, engine.contextProvider.model);
+  }
+
+  void _reset(BuildContext context, QuestionData questionData) {
+    questionData.clear();
+    Provider.of<KlEngine>(context, listen: false).clear();
   }
 
   @override
@@ -91,14 +150,9 @@ class MainScreen extends StatelessWidget {
                     width: 100.0,
                     height: 40.0,
                     alignment: Alignment.center,
-                    child: Text('Start Process'),
+                    child: Text('Start Inference Process'),
                   ),
-                  onPressed: () {
-                    // loads the next question
-                    var engine = Provider.of<KlEngine>(context, listen: false);
-                    engine.inference();
-                    engine.loadNextQuestion(questionData);
-                  },
+                  onPressed: () => _first(context, questionData)
                 )
               ]
             )
