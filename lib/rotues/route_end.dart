@@ -86,7 +86,7 @@ class RouteEnd extends StatelessWidget {
                         }
                       ),
                     ),
-                    SizedBox(width: 10.0,),
+                    const SizedBox(width: 10.0,),
                     SizedBox(
                       width: 100.0,
                       height: 30.0,

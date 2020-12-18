@@ -1,4 +1,3 @@
-import 'package:auto_size_text/auto_size_text.dart';
 /// This project is build during the course Knowledge Technology Practical at the
 /// UNIVERSITY OF GRONINGEN (WBAI014-05).
 /// The project was build by:
@@ -8,6 +7,9 @@ import 'package:auto_size_text/auto_size_text.dart';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart' show rootBundle;
+
+import 'package:auto_size_text/auto_size_text.dart';
+
 import 'package:groningen_guide/kl/kl_question.dart';
 import 'package:groningen_guide/kl_engine.dart';
 import 'package:groningen_guide/main.dart';
