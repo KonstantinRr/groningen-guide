@@ -4,12 +4,14 @@ The application implements a custom inference engine and knowledge base (KB) tha
 
 ## Inference process
 
-The basic inference process can be summarized using the following pseudo code.
+The inference engine uses forward chaining to gain more information from the current knowledge. Whenever it runs out of new rules to activate it will ask a question to the user to gain more information. The basic inference process can be summarized using the following pseudo code.
 
 ```
 Goal inferenceProcess() {
     do {
-        infereVariables();
+        while didInfereNewFacts() {
+            infere();
+        }
         for goal in goals {
             if isGoalReached(goal)
                 return goal
