@@ -79,8 +79,10 @@ class WidgetRuleList extends StatelessWidget {
 class WidgetDebugger extends StatefulWidget {
   final bool includeScrollBar;
   final bool showAlways;
+  final int initalPage;
   const WidgetDebugger({Key key,
     this.includeScrollBar = true,
+    this.initalPage = 0,
     this.showAlways = false})
       : super(key: key);
 
@@ -90,11 +92,68 @@ class WidgetDebugger extends StatefulWidget {
 
 class WidgetDebuggerState extends State<WidgetDebugger> {
   final controller = ScrollController();
+  List<Widget Function(BuildContext)> builders;
+  int page;
+
+  @override
+  void initState() {
+    super.initState();
+    page = widget.initalPage;
+    builders = [
+      (context) => const WidgetVariables(),
+      (context) => Consumer<KlBaseProvider>(
+        builder: (context, klBaseProvider, _) => WidgetDebuggerList(
+          list: klBaseProvider.base.endpoints,
+          name: 'Endpoints',
+          builder: (endpoint) => WidgetEndpoint(endpoint: endpoint),
+      )),
+      (context) => Consumer<KlBaseProvider>(
+        builder: (context, klBaseProvider, _) => WidgetDebuggerList(
+          list: klBaseProvider.base.rules,
+          name: 'Rules',
+          builder: (rule) => WidgetRule(rule: rule),
+      )),
+      (context) => Consumer<KlBaseProvider>(
+        builder: (context, klBaseProvider, _) => WidgetDebuggerList(
+          list: klBaseProvider.base.questions,
+          name: 'Question',
+          builder: (question) => WidgetQuestion(question: question),
+      )),
+    ];
+  }
 
   @override
   void dispose() {
     controller.dispose();
     super.dispose();
+  }
+
+  Widget _buildHeader(BuildContext context) {
+    var theme = Theme.of(context);
+    return SizedBox(
+      height: 60.0,
+      child: Row(
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        children: [
+          Expanded(child: FlatButton(
+            child: Text('Variables', style: TextStyle(color: page == 0 ? theme.accentColor : null),),
+            onPressed: () => setState(() => page = 0),
+          )),
+          Expanded(child: FlatButton(
+            child: Text('Endpoints', style: TextStyle(color: page == 1 ? theme.accentColor : null)),
+            onPressed: () => setState(() => page = 1),
+          )),
+          Expanded(child: FlatButton(
+            child: Text('Rules', style: TextStyle(color: page == 2 ? theme.accentColor : null),),
+            onPressed: () => setState(() => page = 2),
+          )),
+          Expanded(child: FlatButton(
+            child: Text('Questions', style: TextStyle(color: page == 3 ? theme.accentColor : null),),
+            onPressed: () => setState(() => page = 3),
+          ))
+        ],
+      ),
+    );
   }
 
   @override
@@ -123,25 +182,8 @@ class WidgetDebuggerState extends State<WidgetDebugger> {
                 onPressed: () => resetModel(context),
               ),
             ),
-            const WidgetVariables(),
-            Consumer<KlBaseProvider>(
-              builder: (context, klBaseProvider, _) => WidgetDebuggerList(
-                list: klBaseProvider.base.endpoints,
-                name: 'Endpoints',
-                builder: (endpoint) => WidgetEndpoint(endpoint: endpoint),
-            )),
-            Consumer<KlBaseProvider>(
-              builder: (context, klBaseProvider, _) => WidgetDebuggerList(
-                list: klBaseProvider.base.rules,
-                name: 'Rules',
-                builder: (rule) => WidgetRule(rule: rule),
-            )),
-            Consumer<KlBaseProvider>(
-              builder: (context, klBaseProvider, _) => WidgetDebuggerList(
-                list: klBaseProvider.base.questions,
-                name: 'Question',
-                builder: (question) => WidgetQuestion(question: question),
-            )),
+            _buildHeader(context),
+            builders[page](context)
           ]
       )
     );
