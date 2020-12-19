@@ -164,7 +164,6 @@ class RouteHome extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return KnowledgeBaseLoader(
-      onLoad: (context) => const CircularProgressIndicator(),
       onDone: (context) => Consumer<DebuggerProvider>(
         builder: (context, prov, _) => WidgetSizeRequirement(
           minHeight: 200, minWidth: 300,
@@ -175,6 +174,13 @@ class RouteHome extends StatelessWidget {
           }
         )
       ),
+      onLoad: (context) =>
+        Scaffold(
+          body: Center(child: SizedBox(
+            width: 50.0, height: 50.0,
+            child: const CircularProgressIndicator(),
+          )),
+        ),
       onErr: (context, err) =>
         Scaffold(
           body: Center(child: Text('Error loading knowledge base $err'))
