@@ -61,19 +61,19 @@ class MainScreen extends StatelessWidget {
             ]
           )
         : Container(
-            height: 250.0,
             alignment: Alignment.center,
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
                 Text('There is currently no question loaded!',
-                  style: theme.textTheme.headline6),
-                FlatButton(
+                  style: theme.textTheme.bodyText2),
+                SizedBox(height: 10.0),
+                RaisedButton(
                   child: Container(
-                    width: 100.0,
+                    width: 250.0,
                     height: 40.0,
                     alignment: Alignment.center,
-                    child: Text('Start Inference Process'),
+                    child: Text('Start Inference Process', style: theme.textTheme.headline6,),
                   ),
                   onPressed: () => firstQuestion(context)
                 )
@@ -152,7 +152,10 @@ class RouteHome extends StatelessWidget {
           ),
           Visibility(
             visible: prov.showDebugger,
-            child: WidgetDebugger(key: debuggerKey),
+            child: Container(
+              width: 500.0,
+              child: WidgetDebugger(key: debuggerKey),
+            ),
           ),
         ]
       )
@@ -167,14 +170,16 @@ class RouteHome extends StatelessWidget {
         builder: (context, prov, _) => WidgetSizeRequirement(
           minHeight: 200, minWidth: 300,
           builder: (context, constraints) {
-            return constraints.maxWidth <= 800.0
+            return constraints.maxWidth <= 900.0
               ? buildConstrained(context, prov)
               : buildFull(context, prov);
           }
         )
       ),
       onErr: (context, err) =>
-        Center(child: Text('Error loading knowledge base $err'))
+        Scaffold(
+          body: Center(child: Text('Error loading knowledge base $err'))
+        ),
     );
   }
 }

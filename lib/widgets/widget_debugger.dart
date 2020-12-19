@@ -10,6 +10,7 @@ import 'package:groningen_guide/kl/kl_rule.dart';
 
 import 'package:groningen_guide/kl_engine.dart';
 import 'package:groningen_guide/main.dart';
+import 'package:groningen_guide/model_actions.dart';
 import 'package:groningen_guide/widgets/widget_db_endpoint.dart';
 import 'package:groningen_guide/widgets/widget_db_question.dart';
 import 'package:groningen_guide/widgets/widget_db_rule.dart';
@@ -100,7 +101,6 @@ class WidgetDebuggerState extends State<WidgetDebugger> {
   Widget build(BuildContext context) {
     var theme = Theme.of(context);
     var view = Container(
-      width: 400.0,
       color: Colors.white,
       child: ListView(
         controller: controller,
@@ -120,10 +120,7 @@ class WidgetDebuggerState extends State<WidgetDebugger> {
               child: RaisedButton(
                 color: theme.primaryColor,
                 child: Text('Reset', style: theme.textTheme.button,),
-                onPressed: () {
-                  Provider.of<QuestionData>(context, listen: false).clear();
-                  Provider.of<KlEngine>(context, listen: false).clear();
-                }
+                onPressed: () => resetModel(context),
               ),
             ),
             const WidgetVariables(),
