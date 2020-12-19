@@ -12,9 +12,6 @@
             "description": "Defines whether the user has a goal",
             "conditions": [ "business OR leisure" ],
             "events": [ "userHasGoal = 1" ]
-        },
-        {
-            
         }
     ],
     "endpoints": [
