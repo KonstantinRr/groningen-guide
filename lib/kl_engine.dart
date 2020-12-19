@@ -359,8 +359,7 @@ class KlEngine extends ChangeNotifier {
 
   /// Creates an empty knowledge base with default initialized members
   KlEngine() {
-    klBaseProvider = KlBaseProvider(
-      KlBase(values: [], questions: [], rules: [], endpoints: []), this);
+    klBaseProvider = KlBaseProvider(KlBase(), this);
     expressionProvider = KlExpressionProvider(
       ExpressionStorage(klBaseProvider.base), this);
     contextProvider = KlContextProvider(

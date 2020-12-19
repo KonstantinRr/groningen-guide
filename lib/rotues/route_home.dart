@@ -6,15 +6,14 @@
 /// Livia Regus (S3354970): l.regus@student.rug.nl
 
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:groningen_guide/model_actions.dart';
+import 'package:groningen_guide/kl_engine.dart';
+import 'package:groningen_guide/loader/asset_loader.dart';
 import 'package:groningen_guide/widgets/action_info.dart';
 import 'package:groningen_guide/widgets/action_inspector.dart';
 import 'package:groningen_guide/widgets/widget_title.dart';
 import 'package:groningen_guide/widgets/width_size_requirement.dart';
-import 'package:provider/provider.dart';
-
-import 'package:groningen_guide/kl_engine.dart';
-import 'package:groningen_guide/loader/asset_loader.dart';
 import 'package:groningen_guide/widgets/widget_question.dart';
 import 'package:groningen_guide/widgets/widget_debugger.dart';
 

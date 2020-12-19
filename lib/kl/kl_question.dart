@@ -42,7 +42,7 @@ class KlQuestion extends MapObject {
   void read(dynamic map) {
     assertType<Map<String, dynamic>>(map);
     name = assertTypeGet<String>(map, 'name', allowNull: true);
-    description = assertTypeGet<String>(map, 'description');
+    description = assertTypeGet<String>(map, 'description', allowNull: true);
     image = assertTypeGet<String>(map, 'image', allowNull: true);
     maxAnswers = assertTypeGet<int>(map, 'maxAnswers', allowNull: true);
     conditions = assertTypeGetList<String>(map, 'conditions', converter: (e) => e as String);
@@ -55,6 +55,7 @@ class KlQuestion extends MapObject {
     'description': description,
     'image': image,
     'maxAnswers': maxAnswers,
-    'options': options?.map((e) => e.toJson())?.toList()
+    'conditions': conditions,
+    'options': options?.map((e) => e?.toJson())?.toList()
   };
 }
