@@ -40,10 +40,9 @@ class StudyGuide extends StatelessWidget {
   const StudyGuide({Key key}) : super(key: key);
 
   /// Generates a [Route] when no other matching route is found
-  Route onGenerateUnknownRoute(RouteSettings settings) {
-    return MaterialPageRoute(builder: (context) => const RouteUnknown(),
+  Route onGenerateUnknownRoute(RouteSettings settings) =>
+    MaterialPageRoute(builder: (context) => const RouteUnknown(),
       settings: RouteSettings(name: settings.name));
-  }
 
   /// Generates a [Route] for the specified [RouteSettings]
   Route onGenerateRoute(RouteSettings settings) {
