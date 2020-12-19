@@ -31,7 +31,7 @@ class EndpointWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var theme = Theme.of(context);
-    return ListView(
+    return Column(
       children: [
         Container(
           height: 50.0,
@@ -72,15 +72,17 @@ enum GoalDialogAction {
 }
 
 class EndpointDialog extends StatelessWidget {
-  final KlEndpoint endpoint;
-  const EndpointDialog({this.endpoint, Key key}) : super(key: key);
+  final List<KlEndpoint> endpoints;
+  const EndpointDialog({this.endpoints, Key key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return AlertDialog(
       content: Container(
         width: 500, height: 300,
-        child: EndpointWidget(endpoint: endpoint),
+        child: ListView(
+          children: endpoints.map((e) => EndpointWidget(endpoint: e)).toList(),
+        )
       ),
       actions: [
         FlatButton(
@@ -102,10 +104,10 @@ class EndpointDialog extends StatelessWidget {
   }
 }
 
-Future<GoalDialogAction> showEndpointDialog(BuildContext context, KlEndpoint endpoint) {
+Future<GoalDialogAction> showEndpointDialog(BuildContext context, List<KlEndpoint> endpoints) {
   return showDialog<GoalDialogAction>(
     context: context,
-    builder: (context) => EndpointDialog(endpoint: endpoint,)
+    builder: (context) => EndpointDialog(endpoints: endpoints,)
   ) ?? GoalDialogAction.Reset;
 }
 

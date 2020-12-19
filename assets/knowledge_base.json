@@ -12,6 +12,9 @@
             "description": "Defines whether the user has a goal",
             "conditions": [ "business OR leisure" ],
             "events": [ "userHasGoal = 1" ]
+        },
+        {
+            
         }
     ],
     "endpoints": [
@@ -198,40 +201,40 @@
         {
             "name": "Starbucks",
             "description": " ",
-            "conditions": [ "cafe AND studying AND leisure AND gang AND (average) AND coffee AND (breakfast OR lunch)" ]
+            "conditions": [ "cafe AND leisure AND average AND (studying OR coffee) AND (breakfast OR lunch)" ]
         },
         {
             "name": "Doppio Espresso",
             "description": " ",
-            "conditions": [ "cafe AND leisure AND gang AND (cheap OR average) AND coffee AND (breakfast OR lunch)" ]
+            "conditions": [ "cafe AND leisure AND (cheap OR average) AND coffee AND (breakfast OR lunch)" ]
         },
         {
             "name": "Coffee Company",
             "description": " ",
-            "conditions": [ "cafe AND leisure AND (gang OR family OR studying) AND (cheap OR average) AND coffee AND (breakfast OR lunch)" ]
+            "conditions": [ "cafe AND leisure AND (cheap OR average) AND (coffee OR studying) AND (breakfast OR lunch)" ]
         },
         {
             "name": "Black & Bloom",
             "image":"assets/images/blackBloom.jpg",
             "description": "Experiment with white and black coffee at Black & Bloom, once here you'll want to come back again ",
-            "conditions": [ "cafe AND leisure AND gang AND (cheap OR average) AND coffee AND (breakfast OR lunch)" ]
+            "conditions": [ "cafe AND leisure AND (cheap OR average) AND coffee AND (breakfast OR lunch)" ]
         },
         {
             "name": "Chocolate Company",
             "image": "assets/images/chocoCompany.jpg",
             "description": "Your sweet tooth thirves for some chocolate? This is where you want to be ;)",
-            "conditions": [ "cafe AND leisure AND gang AND (cheap OR average) AND hot_chocolate AND (breakfast OR lunch)" ]
+            "conditions": [ "cafe AND leisure AND (cheap OR average) AND hot_chocolate AND (breakfast OR lunch)" ]
         },
         {
             "name": "Smooth Brothers",
             "image":"assets/images/smoothBrothers.jpg",
             "description": "The perfect place if you feel in a jazzy mood and want to delight yourself with a smoothy among other ",
-            "conditions": [ "cafe AND leisure AND (gang AND cheap OR cheap OR average) AND smoothies AND (breakfast OR lunch)" ]
+            "conditions": [ "cafe AND leisure AND average AND smoothies AND (breakfast OR lunch) AND NOT studying" ]
         },
         {
             "name": "Cappuvino",
             "description": "A special place",
-            "conditions": [ "cafe AND (leisure OR business)" ]
+            "conditions": [ "cafe AND (leisure OR business) AND average AND (breakfast OR lunch) AND coffee" ]
         }
     ],
     "questions": [
@@ -262,7 +265,7 @@
             "conditions": [ "hotel OR cafe OR restaurant" ],
             "options": [
                 {
-                    "description": "Business",
+                    "description": "Business Meeting",
                     "events": [ "business = 1" ]
                 },
                 {
@@ -278,17 +281,17 @@
             "conditions": [ "userHasGoal"],
             "options": [
                 {
-                    "conditions": [ "NOT cafe" ],
+                    "conditions": [ "restaurant OR hotel" ],
                     "description": "Let the money flow",
-                    "events": [ "expensive = 1", "money = 1" ]
+                    "events": [ "expensive = 1" ]
                 },
                 {
                     "description": "Mid-range",
-                    "events": [ "average = 1", "money = 1" ]
+                    "events": [ "average = 1" ]
                 },
                 {
                     "description": "On a budget",
-                    "events": [ "cheap = 1", "money = 1" ]
+                    "events": [ "cheap = 1" ]
                 }
             ]
         },
@@ -296,14 +299,13 @@
             "name": "What do you have in mind?",
             "description": "",
             "maxAnswers": 1,
-            "conditions": [ "money" ],
+            "conditions": [ "restaurant OR hotel" ],
             "options": [
                 {
                     "description": "Family and children",
                     "events": [ "family = 1", "mind = 1"  ]
                 },
                 {
-                    "conditions": [ "NOT cafe"],
                     "description": "Romantic evening",
                     "events": [ "romantic = 1", "mind = 1" ]
                 },
@@ -312,7 +314,6 @@
                     "events": [ "cultural = 1", "mind = 1" ]
                 },
                 {
-                    "conditions": [ "NOT cafe"],
                     "description": "Bar scene",
                     "events": [ "bar = 1", "mind = 1" ]
                 },
@@ -341,7 +342,7 @@
                     "events": [ "lunch = 1", "meal = 1" ]
                 },
                 {
-                    "conditions": [ "NOT cafe" ],
+                    "conditions": [ "restaurant" ],
                     "description": "Dinner",
                     "events": [ "dinner = 1", "meal = 1" ]
                 }

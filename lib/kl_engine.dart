@@ -369,7 +369,7 @@ class KlEngine extends ChangeNotifier {
 
   /// Loads a new knowledge base from a JSON encoded [String]
   void loadFromString(String string) {
-    try {
+    //try {
       // code that might throw
       var map = json.decode(string);
       var nklBase = KlBaseProvider(
@@ -386,9 +386,9 @@ class KlEngine extends ChangeNotifier {
       contextProvider = ncontextModel;
       // notifies listeners on the state change
       notifyAll();
-    } catch (e) {
-      throw e;
-    }
+    //} catch (e) {
+    //  throw e;
+    //}
   }
 
   void clear() {

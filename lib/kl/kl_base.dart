@@ -26,32 +26,41 @@ class KlBase extends MapObject {
   /// Stores the list of potential endpoints
   List<KlEndpoint> endpoints;
 
+  /// Creates a zero initalized knowledge base. All members are null
+  KlBase.zero();
+
   /// Creates a new knowledge base by supplying the member variables
-  KlBase({this.values, this.rules, this.questions, this.endpoints});
+  KlBase({List<KlVariable> values, List<KlRule> rules,
+    List<KlQuestion> questions, List<KlEndpoint> endpoints}) :
+    values = values ?? [],
+    rules = rules ?? [],
+    questions = questions ?? [],
+    endpoints = endpoints ?? [];
+  
   /// Creates a new question option using a JSON deserialized object
-  factory KlBase.fromJson(dynamic map) => KlBase()..read(map);
+  factory KlBase.fromJson(dynamic map) => KlBase.zero()..read(map);
 
   /// Reads the knowledge base object using a JSON deserialized object
   @override
   void read(dynamic map) {
     assertType<Map<String, dynamic>>(map);
-    values = assertTypeGet<List>(map, 'values').map((e) => KlVariable.fromJson(e)).toList();
-    rules = assertTypeGet<List>(map, 'rules').map((e) => KlRule.fromJson(e)).toList();
-    questions = assertTypeGet<List>(map, 'questions').map((e) => KlQuestion.fromJson(e)).toList();
-    endpoints = assertTypeGet<List>(map, 'endpoints').map((e) => KlEndpoint.fromJson(e)).toList();
+    values = assertTypeGetList<KlVariable>(map, 'values', converter: (e) => KlVariable.fromJson(map));
+    rules = assertTypeGetList<KlRule>(map, 'rules', converter: (e) => KlRule.fromJson(e));
+    questions = assertTypeGetList<KlQuestion>(map, 'questions', converter: (e) => KlQuestion.fromJson(e));
+    endpoints = assertTypeGetList<KlEndpoint>(map, 'endpoints', converter: (e) => KlEndpoint.fromJson(e));
   }
 
   /// Serializes this knowledge base to a map object
   @override
   Map<String, dynamic> toJson() => {
-    'values': values.map((e) => e.toJson()).toList(),
-    'rules': rules.map((e) => e.toJson()).toList(),
-    'questions': questions.map((e) => e.toJson()).toList(),
-    'endpoints': endpoints.map((e) => e.toJson()).toList()
+    'values': values?.map((e) => e?.toJson())?.toList(),
+    'rules': rules?.map((e) => e?.toJson())?.toList(),
+    'questions': questions?.map((e) => e?.toJson())?.toList(),
+    'endpoints': endpoints?.map((e) => e?.toJson())?.toList()
   };
 
   @override
   String toString() => 'KlBase['
-    'values:${values.length},rules:${rules.length},'
-    'questions:${questions.length},endpoint:${endpoints.length}]';
+    'values:${values?.length},rules:${rules?.length},'
+    'questions:${questions?.length},endpoint:${endpoints?.length}]';
 }

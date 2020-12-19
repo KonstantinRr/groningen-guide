@@ -30,8 +30,9 @@ Future<void> nextQuestion(BuildContext context) async {
   var endpoints = engine.checkEndpoints().toList();
 
   if (endpoints.isNotEmpty) {
+    print('Found Endpoints $endpoints');
     // we reached an endpoint and want to show the dialog
-    var result = await showEndpointDialog(context, endpoints.first); // TODO multiple endpoints
+    var result = await showEndpointDialog(context, endpoints); // TODO multiple endpoints
     switch (result) {
       case GoalDialogAction.Previous:
         previousQuestion(context); // TODO side effects
