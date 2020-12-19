@@ -10,9 +10,12 @@ import 'package:groningen_guide/kl_engine.dart';
 import 'package:groningen_guide/kl_parser.dart';
 import 'package:provider/provider.dart';
 
+/// This [Widget] is used to display an event.
 class WidgetEvent extends StatelessWidget {
   final TreeElement element;
-  const WidgetEvent({Key key, @required this.element}) : super(key: key);
+  const WidgetEvent({Key key, @required this.element}) :
+    assert(element != null),
+    super(key: key);
   
   @override
   Widget build(BuildContext context) {
