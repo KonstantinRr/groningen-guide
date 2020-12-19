@@ -30,7 +30,7 @@ class MainScreen extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
               Expanded(child: QuestionWidget(
-                question: questionData.current,
+                data: questionData.current,
                 change: (index) => questionData.changeOption(index),
               )),
               Row(

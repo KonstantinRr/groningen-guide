@@ -7,6 +7,7 @@
 
 import 'package:flutter/material.dart';
 
+/// The title [Widget] that is build as part of the [AppBar].
 class WidgetTitle extends StatelessWidget {
   const WidgetTitle({Key key}) : super(key: key);
 
