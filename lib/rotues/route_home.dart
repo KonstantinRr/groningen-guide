@@ -27,57 +27,57 @@ class MainScreen extends StatelessWidget {
     return Consumer<QuestionData>(
       builder: (context, questionData, _) => questionData.hasQuestion
         ? Column(
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            children: [
-              Expanded(child: QuestionWidget(
-                data: questionData.current,
-                change: (index) => questionData.changeOption(index),
-              )),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: <Widget> [
-                  Container(
-                    margin: const EdgeInsets.only(top: 15, bottom: 15.0),
-                    height: 40.0,
-                    width: 100.0,
-                    child: RaisedButton(
-                      child: const Text('Previous'),
-                      onPressed: () => previousQuestion(context)
-                    ),
-                  ),
-                  const SizedBox(width: 10.0,),
-                  Container(
-                    margin: const EdgeInsets.only(top: 15.0, bottom: 15.0),
-                    height: 40.0,
-                    width: 100.0,
-                    child: RaisedButton(
-                      child: const Text('Next'),
-                      onPressed: () => nextQuestion(context)
-                    ),
-                  )
-                ]
-              )
-            ]
-          )
-        : Container(
-            alignment: Alignment.center,
-            child: Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: [
+            Expanded(child: QuestionWidget(
+              data: questionData.current,
+              change: (index) => questionData.changeOption(index),
+            )),
+            Row(
               mainAxisAlignment: MainAxisAlignment.center,
-              children: <Widget>[
-                Text('There is currently no question loaded!',
-                  style: theme.textTheme.bodyText2),
-                SizedBox(height: 10.0),
-                RaisedButton(
-                  child: Container(
-                    width: 250.0,
-                    height: 40.0,
-                    alignment: Alignment.center,
-                    child: Text('Start Inference Process', style: theme.textTheme.headline6,),
+              children: <Widget> [
+                Container(
+                  margin: const EdgeInsets.only(top: 15, bottom: 15.0),
+                  height: 40.0,
+                  width: 100.0,
+                  child: RaisedButton(
+                    child: const Text('Previous'),
+                    onPressed: () => previousQuestion(context)
                   ),
-                  onPressed: () => firstQuestion(context)
+                ),
+                const SizedBox(width: 10.0,),
+                Container(
+                  margin: const EdgeInsets.only(top: 15.0, bottom: 15.0),
+                  height: 40.0,
+                  width: 100.0,
+                  child: RaisedButton(
+                    child: const Text('Next'),
+                    onPressed: () => nextQuestion(context)
+                  ),
                 )
               ]
             )
+          ]
+        )
+      : Container(
+          alignment: Alignment.center,
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: <Widget>[
+              Text('There is currently no question loaded!',
+                style: theme.textTheme.bodyText2),
+              SizedBox(height: 10.0),
+              RaisedButton(
+                child: Container(
+                  width: 250.0,
+                  height: 40.0,
+                  alignment: Alignment.center,
+                  child: Text('Start Inference Process', style: theme.textTheme.headline6,),
+                ),
+                onPressed: () => firstQuestion(context)
+              )
+            ]
+          )
         )
     );
   }
