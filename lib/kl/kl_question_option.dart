@@ -21,29 +21,33 @@ class KlQuestionOption extends MapObject {
   List<String> events;
   /// List of conditions that need to be fullfilled 
   List<String> conditions;
-
+  /// Whether this question option is exclusive
   bool exclusive;
 
+  /// Creates a question option where all members are null.
+  KlQuestionOption.zero();
+
   /// Creates a new question option by supplying the member variables
-  KlQuestionOption({this.description, this.events});
+  KlQuestionOption({this.description, List<String> events, List<String> conditions}) :
+    events = events ?? [], conditions = conditions ?? [];
   /// Creates a new question option using a JSON deserialized object
-  factory KlQuestionOption.fromJson(dynamic map) => KlQuestionOption()..read(map);
+  factory KlQuestionOption.fromJson(dynamic map) => KlQuestionOption.zero()..read(map);
 
   /// Reads the question option object using a JSON deserialized object
   void read(dynamic map) {
     assertType<Map<String, dynamic>>(map);
     description = assertTypeGet<String>(map, 'description');
     exclusive = map['exclusive'] ?? false;
-    events = assertTypeGet<List>(map, 'events')
-      .map<String>((e) => e as String).toList();
-    conditions = assertTypeGet<List>(map, 'conditions', allowNull: true, def: [])
-      .map<String>((e) => e as String).toList();
+    events = assertTypeGetList<String>(map, 'events', converter: (e) => e as String);
+    conditions = assertTypeGetList<String>(map, 'conditions', allowNull: true, def: [],
+      converter: (e) => e as String);
   }
 
   /// Serializes this object as a JSON object
   Map<String, dynamic> toJson() => {
     'description': description,
     'events': events,
+    'conditions': conditions,
     'exclusive': exclusive
   };
 }
