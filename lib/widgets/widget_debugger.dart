@@ -50,32 +50,6 @@ class WidgetDebuggerList<T> extends StatelessWidget {
   }
 }
 
-class WidgetRuleList extends StatelessWidget {
-  final List<KlRule> rules;
-  const WidgetRuleList({Key key, @required this.rules}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.stretch,
-      children: [
-        Container(
-          margin: const EdgeInsets.only(top: 10, bottom: 5),
-          alignment: Alignment.center,
-          child: Text('Rules', style: Theme.of(context).textTheme.headline5, ),
-        ),
-        ...
-        enumerate(rules).map<Widget>(
-          (r) => Container(
-            padding: const EdgeInsets.all(7),
-            color: r.item1.isOdd ? Colors.grey[200] : Colors.grey[100],
-            child: WidgetRule(rule: r.item2)),
-        ),
-      ],
-    );
-  }
-}
-
 class WidgetDebugger extends StatefulWidget {
   final bool includeScrollBar;
   final bool showAlways;
