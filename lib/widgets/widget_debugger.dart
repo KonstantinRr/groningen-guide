@@ -37,6 +37,10 @@ class WidgetDebuggerList<T> extends StatelessWidget {
           alignment: Alignment.center,
           child: Text(name, style: theme.textTheme.headline5,),
         ),
+        Padding(
+          padding: EdgeInsets.all(5),
+          child: Text('Loaded ${list.length} entries', style: theme.textTheme.bodyText1,),
+        ),
         ...
         enumerate(list).map<Widget>(
           (r) => Container(

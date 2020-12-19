@@ -197,6 +197,13 @@ class ContextModel {
 
   Iterable<MapEntry<String, int>> get entries => model.entries;
 
+  int countTrueFacts() {
+    int count = 0;
+    for (var i in model.values)
+      if (i != 0) count++;
+    return count;
+  }
+
   void clear() {
     model.clear();
     changed = true;
