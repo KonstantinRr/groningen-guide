@@ -18,17 +18,23 @@ class KlEndpoint extends MapObject {
   /// The optional endpoint's image
   String image;
 
-  KlEndpoint({this.name, this.description, this.conditions});
+  /// Creates an empty endpoint where all members are null.
+  KlEndpoint.zero();
 
-  factory KlEndpoint.fromJson(dynamic map) => KlEndpoint()..read(map);
+  /// Creates an endpoint using the supplied parameters
+  KlEndpoint({String name, String description,
+    String image, List<String> conditions}) :
+    conditions = conditions ?? [];
+
+  /// Creates an endpoint by parsing the data from a JSON file
+  factory KlEndpoint.fromJson(dynamic map) => KlEndpoint.zero()..read(map);
 
   @override
   void read(dynamic map) {
     assertType<Map<String, dynamic>>(map);
-    name = assertTypeGet<String>(map, "name");
-    description = assertTypeGet<String>(map, "description");
-    conditions = assertTypeGet<List>(map, 'conditions')
-      .map<String>((e) => e as String).toList();
+    name = assertTypeGet<String>(map, 'name', allowNull: true);
+    description = assertTypeGet<String>(map, 'description', allowNull: true);
+    conditions = assertTypeGetList<String>(map, 'conditions', converter: (e) => e as String);
     image = assertTypeGet<String>(map, 'image', allowNull: true);
   }
 

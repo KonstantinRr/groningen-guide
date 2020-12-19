@@ -10,7 +10,7 @@
         {
             "name": "User Goal",
             "description": "Defines whether the user has a goal",
-            "conditions": [ "business OR leisure" ],
+            "conditions": [ "business OR leisure OR studying" ],
             "events": [ "userHasGoal = 1" ]
         }
     ],
@@ -198,7 +198,7 @@
         {
             "name": "Starbucks",
             "description": " ",
-            "conditions": [ "cafe AND leisure AND average AND (studying OR coffee) AND (breakfast OR lunch)" ]
+            "conditions": [ "cafe AND (leisure OR business OR studying) AND average AND (coffee OR smoothies OR hot_chocolate) AND (breakfast OR lunch)" ]
         },
         {
             "name": "Doppio Espresso",
@@ -208,7 +208,7 @@
         {
             "name": "Coffee Company",
             "description": " ",
-            "conditions": [ "cafe AND leisure AND (cheap OR average) AND (coffee OR studying) AND (breakfast OR lunch)" ]
+            "conditions": [ "cafe AND (leisure OR studying) AND (cheap OR average) AND coffee AND (breakfast OR lunch)" ]
         },
         {
             "name": "Black & Bloom",
@@ -226,12 +226,12 @@
             "name": "Smooth Brothers",
             "image":"assets/images/smoothBrothers.jpg",
             "description": "The perfect place if you feel in a jazzy mood and want to delight yourself with a smoothy among other ",
-            "conditions": [ "cafe AND leisure AND average AND smoothies AND (breakfast OR lunch) AND NOT studying" ]
+            "conditions": [ "cafe AND leisure AND NOT studying AND average AND smoothies AND (breakfast OR lunch)" ]
         },
         {
             "name": "Cappuvino",
             "description": "A special place",
-            "conditions": [ "cafe AND (leisure OR business) AND average AND (breakfast OR lunch) AND coffee" ]
+            "conditions": [ "cafe AND (leisure OR business) AND (average OR cheap) AND (breakfast OR lunch) AND (coffee OR hot_chocolate)" ]
         }
     ],
     "questions": [
@@ -268,6 +268,10 @@
                 {
                     "description": "Leisure/Tourism",
                     "events": [ "leisure = 1" ]
+                },
+                {
+                    "description": "Studying",
+                    "events": [ "studying = 1" ]
                 }
             ]
         },
@@ -500,10 +504,6 @@
                 {
                     "description": "Coffee",
                     "events": [ "coffee = 1" ]
-                },
-                {
-                    "description": "Studying",
-                    "events": [ "studying = 1" ]
                 }
             ]
         },
