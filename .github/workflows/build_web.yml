@@ -12,6 +12,3 @@ jobs:
     - run: flutter pub get
     - run: flutter test
     - run: flutter build web
-      with:
-        artifacts: "build/web/*"
-        token: ${{ secrets.TOKEN }}

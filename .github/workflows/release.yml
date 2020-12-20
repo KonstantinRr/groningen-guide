@@ -1,0 +1,22 @@
+on: 
+  push:
+    tags:
+    - 'v*'
+name: Build release artifacts
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - uses: subosito/flutter-action@v1
+      with:
+        channel: dev
+    - run: flutter config --enable-web
+    - run: flutter pub get
+    - run: flutter test
+    - run: flutter build web
+    - uses: ncipollo/release-action@v1
+      with:
+        artifacts: "build/web/*"
+        bodyFile: "release.md"
+        token: ${{ secrets.GITHUB_TOKEN }}
