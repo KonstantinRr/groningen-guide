@@ -7,6 +7,8 @@
 
 import 'package:groningen_guide/kl/kl_helpers.dart';
 
+/// ---- Specific Knowledge Base implementations ---- ///
+
 /// This class represents an endpoint in the knowledge base.
 class KlEndpoint extends MapObject {
   /// The endpoint's unique name

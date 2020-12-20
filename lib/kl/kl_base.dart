@@ -1,4 +1,3 @@
-import 'package:groningen_guide/kl/kl_endpoint.dart';
 /// This project is build during the course Knowledge Technology Practical at the
 /// UNIVERSITY OF GRONINGEN (WBAI014-05).
 /// The project was build by:
@@ -6,6 +5,7 @@ import 'package:groningen_guide/kl/kl_endpoint.dart';
 /// Nicholas Koundouros (S3726444) n.koundouros@student.rug.nl
 /// Livia Regus (S3354970): l.regus@student.rug.nl
 
+import 'package:groningen_guide/kl/kl_endpoint.dart';
 import 'package:groningen_guide/kl/kl_helpers.dart';
 import 'package:groningen_guide/kl/kl_question.dart';
 import 'package:groningen_guide/kl/kl_rule.dart';
