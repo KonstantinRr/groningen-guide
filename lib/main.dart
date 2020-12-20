@@ -35,6 +35,13 @@ Iterable<Tuple2<int, T>> enumerate<T>(Iterable<T> it) sync* {
   }
 }
 
+Iterable<Tuple2<A, B>> chain2<A, B>(Iterable<A> first, Iterable<B> second) sync* {
+  var it1 = first.iterator;
+  var it2 = second.iterator;
+  while (it1.moveNext() && it2.moveNext())
+    yield Tuple2<A, B>(it1.current, it2.current);
+}
+
 /// The main application widget that creates a [MaterialApp]
 class StudyGuide extends StatelessWidget {
   const StudyGuide({Key key}) : super(key: key);

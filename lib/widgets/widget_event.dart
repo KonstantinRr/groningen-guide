@@ -26,6 +26,7 @@ class WidgetEvent extends StatelessWidget {
         Expanded(child: Text(element.toString(), style: theme.textTheme.bodyText2)),
         IconButton(
           icon: Icon(Icons.play_arrow, color: Colors.green),
+          splashRadius: 15.0,
           onPressed: () {
             var contextProvider = Provider.of<KlContextProvider>(context, listen: false);
             contextProvider.updateContextModel((cm) {

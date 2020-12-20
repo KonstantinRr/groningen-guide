@@ -15,6 +15,7 @@ import 'package:groningen_guide/widgets/widget_db_endpoint.dart';
 import 'package:groningen_guide/widgets/widget_db_question.dart';
 import 'package:groningen_guide/widgets/widget_db_rule.dart';
 import 'package:groningen_guide/widgets/widget_db_variables.dart';
+import 'package:groningen_guide/widgets/widget_history.dart';
 import 'package:provider/provider.dart';
 
 class WidgetDebuggerList<T> extends StatelessWidget {
@@ -97,6 +98,7 @@ class WidgetDebuggerState extends State<WidgetDebugger> {
           name: 'Question',
           builder: (question) => WidgetQuestion(question: question),
       )),
+      (context) => WidgetHistory(),
     ];
   }
 
@@ -128,7 +130,11 @@ class WidgetDebuggerState extends State<WidgetDebugger> {
           Expanded(child: FlatButton(
             child: Text('Questions', style: TextStyle(color: page == 3 ? theme.accentColor : null),),
             onPressed: () => setState(() => page = 3),
-          ))
+          )),
+          Expanded(child: FlatButton(
+            child: Text('History', style: TextStyle(color: page == 4 ? theme.accentColor : null)),
+            onPressed: () => setState(() => page = 4),
+          ),)
         ],
       ),
     );
@@ -142,23 +148,27 @@ class WidgetDebuggerState extends State<WidgetDebugger> {
       child: ListView(
         controller: controller,
           children: <Widget>[
-            Container(
-              height: 45.0,
-              margin: const EdgeInsets.only(left: 15.0, right: 15.0, top: 10.0, bottom: 5.0),
-              child: RaisedButton(
-                color: theme.primaryColor,
-                child: Text('Edit Knowledge Base', style: theme.textTheme.button,),
-                onPressed: () =>
-                  Navigator.of(context).pushNamed('/editor')),
-            ),
-            Container(
-              height: 45.0,
-              margin: const EdgeInsets.only(left: 15.0, right: 15.0, top: 5.0, bottom: 10.0),
-              child: RaisedButton(
-                color: theme.primaryColor,
-                child: Text('Reset', style: theme.textTheme.button,),
-                onPressed: () => resetModel(context),
-              ),
+            Row(
+              children: <Widget> [
+                Expanded(child: Container(
+                  height: 45.0,
+                  margin: const EdgeInsets.all(5.0),
+                  child: RaisedButton(
+                    color: theme.primaryColor,
+                    child: Text('Edit', style: theme.textTheme.button,),
+                    onPressed: () =>
+                      Navigator.of(context).pushNamed('/editor')),
+                )),
+                Expanded(child: Container(
+                  height: 45.0,
+                  margin: const EdgeInsets.all(5.0),
+                  child: RaisedButton(
+                    color: theme.primaryColor,
+                    child: Text('Reset', style: theme.textTheme.button,),
+                    onPressed: () => resetModel(context),
+                  ),
+                )),
+              ]
             ),
             _buildHeader(context),
             builders[page](context)

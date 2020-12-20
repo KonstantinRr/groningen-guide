@@ -37,7 +37,7 @@ class WidgetVariablesState extends State<WidgetVariables> {
             ),
             Padding(
               padding: const EdgeInsets.all(5),
-              child: Text('Loaded $trueFacts of $totalFacts totalFacts'),
+              child: Text('Loaded $trueFacts of $totalFacts total facts'),
             ),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 5.0),
