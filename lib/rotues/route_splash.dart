@@ -6,6 +6,7 @@
 /// Livia Regus (S3354970): l.regus@student.rug.nl
 
 import 'package:flutter/material.dart';
+import 'package:groningen_guide/widgets/widget_iconref.dart';
 import 'package:groningen_guide/widgets/widget_logo.dart';
 import 'package:groningen_guide/widgets/width_size_requirement.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -35,7 +36,6 @@ class RouteSplashState extends State<RouteSplash> {
   @override
   Widget build(BuildContext context) {
     var theme = Theme.of(context);
-    var style = theme.textTheme.bodyText1;
 
     return WidgetSizeRequirement(
       minHeight: 210.0,
@@ -69,22 +69,7 @@ class RouteSplashState extends State<RouteSplash> {
             Positioned(
               bottom: 0.0, height: 50.0,
               left: 0, right: 0,
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: <Widget> [
-                  Text('Icons made by ', style: style,),
-                  InkWell(
-                    child: Text('Freepik', style: style.copyWith(color: Colors.lightBlue),),
-                    onTap: () => launch('https://www.flaticon.com/authors/freepik'),
-                  ),
-                  Text(' from ', style: style,),
-                  InkWell(
-                    child: Text('Flaticon', style: style.copyWith(color: Colors.lightBlue),),
-                    onTap: () => launch('https://www.flaticon.com/'),
-                  ),
-                ]
-              )
+              child: WidgetIconRef(name: 'Freepik', linkName: 'freepik',)
             )
           ]
         )

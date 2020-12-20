@@ -6,6 +6,9 @@
 /// Livia Regus (S3354970): l.regus@student.rug.nl
 
 import 'package:flutter/material.dart';
+import 'package:logging/logging.dart';
+import 'package:tuple/tuple.dart';
+
 import 'package:groningen_guide/kl_engine.dart';
 import 'package:groningen_guide/rotues/route_editor.dart';
 import 'package:groningen_guide/rotues/route_end.dart';
@@ -14,8 +17,6 @@ import 'package:groningen_guide/rotues/route_history.dart';
 import 'package:groningen_guide/rotues/route_home.dart';
 import 'package:groningen_guide/rotues/route_splash.dart';
 import 'package:groningen_guide/rotues/route_unknown.dart';
-import 'package:logging/logging.dart';
-import 'package:tuple/tuple.dart';
 
 void main() {
   Logger.root.level = Level.ALL; // defaults to Level.INFO
