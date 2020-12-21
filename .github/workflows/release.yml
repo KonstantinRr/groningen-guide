@@ -1,40 +1,35 @@
-on: 
-  push:
-    tags:
-    - 'v*'
-name: Build release artifacts
+name: Deploy
+on:
+  release:
+    types: [created]
 jobs:
   build:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-20.04
     steps:
     - uses: actions/checkout@v2
     - uses: subosito/flutter-action@v1
       with:
         channel: dev
-    - run: flutter config --enable-web
-    - run: flutter pub get
-    - run: flutter test
-    - run: flutter build web
-    - name: Zip the build artifacts
+    #- name: Compress Sources
+    #  run: |
+    #    mkdir -p build
+    #    tar -czvf build/source.tar.gz ./
+    #    zip -r build/source.zip ./
+    - name: Build Flutter
+      run: |
+        flutter config --enable-web
+        flutter config --enable-linux-desktop
+        flutter config --enable-windows-desktop
+        flutter pub get
+        flutter test
+        flutter build web
+    - name: Compress Artifacts
       run: |
         zip -r build/build_web.zip build/web/
-    - name: Create Release
-      id: create_release
-      uses: actions/create-release@v1
+        tar -czvf build/build_web.tar.gz build/web/
+    - name: Upload Artificats
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      with:
-        tag_name: ${{ github.ref }}
-        release_name: Release ${{ github.ref }}
-        draft: true
-        prerelease: true
-    - name: Upload Release Asset
-      id: upload-release-asset 
-      uses: actions/upload-release-asset@v1
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      with:
-        upload_url: ${{ steps.create_release.outputs.upload_url }} # This pulls from the CREATE RELEASE step above, referencing it's ID to get its outputs object, which include a `upload_url`. See this blog post for more info: https://jasonet.co/posts/new-features-of-github-actions/#passing-data-to-future-steps 
-        asset_path: ./build/build_web.zip
-        asset_name: web.zip
-        asset_content_type: application/zip
+      run: |
+        tag_name="${GITHUB_REF##*/}"
+        hub release edit $(find ./build -type f \( -name "*.zip" -o -name "*.tar.gz" \) -printf "-a %p ") -m "" "$tag_name" 
