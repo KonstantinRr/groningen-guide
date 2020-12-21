@@ -25,8 +25,8 @@ jobs:
         flutter build web
     - name: Compress Artifacts
       run: |
-        zip -r build/build_web.zip build/web/
-        tar -czvf build/build_web.tar.gz build/web/
+        (cd build/web && zip -r ../web.zip .)
+        (cd build/web && tar -czvf ../web.tar.gz .)
     - name: Upload Artificats
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
