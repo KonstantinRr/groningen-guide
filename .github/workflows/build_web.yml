@@ -21,7 +21,7 @@ jobs:
     - name: Copy Artifacts to Deployment
       run: |
         mkdir -p artifacts
-        cp build/web/* artifacts/
+        cp -r build/web/* artifacts/
     - name: Deploy
       uses: JamesIves/github-pages-deploy-action@3.7.1
       with:
