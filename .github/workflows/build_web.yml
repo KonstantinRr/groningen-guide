@@ -1,5 +1,5 @@
 on: [push, pull_request]
-name: Build web version
+name: build_web
 jobs:
   build:
     runs-on: ubuntu-latest

@@ -1,5 +1,8 @@
 ## Groningen Guide | UNIVERSITY OF GRONINGEN
 
+![Latest Web Build](https://github.com/KonstantinRr/groningen-guide/workflows/build_web/badge.svg)
+![Latest Release](https://github.com/KonstantinRr/groningen-guide/workflows/deploy/badge.svg)
+
 The Groningen tourist and study guide.
 View the live website [here](https://studyguide.esync.dev).
 
