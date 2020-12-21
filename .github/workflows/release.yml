@@ -1,4 +1,4 @@
-name: deploy
+name: latest_release
 on:
   release:
     types: [created]
