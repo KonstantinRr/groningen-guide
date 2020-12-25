@@ -263,21 +263,24 @@
         },
         {
             "name": "Starbucks",
-            "description": " ",
+            "image":"assets/images/strabucksUB.jpg",
+            "description": "In need for a study place while combining it with a chat with your friend? Here you go, the best coffee right in the building of the University library, what else can one wish for? ",
             "conditions": [
                 "cafe AND studying AND leisure AND gang AND (average) AND coffee AND (breakfast OR lunch)"
             ]
         },
         {
             "name": "Doppio Espresso",
-            "description": " ",
+            "image":"assets/images/doppioEspresso.jpg",
+            "description": "This is the place to be if you'd like to have a cup of refreshing coffee with your friends.",
             "conditions": [
                 "cafe AND leisure AND gang AND (cheap OR average) AND coffee AND (breakfast OR lunch)"
             ]
         },
         {
             "name": "Coffee Company",
-            "description": " ",
+            "image":"assets/images/cofeeCompany.jpg",
+            "description": "This is the perfect place to serve a coffee in a relaxed and cozy atmosphere, be it for studying, going out with your friends or family.",
             "conditions": [
                 "cafe AND leisure AND (gang OR family OR studying) AND (cheap OR average) AND coffee AND (breakfast OR lunch)"
             ]
