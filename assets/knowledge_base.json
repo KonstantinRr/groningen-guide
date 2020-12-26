@@ -97,168 +97,157 @@
             "name": "Mr Mofongo",
             "description": " ",
             "conditions": [
-                "restaurant AND (business OR leisure) AND (romantic OR bar) AND average AND area_citycenter AND gang AND (dinner OR lunch)"
+                "restaurant AND (business OR leisure) AND (romantic OR bar OR gang) AND (average OR expensive)  AND (dinner OR lunch)"
             ]
         },
         {
             "name": "Mr Smith's",
             "description": " ",
             "conditions": [
-                "restaurant AND (business OR leisure) AND (romantic OR bar) AND average AND gang AND (dinner OR lunch)"
+                "restaurant AND (business OR leisure) AND (romantic OR bar) AND (lang_thai OR lang_dutch) AND average  AND (dinner OR lunch)"
             ]
         },
         {
             "name": "Bronco",
             "description": " ",
             "conditions": [
-                "restaurant AND leisure AND  bar AND average AND area_citycenter AND gang AND region_american AND lang_US AND (dinner OR lunch)"
+                "restaurant AND leisure  AND average  AND (gang OR bar) AND region_american AND lang_US AND (dinner OR lunch)"
             ]
         },
         {
             "name": "De Betere Tijden",
             "description": " ",
             "conditions": [
-                "restaurant AND (business OR leisure) AND romantic AND average AND area_citycenter AND region_european AND lang_dutch AND (dinner OR lunch)"
+                "restaurant AND (business OR leisure) AND romantic AND average  AND region_european AND lang_dutch AND (dinner OR lunch)"
             ]
         },
         {
             "name": "De Kleine Heerlijkheid",
             "description": " ",
             "conditions": [
-                "restaurant AND (business OR leisure) AND romantic AND average AND area_citycenter AND region_european AND lang_dutch AND (dinner OR lunch)"
+                "restaurant AND (business OR leisure) AND romantic AND average  AND region_european AND lang_dutch AND (dinner OR lunch)"
             ]
         },
         {
             "name": "Cho Fah",
             "description": " ",
             "conditions": [
-                "restaurant AND (business OR leisure) AND average AND area_citycenter AND region_asian AND lang_thai AND gang AND (dinner OR lunch)"
+                "restaurant AND (business OR leisure) AND average  AND region_asian AND lang_thai AND cultural AND (dinner OR lunch)"
             ]
         },
         {
             "name": "Gustatio",
             "description": " ",
             "conditions": [
-                "restaurant AND (business OR leisure) AND romantic AND average AND area_citycenter AND region_european AND lang_italian AND (dinner OR lunch)"
+                "restaurant AND (business OR leisure) AND romantic AND average  AND region_european AND lang_italian AND (dinner OR lunch)"
             ]
         },
         {
             "name": "Da Vinci",
             "description": " ",
             "conditions": [
-                "restaurant AND (business OR leisure) AND romantic AND average AND area_citycenter AND region_european AND lang_italian AND (dinner OR lunch)"
+                "restaurant AND (business OR leisure) AND (romantic OR cultural) AND average AND region_european AND lang_italian AND (dinner OR lunch)"
             ]
         },
         {
             "name": "Ouzerie De Olijfboom",
             "description": " ",
             "conditions": [
-                "restaurant AND (business OR leisure) AND gang AND average AND area_citycenter AND region_european AND lang_greek AND (dinner OR lunch)"
+                "restaurant AND (business OR leisure) AND gang AND average  AND region_european AND lang_greek AND (dinner OR lunch)"
             ]
         },
         {
             "name": "Thai Jasmine",
             "description": " ",
             "conditions": [
-                "restaurant AND (business OR leisure) AND gang AND average AND area_citycenter AND region_asian AND lang_thai AND (dinner OR lunch)"
+                "restaurant AND (business OR leisure) AND cheap AND gang AND region_asian AND lang_thai AND (dinner OR lunch)"
             ]
         },
         {
             "name": "Imono",
             "description": " ",
             "conditions": [
-                "restaurant AND (business OR leisure) AND gang AND romantic AND average AND area_citycenter AND region_asian AND lang_japanese AND dinner"
+                "restaurant AND (business OR leisure) AND romantic AND (average OR expensive) AND region_asian AND lang_japanese AND dinner"
             ]
         },
         {
             "name": "Hanasato",
             "description": " ",
             "conditions": [
-                "restaurant AND romantic AND fine AND area_citycenter AND region_asian AND lang_japanese AND dinner"
+                "restaurant AND romantic AND expensive  AND region_asian AND lang_japanese AND dinner"
             ]
         },
         {
             "name": "De Pijp Wine & Dine",
             "description": " ",
             "conditions": [
-                "restaurant AND romantic AND fine AND area_citycenter AND region_european AND lang_french AND dinner"
+                "restaurant AND romantic AND expensive  AND region_european AND lang_french AND dinner"
             ]
         },
         {
             "name": "Vive la Vie",
             "description": " ",
             "conditions": [
-                "restaurant AND romantic AND fine AND area_citycenter AND region_european AND(lang_dutch OR lang_french) AND dinner"
+                "restaurant AND romantic AND expensive  AND region_european AND(lang_dutch OR lang_french) AND dinner"
             ]
         },
         {
             "name": "Voila",
             "description": " ",
             "conditions": [
-                "restaurant AND romantic AND fine AND area_citycenter AND region_european AND (lang_dutch OR lang_french) AND dinner"
-            ]
-        },
-        {
-            "name": "Restaurant Nassau",
-            "description": " ",
-            "conditions": [
-                "restaurant AND romantic AND fine AND area_citycenter AND region_european AND (lang_dutch OR lang_french) AND dinner"
+                "restaurant AND romantic AND expensive  AND region_european AND (lang_dutch OR lang_french) AND dinner"
             ]
         },
         {
             "name": "Fatoush",
             "description": " ",
             "conditions": [
-                "restaurant AND romantic AND fine AND area_citycenter AND region_european AND (lang_dutch OR lang_frenchh) AND (dinner OR lunch)"
+                "restaurant AND romantic AND average  AND region_european AND (lang_dutch OR lang_frenchh) AND lunch"
             ]
         },
         {
             "name": "Konbu Streetfood",
             "description": " ",
             "conditions": [
-                "restaurant AND romantic AND cheap AND area_citycenter AND region_asian AND lang_vietnamese AND (dinner OR lunch)"
+                "restaurant AND romantic AND cheap  AND region_asian AND lang_vietnamese AND (dinner OR lunch)"
             ]
         },
         {
             "name": "Tiantianle",
             "description": " ",
             "conditions": [
-                "restaurant AND gang AND cheap AND area_citycenter AND (region_asian AND lang_chinese OR region_american AND lang_chilean ) AND (dinner OR lunch)"
+                "restaurant AND (gang OR family) AND cheap  AND (region_asian AND lang_chinese OR region_american AND lang_chilean ) AND (dinner OR lunch)"
             ]
         },
         {
             "name": "Chaplin's Pub",
             "description": " ",
             "conditions": [
-                "restaurant AND gang AND cheap AND area_citycenter AND bar AND region_american AND lang_us AND (dinner OR lunch)"
+                "restaurant AND (gang OR bar) AND cheap  AND region_american AND lang_us AND (dinner OR lunch)"
             ]
         },
         {
             "name": "Magoya",
-            "description": " ",
+            "image":"assets/images/magoya.jpg",
+            "description": "Beautiful Sakura decorations and delicious asian dishes, the best place to be aesthetically pleased and gastronomically fulfilled",
             "conditions": [
-                "restaurant AND gang AND cheap AND area_citycenter AND region_asian AND lang_japanese AND (dinner OR lunch)"
+                "restaurant AND (gang OR romantic OR family) AND (cheap OR average)  AND region_asian AND lang_japanese AND (dinner OR lunch)"
             ]
         },
         {
             "name": "De Pasta Fabriek",
+            "image":"assets/images/pastaFabriek.jpg",
             "description": " ",
             "conditions": [
-                "restaurant AND (business OR leisure) AND gang AND cheap AND area_citycenter AND lang_italian AND (dinner OR lunch)"
+                "restaurant AND (business OR leisure) AND (gang OR family) AND cheap  AND lang_italian AND (dinner OR lunch)"
             ]
         },
         {
             "name": "Vapiano",
-            "description": " ",
+            "image":"assets/images/vapiano.jpg",
+            "description": " It seems like Vapiano is the best place for you, here you'll find an excellent meal for a low price. On top of that, it's vegan/vegetarian friendly ;)  ",
             "conditions": [
-                "restaurant  AND (business OR leisure) AND gang AND cheap AND area_citycenter AND lang_italian AND (dinner OR lunch)"
-            ]
-        },
-        {
-            "name": "Vapiano",
-            "description": " ",
-            "conditions": [
-                "restaurant AND gang AND cheap AND area_citycenter AND Vegan AND (dinner OR lunch)"
+                "restaurant AND (business OR leisure) AND gang AND cheap  AND (vegan OR vegetarian OR lang_italian) AND (dinner OR lunch)"
             ]
         },
         {
@@ -298,7 +287,7 @@
             "image": "assets/images/chocoCompany.jpg",
             "description": "Your sweet tooth thirves for some chocolate? This is where you want to be ;)",
             "conditions": [
-                "cafe AND leisure AND gang AND (cheap OR average)  AND hot_chocolate AND (breakfast OR lunch)"
+                "cafe AND leisure AND gang AND (cheap OR average) AND hot_chocolate AND (breakfast OR lunch)"
             ]
         },
         {
