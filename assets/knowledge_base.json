@@ -95,133 +95,152 @@
         },
         {
             "name": "Mr Mofongo",
-            "description": " ",
+            "image": "assets/images/mrmofongo.jpg",
+            "description": "Mr. Mofongo has seven different 'worlds', each with its own atmosphere and culinary experience. In addition to quality, every world guarantees innovation, sustainability and above all experience. Let yourself be carried away by Máximo's endless wanderlust and join him on an adventure! ",
             "conditions": [
                 "restaurant AND (business OR leisure) AND (romantic OR bar OR gang) AND (average OR expensive)  AND (dinner OR lunch)"
             ]
         },
         {
             "name": "Mr Smith's",
-            "description": " ",
-            "conditions": [
+            "image": "assets/images/mrsmith.jpg",
+            "description": "Welcome to the jungle! Tropical cocktails just for you! ",
+             "conditions": [
                 "restaurant AND (business OR leisure) AND (romantic OR bar) AND (lang_thai OR lang_dutch) AND average  AND (dinner OR lunch)"
             ]
         },
         {
             "name": "Bronco",
-            "description": " ",
+            "image": "assets/images/bronco.jpg",
+            "description": "The best RibHouse in Groningen",
             "conditions": [
                 "restaurant AND leisure  AND average  AND (gang OR bar) AND region_american AND lang_US AND (dinner OR lunch)"
             ]
         },
         {
             "name": "De Betere Tijden",
-            "description": " ",
-            "conditions": [
+            "image": "assets/images/debeteretijden.jpg",
+            "description": " They are renowned for their surprise menu, consisting of 3, 4 or 5 courses. Of course, your preferences are taken into account.",
+             "conditions": [
                 "restaurant AND (business OR leisure) AND romantic AND average  AND region_european AND lang_dutch AND (dinner OR lunch)"
             ]
         },
         {
             "name": "De Kleine Heerlijkheid",
-            "description": " ",
-            "conditions": [
+            "image": "assets/images/deKleineHerlijkheid.jpg",
+            "description": " “We” are Elbrich & Zaneta, friends and now also business partners. We took over De Kleine Heerlijkheid at the end of 2013 with the idea of ​​creating a place here where people feel at home, are pampered and very tasty food. Our restaurant is located just outside the city center on the Schuitendiep in Groningen in a beautiful building from the beginning of the 17th century. The building has been inhabited for years, a family in every room, and that homely atmosphere has remained. The restaurant can rightly be called a living room restaurant. ",
+           "conditions": [
                 "restaurant AND (business OR leisure) AND romantic AND average  AND region_european AND lang_dutch AND (dinner OR lunch)"
             ]
         },
         {
             "name": "Cho Fah",
-            "description": " ",
-            "conditions": [
+            "image": "assets/images/chofah.jpg",
+            "description": "Very good and authentic Thai food. Nice restaurant and friendly service. ",
+             "conditions": [
                 "restaurant AND (business OR leisure) AND average  AND region_asian AND lang_thai AND cultural AND (dinner OR lunch)"
             ]
         },
         {
             "name": "Gustatio",
-            "description": " ",
+            "image": "assets/images/gustatio.jpg",
+            "description": "Angel's Favorite! The owners of this casual osteria want to bring traditional Italian cuisine to the fore. No complicated combinations here, but homemade pasta and powerful flavors that will take your taste buds on a journey. Delicious authenticity cuisine.",
             "conditions": [
                 "restaurant AND (business OR leisure) AND romantic AND average  AND region_european AND lang_italian AND (dinner OR lunch)"
             ]
         },
         {
             "name": "Da Vinci",
-            "description": " ",
+            "image": "assets/images/davinci.jpg",
+            "description": "Homemade Italian food, by the water.",
             "conditions": [
                 "restaurant AND (business OR leisure) AND (romantic OR cultural) AND average AND region_european AND lang_italian AND (dinner OR lunch)"
             ]
         },
         {
             "name": "Ouzerie De Olijfboom",
-            "description": " ",
+            "image": "assets/images/deOlijfboom.jpg",
+            "description": "Taste traditional food from the best Greek restaurant in Groningen!",
             "conditions": [
                 "restaurant AND (business OR leisure) AND gang AND average  AND region_european AND lang_greek AND (dinner OR lunch)"
             ]
         },
         {
             "name": "Thai Jasmine",
-            "description": " ",
+            "image": "assets/images/thaijasmine.jpg",
+            "description": "The BEST Thai food Angel ever had! ",
             "conditions": [
                 "restaurant AND (business OR leisure) AND cheap AND gang AND region_asian AND lang_thai AND (dinner OR lunch)"
             ]
         },
         {
             "name": "Imono",
-            "description": " ",
+            "image": "assets/images/imono.jpg",
+            "description": "Perfect for a first sushi date!",
             "conditions": [
                 "restaurant AND (business OR leisure) AND romantic AND (average OR expensive) AND region_asian AND lang_japanese AND dinner"
             ]
         },
         {
             "name": "Hanasato",
-            "description": " ",
+            "image": "assets/images/hanasato.jpg",
+            "description": "Want to impress your date with fine Asian cuisine? This is the place! ",
             "conditions": [
                 "restaurant AND romantic AND expensive  AND region_asian AND lang_japanese AND dinner"
             ]
         },
         {
             "name": "De Pijp Wine & Dine",
-            "description": " ",
+            "image": "assets/images/dePijp.jpg",
+            "description": "For a romantic evening and great top class food, this is a must not miss! Known as one of the best suprise menu restaurants in Groningen!",
             "conditions": [
                 "restaurant AND romantic AND expensive  AND region_european AND lang_french AND dinner"
             ]
         },
         {
             "name": "Vive la Vie",
-            "description": " ",
+            "image": "assets/images/vivelavie.jpg",
+            "description": "The best restaurant in Groningen without a doubt! Celebrating something special? Get your taste buds ready for an unforgettable experience!  ",
             "conditions": [
                 "restaurant AND romantic AND expensive  AND region_european AND(lang_dutch OR lang_french) AND dinner"
             ]
         },
         {
             "name": "Voila",
-            "description": " ",
+            "image": "assets/images/voila.jpg",
+            "description": "Bringing the French cuisine to you in Groningen! A 5 course suprise menu accompanied by 5 different glasses of wine, leaving you amazed by the end of the night!  ",
             "conditions": [
                 "restaurant AND romantic AND expensive  AND region_european AND (lang_dutch OR lang_french) AND dinner"
             ]
         },
         {
-            "name": "Fatoush",
-            "description": " ",
+            "name": "Restaurant Nassau",
+            "image": "assets/images/nassau.jpg",
+            "description": "In the Prinsenhof Hotel! Nassau's kitchen is run by executive chef Christian de Vries. Nassau is innovative and receives praising reviews in the Michelin and Lekker guides.",
             "conditions": [
-                "restaurant AND romantic AND average  AND region_european AND (lang_dutch OR lang_frenchh) AND lunch"
+                "restaurant AND romantic AND fine AND Dutch And French AND dinner"
             ]
         },
         {
             "name": "Konbu Streetfood",
-            "description": " ",
+            "image": "assets/images/konbu.jpg",
+            "description": "Affordable bites for all, that will keep you going back for more! ",
             "conditions": [
                 "restaurant AND romantic AND cheap  AND region_asian AND lang_vietnamese AND (dinner OR lunch)"
             ]
         },
         {
             "name": "Tiantianle",
-            "description": " ",
+            "image": "assets/images/tiantianle.jpg",
+            "description": "Want to feel relaxed and zen? This is a must not miss, especially for the food! ",
             "conditions": [
                 "restaurant AND (gang OR family) AND cheap  AND (region_asian AND lang_chinese OR region_american AND lang_chilean ) AND (dinner OR lunch)"
             ]
         },
         {
             "name": "Chaplin's Pub",
-            "description": " ",
+            "image": "assets/images/Chaplins-Pub-1.jpg",
+            "description": "Just the place for you to grab a beer with the boys!",
             "conditions": [
                 "restaurant AND (gang OR bar) AND cheap  AND region_american AND lang_us AND (dinner OR lunch)"
             ]
@@ -237,7 +256,7 @@
         {
             "name": "De Pasta Fabriek",
             "image":"assets/images/pastaFabriek.jpg",
-            "description": " ",
+            "description": "Angel's favorite Diavolo Pasta! Help yourself restaurant, chill vibe!",
             "conditions": [
                 "restaurant AND (business OR leisure) AND (gang OR family) AND cheap  AND lang_italian AND (dinner OR lunch)"
             ]
