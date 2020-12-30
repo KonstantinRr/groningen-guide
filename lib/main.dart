@@ -6,14 +6,17 @@
 /// Livia Regus (S3354970): l.regus@student.rug.nl
 
 import 'package:flutter/material.dart';
+import 'package:logging/logging.dart';
+import 'package:tuple/tuple.dart';
+
 import 'package:groningen_guide/kl_engine.dart';
 import 'package:groningen_guide/rotues/route_editor.dart';
+import 'package:groningen_guide/rotues/route_end.dart';
 import 'package:groningen_guide/rotues/route_endpoint.dart';
+import 'package:groningen_guide/rotues/route_history.dart';
 import 'package:groningen_guide/rotues/route_home.dart';
 import 'package:groningen_guide/rotues/route_splash.dart';
 import 'package:groningen_guide/rotues/route_unknown.dart';
-import 'package:logging/logging.dart';
-import 'package:tuple/tuple.dart';
 
 void main() {
   Logger.root.level = Level.ALL; // defaults to Level.INFO
@@ -33,15 +36,21 @@ Iterable<Tuple2<int, T>> enumerate<T>(Iterable<T> it) sync* {
   }
 }
 
+Iterable<Tuple2<A, B>> chain2<A, B>(Iterable<A> first, Iterable<B> second) sync* {
+  var it1 = first.iterator;
+  var it2 = second.iterator;
+  while (it1.moveNext() && it2.moveNext())
+    yield Tuple2<A, B>(it1.current, it2.current);
+}
+
 /// The main application widget that creates a [MaterialApp]
 class StudyGuide extends StatelessWidget {
   const StudyGuide({Key key}) : super(key: key);
 
   /// Generates a [Route] when no other matching route is found
-  Route onGenerateUnknownRoute(RouteSettings settings) {
-    return MaterialPageRoute(builder: (context) => const RouteUnknwon(),
+  Route onGenerateUnknownRoute(RouteSettings settings) =>
+    MaterialPageRoute(builder: (context) => const RouteUnknown(),
       settings: RouteSettings(name: settings.name));
-  }
 
   /// Generates a [Route] for the specified [RouteSettings]
   Route onGenerateRoute(RouteSettings settings) {
@@ -58,6 +67,12 @@ class StudyGuide extends StatelessWidget {
       case '/endpoint': return MaterialPageRoute(
         builder: (context) => RouteEndpoint.fromSettings(settings.arguments),
         settings: const RouteSettings(name: 'endpoint'));
+      case '/end': return MaterialPageRoute(
+        builder: (context) => const RouteEnd(),
+        settings: const RouteSettings(name: 'end'));
+      case '/history': return MaterialPageRoute(
+        builder: (context) => const RouteHistory(),
+        settings: const RouteSettings(name: 'history'));
     }
     return null;
   }

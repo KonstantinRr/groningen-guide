@@ -6,15 +6,14 @@
 /// Livia Regus (S3354970): l.regus@student.rug.nl
 
 import 'package:flutter/material.dart';
-import 'package:groningen_guide/rotues/route_endpoint.dart';
+import 'package:provider/provider.dart';
+import 'package:groningen_guide/model_actions.dart';
+import 'package:groningen_guide/kl_engine.dart';
+import 'package:groningen_guide/loader/asset_loader.dart';
 import 'package:groningen_guide/widgets/action_info.dart';
 import 'package:groningen_guide/widgets/action_inspector.dart';
 import 'package:groningen_guide/widgets/widget_title.dart';
 import 'package:groningen_guide/widgets/width_size_requirement.dart';
-import 'package:provider/provider.dart';
-
-import 'package:groningen_guide/kl_engine.dart';
-import 'package:groningen_guide/loader/asset_loader.dart';
 import 'package:groningen_guide/widgets/widget_question.dart';
 import 'package:groningen_guide/widgets/widget_debugger.dart';
 
@@ -22,86 +21,63 @@ import 'package:groningen_guide/widgets/widget_debugger.dart';
 class MainScreen extends StatelessWidget {
   const MainScreen({Key key}) : super(key: key);
 
-  void _next(BuildContext context, QuestionData questionData) {
-    var engine = Provider.of<KlEngine>(context, listen: false);
-    var selectedOptions = questionData.selectedOptions();
-    for (var i in selectedOptions)
-      engine.evaluateEvents(i.events);
-    engine.inference();
-    var endpoint = engine.checkEndpoints();
-    if (endpoint != null) {
-      showEndpointDialog(context, endpoint);
-    } else {
-      engine.loadNextQuestion(questionData);
-    }
-  }
-
-  void _previous(BuildContext context, QuestionData questionData) {
-
-  }
-
   @override
   Widget build(BuildContext context) {
     var theme = Theme.of(context);
     return Consumer<QuestionData>(
       builder: (context, questionData, _) => questionData.hasQuestion
         ? Column(
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            children: [
-              Expanded(child: QuestionWidget(
-                question: questionData.current,
-                change: (index) => questionData.changeOption(index),
-              )),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: <Widget> [
-                  Container(
-                    margin: const EdgeInsets.only(top: 15, bottom: 15.0),
-                    height: 40.0,
-                    width: 100.0,
-                    child: RaisedButton(
-                      child: const Text('Previous'),
-                      onPressed: () => _previous(context, questionData)
-                    ),
-                  ),
-                  const SizedBox(width: 10.0,),
-                  Container(
-                    margin: const EdgeInsets.only(top: 15.0, bottom: 15.0),
-                    height: 40.0,
-                    width: 100.0,
-                    child: RaisedButton(
-                      child: const Text('Next'),
-                      onPressed: () => _next(context, questionData)
-                    ),
-                  )
-                ]
-              )
-            ]
-          )
-        : Container(
-            height: 250.0,
-            alignment: Alignment.center,
-            child: Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: [
+            Expanded(child: QuestionWidget(
+              data: questionData.current,
+              change: (index) => questionData.changeOption(index),
+            )),
+            Row(
               mainAxisAlignment: MainAxisAlignment.center,
-              children: <Widget>[
-                Text('There is currently no question loaded!',
-                  style: theme.textTheme.headline6),
-                FlatButton(
-                  child: Container(
-                    width: 100.0,
-                    height: 40.0,
-                    alignment: Alignment.center,
-                    child: Text('Start Process'),
+              children: <Widget> [
+                Container(
+                  margin: const EdgeInsets.only(top: 15, bottom: 15.0),
+                  height: 40.0,
+                  width: 100.0,
+                  child: RaisedButton(
+                    child: const Text('Previous'),
+                    onPressed: () => previousQuestion(context)
                   ),
-                  onPressed: () {
-                    // loads the next question
-                    var engine = Provider.of<KlEngine>(context, listen: false);
-                    engine.inference();
-                    engine.loadNextQuestion(questionData);
-                  },
+                ),
+                const SizedBox(width: 10.0,),
+                Container(
+                  margin: const EdgeInsets.only(top: 15.0, bottom: 15.0),
+                  height: 40.0,
+                  width: 100.0,
+                  child: RaisedButton(
+                    child: const Text('Next'),
+                    onPressed: () => nextQuestion(context)
+                  ),
                 )
               ]
             )
+          ]
+        )
+      : Container(
+          alignment: Alignment.center,
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: <Widget>[
+              Text('There is currently no question loaded!',
+                style: theme.textTheme.bodyText2),
+              SizedBox(height: 10.0),
+              RaisedButton(
+                child: Container(
+                  width: 250.0,
+                  height: 40.0,
+                  alignment: Alignment.center,
+                  child: Text('Start Inference Process', style: theme.textTheme.headline6,),
+                ),
+                onPressed: () => firstQuestion(context)
+              )
+            ]
+          )
         )
     );
   }
@@ -175,7 +151,10 @@ class RouteHome extends StatelessWidget {
           ),
           Visibility(
             visible: prov.showDebugger,
-            child: WidgetDebugger(key: debuggerKey),
+            child: Container(
+              width: 500.0,
+              child: WidgetDebugger(key: debuggerKey),
+            ),
           ),
         ]
       )
@@ -185,19 +164,27 @@ class RouteHome extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return KnowledgeBaseLoader(
-      onLoad: (context) => const CircularProgressIndicator(),
       onDone: (context) => Consumer<DebuggerProvider>(
         builder: (context, prov, _) => WidgetSizeRequirement(
           minHeight: 200, minWidth: 300,
           builder: (context, constraints) {
-            return constraints.maxWidth <= 800.0
+            return constraints.maxWidth <= 900.0
               ? buildConstrained(context, prov)
               : buildFull(context, prov);
           }
         )
       ),
+      onLoad: (context) =>
+        Scaffold(
+          body: Center(child: SizedBox(
+            width: 50.0, height: 50.0,
+            child: const CircularProgressIndicator(),
+          )),
+        ),
       onErr: (context, err) =>
-        Center(child: Text('Error loading knowledge base $err'))
+        Scaffold(
+          body: Center(child: Text('Error loading knowledge base $err'))
+        ),
     );
   }
 }

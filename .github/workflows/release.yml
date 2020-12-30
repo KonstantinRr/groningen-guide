@@ -1,0 +1,37 @@
+name: latest_release
+on:
+  release:
+    types: [created]
+jobs:
+  build:
+    runs-on: ubuntu-20.04
+    steps:
+    - uses: actions/checkout@v2
+      with:
+        persist-credentials: false
+    - uses: subosito/flutter-action@v1
+      with:
+        channel: dev
+    #- name: Compress Sources
+    #  run: |
+    #    mkdir -p build
+    #    tar -czvf build/source.tar.gz ./
+    #    zip -r build/source.zip ./
+    - name: Build Flutter
+      run: |
+        flutter config --enable-web
+        flutter config --enable-linux-desktop
+        flutter config --enable-windows-desktop
+        flutter pub get
+        flutter test
+        flutter build web
+    - name: Compress Artifacts
+      run: |
+        (cd build/web && zip -r ../web.zip .)
+        (cd build/web && tar -czvf ../web.tar.gz .)
+    - name: Upload Artificats
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      run: |
+        tag_name="${GITHUB_REF##*/}"
+        hub release edit $(find ./build -type f \( -name "*.zip" -o -name "*.tar.gz" \) -printf "-a %p ") -m "" "$tag_name" 

@@ -27,22 +27,26 @@ class KlQuestion extends MapObject {
   /// Maximum amount of answers you can choose
   int maxAnswers;
 
+  /// Creates an empty question where all elements are null
+  KlQuestion.zero();
+
   /// Creates a new question by supplying the member variables
-  KlQuestion({this.name, this.description, this.image, this.options, this.maxAnswers});
+  KlQuestion({this.name, this.description, this.image,
+    List<KlQuestionOption> options, this.maxAnswers})
+    : options = options ?? [];
+
   /// Creates a new question using a JSON deserialized object
-  factory KlQuestion.fromJson(dynamic obj) => KlQuestion()..read(obj);
+  factory KlQuestion.fromJson(dynamic obj) => KlQuestion.zero()..read(obj);
   
   /// Reads the question object using a JSON deserialized object
   void read(dynamic map) {
     assertType<Map<String, dynamic>>(map);
-    name = assertTypeGet<String>(map, 'name');
-    description = assertTypeGet<String>(map, 'description');
+    name = assertTypeGet<String>(map, 'name', allowNull: true);
+    description = assertTypeGet<String>(map, 'description', allowNull: true);
     image = assertTypeGet<String>(map, 'image', allowNull: true);
     maxAnswers = assertTypeGet<int>(map, 'maxAnswers', allowNull: true);
-    conditions = assertTypeGet<List>(map, 'conditions')
-      .map<String>((e) => e as String).toList();
-    options = assertTypeGet<List>(map, 'options')
-      .map((e) => KlQuestionOption.fromJson(e)).toList();
+    conditions = assertTypeGetList<String>(map, 'conditions', converter: (e) => e as String);
+    options = assertTypeGetList<KlQuestionOption>(map, 'options', converter: (e) => KlQuestionOption.fromJson(e));
   }
 
   /// Serializes this object as a JSON object
@@ -51,6 +55,7 @@ class KlQuestion extends MapObject {
     'description': description,
     'image': image,
     'maxAnswers': maxAnswers,
-    'options': options?.map((e) => e.toJson())?.toList()
+    'conditions': conditions,
+    'options': options?.map((e) => e?.toJson())?.toList()
   };
 }

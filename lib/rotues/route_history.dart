@@ -7,12 +7,15 @@
 
 import 'package:flutter/material.dart';
 
-/// The title [Widget] that is build as part of the [AppBar].
-class WidgetTitle extends StatelessWidget {
-  const WidgetTitle({Key key}) : super(key: key);
+import 'package:groningen_guide/widgets/widget_history.dart';
 
+class RouteHistory extends StatelessWidget {
+  const RouteHistory({Key key}) : super(key: key);
+  
   @override
   Widget build(BuildContext context) {
-    return Text('Angel\'s Groningen Guide');
+    return Scaffold(
+      body: WidgetHistory(),
+    );
   }
 }

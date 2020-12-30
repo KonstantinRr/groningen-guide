@@ -1,0 +1,31 @@
+on: [push, pull_request]
+name: lates_build_web
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+      with:
+        persist-credentials: false
+    - uses: subosito/flutter-action@v1
+      with:
+        channel: dev
+    - name: Build Flutter
+      run: |
+        flutter config --enable-web
+        flutter config --enable-linux-desktop
+        flutter config --enable-windows-desktop
+        flutter pub get
+        flutter test
+        flutter build web
+    - name: Copy Artifacts to Deployment
+      run: |
+        mkdir -p artifacts
+        cp -r build/web/* artifacts/
+    - name: Deploy
+      uses: JamesIves/github-pages-deploy-action@3.7.1
+      with:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        BRANCH: gh-pages # The branch the action should deploy to.
+        FOLDER: artifacts # The folder the action should deploy.
+        CLEAN: true # Automatically remove deleted files from the deploy branch

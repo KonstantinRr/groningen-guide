@@ -25,25 +25,32 @@ class KlRule extends MapObject {
   /// The events that are executed if this rule is infered
   List<String> events;
 
+  /// Creates an empty rule where all members are null
+  KlRule.zero();
+
   /// Creates a new rule by supplying the member variables
-  KlRule({this.name, this.description, this.conditions, this.events});
+  KlRule({this.name, this.description,
+    List<String> conditions, List<String> events}) :
+    conditions = conditions ?? [],
+    events = events ?? [];
+  
   /// Creates a new rule using a JSON deserialized object
   factory KlRule.fromJson(dynamic obj) => KlRule()..read(obj);
 
   /// Reads the rule object using a JSON deserialized object
   void read(dynamic map) {
     assertType<Map<String, dynamic>>(map);
-    name = assertTypeGet<String>(map, 'name');
-    description = assertTypeGet<String>(map, 'description');
-    conditions = assertTypeGet<List>(map, 'conditions')
-      .map<String>((e) => e as String).toList();
-    events = assertTypeGet<List>(map, 'events')
-      .map<String>((e) => e as String).toList();
+    name = assertTypeGet<String>(map, 'name', allowNull: true);
+    description = assertTypeGet<String>(map, 'description', allowNull: true);
+    conditions = assertTypeGetList<String>(map, 'conditions', converter: (e) => e as String);
+    events = assertTypeGetList<String>(map, 'events', converter: (e) => e as String);
   }
 
   /// Serializes this object as a JSON object
   Map<String, dynamic> toJson() => {
-    'name': name, 'description': description,
-    'conditions': conditions, 'events': events
+    'name': name,
+    'description': description,
+    'conditions': conditions,
+    'events': events
   };
 }

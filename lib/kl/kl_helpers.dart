@@ -13,9 +13,10 @@ abstract class JsonElement {
   /// Deserializes the given object
   void read(dynamic obj);
 
-  void assertType<Type>(dynamic obj, {bool allowNull=false}) {
+  bool assertType<Type>(dynamic obj, {bool allowNull=false}) {
     if (!(allowNull && obj == null) && !(obj is Type))
-      throw Exception('Object must be of type \'${Type.toString()}\'');
+      throw Exception('Object $obj must be of type \'${Type.toString()}\'');
+    return obj != null;
   }
 
   Type assertTypeGet<Type>(dynamic map, dynamic key, {bool allowNull=false, Type def}) {
@@ -23,6 +24,29 @@ abstract class JsonElement {
     var result = map[key];
     assertType<Type>(result, allowNull: allowNull);
     return result == null ? def : result as Type;
+  }
+
+  List<Type> assertTypeGetList<Type>(
+    dynamic map, dynamic key,
+    {bool allowNull=false, List<Type> def,
+    Type Function(dynamic) converter})
+  {
+    assertType<Map>(map);
+    converter ??= (dynamic obj) {
+      try {
+        return obj as Type;
+      } catch (e) {
+        throw Exception('Could not convert $obj to ${Type.toString()}');
+      }
+    };
+
+    var result = map[key];
+    var isNotNull = assertType<List>(result, allowNull: allowNull);
+    if (isNotNull) {
+      return (result as List).map<Type>((e) => converter(e)).toList();
+    } else {
+      return def;
+    }
   }
 }
 

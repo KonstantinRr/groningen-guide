@@ -1,15 +1,17 @@
 {
-    "values": [ ],
+    "events": [ ],
     "rules": [
         {
-            "name": "businessTrip",
+            "name": "Brunch Rule",
             "description": " ",
-            "conditions": [
-                "hotel AND business"
-            ],
-            "events" : [
-                "isBusinessTrip = 1"
-            ]
+            "conditions": [ "breakfast AND lunch" ],
+            "events" : [ "brunch = 1" ]
+        },
+        {
+            "name": "User Goal",
+            "description": "Defines whether the user has a goal",
+            "conditions": [ "business OR leisure OR studying" ],
+            "events": [ "userHasGoal = 1" ]
         }
     ],
     "endpoints": [
@@ -17,81 +19,61 @@
             "name": "Prinsenhof Hotel",
             "description": "Angel recommends you this 4-star boutique hotel in the heart of Groningen. Right in the shadows of the Martini Tower, its beautiful garden will offer the best cultural experience, suitable for any purpose, especially for a romantic experience <3 ",
             "image": "assets/images/prinsenhofHotel.jpg",
-            "conditions": [
-                "hotel AND (business OR leisure) AND (cultural OR private OR romantic OR area_citycenter) AND NOT cheap "
-            ]
+            "conditions": [ "hotel AND (business OR leisure) AND (cultural OR private OR romantic OR area_citycenter) AND NOT cheap " ]
         },
         {
             "name": "NH Hotel de Ville, Mercure, The Student Hotel",
             "description": "According to your requirements, Angel has found several suitable places. Opt for The Student Hotel or for the NH Hotel de Ville, if you'd like to be close to the city center or for Mercure for a more isolated option ",
             "image": "assets/images/nhDeVille.jpg",
-            "conditions": [
-                "hotel AND (business OR leisure) AND (service_breakfast_included AND bar)  "
-            ]
+            "conditions": [ "hotel AND (business OR leisure) AND (service_breakfast_included AND bar)" ]
         },
         {
             "name": "Klipper Zwadde Boat Hotel",
             "description": " Staying in a boat hotel! I bet you've never thought about that, huh? Angel highly suggests this for a unique experience ;) ",
             "image": "assets/images/KlipperZwaddeboatHotel.jpg",
-            "conditions": [
-                "hotel AND  leisure AND cultural AND average   "
-            ]
+            "conditions": [ "hotel AND  leisure AND cultural AND average" ]
         },
         {
             "name": "Martini Hotel Groningen",
             "description": "Wonderful memories are granted if you stay here, the sweet spot of Groningen ",
             "image": "",
-            "conditions": [
-                "hotel AND (business OR leisure) AND (cultural_experience OR private OR romantic OR area_citycenter) AND cheap "
-            ]
+            "conditions": [ "hotel AND (business OR leisure) AND (cultural_experience OR private OR romantic OR area_citycenter) AND cheap" ]
         },
         {
             "name": "Hotel Miss Blanche",
             "description": "The best option for you, my friend, would be this boutique hotel in the city of Groningen with luxurious and uniquely furnished rooms ",
             "image": "assets/images/missBlanche",
-            "conditions": [
-                "hotel AND (business OR leisure) AND area_citycenter AND fine AND (romantic OR family) "
-            ]
+            "conditions": [ "hotel AND (business OR leisure) AND area_citycenter AND fine AND (romantic OR family)" ]
         },
         {
             "name": "The Student Hotel",
             "image": "assets/images/studentHotel",
             "description": "This is the best option for you, with everything you need + the chance of extending your stay for up to a couple of months at a good price. ",
-            "conditions": [
-                "hotel AND (business OR leisure) AND (service_long_stay AND (area_citycenter OR service_breakfast_included OR bar))"
-            ]
+            "conditions": [ "hotel AND (business OR leisure) AND (service_long_stay AND (area_citycenter OR service_breakfast_included OR bar))" ]
         },
         {
             "name": "Stee in stad",
             "description": " This is a great place for staying in with your family, a perfect location since you're close to the city center and the area is quiet and nice, all at the best price",
             "image": "assets/images/steeInStad.jpg",
-            "conditions": [
-                "hotel AND leisure AND family AND average AND service_breakfast_included OR area_korrewegwijk"
-            ]
+            "conditions": [ "hotel AND leisure AND family AND average AND service_breakfast_included OR area_korrewegwijk" ]
         },
         {
             "name": "City Hotel",
             "description": "This is a great place for you and your family if you want to stay in the city center at the best price",
             "image": "assets/images/cityHotel.jpg",
-            "conditions": [
-                "hotel AND leisure AND area_citycenter AND average AND service_breakfast_included AND family"
-            ]
+            "conditions": [ "hotel AND leisure AND area_citycenter AND average AND service_breakfast_included AND family" ]
         },
         {
             "name": "Mercure",
             "description": "This hotel has all the facilities you could probably wish for, all in an isolated environment, reasonably far away from the city center crowdedness  ",
             "image": "assets/images/mercure.png",
-            "conditions": [
-                "hotel AND (business OR leisure) AND (area_rivierenbuurt OR service_breakfast_included)"
-            ]
+            "conditions": [ "hotel AND (business OR leisure) AND (area_rivierenbuurt OR service_breakfast_included)" ]
         },
         {
             "name": "Bed & Breakfast 'Het Kasteeltje'",
             "description": "I know you're on a budget, but trust me, this place will make your family feel like you've had the best vacation ever! Cosy rooms, your own kitchen and a friendly neighbourhood, what else is there to wish for? ",
             "image": "assets/images/theManor.png",
-            "conditions": [
-                "hotel AND leisure AND (area_oosterportbuurt OR (family AND cheap)) "
-            ]
+            "conditions": [ "hotel AND leisure AND (area_oosterportbuurt OR (family AND cheap))" ]
         },
         {
             "name": "Mr Mofongo",
@@ -297,9 +279,7 @@
             "name": "Black & Bloom",
             "image":"assets/images/blackBloom.jpg",
             "description": "Experiment with white and black coffee at Black & Bloom, once here you'll want to come back again ",
-            "conditions": [
-                "cafe AND leisure  AND gang AND (cheap OR average)  AND coffee AND (breakfast OR lunch)"
-            ]
+            "conditions": [ "cafe AND leisure AND (cheap OR average) AND coffee AND (breakfast OR lunch)" ]
         },
         {
             "name": "Chocolate Company",
@@ -313,9 +293,12 @@
             "name": "Smooth Brothers",
             "image":"assets/images/smoothBrothers.jpg",
             "description": "The perfect place if you feel in a jazzy mood and want to delight yourself with a smoothy among other ",
-            "conditions": [
-                "cafe AND leisure AND (gang AND cheap OR cheap OR average)  AND smoothies AND (breakfast OR lunch)"
-            ]
+            "conditions": [ "cafe AND leisure AND NOT studying AND average AND smoothies AND (breakfast OR lunch)" ]
+        },
+        {
+            "name": "Cappuvino",
+            "description": "A special place",
+            "conditions": [ "cafe AND (leisure OR business) AND (average OR cheap) AND (breakfast OR lunch) AND (coffee OR hot_chocolate)" ]
         }
     ],
     "questions": [
@@ -343,17 +326,19 @@
             "name": "What is your main goal?",
             "description": "",
             "maxAnswers": 1,
-            "conditions": [
-                "hotel OR cafe OR restaurant"
-            ],
+            "conditions": [ "hotel OR cafe OR restaurant" ],
             "options": [
                 {
-                    "description": "Business",
-                    "events": [ "business = 1", "goal = 1" ]
+                    "description": "Business Meeting",
+                    "events": [ "business = 1" ]
                 },
                 {
                     "description": "Leisure/Tourism",
-                    "events": [ "leisure = 1", "goal = 1" ]
+                    "events": [ "leisure = 1" ]
+                },
+                {
+                    "description": "Studying",
+                    "events": [ "studying = 1" ]
                 }
             ]
         },
@@ -361,19 +346,20 @@
             "name": "How much are you willing to spend?",
             "description": "",
             "maxAnswers": 1,
-            "conditions": [ "goal"],
+            "conditions": [ "userHasGoal"],
             "options": [
                 {
+                    "conditions": [ "restaurant OR hotel" ],
                     "description": "Let the money flow",
-                    "events": [ "expensive = 1", "money = 1" ]
+                    "events": [ "expensive = 1" ]
                 },
                 {
                     "description": "Mid-range",
-                    "events": [ "average = 1", "money = 1" ]
+                    "events": [ "average = 1" ]
                 },
                 {
                     "description": "On a budget",
-                    "events": [ "cheap = 1", "money = 1" ]
+                    "events": [ "cheap = 1" ]
                 }
             ]
         },
@@ -381,7 +367,7 @@
             "name": "What do you have in mind?",
             "description": "",
             "maxAnswers": 1,
-            "conditions": ["money" ],
+            "conditions": [ "restaurant OR hotel" ],
             "options": [
                 {
                     "description": "Family and children",
@@ -416,7 +402,7 @@
         {
             "name": "What kind of meal would you like?",
             "description": "",
-            "maxAnswers": 1,
+            "maxAnswers": 2,
             "conditions": ["cafe OR restaurant"],
             "options": [
                 {
@@ -438,7 +424,7 @@
         {
             "name": "What type of cuisine are you looking for?",
             "description": "",
-            "maxAnswers": 7,
+            "maxAnswers": 1,
             "conditions": [ "meal AND NOT cafe" ],
             "options": [                
                 {
@@ -462,7 +448,7 @@
         {
             "name": "You have chosen American cuisine",
             "description": "please, specify",
-            "maxAnswers": 7,
+            "maxAnswers": 1,
             "conditions": [ "region_american" ],
             "options": [                
                 {
@@ -478,7 +464,7 @@
         {
             "name": "You have chosen European cuisine",
             "description": "please, specify",
-            "maxAnswers": 7,
+            "maxAnswers": 1,
             "conditions": [ "region_european" ],
             "options": [                
                 {
@@ -491,7 +477,7 @@
                 },
                 {
                     "description": "Italian",
-                    "events": [ "lang_italian" ]
+                    "events": [ "lang_italian = 1" ]
                 },
                 {
                     "description": "Greek",
@@ -590,10 +576,6 @@
                 {
                     "description": "Coffee",
                     "events": [ "coffee = 1" ]
-                },
-                {
-                    "description": "Studying",
-                    "events": [ "studying = 1" ]
                 }
             ]
         },

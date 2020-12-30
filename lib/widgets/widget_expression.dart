@@ -8,15 +8,69 @@
 import 'package:flutter/material.dart';
 import 'package:groningen_guide/kl_parser.dart';
 
+/// This [Widget] represents a [TextField] where it is possible
+/// to enter text that is parsed as expression. 
 class ExpressionParser extends StatefulWidget {
-  const ExpressionParser({Key key}) : super(key: key);
+  final double width, height;
+  final void Function(TreeElement) onSuccess;
+  final void Function(dynamic, StackTrace) onError;
 
+  const ExpressionParser({this.width, this.height,
+    this.onError, this.onSuccess, Key key}) :
+    super(key: key);
+
+  /// Creates an [ExpressionParserState]
   @override
-  ExpressionParserState createState() => ExpressionParserState();
+  ExpressionParserState createState() => ExpressionParserState(
+    onError: onError, onSuccess: onSuccess);
 }
 
+/// The [State] associated with [ExpressionParser]
 class ExpressionParserState extends State<ExpressionParser> {
-  final TextEditingController controller = TextEditingController();
+  final controller = TextEditingController();
+  void Function(TreeElement) onSuccess;
+  void Function(dynamic, StackTrace) onError;
+
+
+  ExpressionParserState({
+    @required void Function(TreeElement) onSuccess,
+    @required void Function(dynamic, StackTrace) onError,
+  }) {
+    onSuccess ??= _showSuccessDialog;
+    onError ??= _showErrorDialog;
+  }
+  
+  void _showErrorDialog(dynamic err, StackTrace stack) {
+    showDialog(
+      context: context,
+      builder: (context) {
+        var theme = Theme.of(context);
+        return AlertDialog(
+          title: Text('Error', style: theme.textTheme.headline6,),
+          content: Text('${err.toString()}', style: theme.textTheme.bodyText1,),
+        );
+      }
+    );
+  }
+
+  void _showSuccessDialog(TreeElement tree) {
+    showDialog(
+      context: context,
+      builder: (context) {
+        var theme = Theme.of(context);
+        return AlertDialog(
+          title: Text('Success', style: theme.textTheme.headline6,),
+          content: Text(tree.istr(), style: theme.textTheme.bodyText1,),
+          actions: [
+            FlatButton(
+              child: Text('Exit'),
+              onPressed: () => Navigator.of(context).pop(),
+            )
+          ],
+        );
+      }
+    );
+  }
 
   @override
   void dispose() {
@@ -24,35 +78,38 @@ class ExpressionParserState extends State<ExpressionParser> {
     super.dispose();
   }
 
+  /// Loads the currently entered expression to the
   void _loadExpression() {
     try {
       var tree = buildExpression(controller.text);
-      print(tree.istr());
+      onSuccess(tree);
     } catch (e, stacktrace) {
-      print(stacktrace);
-      print(e.toString());
-    } 
+      onError(e, stacktrace);
+    }
   }
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: 200.0, height: 150.0,
+      width: widget.width,
+      height: widget.height,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
-          Expanded(child: TextField(
-            maxLines: null, minLines: null,
-            controller: controller,
-            decoration: InputDecoration.collapsed(
-              hintText: 'Expression'
+          Expanded(
+            child: TextField(
+              maxLines: null, minLines: null,
+              controller: controller,
+              decoration: InputDecoration.collapsed(
+                hintText: 'Expression'
+              ),
+              expands: true,
             ),
-            expands: true,
-          ),),
+          ),
           RaisedButton(
             child: Text('Load Expression'),
             onPressed: _loadExpression
-          )
+          ),
         ],
       )
     );

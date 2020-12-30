@@ -126,34 +126,47 @@ class ExpressionStorage {
 /// Stores the the currently asked question as well as all
 /// previous questions.
 class QuestionData extends ChangeNotifier {
+  /// The stack of previously asked questions;
   final List<Tuple3<KlQuestion, List<bool>, ContextModel>> previous = [];
-  Queue<int> _selectionOrder;
+  /// The order in which the questions were selected
+  Queue<int> _selectionOrder = Queue();
+  /// The currently asked question
   Tuple2<KlQuestion, List<bool>> _current;
+
+  ContextModel loadPreviousQuestion() {
+    var data = previous.last;
+    _current = Tuple2(data.item1, List.generate(
+      data.item1.options.length, (_) => false));
+    previous.removeLast();
+    notifyListeners();
+    return data.item3;
+  }
 
   /// Unloads the current question and puts it on the stack of
   /// previous asked questions.
-  void unloadQuestion(ContextModel currentModel, {bool notify=true}) {
+  void unloadQuestion(ContextModel snapshot, {bool notify=true}) {
     if (_current != null) {
       previous.add(Tuple3<KlQuestion, List<bool>, ContextModel>(
-        _current.item1, _current.item2, currentModel.snapshot()));
+        _current.item1, _current.item2, snapshot));
+      _selectionOrder.clear();
       _current = null;
     }
     if (notify) notifyListeners();
   }
 
+  /// Clears the stack of asked questions and the currently loaded question
   void clear() {
     previous.clear();
-    _selectionOrder = null;
+    _selectionOrder.clear();
     _current = null;
     notifyListeners();
   }
 
-  /// Loads the current [question] and puts it on the
+  /// Loads the given [question] and puts it on the
   void loadQuestion(KlQuestion question, ContextModel currentModel) {
     unloadQuestion(currentModel, notify: false);
     _current = Tuple2(question, List.generate(
       question.options.length, (_) => false));
-    _selectionOrder = Queue();
     notifyListeners();
   }
 
@@ -210,12 +223,19 @@ class QuestionData extends ChangeNotifier {
 
   /// Returns the current question as well as the answers
   Tuple2<KlQuestion, List<bool>> get current => _current;
-
   /// Returns the currently loaded question
   KlQuestion get currentQuestion => _current?.item1;
-
   /// Returns the currently loaded answers
   List<bool> get currentAnswers => _current?.item2;
+
+  /// Returns the last asked question data, requires at least one previous question
+  Tuple3<KlQuestion, List<bool>, ContextModel> get last => previous.last;
+  /// Returns the last asked question, requires at least one previous question
+  KlQuestion get lastQuestion => previous.last.item1;
+  /// Returns the last given answers, requires at least one previous question
+  List<bool> get lastAnswers => previous.last.item2;
+  /// Returns the snapshot of the last question, requires at least one previous question
+  ContextModel get lastSnapshot => previous.last.item3;
 
   void info() {
     for (var i = 0; i < previous.length; i++) {
@@ -227,9 +247,8 @@ class QuestionData extends ChangeNotifier {
   }
 
   @override
-  String toString() {
+  String toString() => 'QuestionData[stack:${previous.length},current=${current!=null}]';
 
-  }
 }
 
 class DebuggerProvider extends ChangeNotifier {
@@ -293,6 +312,12 @@ class KlContextProvider extends ChangeNotifier {
   KlEngine parent;
   KlContextProvider(this.model, this.parent);
 
+  void loadSnap(ContextModel newModel, {bool notifyParent = true}) {
+    model = newModel;
+    notifyListeners();
+    if (notifyParent) parent.notifyListeners();
+  }
+
   /// Updates the context model by calling the update function
   void updateContextModel(void Function(ContextModel) updater,
       {bool notifyParent = true}) {
@@ -334,8 +359,7 @@ class KlEngine extends ChangeNotifier {
 
   /// Creates an empty knowledge base with default initialized members
   KlEngine() {
-    klBaseProvider = KlBaseProvider(
-      KlBase(values: [], questions: [], rules: [], endpoints: []), this);
+    klBaseProvider = KlBaseProvider(KlBase(), this);
     expressionProvider = KlExpressionProvider(
       ExpressionStorage(klBaseProvider.base), this);
     contextProvider = KlContextProvider(
@@ -344,7 +368,7 @@ class KlEngine extends ChangeNotifier {
 
   /// Loads a new knowledge base from a JSON encoded [String]
   void loadFromString(String string) {
-    try {
+    //try {
       // code that might throw
       var map = json.decode(string);
       var nklBase = KlBaseProvider(
@@ -361,9 +385,9 @@ class KlEngine extends ChangeNotifier {
       contextProvider = ncontextModel;
       // notifies listeners on the state change
       notifyAll();
-    } catch (e) {
-      throw e;
-    }
+    //} catch (e) {
+    //  throw e;
+    //}
   }
 
   void clear() {
@@ -414,7 +438,7 @@ class KlEngine extends ChangeNotifier {
   bool evaluateQuestion(KlQuestion q) => evaluateConditionList(q.conditions);
   /// Evaluates the conditions of an endpoint
   bool evaluateEndpoint(KlEndpoint endpoint) => evaluateConditionList(endpoint.conditions);
-  
+
   /// Runs the inference model by running through all rules and executing the
   /// event list of the rule conditions evaluate to [true].
   void inference() {
@@ -433,14 +457,11 @@ class KlEngine extends ChangeNotifier {
     }
   }
 
-  KlEndpoint checkEndpoints() {
+  Iterable<KlEndpoint> checkEndpoints() sync* {
     for (var endpoint in klBaseProvider.base.endpoints) {
       var result = evaluateConditionList(endpoint.conditions);
-      if (result) {
-        return endpoint;
-      }
+      if (result) yield endpoint;
     }
-    return null;
   }
 
   void notifyAll() {
@@ -452,25 +473,18 @@ class KlEngine extends ChangeNotifier {
 
   /// Loads the next question to to the [QuestionData] object
   /// that is required to gain more information.
-  void loadNextQuestion(QuestionData questionData) {
+  List<KlQuestion> availableQuestions() {
     logger.info('Unloading current question');
-    questionData.unloadQuestion(contextProvider.model);
+    var questions = <KlQuestion>[];
     for (var i = 0; i < klBaseProvider.base.questions.length; i++) {
       var question = klBaseProvider.base.questions[i];
-      logger.info("Checking question ${question.name}");
-      // evaluates if the question was already asked
-      var contained = questionData.containsQuestion(question);
-      logger.info("    Checking if question was already set: $contained");
-      if (contained) continue;
       // evaluates the question's conditions
       var conditions = evaluateQuestion(klBaseProvider.base.questions[i]);
-      logger.info("    Checking conditions $conditions");
+      logger.info("Checking question ${question.name} conditions $conditions");
       if (!conditions) continue;
 
-      logger.info('Loading Question ${question.name}');
-      questionData.loadQuestion(klBaseProvider.base.questions[i], contextProvider.model);
-      break;
+      questions.add(question);
     }
-    notifyAll();
+    return questions;
   }
 }

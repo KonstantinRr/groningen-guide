@@ -7,11 +7,17 @@
 
 import 'package:flutter/material.dart';
 
+/// The application logo [Widget].
 class WidgetLogo extends StatelessWidget {
+  /// The widget's size
   final double size;
+  /// The margin around the [Widget]
   final EdgeInsets margin;
-  const WidgetLogo({@required this.size,
-    this.margin, Key key}) : super(key: key);
+
+  /// Creates a [WidgetLogo] using a [size] and [margin].
+  const WidgetLogo({@required this.size, this.margin, Key key}) :
+    assert(size != null, 'Size must not be null'),
+    super(key: key);
 
   @override
   Widget build(BuildContext context) {

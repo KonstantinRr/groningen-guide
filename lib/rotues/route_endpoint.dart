@@ -7,9 +7,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:groningen_guide/kl/kl_endpoint.dart';
-import 'package:groningen_guide/kl_engine.dart';
 import 'package:groningen_guide/widgets/widget_title.dart';
-import 'package:provider/provider.dart';
 import 'package:flutter/services.dart' show rootBundle;
 
 Future<ImageProvider> loadImageFromAsset(String image) async {
@@ -33,7 +31,7 @@ class EndpointWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var theme = Theme.of(context);
-    return ListView(
+    return Column(
       children: [
         Container(
           height: 50.0,
@@ -69,31 +67,36 @@ class EndpointWidget extends StatelessWidget {
   }
 }
 
+enum GoalDialogAction {
+  Reset, Previous
+}
+
 class EndpointDialog extends StatelessWidget {
-  final KlEndpoint endpoint;
-  const EndpointDialog({this.endpoint, Key key}) : super(key: key);
+  final List<KlEndpoint> endpoints;
+  const EndpointDialog({this.endpoints, Key key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return AlertDialog(
       content: Container(
         width: 500, height: 300,
-        child: EndpointWidget(endpoint: endpoint),
+        child: ListView(
+          children: endpoints.map((e) => EndpointWidget(endpoint: e)).toList(),
+        )
       ),
       actions: [
-        //FlatButton(
-        //  child: Text('Exit', style: theme.textTheme.button,),
-        //  onPressed: () {
-        //    Navigator.of(context).pop(true);
-        //  },
-        //),
+        FlatButton(
+          child: Text('Previous'),
+          onPressed: () {
+            // goes back a question
+            Navigator.of(context).pop(GoalDialogAction.Previous);
+          },
+        ),
         FlatButton(
           child: Text('Reset'),
           onPressed: () {
             // resets the engine
-            Provider.of<QuestionData>(context, listen: false).clear();
-            Provider.of<KlEngine>(context, listen: false).clear();
-            Navigator.of(context).pop(true);
+            Navigator.of(context).pop(GoalDialogAction.Reset);
           }
         )
       ],
@@ -101,11 +104,11 @@ class EndpointDialog extends StatelessWidget {
   }
 }
 
-Future<void> showEndpointDialog(BuildContext context, KlEndpoint endpoint) {
-  return showDialog(
+Future<GoalDialogAction> showEndpointDialog(BuildContext context, List<KlEndpoint> endpoints) {
+  return showDialog<GoalDialogAction>(
     context: context,
-    builder: (context) => EndpointDialog(endpoint: endpoint,)
-  );
+    builder: (context) => EndpointDialog(endpoints: endpoints,)
+  ) ?? GoalDialogAction.Reset;
 }
 
 class RouteEndpoint extends StatelessWidget {
