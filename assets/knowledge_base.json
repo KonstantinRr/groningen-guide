@@ -218,7 +218,7 @@
             "image": "assets/images/nassau.jpg",
             "description": "In the Prinsenhof Hotel! Nassau's kitchen is run by executive chef Christian de Vries. Nassau is innovative and receives praising reviews in the Michelin and Lekker guides.",
             "conditions": [
-                "restaurant AND romantic AND fine AND Dutch And French AND dinner"
+                "restaurant AND romantic AND fine AND (lang_dutch OR lang_french) AND dinner AND cultural"
             ]
         },
         {
@@ -230,7 +230,7 @@
             ]
         },
         {
-            "name": "Tiantianle",
+            "name": "Tian Tian Le",
             "image": "assets/images/tiantianle.jpg",
             "description": "Want to feel relaxed and zen? This is a must not miss, especially for the food! ",
             "conditions": [
@@ -274,7 +274,7 @@
             "image":"assets/images/strabucksUB.jpg",
             "description": "In need for a study place while combining it with a chat with your friend? Here you go, the best coffee right in the building of the University library, what else can one wish for? ",
             "conditions": [
-                "cafe AND studying AND leisure AND gang AND (average) AND coffee AND (breakfast OR lunch)"
+                "cafe AND (leisure AND (gang OR studying) OR business)  AND (average OR expensive) AND coffee AND (breakfast OR lunch)"
             ]
         },
         {
@@ -385,10 +385,12 @@
             "options": [
                 {
                     "description": "Family and children",
+                    "conditions":["NOT business "],
                     "events": [ "family = 1", "mind = 1"  ]
                 },
                 {
                     "description": "Romantic evening",
+                    "conditions":["NOT business AND NOT cafe"],
                     "events": [ "romantic = 1", "mind = 1" ]
                 },
                 {
@@ -397,6 +399,7 @@
                 },
                 {
                     "description": "Bar scene",
+                    "conditions":["NOT business AND NOT cafe"],                    
                     "events": [ "bar = 1", "mind = 1" ]
                 },
                 {
@@ -405,6 +408,7 @@
                 },
                 {
                     "description": "For the whole gang",
+                    "conditions":["NOT business"],
                     "events": [ "gang = 1", "mind = 1" ]
                 }
             ]
@@ -417,6 +421,7 @@
             "options": [
                 {
                     "description": "Breakfast",
+                    "conditions":["NOT restaurant"],
                     "events": [ "breakfast = 1", "meal = 1" ]
                 },
                 {
@@ -425,6 +430,7 @@
                 },
                 {
                     "description": "Dinner",
+                    "conditions":["NOT cafe"],
                     "events": [ "dinner = 1", "meal = 1" ]
                 }
             ]
@@ -621,7 +627,7 @@
             "description": "",
             "image": "assets/images/groMap.jpg",
             "maxAnswers": 1,
-            "conditions": [ "service"],
+            "conditions": [ "service AND NOT cafe AND NOT restaurant"],
             "options": [
                 {
                     "description": "City centre",
