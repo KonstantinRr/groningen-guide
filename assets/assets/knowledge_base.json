@@ -36,18 +36,18 @@
         {
             "name": "Martini Hotel Groningen",
             "description": "Wonderful memories are granted if you stay here, the sweet spot of Groningen ",
-            "image": "",
-            "conditions": [ "hotel AND (business OR leisure) AND (cultural_experience OR private OR romantic OR area_citycenter) AND cheap" ]
+            "image": "assets/images/martini.jpg",
+            "conditions": [ "hotel AND (business OR leisure) AND (cultural_experience OR private OR romantic OR area_citycenter OR bar) AND cheap" ]
         },
         {
             "name": "Hotel Miss Blanche",
             "description": "The best option for you, my friend, would be this boutique hotel in the city of Groningen with luxurious and uniquely furnished rooms ",
-            "image": "assets/images/missBlanche",
-            "conditions": [ "hotel AND (business OR leisure) AND area_citycenter AND fine AND (romantic OR family)" ]
+            "image": "assets/images/missBlanche.jpg",
+            "conditions": [ "hotel AND (business OR leisure) AND area_citycenter AND expensive AND (romantic OR family)" ]
         },
         {
             "name": "The Student Hotel",
-            "image": "assets/images/studentHotel",
+            "image": "assets/images/studentHotel.jpg",
             "description": "This is the best option for you, with everything you need + the chance of extending your stay for up to a couple of months at a good price. ",
             "conditions": [ "hotel AND (business OR leisure) AND (service_long_stay AND (area_citycenter OR service_breakfast_included OR bar))" ]
         },
@@ -80,7 +80,7 @@
             "image": "assets/images/mrmofongo.jpg",
             "description": "Mr. Mofongo has seven different 'worlds', each with its own atmosphere and culinary experience. In addition to quality, every world guarantees innovation, sustainability and above all experience. Let yourself be carried away by Máximo's endless wanderlust and join him on an adventure! ",
             "conditions": [
-                "restaurant AND (business OR leisure) AND (romantic OR bar OR gang) AND (average OR expensive)  AND (dinner OR lunch)"
+                "restaurant AND (business OR leisure) AND (romantic OR bar OR gang OR private) AND (average OR expensive)  AND (dinner OR lunch)"
             ]
         },
         {
@@ -88,7 +88,7 @@
             "image": "assets/images/mrsmith.jpg",
             "description": "Welcome to the jungle! Tropical cocktails just for you! ",
              "conditions": [
-                "restaurant AND (business OR leisure) AND (romantic OR bar) AND (lang_thai OR lang_dutch) AND average  AND (dinner OR lunch)"
+                "restaurant AND  leisure AND (romantic OR bar) AND (lang_thai OR lang_dutch) AND average  AND (dinner OR lunch)"
             ]
         },
         {
@@ -96,7 +96,7 @@
             "image": "assets/images/bronco.jpg",
             "description": "The best RibHouse in Groningen",
             "conditions": [
-                "restaurant AND leisure  AND average  AND (gang OR bar) AND region_american AND lang_US AND (dinner OR lunch)"
+                "restaurant AND leisure AND average  AND (gang OR bar) AND lang_US AND (dinner OR lunch)"
             ]
         },
         {
@@ -104,7 +104,7 @@
             "image": "assets/images/debeteretijden.jpg",
             "description": " They are renowned for their surprise menu, consisting of 3, 4 or 5 courses. Of course, your preferences are taken into account.",
              "conditions": [
-                "restaurant AND (business OR leisure) AND romantic AND average  AND region_european AND lang_dutch AND (dinner OR lunch)"
+                "restaurant AND (business OR leisure) AND romantic AND average AND lang_dutch AND (dinner OR lunch)"
             ]
         },
         {
@@ -112,7 +112,7 @@
             "image": "assets/images/deKleineHerlijkheid.jpg",
             "description": " “We” are Elbrich & Zaneta, friends and now also business partners. We took over De Kleine Heerlijkheid at the end of 2013 with the idea of ​​creating a place here where people feel at home, are pampered and very tasty food. Our restaurant is located just outside the city center on the Schuitendiep in Groningen in a beautiful building from the beginning of the 17th century. The building has been inhabited for years, a family in every room, and that homely atmosphere has remained. The restaurant can rightly be called a living room restaurant. ",
            "conditions": [
-                "restaurant AND (business OR leisure) AND romantic AND average  AND region_european AND lang_dutch AND (dinner OR lunch)"
+                "restaurant AND (business OR leisure) AND (romantic OR private) AND average  AND region_european AND lang_dutch AND (dinner OR lunch)"
             ]
         },
         {
@@ -152,7 +152,7 @@
             "image": "assets/images/thaijasmine.jpg",
             "description": "The BEST Thai food Angel ever had! ",
             "conditions": [
-                "restaurant AND (business OR leisure) AND cheap AND gang AND region_asian AND lang_thai AND (dinner OR lunch)"
+                "restaurant AND (business OR leisure) AND cheap AND gang AND lang_thai AND (dinner OR lunch)"
             ]
         },
         {
@@ -160,7 +160,7 @@
             "image": "assets/images/imono.jpg",
             "description": "Perfect for a first sushi date!",
             "conditions": [
-                "restaurant AND (business OR leisure) AND romantic AND (average OR expensive) AND region_asian AND lang_japanese AND dinner"
+                "restaurant AND (business OR leisure) AND romantic AND (average OR expensive) AND lang_japanese AND dinner"
             ]
         },
         {
@@ -168,7 +168,7 @@
             "image": "assets/images/hanasato.jpg",
             "description": "Want to impress your date with fine Asian cuisine? This is the place! ",
             "conditions": [
-                "restaurant AND romantic AND expensive  AND region_asian AND lang_japanese AND dinner"
+                "restaurant AND romantic AND expensive  AND lang_japanese AND dinner"
             ]
         },
         {
@@ -176,7 +176,7 @@
             "image": "assets/images/dePijp.jpg",
             "description": "For a romantic evening and great top class food, this is a must not miss! Known as one of the best suprise menu restaurants in Groningen!",
             "conditions": [
-                "restaurant AND romantic AND expensive  AND region_european AND lang_french AND dinner"
+                "restaurant AND romantic AND expensive AND region_european AND lang_french AND dinner"
             ]
         },
         {
@@ -184,7 +184,7 @@
             "image": "assets/images/vivelavie.jpg",
             "description": "The best restaurant in Groningen without a doubt! Celebrating something special? Get your taste buds ready for an unforgettable experience!  ",
             "conditions": [
-                "restaurant AND romantic AND expensive  AND region_european AND(lang_dutch OR lang_french) AND dinner"
+                "restaurant AND (business OR leisure) AND (romantic OR private ) AND expensive  AND region_european AND (lang_dutch OR lang_french) AND dinner"
             ]
         },
         {
@@ -200,7 +200,7 @@
             "image": "assets/images/nassau.jpg",
             "description": "In the Prinsenhof Hotel! Nassau's kitchen is run by executive chef Christian de Vries. Nassau is innovative and receives praising reviews in the Michelin and Lekker guides.",
             "conditions": [
-                "restaurant AND romantic AND fine AND (lang_dutch OR lang_french) AND dinner AND cultural"
+                "restaurant AND romantic AND expensive AND (lang_dutch OR lang_french) AND dinner AND cultural"
             ]
         },
         {
@@ -208,7 +208,7 @@
             "image": "assets/images/konbu.jpg",
             "description": "Affordable bites for all, that will keep you going back for more! ",
             "conditions": [
-                "restaurant AND romantic AND cheap  AND region_asian AND lang_vietnamese AND (dinner OR lunch)"
+                "restaurant AND romantic AND cheap  AND lang_vietnamese AND (dinner OR lunch)"
             ]
         },
         {
@@ -216,7 +216,7 @@
             "image": "assets/images/tiantianle.jpg",
             "description": "Want to feel relaxed and zen? This is a must not miss, especially for the food! ",
             "conditions": [
-                "restaurant AND (gang OR family) AND cheap  AND (region_asian AND lang_chinese OR region_american AND lang_chilean ) AND (dinner OR lunch)"
+                "restaurant AND (gang OR family) AND cheap  AND ( lang_chinese OR lang_chilean ) AND (dinner OR lunch)"
             ]
         },
         {
@@ -224,7 +224,7 @@
             "image": "assets/images/Chaplins-Pub-1.jpg",
             "description": "Just the place for you to grab a beer with the boys!",
             "conditions": [
-                "restaurant AND (gang OR bar) AND cheap  AND region_american AND lang_us AND (dinner OR lunch)"
+                "restaurant AND (gang OR bar) AND cheap  AND lang_us AND (dinner OR lunch)"
             ]
         },
         {
@@ -232,7 +232,7 @@
             "image":"assets/images/magoya.jpg",
             "description": "Beautiful Sakura decorations and delicious asian dishes, the best place to be aesthetically pleased and gastronomically fulfilled",
             "conditions": [
-                "restaurant AND (gang OR romantic OR family) AND (cheap OR average)  AND region_asian AND lang_japanese AND (dinner OR lunch)"
+                "restaurant AND (gang OR romantic OR family) AND (cheap OR average) AND lang_japanese AND (dinner OR lunch)"
             ]
         },
         {
@@ -338,6 +338,7 @@
                 },
                 {
                     "description": "Studying",
+                    "conditions": ["NOT restaurant AND NOT hotel"],
                     "events": [ "studying = 1" ]
                 }
             ]
@@ -367,7 +368,7 @@
             "name": "What do you have in mind?",
             "description": "",
             "maxAnswers": 1,
-            "conditions": [ "restaurant OR hotel" ],
+            "conditions": [ "restaurant OR hotel OR cafe" ],
             "options": [
                 {
                     "description": "Family and children",
@@ -381,15 +382,17 @@
                 },
                 {
                     "description": "Cultural experience",
+                    "conditions":[" NOT cafe"],                    
                     "events": [ "cultural = 1", "mind = 1" ]
                 },
                 {
                     "description": "Bar scene",
-                    "conditions":["NOT business AND NOT cafe"],                    
+                    "conditions":[" NOT (cafe OR restaurant)"],                    
                     "events": [ "bar = 1", "mind = 1" ]
                 },
                 {
                     "description": "Private",
+                    "conditions":[" NOT (cafe OR restaurant)"],
                     "events": [ "private = 1", "mind = 1" ]
                 },
                 {
@@ -505,6 +508,7 @@
                 },
                 {
                     "description": "Japanese",
+                    "conditions":["NOT cheap"],
                     "events": [ "lang_japanese = 1" ]
                 },
                 {
@@ -542,7 +546,7 @@
             "name": "What service preference do you have?",
             "description": "",
             "maxAnswers": 2,
-            "conditions": [ "money AND NOT isBusinessTrip AND NOT (cafe OR restaurant)"],
+            "conditions": [ "money AND NOT (cafe OR restaurant)"],
             "options": [              
                 {
                     "description": "Long stay (up to a couple of months)",
@@ -551,7 +555,11 @@
                 {
                     "description": "Breakfast included",
                     "events": [ "service_breakfast = 1", "service = 1" ]
-                },    
+                }, 
+                {
+                    "description": "Meeting rooms",
+                    "events": [ "service_meeting_room = 1", "service = 1" ]
+                },   
                 {
                     "exclusive": true,
                     "description": "No preference",
@@ -580,36 +588,11 @@
             ]
         },
         {
-            "name": "You're on a business trip",
-            "description": "please tell us what are your preferences",
-            "maxAnswers": 2,
-            "conditions": [ "isBusinessTrip" ],
-            "options": [
-                {
-                    "description": "Cultural experience",
-                    "events": [ "cultural = 1" ]
-                },
-                {
-                    "description": "Meeting rooms",
-                    "events": [ "service_meeting_room = 1" ]
-                },
-                {
-                    "description": "Breakfast included",
-                    "events": [ "service_breakfast = 1" ]
-                },
-                {
-                    "exclusive": true,
-                    "description": "No preference",
-                    "events": ["service = 1" ]
-                }
-            ]
-        },
-        {
             "name": "What area would you prefer?",
             "description": "",
             "image": "assets/images/groMap.jpg",
             "maxAnswers": 1,
-            "conditions": [ "service AND NOT cafe AND NOT restaurant"],
+            "conditions": [ "service AND NOT( cafe OR restaurant) "],
             "options": [
                 {
                     "description": "City centre",
