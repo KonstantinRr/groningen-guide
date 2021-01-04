@@ -19,61 +19,61 @@
             "name": "Prinsenhof Hotel",
             "description": "Angel recommends you this 4-star boutique hotel in the heart of Groningen. Right in the shadows of the Martini Tower, its beautiful garden will offer the best cultural experience, suitable for any purpose ",
             "image": "assets/images/prinsenhofHotel.jpg",
-            "conditions": [ "hotel AND (business OR leisure) AND (cultural OR private OR romantic OR area_citycenter) AND NOT cheap AND NOT (cultural AND average) AND NOT (expensive AND romantic)" ]
+            "conditions": [ "hotel AND ((business AND (service_meeting_room OR bar) AND cultural) OR (leisure AND (cultural OR romantic) AND bar)) AND NOT cheap AND NOT (cultural AND average) AND NOT (expensive AND romantic) AND area_citycenter" ]
         },
         {
-            "name": "NH Hotel de Ville, Mercure, The Student Hotel",
-            "description": "According to your requirements, Angel has found several suitable places. Opt for The Student Hotel or for the NH Hotel de Ville, if you'd like to be close to the city center or for Mercure for a more isolated option ",
+            "name": "City Hotel",
+            "description": "This is a great place for you if you want to stay in the city center at the best price",
+            "image": "assets/images/cityHotel.jpg",
+            "conditions": [ "hotel AND leisure AND average AND service_breakfast AND romantic AND area_citycenter" ]
+        },
+        {
+            "name": "NH Hotel de Ville",
+            "description": "According to your requirements, Angel suggests you to opt for the NH Hotel de Ville ",
             "image": "assets/images/nhDeVille.jpg",
-            "conditions": [ "hotel AND (business OR leisure) AND (service_breakfast_included AND bar)" ]
+            "conditions": [ "hotel AND ((business AND (service_breakfast OR service_meeting_room) AND cultural) OR (leisure AND (family OR romantic OR cultural) AND service_breakfast)) AND (average OR expensive) AND area_citycenter" ]
         },
         {
             "name": "Klipper Zwadde Boat Hotel",
             "description": " Staying in a boat hotel! I bet you've never thought about that, huh? Angel highly suggests this for a unique experience ;) ",
             "image": "assets/images/KlipperZwaddeboatHotel.jpg",
-            "conditions": [ "hotel AND  leisure AND cultural AND average" ]
+            "conditions": [ "hotel AND leisure AND cultural AND average AND NOT (service_breakfast OR bar OR service_long_stay OR service_conference_room)" ]
         },
         {
             "name": "Martini Hotel Groningen",
             "description": "Wonderful memories are granted if you stay here, the sweet spot of Groningen ",
             "image": "assets/images/martini.jpg",
-            "conditions": [ "hotel AND (business OR leisure) AND (cultural OR private OR romantic OR area_citycenter OR bar) AND cheap" ]
+            "conditions": [ "hotel AND ((business AND cultural) OR (leisure AND (family OR romantic)) AND bar) AND (cheap OR average) AND area_citycenter" ]
         },
         {
             "name": "Hotel Miss Blanche",
             "description": "The best option for you, my friend, would be this boutique hotel in the city of Groningen with luxurious and uniquely furnished rooms ",
             "image": "assets/images/missBlanche.jpg",
-            "conditions": [ "hotel AND (business OR leisure) AND area_citycenter AND expensive AND (romantic OR family)" ]
+            "conditions": [ "hotel AND ((business AND service_meeting_room) OR (leisure AND (romantic OR family) AND bar)) AND area_citycenter AND expensive" ]
         },
         {
             "name": "The Student Hotel",
             "image": "assets/images/studentHotel.jpg",
             "description": "This is the best option for you, with everything you need + the chance of extending your stay for up to a couple of months at a good price. ",
-            "conditions": [ "hotel AND (business OR leisure) AND (service_long_stay AND (area_citycenter OR service_breakfast_included OR bar))" ]
+            "conditions": [ "hotel AND (business OR leisure) AND service_long_stay " ]
         },
         {
             "name": "Stee in stad",
             "description": " This is a great place for staying in with your family, a perfect location since you're close to the city center and the area is quiet and nice, all at the best price",
             "image": "assets/images/steeInStad.jpg",
-            "conditions": [ "hotel AND leisure AND family AND average AND service_breakfast_included OR area_korrewegwijk" ]
-        },
-        {
-            "name": "City Hotel",
-            "description": "This is a great place for you and your family if you want to stay in the city center at the best price",
-            "image": "assets/images/cityHotel.jpg",
-            "conditions": [ "hotel AND leisure AND area_citycenter AND average AND service_breakfast_included AND family" ]
-        },
+            "conditions": [ "hotel AND leisure AND family AND average AND service_breakfast AND area_korrewegwijk " ]
+        },        
         {
             "name": "Mercure",
             "description": "This hotel has all the facilities you could probably wish for, all in an isolated environment, reasonably far away from the city center crowdedness  ",
-            "image": "assets/images/mercure.png",
-            "conditions": [ "hotel AND (business OR leisure) AND (area_rivierenbuurt OR service_breakfast_included OR bar OR service_meeting_room OR family) AND average " ]
+            "image": "assets/images/mercure.jpg",
+            "conditions": [ "hotel AND ((business AND (service_breakfast OR bar) AND cultural) OR (leisure AND (service_breakfast OR bar) AND (family OR cultural OR romantic))) AND (average OR cheap) AND area_rivierenbuurt " ]
         },
         {
             "name": "Apollo Hotel",
             "description": "This hotel has all the facilities you could probably wish for, be it renting a bike, a fitness center or business meeting rooms. All in an isolated environment, reasonably far away from the city center crowdedness  ",
             "image": "assets/images/apolloHotel.jpg",
-            "conditions": [ "hotel AND (business OR leisure) AND (area_rivierenbuurt OR bar OR service_meeting_room OR family) AND expensive " ]
+            "conditions": ["hotel AND ((business AND (service_meeting_room OR bar) AND cultural) OR (leisure AND bar AND (family OR romantic OR cultural))) AND expensive AND area_rivierenbuurt " ]
         },
         {
             "name": "Bed & Breakfast 'Het Kasteeltje'",
@@ -270,7 +270,7 @@
             "image":"assets/images/strabucksUB.jpg",
             "description": "In need for a study place while combining it with a chat with your friend? Here you go, the best coffee right in the building of the University library, what else can one wish for? (p.s. also good for business)",
             "conditions": [
-                "cafe AND NOT hotel AND (leisure AND gang OR studying OR business)  AND (average OR expensive) AND (coffee OR (studying AND (smoothies OR hot_chocolate))) AND (breakfast OR lunch)"
+                "cafe AND NOT hotel AND (leisure AND gang OR studying OR business)  AND (average OR expensive) AND (coffee OR (studying AND (smoothies OR hot_chocolate))) AND (breakfast OR lunch) AND NOT family"
             ]
         },
         {
@@ -315,11 +315,28 @@
         },
         {
             "name": "Cappuvino",
-            "description": "A special place",
+            "image":"assets/images/cappuvino.jpg",
+            "description": "A special place with coffee, wine and jazz in the heart of Groningen",
             "conditions": [
-                 "cafe AND NOT hotel AND (leisure OR business) AND (average OR cheap) AND (breakfast OR lunch) AND (coffee OR hot_chocolate)"
+                 "cafe AND NOT hotel AND (leisure OR business) AND average  AND (breakfast OR lunch) AND (coffee OR hot_chocolate) AND NOT family"
                  ]
-        }
+        },
+        {
+            "name": "Pure",
+            "image":"assets/images/pure.jpg",
+            "description": "A wide range of ice-cream flavours and donuts for your kind and the best coffee for you, all of it at the best price!",
+            "conditions": [
+                 "cafe AND NOT hotel AND leisure AND cheap AND (breakfast OR lunch) AND (coffee OR hot_chocolate) AND family"
+                 ]
+        },
+        {
+            "name": "Tucano",
+            "image":"assets/images/tucano.jpg",
+            "description": "Cozy atmosphere, perfect for studying, business or a just having a good time ;)",
+            "conditions": [
+                 "cafe AND NOT hotel AND (leisure OR business OR studying) AND (average OR cheap )  AND (breakfast OR lunch) AND (coffee OR hot_chocolate OR smoothies)"
+                 ]
+        }        
     ],
     "questions": [
         {
@@ -392,7 +409,7 @@
             "options": [
                 {
                     "description": "Family and children",
-                    "conditions":["NOT business "],
+                    "conditions":["NOT business AND NOT studying"],
                     "events": [ "family = 1", "mind = 1"  ]
                 },
                 {
@@ -404,26 +421,15 @@
                     "description": "Cultural experience",
                     "conditions":["NOT cafe"],                    
                     "events": [ "cultural = 1", "mind = 1" ]
-                },
-                {
-                    "description": "Bar scene",
-                    "conditions":[" NOT (cafe OR restaurant)"],                    
-                    "events": [ "bar = 1", "mind = 1" ]
-                },
+                },                
                 {
                     "description": "Private",
+                    "conditions":["NOT hotel"],
                     "events": [ "private = 1", "mind = 1" ]
                 },
                 {
                     "description": "For the whole gang",
-                    "conditions":["NOT (business OR hotel)"],
                     "events": [ "gang = 1", "mind = 1" ]
-                },
-                {
-                    "description": "Nothing particular",
-                    "conditions":["cafe"],
-                    "exclusive": true,
-                    "events": ["mind = 1" ]
                 }
             ]
         }, 
@@ -442,14 +448,13 @@
                     "events": [ "service_breakfast = 1", "service = 1" ]
                 }, 
                 {
-                    "description": "Meeting rooms",
-                    "conditions": ["NOT family"],
+                    "description": "Conference room",
+                    "conditions": ["NOT leisure"],
                     "events": [ "service_meeting_room = 1", "service = 1" ]
-                },   
+                },
                 {
-                    "exclusive": true,
-                    "description": "No preference",
-                    "events": ["service = 1" ]
+                    "description": "Bar scene",                    
+                    "events": [ "bar = 1", "service = 1" ]
                 }
             ]
         },       
@@ -594,9 +599,9 @@
                     "events": [ "area_citycenter = 1" ]
                 },
                 {
-                    "description": "Korrewegwijk/ Indische buurt",
-                    "conditions":["NOT service_long_stay"],
-                    "events": [ "area_korrewegwijk = 1", "area_indischebuurt = 1" ]
+                    "description": "Korrewegwijk",
+                    "conditions":["NOT service_long_stay AND NOT business AND average"],
+                    "events": [ "area_korrewegwijk = 1" ]
                 },
                 {
                     "description": "Rivierenbuurt",
@@ -604,7 +609,7 @@
                 },
                 {
                     "description": "Oosterparkwijk",
-                    "conditions":["NOT service_long_stay"],
+                    "conditions":["NOT service_long_stay AND family AND cheap"],
                     "events": [ "area_oosterparkwijk = 1" ]
                 }
             ]
