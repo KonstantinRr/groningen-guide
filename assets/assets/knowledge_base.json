@@ -102,7 +102,7 @@
             "image": "assets/images/bronco.jpg",
             "description": "The best RibHouse in Groningen",
             "conditions": [
-                "restaurant AND NOT hotel AND (leisure OR business) AND average  AND (gang OR bar) AND lang_US AND (dinner OR lunch)"
+                "restaurant AND NOT hotel AND (leisure OR business) AND average AND (gang OR bar) AND lang_us AND (dinner OR lunch)"
             ]
         },
         {
@@ -166,7 +166,7 @@
             "image": "assets/images/imono.jpg",
             "description": "Perfect for a first sushi date!",
             "conditions": [
-                "restaurant AND NOT hotel AND leisure AND romantic AND (average OR expensive) AND lang_japanese AND dinner"
+                "restaurant AND NOT hotel AND leisure AND (romantic OR private) AND average AND lang_japanese AND (dinner OR lunch) "
             ]
         },
         {
@@ -174,7 +174,7 @@
             "image": "assets/images/hanasato.jpg",
             "description": "Want to impress your date with fine Asian cuisine? This is the place! ",
             "conditions": [
-                "restaurant AND NOT hotel AND romantic AND lang_japanese AND expensive  AND (dinner OR lunch)"
+                "restaurant AND NOT hotel AND (romantic OR private) AND lang_japanese AND expensive  AND (dinner OR lunch)"
             ]
         },        
         {
@@ -215,6 +215,14 @@
             "description": " A beautiful place in the centre of Groningen. The dishes are prepared with organic and regional products and, of course, lots of love. It's also vegan and vegetarian friendly ",
             "conditions": [
                 "restaurant AND NOT hotel AND (leisure OR business) AND gang AND average AND lang_dutch AND (dinner OR lunch)"
+            ]
+        },
+        {
+            "name": "Boccaccio",
+            "image": "assets/images/boccaccio.jpg",
+            "description": "A place with Italian food in the city center of Groningen. Be it for a business meeting or for a large group, this is a perfect place. ",
+            "conditions": [
+                "restaurant AND NOT hotel AND (leisure OR business) AND (gang OR private) AND average AND lang_italian AND (dinner OR lunch)"
             ]
         },
         {
@@ -432,7 +440,7 @@
                 },                
                 {
                     "description": "Private",
-                    "conditions":["NOT hotel"],
+                    "conditions":["NOT hotel AND NOT cheap"],
                     "events": [ "private = 1", "mind = 1" ]
                 },
                 {
@@ -505,11 +513,12 @@
                 },
                 {
                     "description": "Asian",
+                    "conditions":["NOT (business AND expensive AND cultural)"],
                     "events": [ "region_asian = 1" ]
                 },
                 {
                     "description": "American",
-                    "conditions": [ "NOT romantic AND NOT private AND NOT expensive" ],
+                    "conditions": [ "NOT romantic AND NOT private AND NOT expensive AND NOT cultural" ],
                     "events": [ "region_american = 1" ]
                 }
             ]
