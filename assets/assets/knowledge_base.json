@@ -17,19 +17,19 @@
     "endpoints": [
         {
             "name": "Prinsenhof Hotel",
-            "description": "Angel recommends you this 4-star boutique hotel in the heart of Groningen. Right in the shadows of the Martini Tower, its beautiful garden will offer the best cultural experience, suitable for any purpose ",
+            "description": "Angel recommends you this 4-star boutique hotel in the heart of Groningen. Right in the shadows of the Martini Tower, its beautiful garden will offer the best cultural experience, suitable for any purpose. ",
             "image": "assets/images/prinsenhofHotel.jpg",
             "conditions": [ "hotel AND ((business AND (service_meeting_room OR bar) AND cultural) OR (leisure AND (cultural OR romantic) AND bar)) AND NOT cheap AND NOT (cultural AND average) AND NOT (expensive AND romantic) AND area_citycenter" ]
         },
         {
             "name": "City Hotel",
-            "description": "This is a great place for you if you want to stay in the city center at the best price",
+            "description": "This is a great place for you if you want to stay in the city center at the best price.",
             "image": "assets/images/cityHotel.jpg",
             "conditions": [ "hotel AND leisure AND average AND service_breakfast AND romantic AND area_citycenter" ]
         },
         {
             "name": "NH Hotel de Ville",
-            "description": "According to your requirements, Angel suggests you to opt for the NH Hotel de Ville ",
+            "description": "According to your requirements, Angel suggests you to opt for the NH Hotel de Ville. ",
             "image": "assets/images/nhDeVille.jpg",
             "conditions": [ "hotel AND ((business AND (service_breakfast OR service_meeting_room) AND cultural) OR (leisure AND (family OR romantic OR cultural) AND service_breakfast)) AND (average OR expensive) AND area_citycenter" ]
         },
@@ -37,17 +37,17 @@
             "name": "Klipper Zwadde Boat Hotel",
             "description": " Staying in a boat hotel! I bet you've never thought about that, huh? Angel highly suggests this for a unique experience ;) ",
             "image": "assets/images/KlipperZwaddeboatHotel.jpg",
-            "conditions": [ "hotel AND leisure AND cultural AND average AND NOT (service_breakfast OR bar OR service_long_stay OR service_conference_room)" ]
+            "conditions": [ "hotel AND leisure AND cultural AND average AND NOT (service_breakfast OR bar OR service_long_stay OR service_conference_room) " ]
         },
         {
             "name": "Martini Hotel Groningen",
-            "description": "Wonderful memories are granted if you stay here, the sweet spot of Groningen ",
+            "description": "Wonderful memories are granted if you stay here, the sweet spot of Groningen. ",
             "image": "assets/images/martini.jpg",
-            "conditions": [ "hotel AND ((business AND cultural) OR (leisure AND (family OR romantic)) AND bar) AND (cheap OR average) AND area_citycenter" ]
+            "conditions": [ "hotel AND ((business AND cultural) OR (leisure AND (family OR romantic OR cultural)) AND bar) AND (cheap OR average) AND area_citycenter" ]
         },
         {
             "name": "Hotel Miss Blanche",
-            "description": "The best option for you, my friend, would be this boutique hotel in the city of Groningen with luxurious and uniquely furnished rooms ",
+            "description": "The best option for you, my friend, would be this boutique hotel in the city of Groningen with luxurious and uniquely furnished rooms. ",
             "image": "assets/images/missBlanche.jpg",
             "conditions": [ "hotel AND ((business AND service_meeting_room) OR (leisure AND (romantic OR family) AND bar)) AND area_citycenter AND expensive" ]
         },
@@ -59,27 +59,33 @@
         },
         {
             "name": "Stee in stad",
-            "description": " This is a great place for staying in with your family, a perfect location since you're close to the city center and the area is quiet and nice, all at the best price",
+            "description": " This is a great place for staying in with your family, a perfect location since you're close to the city center and the area is quiet and nice, all at the best price.",
             "image": "assets/images/steeInStad.jpg",
             "conditions": [ "hotel AND leisure AND family AND average AND service_breakfast AND area_korrewegwijk " ]
         },        
         {
             "name": "Mercure",
-            "description": "This hotel has all the facilities you could probably wish for, all in an isolated environment, reasonably far away from the city center crowdedness  ",
+            "description": "This hotel has all the facilities you could probably wish for, all in an isolated environment, reasonably far away from the city center crowdedness.  ",
             "image": "assets/images/mercure.jpg",
             "conditions": [ "hotel AND ((business AND (service_breakfast OR bar) AND cultural) OR (leisure AND (service_breakfast OR bar) AND (family OR cultural OR romantic))) AND (average OR cheap) AND area_rivierenbuurt " ]
         },
         {
             "name": "Apollo Hotel",
-            "description": "This hotel has all the facilities you could probably wish for, be it renting a bike, a fitness center or business meeting rooms. All in an isolated environment, reasonably far away from the city center crowdedness  ",
+            "description": "This hotel has all the facilities you could probably wish for, be it renting a bike, a fitness center or business meeting rooms. All in an isolated environment, reasonably far away from the city center crowdedness.  ",
             "image": "assets/images/apolloHotel.jpg",
-            "conditions": ["hotel AND ((business AND (service_meeting_room OR bar) AND cultural) OR (leisure AND bar AND (family OR romantic OR cultural))) AND expensive AND area_rivierenbuurt " ]
+            "conditions": ["hotel AND ((business AND (service_meeting_room OR bar OR service_breakfast) AND cultural) OR (leisure AND (bar OR service_breakfast) AND (family OR romantic OR cultural))) AND expensive AND area_rivierenbuurt " ]
         },
         {
             "name": "Bed & Breakfast 'Het Kasteeltje'",
-            "description": "I know you're on a budget, but trust me, this place will make your family feel like you've had the best vacation ever! Cosy rooms, your own kitchen and a friendly neighbourhood, what else is there to wish for? ",
+            "description": "I know you're on a budget, but trust me, this place will make your family feel like you've had the best vacation ever! Cosy rooms, your own kitchen and a friendly neighbourhood, what else is there to wish for?. ",
             "image": "assets/images/theManor.jpg",
             "conditions": [ "hotel AND leisure AND (area_oosterparkwijk OR (family AND cheap))" ]
+        },
+        {
+            "name":"Boutique Hotel De Doelen",
+            "description": "A beautiful place with the touch of a museum. ",
+            "image": "assets/images/deDoelen.jpg",
+            "conditions": [ "hotel AND leisure AND (area_citycenter AND ( romantic OR cultural) AND service_breakfast) AND cheap" ]
         },
         {
             "name": "Mr Mofongo",
@@ -358,7 +364,7 @@
         {
             "name": "What are you looking for?",
             "description": "",
-            "maxAnswers": 1,
+            "maxAnswers": 2,
             "conditions": [ ],
             "options": [
                 {
@@ -450,6 +456,7 @@
                 },
                 {
                     "description": "For the whole gang",
+                    "conditions":["NOT hotel "],
                     "events": [ "gang = 1", "mind = 1" ]
                 }
             ]
@@ -458,7 +465,7 @@
             "name": "What service preference do you have?",
             "description": "",
             "maxAnswers": 2,
-            "conditions": [ "money AND NOT (cafe OR restaurant) OR (mind AND NOT (cafe OR restaurant))"],
+            "conditions": [ "money AND NOT (cafe OR restaurant) OR (mind AND NOT (cafe OR restaurant)) OR (userHasGoal AND hotel)"],
             "options": [              
                 {
                     "description": "Long stay (up to a couple of months)",
@@ -618,7 +625,7 @@
         {
             "name": "What area would you prefer?",
             "description": "",
-            "image": "assets/images/groMap.jpg",
+            "image": null,
             "maxAnswers": 1,
             "conditions": [ "service AND NOT( cafe OR restaurant) "],
             "options": [

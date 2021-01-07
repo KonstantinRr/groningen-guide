@@ -15,8 +15,8 @@
             "type": "image/png"
         },
         {
-            "src": "icons/Icon-512.png",
-            "sizes": "512x512",
+            "src": "icons/icon-angel-statue.png",
+            "sizes": "997x1280",
             "type": "image/png"
         }
     ]
