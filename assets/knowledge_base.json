@@ -37,7 +37,13 @@
             "name": "Klipper Zwadde Boat Hotel",
             "description": " Staying in a boat hotel! I bet you've never thought about that, huh? Angel highly suggests this for a unique experience ;) ",
             "image": "assets/images/KlipperZwaddeboatHotel.jpg",
-            "conditions": [ "hotel AND leisure AND cultural AND average AND NOT (service_breakfast OR bar OR service_long_stay OR service_conference_room)" ]
+            "conditions": [ "hotel AND leisure AND cultural AND average AND NOT (service_breakfast OR bar OR service_long_stay OR service_conference_room) " ]
+        },
+        {
+            "name": "",
+            "description": "Best Western Plus Hotel Groningen Plaza ",
+            "image": "assets/images/KlipperZwaddeboatHotel.jpg",
+            "conditions": [ "hotel AND leisure AND cultural AND average AND NOT (service_breakfast OR bar OR service_long_stay OR service_conference_room) " ]
         },
         {
             "name": "Martini Hotel Groningen",
@@ -358,7 +364,7 @@
         {
             "name": "What are you looking for?",
             "description": "",
-            "maxAnswers": 1,
+            "maxAnswers": 2,
             "conditions": [ ],
             "options": [
                 {
@@ -450,6 +456,7 @@
                 },
                 {
                     "description": "For the whole gang",
+                    "conditions":["NOT hotel "],
                     "events": [ "gang = 1", "mind = 1" ]
                 }
             ]
@@ -458,7 +465,7 @@
             "name": "What service preference do you have?",
             "description": "",
             "maxAnswers": 2,
-            "conditions": [ "money AND NOT (cafe OR restaurant) OR (mind AND NOT (cafe OR restaurant))"],
+            "conditions": [ "money AND NOT (cafe OR restaurant) OR (mind AND NOT (cafe OR restaurant)) OR (userHasGoal AND hotel)"],
             "options": [              
                 {
                     "description": "Long stay (up to a couple of months)",
@@ -618,7 +625,7 @@
         {
             "name": "What area would you prefer?",
             "description": "",
-            "image": "assets/images/groMap.jpg",
+            "image": null,
             "maxAnswers": 1,
             "conditions": [ "service AND NOT( cafe OR restaurant) "],
             "options": [
