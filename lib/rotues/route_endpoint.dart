@@ -78,50 +78,51 @@ enum GoalDialogAction {
   Reset, Previous
 }
 
-class EndpointDialog extends StatelessWidget {
-  final List<KlEndpoint> endpoints;
-  const EndpointDialog({this.endpoints, Key key}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return AlertDialog(
+Future<GoalDialogAction> showEndpointDialog(
+  BuildContext context, List<KlEndpoint> endpoints, {GoalDialogAction def}) async {
+  var routeResult = await showDialog(
+    context: context,
+    barrierDismissible: false,
+    builder: (context) => AlertDialog(
       content: Container(
         width: 500, height: 300,
         child: ListView(
-          children: endpoints.map((e) => EndpointWidget(endpoint: e)).toList(),
+          children: endpoints.map(
+            (e) => EndpointWidget(endpoint: e)).toList(),
         )
       ),
-      actions: [
+      actions: <Widget> [
         FlatButton(
           child: Text('Previous'),
           onPressed: () =>
             // goes back a question
-            Navigator.of(context).pop(GoalDialogAction.Previous)
+            Navigator.of(context).pop<GoalDialogAction>(GoalDialogAction.Previous)
         ),
         FlatButton(
           child: Text('Reset'),
           onPressed: () =>
             // resets the engine
-            Navigator.of(context).pop(GoalDialogAction.Reset)
+            Navigator.of(context).pop<GoalDialogAction>(GoalDialogAction.Reset)
         )
       ],
-    );
-  }
+    )
+  );
+  return (routeResult is GoalDialogAction) ? routeResult : def;
 }
 
-Future<GoalDialogAction> showEndpointDialog(BuildContext context, List<KlEndpoint> endpoints) {
-  return showDialog<GoalDialogAction>(
-    context: context,
-    builder: (context) => EndpointDialog(endpoints: endpoints,)
-  ) ?? GoalDialogAction.Reset;
+Future<GoalDialogAction> showEndpointRoute(
+  BuildContext context, List<KlEndpoint> endpoints, {GoalDialogAction def}) async {
+  var routeResult = await Navigator.of(context)
+    .pushNamed('/endpoint', arguments: {'endpoints': endpoints});
+  return (routeResult is GoalDialogAction) ? routeResult : def;
 }
 
 class RouteEndpoint extends StatelessWidget {
-  final KlEndpoint endpoint;
-  const RouteEndpoint({@required this.endpoint});
+  final List<KlEndpoint> endpoints;
+  const RouteEndpoint({@required this.endpoints});
 
   factory RouteEndpoint.fromSettings(Object settings) =>
-    RouteEndpoint(endpoint: (settings as Map)['data'] as KlEndpoint);
+    RouteEndpoint(endpoints: (settings as Map)['endpoints'] as List<KlEndpoint>);
 
   @override
   Widget build(BuildContext context) {
@@ -135,8 +136,42 @@ class RouteEndpoint extends StatelessWidget {
           onPressed: () => Navigator.of(context).pop(GoalDialogAction.Previous)
         ),
       ),
-      body: EndpointWidget(
-        endpoint: endpoint,
+      body: Column(
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        children: [
+          Expanded(child: ListView.builder(
+            itemCount: endpoints.length,
+            itemBuilder: (context, i) => EndpointWidget(
+              endpoint: endpoints[i],
+            )
+          )),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              SizedBox(
+                height: 40.0, width: 100.0,
+                child: FlatButton(
+                  child: Text('Previous'),
+                  color: theme.primaryColor,
+                  onPressed: () =>
+                    // goes back a question
+                    Navigator.of(context).pop<GoalDialogAction>(GoalDialogAction.Previous)
+                ),
+              ),
+              SizedBox(width: 10.0,),
+              SizedBox(
+                height: 40.0, width: 100.0,
+                child: FlatButton(
+                  child: Text('Reset'),
+                  color: theme.primaryColor,
+                  onPressed: () =>
+                    // resets the engine
+                    Navigator.of(context).pop<GoalDialogAction>(GoalDialogAction.Reset)
+                ),
+              )
+            ],
+          )
+        ]
       )
     );
   }

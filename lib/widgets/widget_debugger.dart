@@ -177,7 +177,7 @@ class WidgetDebuggerState extends State<WidgetDebugger> {
                   child: RaisedButton(
                     color: theme.primaryColor,
                     child: Text('Reset', style: theme.textTheme.button,),
-                    onPressed: () => resetModel(context),
+                    onPressed: () => resetModell(context),
                   ),
                 )),
               ]

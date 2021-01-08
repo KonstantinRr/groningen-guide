@@ -56,7 +56,7 @@ class RouteEnd extends StatelessWidget {
                 var ex = await _showExitDialog(context);
                 if (ex == _ExitOptions.Stop) return;
               }
-              resetModel(context);
+              resetModell(context);
               Navigator.of(context).pop();
             }
           ),
@@ -93,7 +93,7 @@ class RouteEnd extends StatelessWidget {
                       child: RaisedButton(
                         child: Text('Reset'),
                         onPressed: () {
-                          resetModel(context);
+                          resetModell(context);
                           Navigator.of(context).pop();
                         }
                       )
