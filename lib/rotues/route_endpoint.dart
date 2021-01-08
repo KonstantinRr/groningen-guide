@@ -44,9 +44,21 @@ class EndpointWidget extends StatelessWidget {
             future: loadImageFromAsset(endpoint.image),
             builder: (context, snap) {
               if (snap.hasError)
-                return Text('Error loading image ${endpoint.image}');
-              if (snap.hasData)
                 return Container(
+                  height: 250.0, width: 250.0,
+                  alignment: Alignment.center,
+                  child: Text('Error loading image ${endpoint.image}')
+                );
+              if (!snap.hasData)
+                return Container(
+                  width: 250.0, height: 250.0,
+                  alignment: Alignment.center,
+                  child: SizedBox(
+                    width: 55.0, height: 55.0,
+                    child: CircularProgressIndicator(),
+                  )
+                );
+              return Container(
                   height: 250.0, width: 250.0,
                   decoration: BoxDecoration(
                     image: DecorationImage(
@@ -55,11 +67,6 @@ class EndpointWidget extends StatelessWidget {
                     )
                   ),
                 );
-              return Container(
-                width: 100.0, height: 100.0,
-                padding: EdgeInsets.all(20.0),
-                child: CircularProgressIndicator(),
-              );
             },
           ))
       ],
@@ -87,17 +94,15 @@ class EndpointDialog extends StatelessWidget {
       actions: [
         FlatButton(
           child: Text('Previous'),
-          onPressed: () {
+          onPressed: () =>
             // goes back a question
-            Navigator.of(context).pop(GoalDialogAction.Previous);
-          },
+            Navigator.of(context).pop(GoalDialogAction.Previous)
         ),
         FlatButton(
           child: Text('Reset'),
-          onPressed: () {
+          onPressed: () =>
             // resets the engine
-            Navigator.of(context).pop(GoalDialogAction.Reset);
-          }
+            Navigator.of(context).pop(GoalDialogAction.Reset)
         )
       ],
     );
@@ -127,7 +132,7 @@ class RouteEndpoint extends StatelessWidget {
         title: const WidgetTitle(),
         leading: IconButton(
           icon: const Icon(Icons.arrow_back, color: Colors.black,),
-          onPressed: () => Navigator.of(context).pop()
+          onPressed: () => Navigator.of(context).pop(GoalDialogAction.Previous)
         ),
       ),
       body: EndpointWidget(
