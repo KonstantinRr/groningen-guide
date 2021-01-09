@@ -96,6 +96,14 @@
             ]
         },
         {
+            "name": "De Drie Gezusters",
+            "image": "assets/images/de3gezusters.jpg",
+            "description": "One of Groningen's pearls, the perfect place to be absorbed into the mazes of the Dutch architecture, dating back to centuries ago. Aside from friedly staff, you'll be presented the chance to have a view towards Grote Markt",
+             "conditions": [
+                "restaurant AND NOT hotel AND  (leisure OR business) AND (cultural) AND (region_european) AND average  AND (dinner OR lunch)"
+            ]
+        },
+        {
             "name": "Mr Smith's",
             "image": "assets/images/mrsmith.jpg",
             "description": "Welcome to the jungle! Tropical cocktails just for you! ",
