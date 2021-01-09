@@ -364,7 +364,7 @@
         {
             "name": "What are you looking for?",
             "description": "",
-            "maxAnswers": 2,
+            "maxAnswers": 1,
             "conditions": [ ],
             "options": [
                 {
@@ -577,7 +577,7 @@
         {
             "name": "You have chosen Asian cuisine",
             "description": "please, specify",
-            "maxAnswers": 6,
+            "maxAnswers": 1,
             "conditions": [ "region_asian" ],
             "options": [
                 {
