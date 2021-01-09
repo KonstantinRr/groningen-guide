@@ -99,9 +99,7 @@
             "name": "De Drie Gezusters",
             "image": "assets/images/de3gezusters.jpg",
             "description": "One of Groningen's pearls, the perfect place to be absorbed into the mazes of the Dutch architecture, dating back to centuries ago. Aside from friedly staff, you'll be presented the chance to have a view towards Grote Markt",
-             "conditions": [
-                "restaurant AND NOT hotel AND  (leisure OR business) AND (cultural) AND (region_european) AND average  AND (dinner OR lunch)"
-            ]
+            "conditions": [ "restaurant AND NOT hotel AND  (leisure OR business) AND (cultural) AND (lang_dutch) AND average  AND (dinner OR lunch)" ]
         },
         {
             "name": "Mr Smith's",
@@ -372,7 +370,7 @@
         {
             "name": "What are you looking for?",
             "description": "",
-            "maxAnswers": 2,
+            "maxAnswers": 1,
             "conditions": [ ],
             "options": [
                 {
@@ -567,7 +565,7 @@
                 },
                 {
                     "description": "French",
-                    "conditions": ["NOT cheap"],
+                    "conditions": ["NOT cheap AND NOT (average AND cultural)"],
                     "events": [ "lang_french = 1" ]
                 },
                 {
@@ -585,7 +583,7 @@
         {
             "name": "You have chosen Asian cuisine",
             "description": "please, specify",
-            "maxAnswers": 6,
+            "maxAnswers": 1,
             "conditions": [ "region_asian" ],
             "options": [
                 {

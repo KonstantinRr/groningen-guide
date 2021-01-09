@@ -9,7 +9,7 @@ const RESOURCES = {
 "manifest.json": "2d8733ee32a8963fac0e79866e5a0c4b",
 "assets/packages/cupertino_icons/assets/CupertinoIcons.ttf": "b14fcf3ee94e3ace300b192e9e7c8c5d",
 "assets/NOTICES": "97ee6926e6a428963c359b994f58d318",
-"assets/assets/knowledge_base.json": "53c277077b8ab6e18b6bf44caa6fd34a",
+"assets/assets/knowledge_base.json": "5d49567b8a20b8682c6ed7c8a5cc1552",
 "assets/assets/images/KlipperZwaddeboatHotel.jpg": "6173e6dc64194c64d8ff636b81ac12db",
 "assets/assets/images/pure.jpg": "0fb14306f8a92738570b2786a01eb89c",
 "assets/assets/images/vapiano.jpg": "15729f686ae3eed746fd5e39633a9bb5",
@@ -66,10 +66,10 @@ const RESOURCES = {
 "assets/AssetManifest.json": "501ece8175615e57ee770655296b4e16",
 "assets/FontManifest.json": "dc3d03800ccca4601324923c0b1d6d57",
 "assets/fonts/MaterialIcons-Regular.otf": "1288c9e28052e028aba623321f7826ac",
-"index.html": "2a30ed3984089221b019a2eae7dac4e4",
-"/": "2a30ed3984089221b019a2eae7dac4e4",
+"index.html": "5eb428e05647e9ef8a016c03beada721",
+"/": "5eb428e05647e9ef8a016c03beada721",
 "version.json": "a6fc3fd6e84615acff6fd79e0b9601a7",
-"main.dart.js": "af364ff617dbc8e6ac3cc78f9b5c130f",
+"main.dart.js": "ddc096c8c8f56a61cc0a4f922120d878",
 "favicon.png": "72774a7b5a4a54dc7d8fe364fc7b3d8f"
 };
 
