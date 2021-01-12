@@ -59738,7 +59738,7 @@ return r.d.a},
 $S:131}
 O.Wz.prototype={
 $2:function(a,b){var s=null,r=t.t
-return M.hR(s,T.ky(C.c4,H.c([T.f_(T.c2(H.c([new T.b0(C.y8,L.a5("Groningen Guide",s,s,s,s,s,s,s,this.a.L.d,s,s,s),s),new T.b0(C.jP,T.ky(C.c4,H.c([T.dv(C.qE,75,75),C.G8],r),C.hE),s)],r),C.E,C.b8,C.p),s,s),T.oy(0,new R.py("Freepik","freepik",s),50,s,0,0,s,s)],r),C.j9))},
+return M.hR(s,T.ky(C.c4,H.c([T.f_(T.c2(H.c([new T.b0(C.y8,L.a5("Angel's Groningen Guide",s,s,s,s,s,s,s,this.a.L.d,s,s,s),s),new T.b0(C.jP,T.ky(C.c4,H.c([T.dv(C.qE,75,75),C.G8],r),C.hE),s)],r),C.E,C.b8,C.p),s,s),T.oy(0,new R.py("Freepik","freepik",s),50,s,0,0,s,s)],r),C.j9))},
 $C:"$2",
 $R:2,
 $S:49}
