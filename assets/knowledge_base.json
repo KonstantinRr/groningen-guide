@@ -542,7 +542,7 @@
             "name": "What type of cuisine are you looking for?",
             "description": "",
             "maxAnswers": 1,
-            "conditions": [ "userHasSocialGoal AND NOT cafe" ],
+            "conditions": [ "userHasSocialGoal AND NOT (cafe OR hotel)" ],
             "options": [                
                 {
                     "description": "European",
