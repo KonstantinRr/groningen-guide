@@ -91,7 +91,7 @@
             "name": "Bed & Breakfast 'Het Kasteeltje'",
             "description": "I know you're on a budget, but trust me, this place will make your family feel like you've had the best vacation ever! Cosy rooms, your own kitchen and a friendly neighbourhood, what else is there to wish for?. ",
             "image": "assets/images/theManor.jpg",
-            "conditions": [ "hotel AND leisure AND (area_oosterparkwijk OR (family AND cheap))" ]
+            "conditions": [ "hotel AND leisure AND  (family AND cheap)" ]
         },
         {
             "name":"Boutique Hotel De Doelen",
@@ -681,7 +681,7 @@
             "conditions": [ "userChoseHotelService AND NOT( cafe OR restaurant) "],
             "options": [
                 {
-                    "description": "City centre",
+                    "description": "City center",
                     "events": [ "area_citycenter = 1" ]
                 },
                 {
@@ -692,11 +692,6 @@
                 {
                     "description": "Rivierenbuurt",
                     "events": [ "area_rivierenbuurt = 1" ]
-                },
-                {
-                    "description": "Oosterparkwijk",
-                    "conditions":["NOT service_long_stay AND family AND cheap"],
-                    "events": [ "area_oosterparkwijk = 1" ]
                 }
             ]
         }
