@@ -449,7 +449,7 @@
                 },
                 {
                     "description": "Studying",
-                    "conditions": ["NOT restaurant  "],
+                    "conditions": ["NOT restaurant AND NOT hotel "],
                     "events": [ "studying = 1" ]
                 }
             ]
