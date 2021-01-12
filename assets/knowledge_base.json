@@ -104,7 +104,7 @@
             "image": "assets/images/mrmofongo.png",
             "description": "Mr. Mofongo has seven different 'worlds', each with its own atmosphere and culinary experience. In addition to quality, every world guarantees innovation, sustainability and above all experience. Let yourself be carried away by Máximo's endless wanderlust and join him on an adventure! ",
             "conditions": [
-                "restaurant AND NOT hotel AND (business OR leisure) AND (romantic OR bar OR gang OR private) AND (average OR expensive) AND (region_asian ) AND (dinner OR lunch) AND NOT (romantic AND region_asian AND expensive)"
+                "restaurant   AND (business OR leisure) AND (romantic OR bar OR gang OR private) AND (average OR expensive) AND (region_asian ) AND (dinner OR lunch) AND NOT (romantic AND region_asian AND expensive AND lang_japanese)"
             ]
         },
         {
@@ -112,7 +112,7 @@
             "image": "assets/images/de3gezusters.jpg",
             "description": "One of Groningen's pearls, the perfect place to be absorbed into the mazes of the Dutch architecture, dating back to centuries ago. Aside from friedly staff, you'll be presented the chance to have a view towards Grote Markt",
              "conditions": [
-                "restaurant AND NOT hotel AND  (leisure OR business) AND (cultural) AND (lang_dutch) AND average  AND (dinner OR lunch)"
+                "restaurant   AND  (leisure OR business) AND (cultural) AND (lang_dutch) AND average  AND (dinner OR lunch)"
             ]
         },
         {
@@ -120,7 +120,7 @@
             "image": "assets/images/mrsmith.jpg",
             "description": "Welcome to the jungle! Tropical cocktails just for you! ",
              "conditions": [
-                "restaurant AND NOT hotel AND  leisure AND (romantic OR bar) AND (lang_thai OR lang_dutch) AND average  AND (dinner OR lunch)"
+                "restaurant   AND  leisure AND (romantic OR bar) AND (lang_thai OR lang_dutch) AND average  AND (dinner OR lunch)"
             ]
         },
         {
@@ -128,7 +128,7 @@
             "image": "assets/images/bronco.jpg",
             "description": "The best RibHouse in Groningen",
             "conditions": [
-                "restaurant AND NOT hotel AND (leisure OR business) AND average AND (gang OR bar) AND lang_us AND (dinner OR lunch)"
+                "restaurant   AND (leisure OR business) AND (average OR expensive) AND (gang OR bar) AND lang_us AND (dinner OR lunch)"
             ]
         },
         {
@@ -136,7 +136,15 @@
             "image": "assets/images/debeteretijden.jpg",
             "description": " They are renowned for their surprise menu, consisting of 3, 4 or 5 courses. Of course, your preferences are taken into account.",
              "conditions": [
-                "restaurant AND NOT hotel AND (business OR leisure) AND (romantic OR private OR family) AND average AND lang_dutch AND (dinner OR lunch)"
+                "restaurant   AND (business OR leisure) AND (romantic OR private OR family) AND average AND lang_dutch AND (dinner OR lunch)"
+            ]
+        },
+        {
+            "name": "Chang Thai Bistro",
+            "image": "assets/images/changThaiBistro.jpg",
+            "description": " This place is specialized in authentic Thai dishes.  ",
+             "conditions": [
+                "restaurant AND ( leisure OR business) AND (cultural OR family) AND expensive AND (lang_thai) AND (dinner OR lunch)"
             ]
         },
         {
@@ -144,7 +152,7 @@
             "image": "assets/images/deKleineHeerlijkheid.jpg",
             "description": "Elbrich & Zaneta are friends and now also business partners. They came up with the idea of ​​creating a place where people feel at home and are pampered and very tasty food. The restaurant can rightly be called a living room restaurant. ",
            "conditions": [
-                "restaurant AND NOT hotel AND (business OR leisure) AND (romantic OR private) AND average AND lang_dutch AND (dinner OR lunch)"
+                "restaurant   AND (business OR leisure) AND (romantic OR private) AND average AND lang_dutch AND (dinner OR lunch)"
             ]
         },
         {
@@ -152,7 +160,7 @@
             "image": "assets/images/chofah.jpg",
             "description": "Very good and authentic Thai food. Nice restaurant and friendly service. ",
              "conditions": [
-                "restaurant AND NOT hotel AND (business OR leisure) AND average  AND lang_thai AND (cultural OR family) AND (dinner OR lunch)"
+                "restaurant   AND (business OR leisure) AND average  AND lang_thai AND (cultural OR family) AND (dinner OR lunch)"
             ]
         },
         {
@@ -160,7 +168,7 @@
             "image": "assets/images/gustatio.jpg",
             "description": "Angel's Favorite! The owners of this casual osteria wants to bring traditional Italian cuisine to the fore. No complicated combinations here, but homemade pasta and powerful flavors that will take your taste buds on a journey. Delicious authentic cuisine.",
             "conditions": [
-                "restaurant AND NOT hotel AND leisure AND (romantic OR family) AND average AND lang_italian AND (dinner OR lunch)"
+                "restaurant   AND leisure AND (romantic OR family) AND average AND lang_italian AND (dinner OR lunch)"
             ]
         },
         {
@@ -168,7 +176,7 @@
             "image": "assets/images/davinci.jpg",
             "description": "Homemade Italian food, by the water.",
             "conditions": [
-                "restaurant AND NOT hotel AND (business OR leisure) AND (romantic OR cultural) AND average AND lang_italian AND (dinner OR lunch)"
+                "restaurant   AND (business OR leisure) AND (romantic OR cultural) AND average AND lang_italian AND (dinner OR lunch)"
             ]
         },
         {
@@ -176,7 +184,7 @@
             "image": "assets/images/deOlijfboom.jpg",
             "description": "Taste traditional food from the best Greek restaurant in Groningen!",
             "conditions": [
-                "restaurant AND NOT hotel AND (business OR leisure) AND (gang OR family) AND average  AND lang_greek AND (dinner OR lunch)"
+                "restaurant   AND (business OR leisure) AND (gang OR family) AND (average OR cheap)  AND lang_greek AND (dinner OR lunch)"
             ]
         },
         {
@@ -184,7 +192,7 @@
             "image": "assets/images/thaijasmine.jpg",
             "description": "The BEST Thai food Angel ever had! ",
             "conditions": [
-                "restaurant AND NOT hotel AND (business OR leisure) AND (cheap OR average) AND gang AND lang_thai AND (dinner OR lunch)"
+                "restaurant   AND (business OR leisure) AND (cheap OR average) AND gang AND lang_thai AND (dinner OR lunch)"
             ]
         },
         {
@@ -192,7 +200,7 @@
             "image": "assets/images/imono.jpg",
             "description": "Perfect for a first sushi date!",
             "conditions": [
-                "restaurant AND NOT hotel AND leisure AND (romantic OR private) AND average AND lang_japanese AND (dinner OR lunch) "
+                "restaurant   AND leisure AND (romantic OR private OR cultural) AND (average OR expensive) AND lang_japanese AND (dinner OR lunch) "
             ]
         },
         {
@@ -200,7 +208,7 @@
             "image": "assets/images/hanasato.jpg",
             "description": "Want to impress your date with fine Asian cuisine? This is the place! ",
             "conditions": [
-                "restaurant AND NOT hotel AND (romantic OR private) AND lang_japanese AND expensive  AND (dinner OR lunch)"
+                "restaurant   AND (romantic OR private OR family) AND lang_japanese AND expensive  AND (dinner OR lunch)"
             ]
         },        
         {
@@ -208,7 +216,7 @@
             "image": "assets/images/dePijp.jpg",
             "description": "For a romantic evening and great top class food, this is a must not miss! Known as one of the best suprise menu restaurants in Groningen!",
             "conditions": [
-                "restaurant AND NOT hotel AND (business OR leisure) AND (romantic OR private OR family) AND expensive AND lang_french AND dinner"
+                "restaurant   AND (business OR leisure) AND (romantic OR private OR family) AND expensive AND lang_french AND dinner"
             ]
         },   
         {
@@ -216,7 +224,7 @@
             "image": "assets/images/vivelavie.jpg",
             "description": "The best restaurant in Groningen without a doubt! Celebrating something special? Get your taste buds ready for an unforgettable experience!  ",
             "conditions": [
-                "restaurant AND NOT hotel AND (business OR leisure) AND (romantic OR private ) AND expensive AND (lang_french OR lang_dutch) AND lunch"
+                "restaurant   AND (business OR leisure) AND (romantic OR private ) AND expensive AND (lang_french OR lang_dutch) AND lunch"
             ]
         },     
         {
@@ -224,7 +232,7 @@
             "image": "assets/images/voila.jpg",
             "description": "Bringing the French cuisine to you in Groningen! A 5 course suprise menu accompanied by 5 different glasses of wine, leaving you amazed by the end of the night!  ",
             "conditions": [
-                "restaurant AND NOT hotel AND (business OR leisure) AND (romantic OR private OR family) AND expensive AND (lang_dutch ) AND (dinner OR lunch)"
+                "restaurant   AND (business OR leisure) AND (romantic OR private OR family) AND expensive AND (lang_dutch ) AND (dinner OR lunch)"
             ]
         },
         {
@@ -232,7 +240,7 @@
             "image": "assets/images/nassau.jpg",
             "description": "In the Prinsenhof Hotel! Nassau's kitchen is run by executive chef Christian de Vries. Nassau is innovative and receives praising reviews in the Michelin and Lekker guides.",
             "conditions": [
-                "restaurant AND NOT hotel AND (leisure OR business) AND (romantic OR cultural) AND expensive AND (lang_dutch OR lang_french) AND (dinner OR lunch)"
+                "restaurant   AND (leisure OR business) AND (romantic OR cultural) AND expensive AND (lang_dutch OR lang_french) AND (dinner OR lunch)"
             ]
         },
         {
@@ -240,7 +248,7 @@
             "image": "assets/images/groen.jpg",
             "description": " A beautiful place in the centre of Groningen. The dishes are prepared with organic and regional products and, of course, lots of love. It's also vegan and vegetarian friendly ",
             "conditions": [
-                "restaurant AND NOT hotel AND (leisure OR business) AND gang AND average AND lang_dutch AND (dinner OR lunch)"
+                "restaurant   AND (leisure OR business) AND gang AND average AND lang_dutch AND (dinner OR lunch)"
             ]
         },
         {
@@ -248,7 +256,7 @@
             "image": "assets/images/boccaccio.jpg",
             "description": "A place with Italian food in the city center of Groningen. Be it for a business meeting or for a large group, this is a perfect place. ",
             "conditions": [
-                "restaurant AND NOT hotel AND (leisure OR business) AND (gang OR private) AND average AND lang_italian AND (dinner OR lunch)"
+                "restaurant   AND (leisure OR business) AND (gang OR private) AND average AND lang_italian AND (dinner OR lunch)"
             ]
         },
         {
@@ -256,7 +264,15 @@
             "image": "assets/images/konbu.jpg",
             "description": "Affordable bites for all, that will keep you going back for more! ",
             "conditions": [
-                "restaurant AND NOT hotel AND romantic AND (cheap OR average) AND lang_vietnamese AND (dinner OR lunch)"
+                "restaurant   AND romantic AND (cheap OR average) AND lang_vietnamese AND (dinner OR lunch)"
+            ]
+        },
+        {
+            "name": "'t Pannekoekschip'",
+            "image": "assets/images/pannekoekschip.jpg",
+            "description": "Definitely a must go if you want to experience the Dutch culture, aside from being a restaurant on the water it serves pancake dishes! yumm ",
+            "conditions": [
+                "restaurant AND (business OR leisure) AND (family OR cultural OR gang ) AND (cheap OR average) AND lang_dutch AND (dinner OR lunch)"
             ]
         },
         {
@@ -264,7 +280,7 @@
             "image": "assets/images/tiantianle.jpg",
             "description": "Want to feel relaxed and zen? This is a must not miss, especially for the food! ",
             "conditions": [
-                "restaurant AND NOT hotel AND leisure AND (gang OR family) AND (cheap OR average)  AND ( lang_chinese OR lang_chilean ) AND (dinner OR lunch)"
+                "restaurant   AND leisure AND (gang OR family) AND (cheap OR average)  AND ( lang_chinese OR lang_chilean ) AND (dinner OR lunch)"
             ]
         },
         {
@@ -272,7 +288,7 @@
             "image": "assets/images/chaplinsPub.jpg",
             "description": "Just the place for you to grab a beer with the boys!",
             "conditions": [
-                "restaurant AND NOT hotel AND leisure AND (gang OR bar) AND (cheap OR average) AND lang_us AND (dinner OR lunch)"
+                "restaurant   AND leisure AND (gang OR bar) AND (cheap OR average) AND lang_us AND (dinner OR lunch)"
             ]
         },
         {
@@ -280,7 +296,7 @@
             "image":"assets/images/magoya.jpg",
             "description": "Beautiful Sakura decorations and delicious asian dishes, the best place to be aesthetically pleased and gastronomically fulfilled",
             "conditions": [
-                "restaurant AND NOT hotel AND (gang OR romantic OR family) AND (cheap OR average) AND lang_japanese AND (dinner OR lunch)"
+                "restaurant   AND (gang OR romantic OR family) AND (cheap OR average) AND lang_japanese AND (dinner OR lunch)"
             ]
         },
         {
@@ -288,7 +304,7 @@
             "image":"assets/images/houdtVanEten.jpg",
             "description": "Delicious French cuisine in a beautiful place in the heart of Groningen",
             "conditions": [
-                "restaurant AND NOT hotel AND (leisure OR business) AND (private OR romantic OR gang) AND average AND lang_french AND (dinner OR lunch)"
+                "restaurant   AND (leisure OR business) AND (private OR romantic OR gang) AND average AND lang_french AND (dinner OR lunch)"
             ]
         },
         {
@@ -296,7 +312,7 @@
             "image":"assets/images/pastaFabriek.jpg",
             "description": "Angel's favorite Diavolo Pasta! A help yourself restaurant with a chill vibe!",
             "conditions": [
-                "restaurant AND NOT hotel AND (business OR leisure) AND (gang OR family) AND cheap  AND lang_italian AND (dinner OR lunch)"
+                "restaurant   AND (business OR leisure) AND (gang OR family) AND cheap  AND lang_italian AND (dinner OR lunch)"
             ]
         },
         {
@@ -304,7 +320,15 @@
             "image":"assets/images/vapiano.jpg",
             "description": " It seems like Vapiano is the best place for you, here you'll find an excellent meal for a low price. On top of that, it's vegan/vegetarian friendly ;)  ",
             "conditions": [
-                "restaurant AND NOT hotel AND (business OR leisure) AND gang AND cheap AND lang_italian AND (dinner OR lunch)"
+                "restaurant   AND (business OR leisure) AND gang AND cheap AND lang_italian AND (dinner OR lunch)"
+            ]
+        },
+        {
+            "name": "Asia Today",
+            "image":"assets/images/asiaToday.jpg",
+            "description": " This place is perfect for business or leisure, with the opportunity to try dishes from a variety of different asian cultures.   ",
+            "conditions": [
+                "restaurant   AND (business OR leisure) AND (gang OR cultural OR private) AND cheap AND (lang_chinese OR lang_thai OR lang_japanese) AND (dinner OR lunch)"
             ]
         },
         {
@@ -312,7 +336,15 @@
             "image":"assets/images/strabucksUB.jpg",
             "description": "In need for a study place while combining it with a chat with your friend? Here you go, the best coffee right in the building of the University library, what else can one wish for? (p.s. also good for business)",
             "conditions": [
-                "cafe AND NOT hotel AND (leisure AND gang OR studying OR business)  AND (average OR expensive) AND (coffee OR (studying AND (smoothies OR hot_chocolate))) AND (breakfast OR lunch) AND NOT family"
+                "cafe  AND  studying  AND average  AND (coffee OR smoothies OR hot_chocolate) AND (breakfast OR lunch) AND NOT (private AND hot_chocolate) "
+            ]
+        },
+        {
+            "name": "De Uurwerker",
+            "image":"assets/images/deUurwerker.jpg",
+            "description": "Located in the neighbourhood of the university, this place offers a cozy atmosphere for you and your friends or colleagues. It also has a very nice courtyard for the warmer days ;)",
+            "conditions": [
+                "cafe AND (leisure OR (business AND (bar OR private OR gang))) AND (average OR cheap)  AND (bar OR private) AND coffee AND (breakfast OR lunch) "
             ]
         },
         {
@@ -320,7 +352,7 @@
             "image":"assets/images/doppioEspresso.jpg",
             "description": "This is the place to be if you'd like to have a cup of refreshing coffee with your friends.",
             "conditions": [
-                "cafe AND NOT hotel AND leisure AND gang AND (cheap OR average) AND coffee AND (breakfast OR lunch)"
+                "cafe AND leisure AND gang AND (cheap OR average) AND coffee AND (breakfast OR lunch)"
             ]
         },
         {
@@ -328,7 +360,7 @@
             "image":"assets/images/coffeeCompany.jpg",
             "description": "This is the perfect place to serve a coffee in a relaxed and cozy atmosphere, be it for studying, going out with your friends or family.",
             "conditions": [
-                "cafe AND NOT hotel AND ((leisure AND (gang OR family)) OR studying)  AND (cheap OR average) AND coffee AND (breakfast OR lunch)"
+                "cafe   AND ((leisure AND (gang OR family)) OR studying)  AND (cheap OR average) AND coffee AND (breakfast OR lunch)"
             ]
         },
         {
@@ -336,7 +368,7 @@
             "image":"assets/images/blackBloom.jpg",
             "description": "Experiment with white and black coffee at Black & Bloom, once here you'll want to come back again ",
             "conditions": [
-                 "cafe  AND NOT hotel AND leisure AND (cheap OR average) AND coffee AND (breakfast OR lunch)" 
+                 "cafe  AND leisure AND (cheap OR average) AND coffee AND (breakfast OR lunch)" 
                 ]
         },
         {
@@ -344,7 +376,7 @@
             "image": "assets/images/chocoCompany.jpg",
             "description": "Your sweet tooth thirves for some chocolate? This is where you want to be ;)",
             "conditions": [
-                "cafe  AND NOT hotel AND leisure AND gang AND (cheap OR average) AND hot_chocolate AND (breakfast OR lunch)"
+                "cafe AND (leisure OR studying) AND (gang OR private) AND (cheap OR average) AND hot_chocolate AND (breakfast OR lunch)"
             ]
         },
         {
@@ -352,7 +384,7 @@
             "image":"assets/images/smoothBrothers.jpg",
             "description": "The perfect place if you feel in a jazzy mood and want to delight yourself with a smoothy among other ",
             "conditions": [ 
-                "cafe AND NOT hotel AND leisure AND average AND smoothies AND (breakfast OR lunch)" 
+                "cafe AND leisure AND average AND (private OR bar OR gang) AND smoothies  AND (breakfast OR lunch)" 
             ]
         },
         {
@@ -360,7 +392,7 @@
             "image":"assets/images/cappuvino.jpg",
             "description": "A special place with coffee, wine and jazz in the heart of Groningen",
             "conditions": [
-                 "cafe AND NOT hotel AND (leisure OR business) AND average  AND (breakfast OR lunch) AND (coffee OR hot_chocolate) AND NOT family"
+                 "cafe AND (leisure OR business) AND average  AND (breakfast OR lunch) AND (coffee OR hot_chocolate) AND NOT family"
                  ]
         },
         {
@@ -368,7 +400,7 @@
             "image":"assets/images/pure.jpg",
             "description": "A wide range of ice-cream flavours and donuts for your kind and the best coffee for you, all of it at the best price!",
             "conditions": [
-                 "cafe AND NOT hotel AND leisure AND cheap AND (breakfast OR lunch) AND (coffee OR hot_chocolate) AND family"
+                 "cafe AND leisure AND cheap AND (breakfast OR lunch) AND (coffee OR hot_chocolate) AND family"
                  ]
         },
         {
@@ -376,7 +408,7 @@
             "image":"assets/images/tucano.jpg",
             "description": "Cozy atmosphere, perfect for studying, business or a just having a good time ;)",
             "conditions": [
-                 "cafe AND NOT hotel AND (leisure OR business OR studying) AND (average OR cheap )  AND (breakfast OR lunch) AND (coffee OR hot_chocolate OR smoothies)"
+                 "cafe AND (leisure OR business OR studying) AND (average OR cheap )  AND (breakfast OR lunch) AND (coffee OR hot_chocolate OR smoothies) AND NOT (coffee AND studying) AND NOT (hot_chocolate AND studying) "
                  ]
         }        
     ],
@@ -417,7 +449,7 @@
                 },
                 {
                     "description": "Studying",
-                    "conditions": ["NOT restaurant AND NOT hotel"],
+                    "conditions": ["NOT restaurant  "],
                     "events": [ "studying = 1" ]
                 }
             ]
@@ -455,23 +487,23 @@
                     "events": [ "family = 1", "mind = 1"  ]
                 },
                 {
-                    "description": "Romantic evening",
+                    "description": "Romantic",
                     "conditions":["NOT business AND NOT cafe"],
                     "events": [ "romantic = 1", "mind = 1" ]
                 },
                 {
                     "description": "Cultural experience",
-                    "conditions":["NOT cafe AND NOT ((cheap OR (expensive AND cultural)) AND restaurant)"],                    
+                    "conditions":["NOT cafe "],                    
                     "events": [ "cultural = 1", "mind = 1"  ]
                 },                
                 {
                     "description": "Private",
-                    "conditions":["NOT hotel AND NOT cheap"],
+                    "conditions":["NOT hotel "],
                     "events": [ "private = 1", "mind = 1" ]
                 },
                 {
                     "description": "Bar",
-                    "conditions":["NOT hotel AND NOT (business AND restaurant)"],
+                    "conditions":["NOT hotel AND NOT (business AND restaurant) AND NOT studying"],
                     "events": [ "bar = 1", "mind = 1" ]
                 },
                 {
@@ -510,7 +542,7 @@
             "name": "What kind of meal would you like?",
             "description": "",
             "maxAnswers": 2,
-            "conditions": ["cafe OR restaurant AND NOT hotel"],
+            "conditions": ["cafe OR restaurant  "],
             "options": [
                 {
                     "description": "Breakfast",
@@ -539,13 +571,12 @@
                     "events": [ "region_european = 1" ]
                 },
                 {
-                    "description": "Asian",
-                    "conditions":["NOT (business AND expensive AND cultural)"],
+                    "description": "Asian",                    
                     "events": [ "region_asian = 1" ]
                 },
                 {
                     "description": "American",
-                    "conditions": [ "NOT romantic AND NOT private AND NOT expensive AND NOT cultural" ],
+                    "conditions": [ "NOT romantic AND NOT private AND NOT cultural" ],
                     "events": [ "region_american = 1" ]
                 }
             ]
@@ -602,17 +633,16 @@
             "options": [
                 {
                     "description": "Thai",
-                    "conditions":["NOT (business AND cultural AND expensive)"],
                     "events": [ "lang_thai = 1" ]
                 },
                 {
                     "description": "Japanese",
-                    "conditions":["NOT cheap AND NOT business"],
+                    "conditions":["NOT (business AND (expensive OR average))"],
                     "events": [ "lang_japanese = 1" ]
                 },
                 {
                     "description": "Chinese",
-                    "conditions":["(gang OR family) AND (cheap OR average)"],
+                    "conditions":[" family AND (cheap OR average)"],
                     "events": [ "lang_chinese = 1" ]
                 },
                 {
@@ -634,6 +664,7 @@
                 },
                 {
                     "description": "Smoothies",
+                    "conditions":["NOT (bar AND business)"],
                     "events": [ "smoothies = 1" ]
                 },
                 {
@@ -655,7 +686,7 @@
                 },
                 {
                     "description": "Korrewegwijk",
-                    "conditions":["NOT service_long_stay AND NOT business AND average"],
+                    "conditions":["NOT service_long_stay AND NOT business AND average AND family"],
                     "events": [ "area_korrewegwijk = 1" ]
                 },
                 {
