@@ -49,7 +49,7 @@ class RouteSplashState extends State<RouteSplash> {
               children: <Widget> [
                 Padding(
                   padding: const EdgeInsets.only(top: 15.0),
-                  child: Text('Groningen Guide', style: theme.textTheme.headline4,),
+                  child: Text('Angel\'s Groningen Guide', style: theme.textTheme.headline4,),
                 ),
                 Padding(
                   padding: const EdgeInsets.all(20.0),
