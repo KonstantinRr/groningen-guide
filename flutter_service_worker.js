@@ -20,7 +20,6 @@ const RESOURCES = {
 "assets/assets/images/smoothBrothers.jpg": "37b24fa326f6df594e2f7bdbe6a3f39d",
 "assets/assets/images/nassau.jpg": "f5356ee3ff0ab1424b9042086ebff5b4",
 "assets/assets/images/magoya.jpg": "ee0f02c4b317eaec3c6c4586053c448b",
-"assets/assets/images/logo_.png": "17e0e43a2f4b6fec66cb4ee59ff3d39c",
 "assets/assets/images/davinci.jpg": "010cf8a40eef09bfdffa8107f77722f9",
 "assets/assets/images/tiantianle.jpg": "5092e146c5fe85ae7c14b34fd5b0bdca",
 "assets/assets/images/cityHotel.jpg": "c8713dfdcf4bc11152ffb2e23ebd168b",
@@ -68,13 +67,14 @@ const RESOURCES = {
 "assets/assets/images/pannekoekschip.jpg": "0770060cdc0bd62a69a2e2b93a241d5b",
 "assets/assets/images/hanasato.jpg": "8f44a64dede2d78f4d8c835a7f60da1c",
 "assets/assets/images/blackBloom.jpg": "d801d94a36bb24ad50aef182ac8b689c",
-"assets/AssetManifest.json": "63dd9b17d6c5f51f570c6bb8b243a449",
+"assets/assets/images/turtle2.png": "17e0e43a2f4b6fec66cb4ee59ff3d39c",
+"assets/AssetManifest.json": "e127c30091552bb80adedfe000ba891f",
 "assets/FontManifest.json": "dc3d03800ccca4601324923c0b1d6d57",
 "assets/fonts/MaterialIcons-Regular.otf": "1288c9e28052e028aba623321f7826ac",
-"index.html": "ab1e0d955dc9dfc34f5347de2351d7c0",
-"/": "ab1e0d955dc9dfc34f5347de2351d7c0",
+"index.html": "f775bcd187e96e34e120fdaef829656b",
+"/": "f775bcd187e96e34e120fdaef829656b",
 "version.json": "a6fc3fd6e84615acff6fd79e0b9601a7",
-"main.dart.js": "35bfb8e165f83aeff3f350310ad46908",
+"main.dart.js": "6c51d7f8a940c04f39f24e4785cc44a1",
 "favicon.png": "72774a7b5a4a54dc7d8fe364fc7b3d8f"
 };
 
