@@ -116,6 +116,12 @@
             ]
         },
         {
+            "name": "De Drie Gezusters",
+            "image": "assets/images/de3gezusters.jpg",
+            "description": "One of Groningen's pearls, the perfect place to be absorbed into the mazes of the Dutch architecture, dating back to centuries ago. Aside from friedly staff, you'll be presented the chance to have a view towards Grote Markt",
+            "conditions": [ "restaurant   AND  (leisure OR business) AND (cultural) AND (lang_dutch) AND average  AND (dinner OR lunch)" ]
+        },
+        {
             "name": "Mr Smith's",
             "image": "assets/images/mrsmith.jpg",
             "description": "Welcome to the jungle! Tropical cocktails just for you! ",
@@ -369,7 +375,7 @@
             "description": "Experiment with white and black coffee at Black & Bloom, once here you'll want to come back again ",
             "conditions": [
                  "cafe  AND leisure AND (cheap OR average) AND coffee " 
-                ]
+             ]
         },
         {
             "name": "Chocolate Company",
@@ -383,7 +389,7 @@
             "name": "Smooth Brothers",
             "image":"assets/images/smoothBrothers.jpg",
             "description": "The perfect place if you feel in a jazzy mood and want to delight yourself with a smoothy among other ",
-            "conditions": [ 
+            "conditions": [
                 "cafe AND leisure AND average AND (private OR bar OR gang) AND smoothies" 
             ]
         },
@@ -393,7 +399,7 @@
             "description": "A special place with coffee, wine and jazz in the heart of Groningen",
             "conditions": [
                  "cafe AND (leisure OR business) AND average AND (coffee OR hot_chocolate) AND NOT family"
-                 ]
+             ]
         },
         {
             "name": "Pure",
@@ -401,7 +407,7 @@
             "description": "A wide range of ice-cream flavours and donuts for your kind and the best coffee for you, all of it at the best price!",
             "conditions": [
                  "cafe AND leisure AND cheap AND  (coffee OR hot_chocolate) AND family"
-                 ]
+             ]
         },
         {
             "name": "Tucano",
@@ -409,7 +415,7 @@
             "description": "Cozy atmosphere, perfect for studying, business or a just having a good time ;)",
             "conditions": [
                  "cafe AND (leisure OR business OR studying) AND (average OR cheap )  AND (coffee OR hot_chocolate OR smoothies) AND NOT (coffee AND studying) AND NOT (hot_chocolate AND studying) "
-                 ]
+             ]
         }        
     ],
     "questions": [
