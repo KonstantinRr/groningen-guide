@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 /// This project is build during the course Knowledge Technology Practical at the
 /// UNIVERSITY OF GRONINGEN (WBAI014-05).
 /// The project was build by:
@@ -32,13 +33,19 @@ Future<void> nextQuestion(BuildContext context) async {
   if (endpoints.isNotEmpty) {
     print('Found Endpoints $endpoints');
     // we reached an endpoint and want to show the dialog
-    var result = await showEndpointDialog(context, endpoints); // TODO multiple endpoints
+    const useDialog = true;
+    var result = await (useDialog ?
+      showEndpointDialog(context, endpoints, def: GoalDialogAction.Reset) :
+      showEndpointRoute(context, endpoints, def: GoalDialogAction.Reset));
+    // removing this print will break things, please don't do it
+    print('Got result $result from route');
+    // ==== ====
     switch (result) {
       case GoalDialogAction.Previous:
-        previousQuestion(context); // TODO side effects
+        previousQuestion(context);
         break;
       case GoalDialogAction.Reset:
-        resetModel(context);
+        resetModell(context);
         break;
     }
   } else {
@@ -89,7 +96,10 @@ void firstQuestion(BuildContext context) {
 }
 
 /// Resets the whole model
-void resetModel(BuildContext context) {
-  Provider.of<QuestionData>(context, listen: false).clear();
+void resetModell(BuildContext context) {
+  print('Clearing Engine');
   Provider.of<KlEngine>(context, listen: false).clear();
+  print('Clearing QuestionData');
+  Provider.of<QuestionData>(context, listen: false).clear();
+  print('Cleared all');
 }

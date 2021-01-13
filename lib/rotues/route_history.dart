@@ -6,8 +6,15 @@
 /// Livia Regus (S3354970): l.regus@student.rug.nl
 
 import 'package:flutter/material.dart';
+import 'package:groningen_guide/kl/kl_question.dart';
+import 'package:groningen_guide/kl_engine.dart';
+import 'package:groningen_guide/kl_parser.dart';
+import 'package:groningen_guide/main.dart';
+import 'package:groningen_guide/widgets/widget_debugger.dart';
 
 import 'package:groningen_guide/widgets/widget_history.dart';
+import 'package:provider/provider.dart';
+import 'package:tuple/tuple.dart';
 
 class RouteHistory extends StatelessWidget {
   const RouteHistory({Key key}) : super(key: key);
@@ -15,7 +22,16 @@ class RouteHistory extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: WidgetHistory(),
+      body: Consumer<QuestionData>(
+        builder: (context, questionData, _) => WidgetDebuggerList<
+          Tuple2<int, Tuple3<KlQuestion, List<bool>, ContextModel>>
+        >(
+          list: enumerate<Tuple3<KlQuestion, List<bool>, ContextModel>>(
+            questionData.previous).toList(),
+          name: 'History',
+          builder: (data) => WidgetHistroyElement(tup: data, questionData: questionData,),
+        ),
+      ),
     );
   }
 }
