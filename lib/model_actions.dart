@@ -8,6 +8,7 @@ import 'package:flutter/foundation.dart';
 
 import 'package:flutter/material.dart';
 import 'package:groningen_guide/kl_engine.dart';
+import 'package:groningen_guide/rotues/route_end.dart';
 import 'package:groningen_guide/rotues/route_endpoint.dart';
 import 'package:provider/provider.dart';
 
@@ -30,10 +31,10 @@ Future<void> nextQuestion(BuildContext context) async {
   // checks if any goals have been reached
   var endpoints = engine.checkEndpoints().toList();
 
+  const useDialog = true;
   if (endpoints.isNotEmpty) {
     print('Found Endpoints $endpoints');
     // we reached an endpoint and want to show the dialog
-    const useDialog = true;
     var result = await (useDialog ?
       showEndpointDialog(context, endpoints, def: GoalDialogAction.Reset) :
       showEndpointRoute(context, endpoints, def: GoalDialogAction.Reset));
@@ -58,7 +59,19 @@ Future<void> nextQuestion(BuildContext context) async {
 
     if (available.isEmpty) {
       // we don't have any new question to ask, jump to the general conclusion
-      Navigator.of(context).pushNamed('/end');
+      var result = await (useDialog ?
+        showEndpointGeneralDialog(context, def: GoalDialogAction.Reset) :
+        showEndpointGeneralRoute(context, def: GoalDialogAction.Reset));
+      // removing this print will break things, please don't do it
+      print('Got result $result from route');
+      switch (result) {
+        case GoalDialogAction.Previous:
+          previousQuestion(context);
+          break;
+        case GoalDialogAction.Reset:
+          resetModell(context);
+          break;
+      }
     } else {
       // loads the first question that is available
       questionData.loadQuestion(
@@ -66,6 +79,52 @@ Future<void> nextQuestion(BuildContext context) async {
     }
   }
 }
+
+
+Future<GoalDialogAction> showEndpointGeneralDialog(
+  BuildContext context, {GoalDialogAction def}) async {
+
+  var routeResult = await showDialog(
+    context: context,
+    barrierDismissible: false,
+    builder: (context) => AlertDialog(
+      scrollable: false,
+      content: Container(
+        width: 700,
+        child: Scrollbar(
+          thickness: 4,
+          child: ListView(
+            shrinkWrap: true,
+            children: const [ const WidgetEnd() ]
+          )
+        )
+      ),
+      actions: <Widget> [
+        FlatButton(
+          child: Text('Previous'),
+          onPressed: () =>
+            // goes back a question
+            Navigator.of(context).pop<GoalDialogAction>(GoalDialogAction.Previous)
+        ),
+        FlatButton(
+          child: Text('Reset'),
+          onPressed: () =>
+            // resets the engine
+            Navigator.of(context).pop<GoalDialogAction>(GoalDialogAction.Reset)
+        )
+      ],
+    )
+  );
+  return (routeResult is GoalDialogAction) ? routeResult : def;
+}
+
+Future<GoalDialogAction> showEndpointGeneralRoute(
+  BuildContext context, {GoalDialogAction def}) async {
+  var routeResult = await Navigator.of(context)
+    .pushNamed('/end');
+  return (routeResult is GoalDialogAction) ? routeResult : def;
+}
+
 
 /// Loads the previous question
 void previousQuestion(BuildContext context) {

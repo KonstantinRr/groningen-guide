@@ -28,7 +28,7 @@ class WidgetLogo extends StatelessWidget {
       decoration: const BoxDecoration(
         image: const DecorationImage(
           fit: BoxFit.contain,
-          image: const AssetImage('assets/images/logo.png')
+          image: const AssetImage('assets/images/turtle.png')
         )
       ),
     );

@@ -149,25 +149,21 @@ class QuestionWidgetState extends State<QuestionWidget> {
         padding: const EdgeInsets.all(10),
         children: <Widget> [
           Container(
-            height: 180.0,
-            child: Stack(
-              fit: StackFit.passthrough,
+            //height: 180.0,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.stretch,
               children: <Widget> [
-                Positioned(
-                  width: constraints.maxWidth * 2 / 3, right: 0.0,
-                  top: 0.0,
-                  child: Card(
-                    elevation: 5.0,
-                    child: Padding(
-                      padding: const EdgeInsets.all(5.0),
-                      child: _buildQuestion(context)
-                    ),
+                Card(
+                  elevation: 5.0,
+                  child: Padding(
+                    padding: const EdgeInsets.all(5.0),
+                    child: _buildQuestion(context)
                   ),
                 ),
-                Positioned(
-                  bottom: 0.0, height: 100.0,
-                  left: 0.0, width: constraints.maxWidth * 1.0 / 3.0,
+                Align(
+                  alignment: Alignment.centerLeft,
                   child: Container(
+                    height: 150, width: 150,
                     decoration: BoxDecoration(
                       image: DecorationImage(
                         fit: BoxFit.contain,

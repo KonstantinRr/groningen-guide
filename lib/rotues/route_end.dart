@@ -7,31 +7,28 @@
 
 import 'package:flutter/material.dart';
 import 'package:groningen_guide/model_actions.dart';
+import 'package:groningen_guide/rotues/route_endpoint.dart';
 import 'package:groningen_guide/widgets/widget_title.dart';
 import 'package:groningen_guide/widgets/width_size_requirement.dart';
 
-enum _ExitOptions {
-  Continue, Stop
-}
+class WidgetEnd extends StatelessWidget {
+  const WidgetEnd({Key key}) : super(key: key);
 
-Future<_ExitOptions> _showExitDialog(BuildContext context) async {
-  return await showDialog<_ExitOptions>(
-    context: context,
-    builder: (context) => AlertDialog(
-      title: Text('Continue?'),
-      content: Text('Going back will reset the knowledge base'),
-      actions: [
-        FlatButton(
-          child: Text('Continue'),
-          onPressed: () => Navigator.of(context).pop(_ExitOptions.Continue)
+  @override
+  Widget build(BuildContext context) {
+    var theme = Theme.of(context);
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: <Widget> [
+        Padding(
+          padding: const EdgeInsets.all(10.0),
+          child: Text('Sorry!', style: theme.textTheme.headline5),
         ),
-        FlatButton(
-          child: Text('Stop'),
-          onPressed: () => Navigator.of(context).pop(_ExitOptions.Stop),
-        )
-      ],
-    )
-  ) ?? _ExitOptions.Stop;
+        Text('We could not reach any conclusion with the given answers',
+          style: theme.textTheme.bodyText2),
+      ]
+    );
+  }
 }
 
 class RouteEnd extends StatelessWidget {
@@ -49,61 +46,41 @@ class RouteEnd extends StatelessWidget {
         appBar: AppBar(
           backgroundColor: theme.appBarTheme.color,
           title: const WidgetTitle(),
-          leading: IconButton(
-            icon: const Icon(Icons.arrow_back, color: Colors.black,),
-            onPressed: () async {
-              if (showExitDialog) {
-                var ex = await _showExitDialog(context);
-                if (ex == _ExitOptions.Stop) return;
-              }
-              resetModell(context);
-              Navigator.of(context).pop();
-            }
-          ),
         ),
-        body: Center(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: <Widget> [
-              Padding(
-                padding: const EdgeInsets.all(10.0),
-                child: Text('Sorry!', style: theme.textTheme.headline5),
-              ),
-              Text('We could not reach any conclusion with the given answers'),
-              Padding(
-                padding: const EdgeInsets.all(10.0),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    SizedBox(
-                      width: 100.0,
-                      height: 30.0,
-                      child: RaisedButton(
-                        child: Text('Previous'),
-                        onPressed: () {
-                          previousQuestion(context);
-                          Navigator.of(context).pop();
-                        }
-                      ),
+        body: Center(child: Column(
+          children: <Widget> [
+            const WidgetEnd(),
+            Padding(
+              padding: const EdgeInsets.all(10.0),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  SizedBox(
+                    width: 100.0,
+                    height: 30.0,
+                    child: RaisedButton(
+                      child: Text('Previous'),
+                      onPressed: () {
+                        Navigator.of(context).pop(GoalDialogAction.Previous);
+                      }
                     ),
-                    const SizedBox(width: 10.0,),
-                    SizedBox(
-                      width: 100.0,
-                      height: 30.0,
-                      child: RaisedButton(
-                        child: Text('Reset'),
-                        onPressed: () {
-                          resetModell(context);
-                          Navigator.of(context).pop();
-                        }
-                      )
+                  ),
+                  const SizedBox(width: 10.0,),
+                  SizedBox(
+                    width: 100.0,
+                    height: 30.0,
+                    child: RaisedButton(
+                      child: Text('Reset'),
+                      onPressed: () {
+                        Navigator.of(context).pop(GoalDialogAction.Reset);
+                      }
                     )
-                  ],
-                )
+                  )
+                ],
               )
-            ]
-          )
-        ),
+            )
+          ]
+        ))
       ),
     );
   }

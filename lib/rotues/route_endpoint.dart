@@ -38,7 +38,10 @@ class EndpointWidget extends StatelessWidget {
           alignment: Alignment.center,
           child: Text(endpoint.name, style: theme.textTheme.headline6),
         ),
-        Text(endpoint.description, style: theme.textTheme.bodyText2),
+        Padding(
+          padding: EdgeInsets.only(bottom: 10),
+          child: Text(endpoint.description, style: theme.textTheme.bodyText2),
+        ),
         if (endpoint.image != null)
           Center(child: FutureBuilder<ImageProvider>(
             future: loadImageFromAsset(endpoint.image),
@@ -79,16 +82,24 @@ enum GoalDialogAction {
 }
 
 Future<GoalDialogAction> showEndpointDialog(
-  BuildContext context, List<KlEndpoint> endpoints, {GoalDialogAction def}) async {
+  BuildContext context, List<KlEndpoint> endpoints, {GoalDialogAction def, bool showOne=true}) async {
+  if (showOne)
+    endpoints = endpoints.isEmpty ? [] : [endpoints.first];
+
   var routeResult = await showDialog(
     context: context,
     barrierDismissible: false,
     builder: (context) => AlertDialog(
+      scrollable: false,
       content: Container(
-        width: 500, height: 300,
-        child: ListView(
-          children: endpoints.map(
-            (e) => EndpointWidget(endpoint: e)).toList(),
+        width: 700,
+        child: Scrollbar(
+          thickness: 4,
+          child: ListView(
+            shrinkWrap: true,
+            children: endpoints.map(
+              (e) => EndpointWidget(endpoint: e)).toList(),
+          )
         )
       ),
       actions: <Widget> [

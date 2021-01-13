@@ -228,6 +228,8 @@ class QuestionData extends ChangeNotifier {
   /// Returns the currently loaded answers
   List<bool> get currentAnswers => _current?.item2;
 
+  bool get hasPrevious => previous.isNotEmpty;
+
   /// Returns the last asked question data, requires at least one previous question
   Tuple3<KlQuestion, List<bool>, ContextModel> get last => previous.last;
   /// Returns the last asked question, requires at least one previous question
@@ -253,7 +255,7 @@ class QuestionData extends ChangeNotifier {
 
 class DebuggerProvider extends ChangeNotifier {
   bool showDebugger;
-  DebuggerProvider({this.showDebugger = true});
+  DebuggerProvider({this.showDebugger = false});
 
   void changeState() {
     showDebugger = !showDebugger;

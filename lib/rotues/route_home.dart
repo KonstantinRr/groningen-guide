@@ -36,16 +36,18 @@ class MainScreen extends StatelessWidget {
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget> [
-                Container(
-                  margin: const EdgeInsets.only(top: 15, bottom: 15.0),
-                  height: 40.0,
-                  width: 100.0,
-                  child: RaisedButton(
-                    child: const Text('Previous'),
-                    onPressed: () => previousQuestion(context)
+                if (questionData.hasPrevious)
+                  Container(
+                    margin: const EdgeInsets.only(top: 15, bottom: 15.0),
+                    height: 40.0,
+                    width: 100.0,
+                    child: RaisedButton(
+                      child: const Text('Previous'),
+                      onPressed: () => previousQuestion(context)
+                    ),
                   ),
-                ),
-                const SizedBox(width: 10.0,),
+                if (questionData.hasPrevious)
+                  const SizedBox(width: 10.0,),
                 Container(
                   margin: const EdgeInsets.only(top: 15.0, bottom: 15.0),
                   height: 40.0,
